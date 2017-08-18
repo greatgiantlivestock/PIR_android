@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.android.canvasing.gglc.absen.LoginActivity"
+    android:labelFor="@+id/header">
+
+    <include
+        android:id="@+id/toolbar_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/toolbar_default" />
+
+    <FrameLayout
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/toolbar_actionbar"
+        android:background="@color/dasgboard_grid">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:textStyle="bold"
+            android:text="Absen Mobile | PT. GGL"
+            />
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/txt_username"
+        android:layout_width="250dp"
+        android:layout_height="53dp"
+        android:ems="10"
+        android:layout_below="@+id/header"
+        android:inputType="textPersonName"
+        android:hint="Username"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="110dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp">
+        <requestFocus/>
+    </EditText>
+
+
+    <EditText
+        android:id="@+id/txt_password"
+        android:layout_width="251dp"
+        android:layout_height="53dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Password"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="184dp"
+        android:layout_below="@+id/txt_username"
+        android:layout_alignLeft="@+id/txt_username"
+        android:layout_alignStart="@+id/txt_username"
+        android:layout_marginTop="22dp" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:background="@color/dasgboard_grid"
+        android:textColor="#fff"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="260dp"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/txt_password"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/lgo"
+        android:layout_marginBottom="18dp"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/btn_login"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PT GREAT GIANT LIVESTOCK"
+        android:layout_marginBottom="67dp"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/howetown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/hometown"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageView
+        android:id="@+id/bonanza"
+        android:layout_toRightOf="@+id/howetown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/bonanza"
+        android:layout_marginTop="45dp"
+        android:layout_alignBaseline="@+id/howetown"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
