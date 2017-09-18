@@ -15,7 +15,7 @@ import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.absen.mobile.gglc.R;
+import com.android.canvasing.mobile.R;
 
 public class GpsChecking extends Activity {
     private Context act;

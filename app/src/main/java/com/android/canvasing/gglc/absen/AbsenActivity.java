@@ -25,7 +25,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.absen.mobile.gglc.R;
+import com.android.canvasing.gglc.canvassing.CheckoutActivity;
+import com.android.canvasing.mobile.R;
+import com.android.canvasing.gglc.canvassing.IconTextTabsActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -305,13 +307,10 @@ public class AbsenActivity extends ActionBarActivity implements
 	};
 
 	private void insertToDatabase() {
-		//LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		locationManager = (LocationManager) getApplicationContext()
 				.getSystemService(Context.LOCATION_SERVICE);
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
 				1000L, 1.0f, locationListener);
-		//locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-		//		1000L, 1.0f, locationListener);
 
 		boolean isGPSEnabled = locationManager
 				.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -323,12 +322,9 @@ public class AbsenActivity extends ActionBarActivity implements
 					Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
 		}else{
 			if(isGPSEnabled){
-				locationManager = (LocationManager) getApplicationContext()
-						.getSystemService(Context.LOCATION_SERVICE);
 				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
 						1000L, 1.0f, locationListener);
 				location2 = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) ;
-
 				if (location2 != null){
 					latitude=location2.getLatitude();
 					longitude=location2.getLongitude();
@@ -376,60 +372,60 @@ public class AbsenActivity extends ActionBarActivity implements
 
 					getAbsen();
 				}else{
-					locationManager = (LocationManager) getApplicationContext()
-							.getSystemService(Context.LOCATION_SERVICE);
 					locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
 							1000L, 1.0f, locationListener);
 					location1 = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-					latitude=location1.getLatitude();
-					longitude=location1.getLongitude();
-					final String vlats=String.valueOf(latitude);
-					final String vlongs=String.valueOf(longitude);
-					final String ip=ip_address.getText().toString();
+					if(location1 != null){
+						latitude=location1.getLatitude();
+						longitude=location1.getLongitude();
+						final String vlats=String.valueOf(latitude);
+						final String vlongs=String.valueOf(longitude);
+						final String ip=ip_address.getText().toString();
 
-					SharedPreferences prefs = getSharedPreferences(AppVar.SHARED_PREFERENCES_NAME, MODE_PRIVATE);
-					final String id_awo = prefs.getString("id_awo","0");
-					final String id_user = prefs.getString("id_user","0");
+						SharedPreferences prefs = getSharedPreferences(AppVar.SHARED_PREFERENCES_NAME, MODE_PRIVATE);
+						final String id_awo = prefs.getString("id_awo","0");
+						final String id_user = prefs.getString("id_user","0");
 
-					class insertToDatabase extends AsyncTask<Void, Void, String> {
-						ProgressDialog loading;
+						class insertToDatabase extends AsyncTask<Void, Void, String> {
+							ProgressDialog loading;
 
-						@Override
-						protected void onPreExecute() {
-							super.onPreExecute();
-							loading = ProgressDialog.show(AbsenActivity.this,"Proses...","Silahkan Tunggu...",false,false);
+							@Override
+							protected void onPreExecute() {
+								super.onPreExecute();
+								loading = ProgressDialog.show(AbsenActivity.this,"Proses...","Silahkan Tunggu...",false,false);
+							}
+
+							@Override
+							protected void onPostExecute(String s) {
+								super.onPostExecute(s);
+								loading.dismiss();
+								Toast.makeText(AbsenActivity.this,"Absen Berhasil !",Toast.LENGTH_LONG).show();
+							}
+
+							@Override
+							protected String doInBackground(Void... params) {
+								HashMap<String,String> hashMap  = new HashMap<>();
+								hashMap.put("lat",vlats);
+								hashMap.put("lng",vlongs);
+								hashMap.put("id_awo",id_awo);
+								hashMap.put("id_user",id_user);
+								hashMap.put("ip",ip);
+
+								RequestHandler rh = new RequestHandler();
+								String res = rh.sendPostRequest(AppVar.POST_ABSEN, hashMap);
+								return res;
+							}
 						}
+						insertToDatabase in = new insertToDatabase();
+						in.execute();
 
-						@Override
-						protected void onPostExecute(String s) {
-							super.onPostExecute(s);
-							loading.dismiss();
-							Toast.makeText(AbsenActivity.this,"Absen Berhasil !",Toast.LENGTH_LONG).show();
-						}
-
-						@Override
-						protected String doInBackground(Void... params) {
-							HashMap<String,String> hashMap  = new HashMap<>();
-							hashMap.put("lat",vlats);
-							hashMap.put("lng",vlongs);
-							hashMap.put("id_awo",id_awo);
-							hashMap.put("id_user",id_user);
-							hashMap.put("ip",ip);
-
-							RequestHandler rh = new RequestHandler();
-							String res = rh.sendPostRequest(AppVar.POST_ABSEN, hashMap);
-							return res;
-						}
+						getAbsen();
+					}else{
+						showCustomDialog("Mohon tunggu, Aplikasi sedang membaca lokasi absen");
 					}
-					insertToDatabase in = new insertToDatabase();
-					in.execute();
-
-					getAbsen();
 				}
 			}else if(isNetworkEnabled){
-				locationManager = (LocationManager) getApplicationContext()
-						.getSystemService(Context.LOCATION_SERVICE);
 				locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
 						1000L, 1.0f, locationListener);
 				location1 = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -586,12 +582,17 @@ public class AbsenActivity extends ActionBarActivity implements
 							ChangePassword.class);
 					startActivity(intentActivity);
 					finish();
-				}/* else if (position == 3) {
+				} else if (position == 3) {
 					Intent intentActivity = new Intent(this,
-							CstomerActivity.class);
+							IconTextTabsActivity.class);
 					startActivity(intentActivity);
 					finish();
-				}*/
+				}else if (position == 4) {
+					Intent intentActivity = new Intent(this,
+							CheckoutActivity.class);
+					startActivity(intentActivity);
+					finish();
+				}
 			}
 		}
 	}
@@ -632,6 +633,27 @@ public class AbsenActivity extends ActionBarActivity implements
 								AlertDialog alertDialog = alertDialogBuilder
 										.create();
 								alertDialog.dismiss();
+
+							}
+						});
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();
+	}
+
+	public void showCustomDialog(String msg) {
+		final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				act);
+		alertDialogBuilder
+				.setMessage(msg)
+				.setCancelable(false)
+				.setNegativeButton(
+						getApplicationContext().getResources().getString(
+								R.string.MSG_DLG_LABEL_OK),
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int id) {
+								android.os.Process
+										.killProcess(android.os.Process.myPid());
 
 							}
 						});

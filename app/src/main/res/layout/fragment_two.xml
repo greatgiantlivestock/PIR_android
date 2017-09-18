@@ -1,0 +1,246 @@
+<ScrollView android:id="@+id/scrl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment1"
+    tools:context="com.android.canvassing.gglc.fragment.OneFragment">
+
+    <LinearLayout
+        android:id="@+id/Linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/activity_history_date"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:padding="5dip" >
+
+            <TextView
+                android:id="@+id/title_id_renacana"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/id_rencana"
+                android:textColor="@color/black"/>
+
+            <Spinner
+                android:id="@+id/id_rencna_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_customer_kode"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:padding="5dip" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/app_customer_kode_customer"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/kode_customer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_customer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:padding="5dip" >
+
+            <TextView
+                android:id="@+id/title_id_customer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/nama_customer"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/nama_customer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:inputType="textCapCharacters"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_customer_alamat"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:padding="5dip" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/app_customer_alamat_customer"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/alamat_customer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:inputType="textCapSentences"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_customer_hohp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:padding="5dip" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/app_customer_telp_customer"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/nohp_customer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:inputType="number"
+                android:maxLength="13"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_customer_USAHA"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:padding="5dip" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/app_customer_usaha_customer"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/nama_usaha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:inputType="textCapSentences"
+                android:maxLength="13"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_history_search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:padding="5dip" >
+
+            <TextView
+                android:id="@+id/title_foto_customer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"/>
+
+            <Button
+                android:id="@+id/foto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Foto"
+                android:layout_centerHorizontal="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_no_checkin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:padding="5dip" >
+
+            <TextView
+                android:id="@+id/title_no_checkin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/app_customer_checkin_no_cjheckin"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/no_checkin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:inputType="number"
+                android:hint="@string/app_customer_checkin_hint_no_cjheckin"
+                android:maxLength="13"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ImgCust"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/Linear1"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/avatar"/>
+
+    <Button
+        android:id="@+id/checkin"
+        android:layout_below="@+id/ImgCust"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/checkin"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
+
+</ScrollView>

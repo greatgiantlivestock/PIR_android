@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.absen.mobile.gglc">
+    package="com.android.canvasing.mobile">
 
     <uses-sdk
         android:minSdkVersion="15"
@@ -83,10 +83,12 @@
         <activity android:name="com.android.canvasing.gglc.absen.ChangePassword"></activity>
         <activity android:name="com.android.canvasing.gglc.absen.History_absen"></activity>
         <activity android:name="com.android.canvasing.gglc.absen.LoginActivity"></activity>
+        <activity android:name="com.android.canvasing.gglc.canvassing.CheckoutActivity"></activity>
+        <activity android:name="com.android.canvasing.gglc.canvassing.IconTextTabsActivity"></activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAazFvEt8jg1lbEwynkl3WuEgnP3ruZKCI" />
+            android:value="AIzaSyDOThsgg_LlPoRqsDn7Jp9S-xjMUb68pFs" />
 
         <meta-data
             android:name="com.google.android.gms.version"

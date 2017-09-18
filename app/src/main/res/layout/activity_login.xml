@@ -35,7 +35,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/dark_grey"
                 android:textSize="@dimen/txt_header_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:id="@+id/thumbnail"

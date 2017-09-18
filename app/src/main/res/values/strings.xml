@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">AbsenMobile</string>
-    <string name="title_activity_maps">Absen Mobile</string>
-    <string name="title_activity_all">Absen Mobile | PT. GGL</string>
+    <string name="app_name">Canvassing</string>
+    <string name="title_activity_maps">Canvassing</string>
+    <string name="title_activity_all">Canvassing | PT. GGL</string>
     <string name="msg_warning_no_location">Lokasi tidak terbaca</string>
     <string name="MSG_DLG_LABEL_OK">OK</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -15,12 +15,33 @@
     <string name="menu_4">CheckIn</string>
     <string name="menu_5">CheckOut</string>
 
+    <string name="one">ONE</string>
+    <string name="eight">EIGHT</string>
+    <string name="five">FIVE</string>
+    <string name="four">FOUR</string>
+    <string name="nine">NINE</string>
+    <string name="seven">SEVEN</string>
+    <string name="six">SIX</string>
+    <string name="ten">TEN</string>
+    <string name="three">THREE</string>
+    <string name="two">Canvassing Unregister Customer</string>
+
+    <string name="canvassing">CANVASSING DISINI</string>
+    <string name="id_rencana">Id Rencana Detail</string>
+    <string name="nama_customer">Nama Customer</string>
+    <string name="Foto">Foto Customer</string>
+    <string name="checkin">Checkin</string>
+
     <string name="MSG_DLG_LABEL_EXIT_DIALOG">Apakah anda yakin keluar dari aplikasi ?</string>
     <string name="MSG_DLG_LABEL_CHANGE_PASSWORD_DIALOG">Aplikasi akan direstart untuk login ulang, lanjutkan?</string>
 
     <string name="you_want_to_buy_format">You want to buy %1$s</string>
     <string name="you_want_info_about_format">You want information about %1$s</string>
     <string name="buy_it">Buy it!</string>
+
+    <string-array name="items">
+        <item>Pilih ID Rencana Detail</item>
+    </string-array>
 
     <string name="MSG_DLG_LABEL_YES">Ya</string>
     <string name="MSG_DLG_LABEL_NO">Tidak</string>
@@ -39,12 +60,11 @@
 
     <string name="app_customer_hint_kode_customer">Kode Customer</string>
     <string name="app_customer_hint_nama_karyawan">Karyawan</string>
+    <string name="app_checkout_nomor_checkout">Nomor Checkin</string>
     <string name="app_customer_hint_nama_toko">Waktu</string>
     <string name="app_customer_hint_wilayah">Wilayah</string>
     <string name="app_customer_hint_lokasi">Lokasi</string>
     <string name="app_customer_hint_status">Status</string>
-
-
     <string name="app_login_processing">Proses login mohon tunggu...</string>
 
     <string name="app_jadwal_hint_kode_jadwal">Kode Jadwal</string>
@@ -56,7 +76,6 @@
     <string name="app_jadwal_processing_download_success">Proses download content jadwal berhasil.</string>
 
     <string name="app_login_text_view_download_data">Sinkronisasi Data</string>
-
 
     /////////////////////////////////////////////
     <string name="app_inventory_menu_sales_kanvas">Sales Kanvas</string>
@@ -120,6 +139,7 @@
     <string name="longitude">Longitude</string>
     <string name="latitude">Latitude</string>
     <string name="address">Address</string>
+    <string name="title_description">Kegiatan :</string>
     <string name="use_address">Use Address</string>
     <string name="use_location">Use Latitude/Longitude</string>
     <string name="get_address">Get Address</string>
@@ -179,7 +199,7 @@
     <!-- Jadwal -->
 
 
-    <!-- Customer -->
+
     <string name="app_customer_hint_search_customer">Search Customer</string>
 
     <string name="app_customer_detail_far_away_location">Anda harus berada di lokasi customer saat melakukan update data customer !</string>
@@ -227,6 +247,7 @@
     <string name="app_customer_type_customer">Type Customer</string>
 
     <string name="app_customer_telp_customer">No HP</string>
+    <string name="app_customer_usaha_customer">Nama Usaha</string>
     <string name="app_customer_ket_customer">Keterangan</string>
     <string name="app_customer_fax_customer">Fax</string>
     <string name="app_customer_lats_customer">Latitude</string>
@@ -273,7 +294,7 @@
     <string name="app_customer_detail_check_out_btn">Check Out</string>
     <string name="app_customer_add_product">Add Product</string>
     <string name="app_customer_add_product_Retur">Add Product Retur</string>
-    <!-- Customer Prospect -->
+    <!-- Prospect -->
     <string name="app_customer_prospect_processing_upload_no_data">Tidak ada customer prospect yang di input oleh user !</string>
     <string name="app_customer_prospect_processing_upload_empty">Mohon periksa koneksi internet anda, untuk upload customer prospect</string>
     <string name="app_customer_prospect_processing_upload_failed">Proses upload customer prospect gagal !</string>
@@ -281,12 +302,18 @@
     <string name="app_customer_prospect_hint_add_customer_prospect">Tambah Customer Prospect</string>
     <string name="app_customer_prospect_hint_search_customer">Search Customer Prospect</string>
     <string name="app_customer_prospect_save_success">Customer Prospect berhasil di tambah !</string>
+    <string name="app_customer_checkin_save_success">Checkin Berhasil</string>
+    <string name="app_customer_checkin_no_cjheckin">Nomor Checkin</string>
+    <string name="app_customer_checkin_hint_no_cjheckin">Ambil foto dulu</string>
     <string name="app_customer_prospect_update_success">Customer Prospect berhasil di ubah !</string>
     <string name="app_customer_update_success">Data Customer berhasil diperbarui, silahkan Upload perubahan ke server</string>
     <string name="app_customer_prospect_save_failed_no_image">Mohon mengambil foto dan TTD lengkap customer prospect !</string>
+    <string name="app_customer_checkin_save_failed_no_image">Anda belum Mengambil foto lokasi customer</string>
+    <string name="app_customer_checkout_validation">Silahkan isi kegiatan dahulu</string>
     <string name="app_customer_prospect_save_failed_no_image_old">Silahkan mengupdate lokasi dan gambar terlebih dahulu</string>
     <string name="app_customer_prospect_save_failed_no_image_new">Perbaharui gambar terlebih dahulu</string>
     <string name="app_customer_prospect_save_failed_empty_box">Mohon mengisi seluruh data customer prospect !</string>
+    <string name="app_checkin_incorrect_value">Mohon mengisi seluruh data dengan benar</string>
     <string name="app_reqload_ttd_empty_box">Mohon tanda tangan terlebih dahulu</string>
     <string name="app_reqload_product_empty_box">Mohon tambahkan product terlebih dahulu</string>
     <string name="app_customer_prospect_save_failed_empty">Mohon mengisi data customer dengan benar</string>
@@ -499,6 +526,7 @@
     <string name="MSG_DLG_LABEL_SAVE_ORDER_EMPTY">Data Order Tidak Boleh Kosong</string>
     <string name="MSG_DLG_LABEL_UPDATE_GPS_PROSPECT_DIALOG">Anda ingin mengupdate lokasi customer prospect?</string>
     <string name="MSG_DLG_LABEL_FAILED_GPS_DIALOG">Koordinat GPS salah ! Mohon periksa koneksi GPS !</string>
+    <string name="MSG_DLG_LABEL_FAILED_CURRENT_GPS_DIALOG">Lokasi checkin masih kosong, mohon priksa koneksi GPS</string>
     <string name="MSG_DLG_LABEL_NOVALID_PWD">Password approval anda tidak valid</string>
     <string name="MSG_DLG_LABEL_TITLE_DIALOG">Keluar Aplikasi</string>
     <string name="MSG_DLG_LABEL_CHECK_INTERNET_CONNECTION">Mohon cek koneksi internet.\ndan coba lagi.</string>

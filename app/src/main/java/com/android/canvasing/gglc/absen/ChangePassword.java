@@ -22,7 +22,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.absen.mobile.gglc.R;
+import com.android.canvasing.gglc.canvassing.CheckoutActivity;
+import com.android.canvasing.mobile.R;
+import com.android.canvasing.gglc.canvassing.IconTextTabsActivity;
 
 import java.util.HashMap;
 
@@ -221,12 +223,17 @@ public class ChangePassword extends ActionBarActivity implements
 							History_absen.class);
 					startActivity(intentActivity);
 					finish();
-				}/*else if (position == 3) {
+				}else if (position == 3) {
 					Intent intentActivity = new Intent(this,
-							stomerActivity.class);
+							IconTextTabsActivity.class);
 					startActivity(intentActivity);
 					finish();
-				}*/
+				}else if (position == 4) {
+					Intent intentActivity = new Intent(this,
+							CheckoutActivity.class);
+					startActivity(intentActivity);
+					finish();
+				}
 			}
 		}
 	}

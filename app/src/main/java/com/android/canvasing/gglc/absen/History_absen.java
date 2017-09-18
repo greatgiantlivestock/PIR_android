@@ -31,7 +31,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.absen.mobile.gglc.R;
+import com.android.canvasing.gglc.canvassing.CheckoutActivity;
+import com.android.canvasing.mobile.R;
+import com.android.canvasing.gglc.canvassing.IconTextTabsActivity;
 import com.android.canvasing.gglc.database.Absen;
 import com.android.canvasing.gglc.database.DatabaseHandler;
 
@@ -315,7 +317,7 @@ public class History_absen extends ActionBarActivity implements
 			String id_awo = prefs.getString("id_awo","null");
 
 			String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
-					+ AppVar.CONFIG_APP_URL_DOWNLOAD_CUSTOMER + "?id_awo="
+					+ AppVar.CONFIG_APP_URL_DOWNLOAD_ABSEN_HISTORY + "?id_awo="
 					+ id_awo + "&tanggal1=" + tanggal1 + "&tanggal2=" + tanggal2;
 			HttpResponse response = getDownloadData(download_data_url);
 
@@ -341,13 +343,13 @@ public class History_absen extends ActionBarActivity implements
 									.getApplicationContext().getResources()
 									.getString(R.string.app_value_true));
 						} else {
-							databaseHandler.deleteTableCustomer();
+							databaseHandler.deleteTableAbsen();
 							saveAppDataCustomerSameData(act
 									.getApplicationContext().getResources()
 									.getString(R.string.app_value_false));
 						}
 					} else {
-						databaseHandler.deleteTableCustomer();
+						databaseHandler.deleteTableAbsen();
 						saveAppDataCustomerSameData(act.getApplicationContext()
 								.getResources()
 								.getString(R.string.app_value_false));
@@ -701,12 +703,17 @@ public class History_absen extends ActionBarActivity implements
 							ChangePassword.class);
 					startActivity(intentActivity);
 					finish();
-				} /*else if (position == 2) {
+				} else if (position == 3) {
 					Intent intentActivity = new Intent(this,
-							ChangePassword.class);
+							IconTextTabsActivity.class);
 					startActivity(intentActivity);
 					finish();
-				}*/
+				}else if (position == 4) {
+					Intent intentActivity = new Intent(this,
+							CheckoutActivity.class);
+					startActivity(intentActivity);
+					finish();
+				}
 			}
 		}
 	}

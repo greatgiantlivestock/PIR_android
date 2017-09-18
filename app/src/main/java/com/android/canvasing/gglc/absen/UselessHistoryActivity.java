@@ -23,7 +23,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.absen.mobile.gglc.R;
+import com.android.canvasing.mobile.R;
 
 import java.util.Calendar;
 

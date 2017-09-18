@@ -10,7 +10,7 @@ import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.absen.mobile.gglc.R;
+import com.android.canvasing.mobile.R;
 
 /**
  * A layout that draws something in the insets passed to

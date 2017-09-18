@@ -27,12 +27,12 @@ public class User {
 	public int getID(){
 		return this._id;
 	}
-	
+
 	// setting id
 	public void setID(int id){
 		this._id = id;
 	}
-	
+
 	// getting name
 	public String getName(){
 		return this._name;
@@ -42,7 +42,7 @@ public class User {
 	public void setName(String name){
 		this._name = name;
 	}
-	
+
 	// getting phone number
 	public String getPhoneNumber(){
 		return this._phone_number;

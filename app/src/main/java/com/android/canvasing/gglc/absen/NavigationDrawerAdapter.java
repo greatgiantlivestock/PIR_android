@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.absen.mobile.gglc.R;
+import com.android.canvasing.mobile.R;
 
 import java.util.List;
 

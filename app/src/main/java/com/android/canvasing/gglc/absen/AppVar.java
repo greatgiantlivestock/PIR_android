@@ -1,16 +1,24 @@
 package com.android.canvasing.gglc.absen;
 
 
+import android.os.Environment;
+
+import java.io.File;
+
 public class AppVar {
 
     //URL to our login.php file, url bisa diganti sesuai dengan alamat server kita
-    public static final String LOGIN_URL = "http://110.232.85.37/absen-android/login/login_member";
-    public static final String LOGIN_URL1 = "http://110.232.85.37/absen-android/login/login_member1";
-    public static final String HISTORY_URL = "http://110.232.85.37/absen-android/absen/lihat_laporan_absen_mobile";
-    public static final String GET_ABSEN = "http://110.232.85.37/absen-android/absen/get/";
-    public static final String POST_ABSEN = "http://110.232.85.37/absen-android/absen/add";
+    public static final String LOGIN_URL = "http://179.15.30.74/android_canvassing/login/login_member";
+    public static final String LOGIN_URL1 = "http://179.15.30.74/android_canvassing/login/login_member1";
+    public static final String HISTORY_URL = "http://179.15.30.74/absen-android/absen/lihat_laporan_absen_mobile";
+    public static final String GET_ABSEN = "http://179.15.30.74/absen-android/absen/get/";
+    public static final String POST_ABSEN = "http://179.15.30.74/absen-android/absen/add";
+    public static final String POST_CHECKIN = "http://179.15.30.74/android_canvassing/checkin/add";
+    public static final String POST_CUSTOMER_TMP = "http://179.15.30.74/android_canvassing/checkin/addcustomer_tmp";
+    public static final String POST_CHECKOUT = "http://179.15.30.74/android_canvassing/checkin/addcheckout";
+    public static final String UPLOAD_URL = "http://179.15.30.74/android_canvassing/ws/upload.php";
 
-    public static final String POST_UPDATE_PASSWORD= "http://110.232.85.37/absen-android/awo/edit_password";
+    public static final String POST_UPDATE_PASSWORD= "http://179.15.30.74/android_canvassing/awo/edit_password";
 
     //Keys for email and password as defined in our $_POST['key'] in login.php
     public static final String KEY_EMAIL = "username";
@@ -19,32 +27,21 @@ public class AppVar {
 
     //If server response is equal to this that means login is successful
     public static final String LOGIN_SUCCESS = "success";
-
     public static final String SHARED_PREFERENCES_NAME = "gglc";
-    public static final String SHARED_PREFERENCES_AWO_NAMA= "nama_awo";
-    public static final String SHARED_PREFERENCES_AWO_ID= "id_awo";
-
-    //////////////////////////////////////////////////////
-    public static final String SHARED_PREFERENCES_Product_FOTO_1 = "mahkota_supplier_foto_1";
-
-    public static final String SHARED_PREFERENCES_SUPPLIER_FOTO_1 = "mahkota_supplier_foto_1";
-    public static final String SHARED_PREFERENCES_SUPPLIER_FOTO_2 = "mahkota_supplier_foto_2";
-    public static final String SHARED_PREFERENCES_SUPPLIER_FOTO_3 = "mahkota_supplier_foto_3";
-    public static final String SHARED_PREFERENCES_SUPPLIER_FOTO_4 = "mahkota_supplier_foto_4";
-    public static final String CONFIG_APP_URL_UPLOAD_INSERT_SUPPLIER = "web_flg_mas/ws/insert_supervisor_report.php";
-
-    public static final String SHARED_PREFERENCES_KANVAS_FOTO_1 = "mahkota_kanvas_foto1";
-    public static final String SHARED_PREFERENCES_KANVAS_FOTO_2 = "mahkota_kanvas_foto2";
-    public static final String SHARED_PREFERENCES_KANVAS_TTD = "mahkota_kanvas_ttd";
-
-    public static final String CONFIG_APP_URL_UPLOAD_INSERT_SALES = "web_flg_mas/ws/insert_penjualan.php";
-    public static final String CONFIG_APP_URL_UPLOAD_INSERT_SALES_DETAIL = "web_flg_mas/ws/insert_penjualan_detail.php";
-
-    public static final String CONFIG_APP_URL_UPLOAD_INSERT_SALES_KANVAS = "web_flg_mas/ws/update_sales_kanvas.php";
-    public static final String CONFIG_APP_URL_UPLOAD_INSERT_SALES_KANVAS_DETAIL = "web_flg_mas/ws/update_sales_kanvas_detail.php";
-
-    ////////////////////////////////
-    //110.232.85.37
+    public static final String CONFIG_APP_URL_DOWNLOAD_CUSTOMER = "android_canvassing/get_mst_customer.php";
+    public static final String CONFIG_APP_URL_UPLOAD_INSERT_SALES = "android_canvassing/insert_penjualan.php";
+    public static final String CONFIG_APP_URL_DOWNLOAD_USER = "android_canvassing/get_user.php";
+    public static final String CONFIG_APP_URL_DOWNLOAD_RENCANA_DETAIL = "android_canvassing/get_rencana_detail.php";
+    public static final String CONFIG_APP_URL_DOWNLOAD_KEGIATAN = "android_canvassing/get_kegiatan.php";
+    public static final String SHARED_PREFERENCES_TABLE_MST_CUSTOMER = "gglc_table_customer";
+    public static final String SHARED_PREFERENCES_TABLE_MST_USER = "gglc_table_user";
+    public static final String SHARED_PREFERENCES_TABLE_MST_KEGIATAN = "gglc_table_kegiatan";
+    public static final String SHARED_PREFERENCES_TABLE_RENCANA_DETAIL = "gglc_table_rencana_detail";
+    public static final String SHARED_PREFERENCES_TABLE_MST_CUSTOMER_SAME_DATA = "gglc_table_customer_same_data";
+    public static final String SHARED_PREFERENCES_TABLE_MST_USER_SAME_DATA = "gglc_table_user_same_data";
+    public static final String SHARED_PREFERENCES_TABLE_MST_KEGIATAN_SAME_DATA = "gglc_table_kegiatan_same_data";
+    public static final String SHARED_PREFERENCES_TABLE_RENCANA_DETAIL_SAME_DATA = "gglc_table_rencana_detail_same_data";
+    public static final String SHARED_PREFERENCES_TABLE_CUSTOMER_ID_CUSTOMER = "mahkota_table_customer_id_customer";
 
     public static final String CONFIG_APP_URL_DOWNLOAD_STOCK_VAN = "web_flg_mas/ws/get_request_load.php";
     public static final String SHARED_PREFERENCES_TABLE_STOCK_VAN = "mahkota_table_stock_van";
@@ -64,17 +61,17 @@ public class AppVar {
     public static final String CONFIG_APP_FOLDER_PRODUCT = "product";
     public static final String CONFIG_APP_FOLDER_STAFF = "staff";
     public static final String CONFIG_APP_FOLDER_CUSTOMER = "customer";
-    public static final String CONFIG_APP_FOLDER_CUSTOMER_PROSPECT = "customer_prospect";
+    public static final String CONFIG_APP_FOLDER_CUSTOMER_PROSPECT = "customer_checkin";
     public static final String CONFIG_APP_FOLDER_REQ_LOAD = "Reqload";
     public static final String CONFIG_APP_FOLDER_PHOTO_PURCHASE = "photo_purchase";
     public static final String CONFIG_APP_FOLDER_DISPLAY_PRODUCT = "photo_display_product";
     // public static final String CONFIG_APP_URL_PUBLIC = "http://mahkota.com/";
-    public static final String CONFIG_APP_URL_PUBLIC = "http://110.232.85.37/";
+    public static final String CONFIG_APP_URL_PUBLIC = "http://179.15.30.74/";
     public static final String CONFIG_APP_APP_FOLDER = "mahkota";
 
     public static final String SHARED_PREFERENCES_STAFF_USERNAME = "mahkota_staff_username";
     public static final String SHARED_PREFERENCES_STAFF_NAMA_LENGKAP = "mahkota_staff_nama_lengkap";
-    public static final String SHARED_PREFERENCES_STAFF_KODE_BRANCH = "mahkota_staff_kode_branch";
+    public static final String SHARED_PREFERENCES_STAFF_KODE_CUSTOMER = "android_canvas_kode_customer";
     public static final String SHARED_PREFERENCES_STAFF_ID_WILAYAH = "mahkota_staff_id_wilayah";
     public static final String SHARED_PREFERENCES_STAFF_ID_DEPO = "mahkota_staff_id_depo";
     public static final String SHARED_PREFERENCES_STAFF_ID_STAFF = "mahkota_staff_id_staff";
@@ -91,7 +88,7 @@ public class AppVar {
     public static final String CONFIG_APP_URL_DOWNLOAD_JADWAL = "web_flg_mas/ws/get_jadwal.php";
     // public static final String CONFIG_APP_URL_DIR_IMG_PRODUCT =
     // "http://mahkota.com/web_flg_mas/imgLib/product/";
-    public static final String CONFIG_APP_URL_DIR_IMG_PRODUCT = "http://110.232.85.37" +
+    public static final String CONFIG_APP_URL_DIR_IMG_PRODUCT = "http://179.15.30.74" +
             "/web_flg_mas/imgLib/product/";
     public static final String CONFIG_APP_URL_DOWNLOAD_PRODUCT = "web_flg_mas/ws/get_product.php";
     public static final String CONFIG_APP_URL_DOWNLOAD_PRODUCT_PRICE = "web_flg_mas/ws/get_product_price.php";
@@ -108,7 +105,7 @@ public class AppVar {
 
     // public static final String CONFIG_APP_URL_DIR_IMG_PROMOSI =
     // "http://mahkota.com/web_flg_mas/imgLib/promosi/";
-    public static final String CONFIG_APP_URL_DIR_IMG_PROMOSI = "http://110.232.85.37" +
+    public static final String CONFIG_APP_URL_DIR_IMG_PROMOSI = "http://179.15.30.74" +
             "/web_flg_mas/imgLib/promosi/";
     public static final String CONFIG_APP_URL_DOWNLOAD_PROMOSI = "web_flg_mas/ws/get_promosi.php";
     public static final String SHARED_PREFERENCES_TABLE_PROMOSI = "mahkota_table_promosi";
@@ -126,13 +123,12 @@ public class AppVar {
 
     // public static final String CONFIG_APP_URL_DIR_IMG_CUSTOMER =
     // "http://mahkota.com/web_flg_mas/imgLib/customer/";
-    public static final String CONFIG_APP_URL_DIR_IMG_CUSTOMER = "http://110.232.85.37" +
+    public static final String CONFIG_APP_URL_DIR_IMG_CUSTOMER = "http://179.15.30.74" +
             "/web_flg_mas/imgLib/customer/";
-    public static final String CONFIG_APP_URL_DOWNLOAD_CUSTOMER = "absen-android/get_customer.php";
+    public static final String CONFIG_APP_URL_DOWNLOAD_ABSEN_HISTORY = "android_canvassing/get_absen_history.php";
     public static final String CONFIG_APP_URL_DOWNLOAD_CUSTOMER_NOO = "web_flg_mas/ws/get_customer_noo.php";
     public static final String SHARED_PREFERENCES_TABLE_CUSTOMER = "mahkota_table_customer";
     public static final String SHARED_PREFERENCES_TABLE_CUSTOMER_SAME_DATA = "mahkota_table_customer_same_data";
-    public static final String SHARED_PREFERENCES_TABLE_CUSTOMER_ID_CUSTOMER = "mahkota_table_customer_id_customer";
     public static final String SHARED_PREFERENCES_TABLE_CUSTOMER_KODE_CUSTOMER = "mahkota_table_customer_kode_customer";
 
     public static final String CONFIG_APP_URL_DOWNLOAD_STAFF = "web_flg_mas/ws/get_staff.php";
@@ -197,4 +193,21 @@ public class AppVar {
     public static final String SHARED_PREFERENCES_TABLE_WILAYAH = "mahkota_table_wilayah";
     public static final String SHARED_PREFERENCES_TABLE_WILAYAH_SAME_DATA = "mahkota_table_wilayah_same_data";
     public static final String SHARED_PREFERENCES_TABLE_WILAYAH_ID_WILAYAH = "mahkota_table_wilayah_id_wilayah";
+
+    public static final String APPLICATION_PACKAGE_NAME = "com.android.canvasing.mobile";
+
+    public static String getFolderPath() {
+        StringBuilder path_builder = new StringBuilder();
+        path_builder.append(File.separatorChar);
+        path_builder.append("Android");
+        path_builder.append(File.separatorChar);
+        path_builder.append("data");
+        path_builder.append(File.separatorChar);
+        path_builder.append(APPLICATION_PACKAGE_NAME);
+        String temp_middle_path = path_builder.toString();
+
+        return Environment.getExternalStorageDirectory().getAbsolutePath()
+                + temp_middle_path;
+
+    }
 }

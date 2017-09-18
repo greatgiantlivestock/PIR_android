@@ -23,7 +23,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.absen.mobile.gglc.R;
+import com.android.canvasing.gglc.database.MstUser;
+import com.android.canvasing.mobile.R;
 import com.android.canvasing.gglc.database.DatabaseHandler;
 import com.android.canvasing.gglc.database.User;
 
@@ -92,13 +93,13 @@ public class NavigationDrawerFragment extends Fragment implements
 		mDrawerList.setAdapter(adapter);
 		selectItem(mCurrentSelectedPosition);
 
-		ArrayList<User> staff_list = db.getAllUser();
-		User user = new User();
-		for (User tempStaff : staff_list)
+		ArrayList<MstUser> staff_list = db.getAllUser();
+		MstUser user = new MstUser();
+		for (MstUser tempStaff : staff_list)
 			user = tempStaff;
 
-		txtKodeStaff.setText(user.getName());
-		txtNamaLengkap.setText(user.getPhoneNumber());
+		txtKodeStaff.setText(user.getNama());
+		txtNamaLengkap.setText(user.getNo_hp());
 		txtBranch.setText("");
 
 		return view;
@@ -146,8 +147,8 @@ public class NavigationDrawerFragment extends Fragment implements
 			mFragmentContainerView = (View) mFragmentContainerView.getParent();
 		}
 		mDrawerLayout = drawerLayout;
-		mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(
-				R.color.myPrimaryDarkColor));
+		//mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(
+		//		R.color.myPrimaryDarkColor));
 
 		mActionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(),
 				mDrawerLayout, toolbar, R.string.drawer_open,
@@ -211,9 +212,9 @@ public class NavigationDrawerFragment extends Fragment implements
 		items.add(new NavigationItem(getResources().getString(R.string.menu_3),
 				getResources().getDrawable(R.drawable.change)));
 		items.add(new NavigationItem(getResources().getString(R.string.menu_4),
-				getResources().getDrawable(R.drawable.setting)));
+				getResources().getDrawable(R.drawable.ckin)));
 		items.add(new NavigationItem(getResources().getString(R.string.menu_5),
-				getResources().getDrawable(R.drawable.setting)));
+				getResources().getDrawable(R.drawable.ckout)));
 		return items;
 	}
 
