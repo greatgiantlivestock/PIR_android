@@ -14,7 +14,7 @@
         android:alpha="0.87"
         android:drawablePadding="25dp"
         android:gravity="center_vertical"
-        android:textColor="#208F7C"
+        android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"/>
 

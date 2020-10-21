@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:padding="3dip" >
+
+    <TextView
+        android:id="@+id/customer_title_nama_customer"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/customer_title_alamat_customer"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/customer_title_status_customer"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.3"
+        android:layout_marginLeft="5dp"
+        android:maxLength="100"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/customer_title_tanggal_rencana"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.3"
+        android:maxLength="100"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+
+</LinearLayout>

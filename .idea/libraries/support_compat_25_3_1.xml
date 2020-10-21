@@ -1,15 +1,15 @@
 <component name="libraryTable">
   <library name="support-compat-25.3.1">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.android/build-cache/e6371f2a6bd16433dca2d4116157d204ca0f04b2/output/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/c4d98a802e660ea0a98da6deb0c621147d29db48/output/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/e6371f2a6bd16433dca2d4116157d204ca0f04b2/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/e6371f2a6bd16433dca2d4116157d204ca0f04b2/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/c4d98a802e660ea0a98da6deb0c621147d29db48/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/c4d98a802e660ea0a98da6deb0c621147d29db48/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-compat/25.3.1/support-compat-25.3.1-sources.jar!/" />
+      <root url="jar://C:/android/sdk/extras/android/m2repository/com/android/support/support-compat/25.3.1/support-compat-25.3.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

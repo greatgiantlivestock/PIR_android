@@ -182,7 +182,7 @@
     </LinearLayout>
     <!-- android:layout_marginTop="?android:attr/actionBarSize" -->
 
-    <com.android.canvasing.gglc.absen.ScrimInsertsFrameLayout
+    <com.android.pir.gglc.absen.ScrimInsertsFrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/scrimInsetsFrameLayout"
@@ -195,11 +195,11 @@
 
         <fragment
             android:id="@+id/fragment_drawer"
-            android:name="com.android.canvasing.gglc.absen.NavigationDrawerFragment"
+            android:name="com.android.pir.gglc.absen.NavigationDrawerFragment"
             android:layout_width="@dimen/navigation_drawer_width"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:layout="@layout/fragment_navigation_drawer" />
-    </com.android.canvasing.gglc.absen.ScrimInsertsFrameLayout>
+    </com.android.pir.gglc.absen.ScrimInsertsFrameLayout>
 
 </android.support.v4.widget.DrawerLayout>

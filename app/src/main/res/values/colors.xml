@@ -48,7 +48,9 @@
     <color name="list_cell">#c4dae5</color>
     <color name="medium_sea_green">#3cb371</color>
     <color name="dark_green">#006400</color>
-    <color name="dasgboard_grid">#00a651</color>
+    <!--<color name="dasgboard_grid">#00a651</color>-->
+    <!--<color name="dasgboard_grid">#3F51B5</color>-->
+    <color name="dasgboard_grid">#1e46b5</color>
     <color name="tab_unselected">#2b6845</color>
     <color name="drawer_color">#2b6846</color>
     <color name="drawer_button">#267148</color>

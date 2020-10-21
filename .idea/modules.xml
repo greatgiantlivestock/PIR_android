@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CANVASING.iml" filepath="$PROJECT_DIR$/CANVASING.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PIR.iml" filepath="$PROJECT_DIR$/PIR.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

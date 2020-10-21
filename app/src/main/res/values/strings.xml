@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Canvassing</string>
-    <string name="title_activity_maps">Canvassing</string>
-    <string name="title_activity_all">Canvassing | PT. GGL</string>
+    <string name="app_name">GGL VisitPIR</string>
+    <string name="title_activity_maps">GGL VisitPIR</string>
+    <string name="title_activity_all">GGL VisitPIR</string>
     <string name="msg_warning_no_location">Lokasi tidak terbaca</string>
     <string name="MSG_DLG_LABEL_OK">OK</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -9,11 +9,14 @@
     <string name="action_settings">Settings</string>
     <string name="drawer_open">Menu opened</string>
     <string name="drawer_close">Menu closed</string>
+    <string name="menu1">Refresh</string>
     <string name="menu_1">Absen</string>
-    <string name="menu_2">History</string>
-    <string name="menu_3">Ganti Password</string>
-    <string name="menu_4">CheckIn</string>
-    <string name="menu_5">CheckOut</string>
+    <string name="menu_2">Dashboard</string>
+    <string name="menu_3">Change Password</string>
+    <string name="menu_4">CheckIn Prospect</string>
+    <string name="menu_5">CheckOut Prospect</string>
+    <string name="menu_6">History</string>
+    <string name="menu_7">Rencana dan Orderan</string>
 
     <string name="one">ONE</string>
     <string name="eight">EIGHT</string>
@@ -28,6 +31,7 @@
 
     <string name="canvassing">CANVASSING DISINI</string>
     <string name="id_rencana">Id Rencana Detail</string>
+    <string name="nomor_rencana">Nomor Rencana</string>
     <string name="nama_customer">Nama Customer</string>
     <string name="Foto">Foto Customer</string>
     <string name="checkin">Checkin</string>
@@ -38,6 +42,21 @@
     <string name="you_want_to_buy_format">You want to buy %1$s</string>
     <string name="you_want_info_about_format">You want information about %1$s</string>
     <string name="buy_it">Buy it!</string>
+
+    <string name="cancel">Mmmmh, no</string>
+    <string name="error">Error</string>
+    <string name="permissionExplanation">Look, we really need your location because bla bla bla&#8230;</string>
+    <string name="switchOnLocationShort">Fitur lokasi (GPS) anda belum aktif, mohon aktifkan telebih dahulu, untuk melanjutkan klik "OK".</string>
+    <string name="switchOnLocationLong">Oops - you seem to have disabled location services at the moment. This app is
+        really cool and needs your location because bla bla bla. To continue, please click on "OK" and enable
+        location. If you\'re worried about battery usage, be sure to switch to energy saving mode. </string>
+    <string name="permissionPermanentlyDeclined">Bummer! You have permanently declined the location permission. But
+        this app is so cool and needs your location because&#8230; you know. Click "OK" to change the permission
+        settings.</string>
+    <string name="mockLocationMessage">Stop\nMocking\nMe</string>
+    <string name="empty">--</string>
+    <string name="ok">OK</string>
+
 
     <string-array name="items">
         <item>Pilih ID Rencana Detail</item>
@@ -60,6 +79,8 @@
 
     <string name="app_customer_hint_kode_customer">Kode Customer</string>
     <string name="app_customer_hint_nama_karyawan">Karyawan</string>
+    <string name="app_customer_hint_customer">Customer</string>
+    <string name="app_customer_hint_product">Produk</string>
     <string name="app_checkout_nomor_checkout">Nomor Checkin</string>
     <string name="app_customer_hint_nama_toko">Waktu</string>
     <string name="app_customer_hint_wilayah">Wilayah</string>
@@ -215,7 +236,7 @@
     <string name="app_customer_processing_upload_empty">Mohon periksa koneksi internet anda, untuk upload customer</string>
     <string name="app_customer_processing_upload_no_data">Tidak ada customer yang di perbarui oleh user !</string>
     <string name="app_product_processing_upload_no_data">Tidak ada product yang di perbarui oleh user !</string>
-    <string name="app_customer_processing_refresh_failed">Upload data pada menu Customer atau menu New Prospect terlebih dahulu!</string>
+    <string name="app_customer_processing_refresh_failed">Anda harus checkin dan checkout terlebih dahulu</string>
     <string name="app_customer_processing_download_content">Proses download content customer.</string>
     <string name="app_customer_processing_download_success">Proses download content customer berhasil.</string>
     <string name="app_customer_kode_customer">Kode Customer</string>
@@ -313,7 +334,8 @@
     <string name="app_customer_prospect_save_failed_no_image_old">Silahkan mengupdate lokasi dan gambar terlebih dahulu</string>
     <string name="app_customer_prospect_save_failed_no_image_new">Perbaharui gambar terlebih dahulu</string>
     <string name="app_customer_prospect_save_failed_empty_box">Mohon mengisi seluruh data customer prospect !</string>
-    <string name="app_checkin_incorrect_value">Mohon mengisi seluruh data dengan benar</string>
+    <string name="app_checkin_incorrect_value">Mohon mengisi kolom kegiatan</string>
+    <string name="app_checkin_incorrect_jenis_kendaraan">Anda belum memilih jenis kendaraan</string>
     <string name="app_reqload_ttd_empty_box">Mohon tanda tangan terlebih dahulu</string>
     <string name="app_reqload_product_empty_box">Mohon tambahkan product terlebih dahulu</string>
     <string name="app_customer_prospect_save_failed_empty">Mohon mengisi data customer dengan benar</string>
@@ -402,7 +424,7 @@
     <string name="app_sales_order_dus">Dus</string>
     <string name="app_sales_order_Pack">Pack</string>
     <string name="app_sales_order_Pcs">Pieces</string>
-    <string name="app_sales_order_failed_please_add_jumlah">Mohon memasukkan jumlah item yang di inginkan !</string>
+    <string name="app_sales_order_failed_please_add_jumlah">Mohon memasukkan jumlah product yang di inginkan !</string>
     <string name="app_sales_order_failed_please_add_0">Field tidak boleh kosong, isikan angka 0 untuk melanjutkan</string>
     <string name="app_sales_order_failed_please_add_pcs">Jumlah pieces harus diisi</string>
     <string name="app_sales_order_failed_please_add_renceng">Jumlah renceng harus diisi</string>
@@ -420,13 +442,16 @@
     <string name="app_reqload_processing_upload_no_data">Tidak ada data Request Kanvas yang di input oleh user !</string>
     <string name="app_req_load_processing_upload_no_data">Tidak ada data req load yang di input oleh user !</string>
     <string name="app_sales_order_processing_upload_failed">Proses upload sales order customer gagal !</string>
-    <string name="app_reqload_processing_upload_failed">Proses upload request stok kanvas gagal !</string>
+    <string name="app_reqload_processing_upload_failed">Proses upload stok fisik gagal !</string>
+    <string name="app_reqload_penjualan_upload_failed">Proses upload data penjualan customer gagal !</string>
     <string name="app_req_load1_processing_upload_failed">Proses upload req load 1 customer gagal !</string>
     <string name="app_req_load2_processing_upload_failed">Proses upload req load 2 customer gagal !</string>
     <string name="app_retur_processing_upload_failed">Proses upload retur gagal !</string>
     <string name="app_sales_order_processing_upload_success">Proses upload sales order customer berhasil !</string>
     <string name="app_KANVAS_processing_upload_success">Proses upload kanvas customer berhasil !</string>
     <string name="app_reqload_processing_upload_success">Proses upload req stok kanvas berhasil !</string>
+    <string name="app_stock_fisik_upload_success">Upload stock fisik sukses</string>
+    <string name="app_penjualan_upload_success">Upload data penjualan sukses</string>
     <string name="app_req_load_processing_upload_success">Proses upload Req Load customer berhasil !</string>
     <string name="app_retur_processing_upload_success">Proses upload retur customer berhasil !</string>
     <string name="app_sales_order_processing_upload">Proses Upload Sales Order</string>
@@ -581,15 +606,17 @@
     <string name="app_supplier_title">Supplier</string>
     <string name="app_supplier_keterangan">Keterangan</string>
     <string name="app_supplier_btn_upload">Upload</string>
-    <string name="app_supplier_processing">Proses upload supplier mohon tunggu...</string>
-    <string name="app_supplier_processing_error">Proses upload supplier error</string>
-    <string name="app_supplier_processing_failed">Proses upload supplier gagal</string>
-    <string name="app_supplier_processing_sukses">Proses upload supplier sukses</string>
+    <string name="app_supplier_processing">Proses upload data.. mohon tunggu...</string>
+    <string name="app_supplier_processing_error">Proses upload data error</string>
+    <string name="app_supplier_processing_failed">Proses upload gagal</string>
+    <string name="app_supplier_processing_sukses">Upload data sukses</string>
     <string name="app_supplier_button_foto_1">Foto 1</string>
     <string name="app_supplier_button_foto_2">Foto 2</string>
     <string name="app_supplier_button_foto_3">Foto 3</string>
     <string name="app_supplier_button_foto_4">Foto 4</string>
     <string name="app_supplier_failed_no_keterangan">Mohon masukkan keterangan</string>
+    <string name="app_supplier_failed_jumlah">Mohon masukkan jumlah</string>
+    <string name="app_supplier_failed_batch">Mohon masukkan batch</string>
     <string name="app_supplier_already_take_foto_1">Anda sudah mengambil Foto 1, apakah anda ingin mengganti dengan gambar baru ?</string>
     <string name="app_supplier_already_take_foto_2">Anda sudah mengambil Foto 2, apakah anda ingin mengganti dengan gambar baru ?</string>
     <string name="app_supplier_already_take_foto_3">Anda sudah mengambil Foto 3, apakah anda ingin mengganti dengan gambar baru ?</string>

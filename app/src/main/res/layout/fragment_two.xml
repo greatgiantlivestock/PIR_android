@@ -18,8 +18,8 @@
 
         <LinearLayout
             android:id="@+id/activity_history_date"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:focusableInTouchMode="true"
             android:orientation="horizontal"
             android:padding="5dip" >
@@ -34,6 +34,31 @@
 
             <Spinner
                 android:id="@+id/id_rencna_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_nomor_rencana"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:padding="5dip" >
+
+            <TextView
+                android:id="@+id/title_nomor_renacana"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tanggal Rencana"
+                android:textColor="@color/black"/>
+
+            <Spinner
+                android:id="@+id/nomor_rencana"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -219,8 +244,7 @@
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:inputType="number"
-                android:hint="@string/app_customer_checkin_hint_no_cjheckin"
-                android:maxLength="13"/>
+                android:hint="@string/app_customer_checkin_hint_no_cjheckin"/>
 
         </LinearLayout>
     </LinearLayout>
