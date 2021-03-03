@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.graphics.drawable.Icon;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
@@ -39,7 +38,7 @@ import com.android.pir.gglc.absen.ChangePassword;
 import com.android.pir.gglc.absen.NavigationDrawerCallbacks;
 import com.android.pir.gglc.absen.NavigationDrawerFragment;
 import com.android.pir.gglc.absen.Orderan;
-import com.android.pir.gglc.database.Absen;
+import com.android.pir.gglc.database.DataSapi;
 import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
 import com.android.pir.gglc.database.MasterRencana;
@@ -50,6 +49,7 @@ import com.android.pir.gglc.database.Trx_Checkin;
 import com.android.pir.mobile.R;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -74,7 +74,7 @@ public class DashboardActivity extends ActionBarActivity implements
 	private DatabaseHandler databaseHandler;
 	private ListView listview;
 	private LinearLayout layout;
-	private ArrayList<Absen> customer_list = new ArrayList<Absen>();
+//	private ArrayList<Absen> customer_list = new ArrayList<Absen>();
 	private ArrayList<Rencana> rencana_list = new ArrayList<Rencana>();
 	private ListViewAdapter cAdapter;
 	private ProgressDialog progressDialog;
@@ -93,10 +93,10 @@ public class DashboardActivity extends ActionBarActivity implements
 	private Typeface typefaceSmall;
 	private TextView jml_ckin,jml_rcn,percent;
     private String response;
-    private Absen customer;
+//    private Absen customer;
 	private Button chat,map;
 	private EditText mulai,sampai;
-	private Button checkin,checkout;
+//	private Button checkin,checkout;
 	final int Date_Dialog_ID=0;
 	final int Date_Dialog_ID1=1;
 	int cDay,cMonth,cYear;
@@ -109,6 +109,7 @@ public class DashboardActivity extends ActionBarActivity implements
 	private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
 	private DatabaseHandler db;
 	private ViewPager viewPager;
+	private int id=0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -122,11 +123,6 @@ public class DashboardActivity extends ActionBarActivity implements
 		act = this;
 		db = new DatabaseHandler(this);
 
-		checkin = (Button)findViewById(R.id.checkin);
-		checkout = (Button)findViewById(R.id.checkout);
-//		jml_ckin = (TextView)findViewById(R.id.jml_ckin);
-//		jml_rcn = (TextView)findViewById(R.id.jml_rcn);
-//		percent = (TextView)findViewById(R.id.percentase);
 		listview = (ListView) findViewById(R.id.list);
 		listview.setItemsCanFocus(false);
 
@@ -142,32 +138,14 @@ public class DashboardActivity extends ActionBarActivity implements
 		mNavigationDrawerFragment.setup(R.id.fragment_drawer,
 				(DrawerLayout) findViewById(R.id.drawer), mToolbar);
 		databaseHandler = new DatabaseHandler(this);
-		mNavigationDrawerFragment.selectItem(0);
+		mNavigationDrawerFragment.selectItem(3);
 
 		ArrayList<MstUser> staff_list = databaseHandler.getAllUser();
 		user = new MstUser();
 		for (MstUser tempStaff : staff_list)
 			user = tempStaff;
 		id_user=user.getId_user();
-
-//		getCkin();
-//		getRencana();
 		updateContentRefreshRencana();
-
-		checkin.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				gotoCheckin();
-			}
-		});
-
-		checkout.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				gotoCheckout();
-			}
-		});
-
 	}
 
 	@Override
@@ -182,9 +160,15 @@ public class DashboardActivity extends ActionBarActivity implements
 			case R.id.menu_refresh:
 				if (GlobalApp.checkInternetConnection(act)) {
 					new DownloadDataCustomer().execute();
-//					updateContentRefreshRencana();
-					new DownloadDataRencanaDetail().execute();
-					db.deleteTableStock();
+				} else {
+					String message = act.getApplicationContext().getResources()
+							.getString(R.string.app_customer_processing_empty);
+					showCustomDialog(message);
+				}
+				return true;
+			case R.id.menu_upload:
+				if (GlobalApp.checkInternetConnection(act)) {
+					new DownloadDataCustomer().execute();
 				} else {
 					String message = act.getApplicationContext().getResources()
 							.getString(R.string.app_customer_processing_empty);
@@ -196,119 +180,12 @@ public class DashboardActivity extends ActionBarActivity implements
 		}
 	}
 
-	//download data customer to sqlite
-	private class DownloadDataCustomer extends AsyncTask<String, Integer, String> {
-		@Override
-		protected void onPreExecute() {
-			progressDialog.setMessage(getApplicationContext().getResources()
-					.getString(R.string.MSG_DLG_LABEL_SYNRONISASI_DATA));
-			progressDialog.show();
-			progressDialog
-					.setOnCancelListener(new DialogInterface.OnCancelListener() {
-						@Override
-						public void onCancel(DialogInterface dialog) {
-							String msg = getApplicationContext()
-									.getResources()
-									.getString(
-											R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
-							showCustomDialog(msg);
-						}
-					});
-		}
-
-		@Override
-		protected String doInBackground(String... params) {
-			SharedPreferences prefs = getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);
-			String id_wilayah= prefs.getString("id_wilayah","null");
-
-			String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
-					+ AppVar.CONFIG_APP_URL_DOWNLOAD_CUSTOMER+ "?id_wilayah="
-					+ id_wilayah;
-			HttpResponse response = getDownloadData(download_data_url);
-			int retCode = (response != null) ? response.getStatusLine()
-					.getStatusCode() : -1;
-			if (retCode != 200) {
-				message = act.getApplicationContext().getResources()
-						.getString(R.string.MSG_DLG_LABEL_URL_NOT_FOUND);
-				handler.post(new Runnable() {
-					public void run() {
-						showCustomDialog(message);
-					}
-				});
-			} else {
-				try {
-					response_data = EntityUtils.toString(response.getEntity());
-
-					SharedPreferences spPreferences = getSharedPrefereces();
-					String main_app_table_data = spPreferences.getString(
-							AppVar.SHARED_PREFERENCES_TABLE_MST_CUSTOMER, null);
-					if (main_app_table_data != null) {
-						if (main_app_table_data.equalsIgnoreCase(response_data)) {
-							saveAppDataBranchSameData(act
-									.getApplicationContext().getResources()
-									.getString(R.string.app_value_true));
-						} else {
-							db.deleteTableMSTCustomer();
-							saveAppDataBranchSameData(act
-									.getApplicationContext().getResources()
-									.getString(R.string.app_value_false));
-						}
-					} else {
-						db.deleteTableMSTCustomer();
-						saveAppDataBranchSameData(act.getApplicationContext()
-								.getResources()
-								.getString(R.string.app_value_false));
-					}
-				} catch (org.apache.http.ParseException e) {
-					message = e.toString();
-					handler.post(new Runnable() {
-						public void run() {
-							showCustomDialog(message);
-						}
-					});
-				} catch (IOException e) {
-					message = e.toString();
-					handler.post(new Runnable() {
-						public void run() {
-							showCustomDialog(message);
-						}
-					});
-				}
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			super.onPostExecute(result);
-			if (response_data != null) {
-				saveAppDataBranch(response_data);
-				extractDataBranch();
-				if (progressDialog != null) {
-					progressDialog.dismiss();
-					//new DownloadDataKegiatan().execute();
-				}
-				showCustomDialog("Data Customer Berhasil Di Sikronkan dengan Server");
-				//new DownloadDataKegiatan().execute();
-				//new DownloadDataTypeCustomer().execute();
-			} else {
-				message = act.getApplicationContext().getResources()
-						.getString(R.string.MSG_DLG_LABEL_DOWNLOAD_FAILED);
-				handler.post(new Runnable() {
-					public void run() {
-						showCustomDialog(message);
-					}
-				});
-			}
-		}
-	}
-
 	public void updateContentRefreshRencana() {
 		rencana_list.clear();
 		ArrayList<Rencana> rencana_from_db = databaseHandler
 				.getAllRencana();
 		if(databaseHandler.getCountDetailrencana()==0){
-			new DownloadDataRencanaDetail().execute();
+			new DownloadDataCustomer().execute();
 		}
 
 		if (rencana_from_db.size() > 0) {
@@ -367,6 +244,299 @@ public class DashboardActivity extends ActionBarActivity implements
 		}
 	}
 
+
+	private class DownloadDataCustomer extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			progressDialog.setMessage(getApplicationContext().getResources()
+					.getString(R.string.MSG_DLG_LABEL_SYNRONISASI_DATA));
+			progressDialog.show();
+			progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					String msg = getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
+					showCustomDialog(msg);
+				}
+			});
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
+					+ AppVar.CONFIG_APP_URL_DOWNLOAD_CUSTOMER_NEW;
+			HttpResponse response = getDownloadData(download_data_url);
+			int retCode = (response != null) ? response.getStatusLine().getStatusCode() : -1;
+			if (retCode != 200) {
+				message = act.getApplicationContext().getResources()
+						.getString(R.string.MSG_DLG_LABEL_URL_NOT_FOUND);
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			} else {
+				try {
+					response_data = EntityUtils.toString(response.getEntity());
+
+					SharedPreferences spPreferences = getSharedPrefereces();
+					String main_app_table_data = spPreferences.getString(
+							AppVar.SHARED_PREFERENCES_TABLE_MST_CUSTOMER, null);
+					if (main_app_table_data != null) {
+						if (main_app_table_data.equalsIgnoreCase(response_data)) {
+							saveAppDataBranchSameData(act
+									.getApplicationContext().getResources()
+									.getString(R.string.app_value_true));
+						} else {
+							db.deleteTableMSTCustomer();
+							saveAppDataBranchSameData(act
+									.getApplicationContext().getResources()
+									.getString(R.string.app_value_false));
+						}
+					} else {
+						db.deleteTableMSTCustomer();
+						saveAppDataBranchSameData(act.getApplicationContext()
+								.getResources()
+								.getString(R.string.app_value_false));
+					}
+				} catch (ParseException e) {
+					message = e.toString();
+					handler.post(new Runnable() {
+						public void run() {
+							showCustomDialog(message);
+						}
+					});
+				} catch (IOException e) {
+					message = e.toString();
+					handler.post(new Runnable() {
+						public void run() {
+							showCustomDialog(message);
+						}
+					});
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			if (response_data != null) {
+				saveAppDataBranch(response_data);
+				extractDataBranch();
+				new DownloadDataRencanaMaster1().execute();
+			} else {
+				message = act.getApplicationContext().getResources()
+						.getString(R.string.MSG_DLG_LABEL_DOWNLOAD_FAILED);
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			}
+		}
+	}
+
+	public void extractDataBranch() {
+		SharedPreferences spPreferences = getSharedPrefereces();
+		String main_app_table_same_data = spPreferences.getString(
+				AppVar.SHARED_PREFERENCES_TABLE_MST_CUSTOMER_SAME_DATA, null);
+		String main_app_table = spPreferences.getString(
+				AppVar.SHARED_PREFERENCES_TABLE_MST_CUSTOMER, null);
+		if (main_app_table_same_data.equalsIgnoreCase(act
+				.getApplicationContext().getResources()
+				.getString(R.string.app_value_false))) {
+			JSONObject oResponse;
+			try {
+				oResponse = new JSONObject(main_app_table);
+				JSONArray jsonarr = oResponse.getJSONArray("customer");
+				for (int i = 0; i < jsonarr.length(); i++) {
+					JSONObject oResponsealue = jsonarr.getJSONObject(i);
+					String id_customer = oResponsealue.isNull("lifnr") ? null
+							: oResponsealue.getString("lifnr");
+					String kode_customer = oResponsealue.isNull("lifnr") ? null
+							: oResponsealue.getString("lifnr");
+					String nama_customer = oResponsealue.isNull("name1") ? null
+							: oResponsealue.getString("name1");
+					String alamat = oResponsealue.isNull("desa") ? null
+							: oResponsealue.getString("desa");
+					String no_hp = oResponsealue.isNull("veraa_user") ? null
+							: oResponsealue.getString("veraa_user");
+					String lats = "0";
+					String longs = "0";
+					String id_wilayah = "3010";
+					Log.d(LOG_TAG, "id_customer:" + id_customer);
+					Log.d(LOG_TAG, "kode_customer:" + kode_customer);
+					Log.d(LOG_TAG, "nama_customer:" + nama_customer);
+					db.addMst_customer(new Mst_Customer(Integer.parseInt(id_customer),kode_customer,nama_customer,alamat,no_hp,lats,longs,Integer.parseInt(id_wilayah)));
+				}
+
+			} catch (JSONException e) {
+				final String message = e.toString();
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+
+			}
+		}
+	}
+
+	private class DownloadDataRencanaMaster1 extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			progressDialog.setMessage(getApplicationContext().getResources()
+					.getString(R.string.MSG_DLG_LABEL_SYNRONISASI_DATA));
+			progressDialog.show();
+			progressDialog
+					.setOnCancelListener(new DialogInterface.OnCancelListener() {
+						@Override
+						public void onCancel(DialogInterface dialog) {
+							String msg = getApplicationContext()
+									.getResources()
+									.getString(
+											R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
+							showCustomDialog(msg);
+						}
+					});
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			ArrayList<MstUser> staff_list = databaseHandler.getAllUser();
+			user = new MstUser();
+			for (MstUser tempStaff : staff_list)
+				user = tempStaff;
+			id_user=user.getId_user();
+
+			String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
+					+ AppVar.CONFIG_APP_URL_DOWNLOAD_RENCANA_MASTER_ONLY+ "?id_karyawan="+id_user;
+			HttpResponse response = getDownloadData(download_data_url);
+			int retCode = (response != null) ? response.getStatusLine()
+					.getStatusCode() : -1;
+			if (retCode != 200) {
+				message = act.getApplicationContext().getResources()
+						.getString(R.string.MSG_DLG_LABEL_URL_NOT_FOUND);
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			} else {
+				try {
+					response_data = EntityUtils.toString(response.getEntity());
+
+					SharedPreferences spPreferences = getSharedPrefereces();
+					String main_app_table_data = spPreferences.getString(
+							AppVar.SHARED_PREFERENCES_TABLE_RENCANA_MASTER, null);
+					if (main_app_table_data != null) {
+						if (main_app_table_data.equalsIgnoreCase(response_data)) {
+							saveAppDataRencanaMasterSameData(act
+									.getApplicationContext().getResources()
+									.getString(R.string.app_value_true));
+						} else {
+							databaseHandler.deleteTableRencanaMaster();
+							saveAppDataRencanaMasterSameData(act
+									.getApplicationContext().getResources()
+									.getString(R.string.app_value_false));
+						}
+					} else {
+						databaseHandler.deleteTableRencanaMaster();
+						saveAppDataRencanaMasterSameData(act.getApplicationContext()
+								.getResources()
+								.getString(R.string.app_value_false));
+					}
+				} catch (org.apache.http.ParseException e) {
+					message = e.toString();
+					handler.post(new Runnable() {
+						public void run() {
+							showCustomDialog(message);
+						}
+					});
+				} catch (IOException e) {
+					message = e.toString();
+					handler.post(new Runnable() {
+						public void run() {
+							showCustomDialog(message);
+						}
+					});
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			if (response_data != null) {
+				saveAppDataRencanaMaster(response_data);
+				extractDataRencanaMaster();
+				new DownloadDataRencanaDetail().execute();
+			} else {
+				message = act.getApplicationContext().getResources()
+						.getString(R.string.MSG_DLG_LABEL_DOWNLOAD_FAILED);
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			}
+		}
+	}
+
+	public void extractDataRencanaMaster() {
+		SharedPreferences spPreferences = getSharedPrefereces();
+		String main_app_table_rm_same_data = spPreferences.getString(
+				AppVar.SHARED_PREFERENCES_TABLE_RENCANA_MASTER_SAME_DATA, null);
+		String main_app_table = spPreferences.getString(
+				AppVar.SHARED_PREFERENCES_TABLE_RENCANA_MASTER, null);
+		if (main_app_table_rm_same_data.equalsIgnoreCase(act
+				.getApplicationContext().getResources()
+				.getString(R.string.app_value_false))) {
+			JSONObject oResponse;
+			try {
+				oResponse = new JSONObject(main_app_table);
+				JSONArray jsonarr = oResponse.getJSONArray("rencana_master");
+				for (int i = 0; i < jsonarr.length(); i++) {
+					JSONObject oResponsealue = jsonarr.getJSONObject(i);
+					String id_rencana_header = oResponsealue.isNull("id_rencana_header") ? null
+							: oResponsealue.getString("id_rencana_header");
+					String nomor_rencana = oResponsealue.isNull("nomor_rencana") ? null
+							: oResponsealue.getString("nomor_rencana");
+					String tanggal_penetapan = oResponsealue.isNull("tanggal_penetapan") ? null
+							: oResponsealue.getString("tanggal_penetapan");
+					String tanggal_rencana = oResponsealue.isNull("tanggal_rencana") ? null
+							: oResponsealue.getString("tanggal_rencana");
+					String id_user_input_rencana = oResponsealue.isNull("id_user_input_rencana") ? null
+							: oResponsealue.getString("id_user_input_rencana");
+					String keterangan = oResponsealue.isNull("keterangan") ? null
+							: oResponsealue.getString("keterangan");
+					String aproved = oResponsealue.isNull("aproved") ? null
+							: oResponsealue.getString("aproved");
+					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
+					Log.d(LOG_TAG, "nomor_rencana:" + nomor_rencana);
+					Log.d(LOG_TAG, "tanggal_penetapan:" + tanggal_penetapan);
+					Log.d(LOG_TAG, "tanggal_rencana:" + tanggal_rencana);
+					Log.d(LOG_TAG, "id_user_input_rencana:" + id_user_input_rencana);
+					Log.d(LOG_TAG, "keterangan:" + keterangan);
+					databaseHandler.addMasterRencana(new MasterRencana(Integer.parseInt(id_rencana_header),nomor_rencana,
+							tanggal_penetapan,tanggal_rencana,Integer.parseInt(id_user_input_rencana),keterangan,aproved));
+				}
+			} catch (JSONException e) {
+				final String message = e.toString();
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			}
+		}
+	}
+
+
 	private class DownloadDataRencanaDetail extends AsyncTask<String, Integer, String> {
 		@Override
 		protected void onPreExecute() {
@@ -392,7 +562,7 @@ public class DashboardActivity extends ActionBarActivity implements
 			String id_karyawan = prefs.getString("id_awo","null");
 
 			String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
-					+ AppVar.CONFIG_APP_URL_DOWNLOAD_RENCANA_DETAIL+ "?id_karyawan="
+					+ AppVar.CONFIG_APP_URL_DOWNLOAD_RENCANA_DETAIL_APROVED+ "?id_karyawan="
 					+ id_karyawan;
 			HttpResponse response = getDownloadData(download_data_url);
 			int retCode = (response != null) ? response.getStatusLine()
@@ -454,10 +624,7 @@ public class DashboardActivity extends ActionBarActivity implements
 			if (response_data != null) {
 				saveAppDataRencanaDetail(response_data);
 				extractDataRencanaDetail();
-				if (progressDialog != null) {
-					progressDialog.dismiss();
-				}
-				new DownloadDataRencanaMaster().execute();
+				new DownloadDataSapi().execute();
 			} else {
 				message = act.getApplicationContext().getResources()
 						.getString(R.string.MSG_DLG_LABEL_DOWNLOAD_FAILED);
@@ -470,7 +637,7 @@ public class DashboardActivity extends ActionBarActivity implements
 		}
 	}
 
-	private class DownloadDataRencanaMaster extends AsyncTask<String, Integer, String> {
+	private class DownloadDataSapi extends AsyncTask<String, Integer, String> {
 		@Override
 		protected void onPreExecute() {
 			progressDialog.setMessage(getApplicationContext().getResources()
@@ -491,12 +658,8 @@ public class DashboardActivity extends ActionBarActivity implements
 
 		@Override
 		protected String doInBackground(String... params) {
-			SharedPreferences prefs = getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);
-			String id_karyawan = prefs.getString("id_awo","null");
-
 			String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
-					+ AppVar.CONFIG_APP_URL_DOWNLOAD_RENCANA_MASTER+ "?id_karyawan="
-					+ id_karyawan;
+					+ AppVar.CONFIG_APP_URL_DOWNLOAD_DATA_SAPI;
 			HttpResponse response = getDownloadData(download_data_url);
 			int retCode = (response != null) ? response.getStatusLine()
 					.getStatusCode() : -1;
@@ -514,21 +677,21 @@ public class DashboardActivity extends ActionBarActivity implements
 
 					SharedPreferences spPreferences = getSharedPrefereces();
 					String main_app_table_data = spPreferences.getString(
-							AppVar.SHARED_PREFERENCES_TABLE_RENCANA_MASTER, null);
+							AppVar.SHARED_PREFERENCES_TABLE_DATA_SAPI, null);
 					if (main_app_table_data != null) {
 						if (main_app_table_data.equalsIgnoreCase(response_data)) {
-							saveAppDataRencanaMasterSameData(act
+							saveAppDataDataSapiSameData(act
 									.getApplicationContext().getResources()
 									.getString(R.string.app_value_true));
 						} else {
-							databaseHandler.deleteTableRencanaMaster();
-							saveAppDataRencanaMasterSameData(act
+							databaseHandler.deleteTableDataSapi();
+							saveAppDataDataSapiSameData(act
 									.getApplicationContext().getResources()
 									.getString(R.string.app_value_false));
 						}
 					} else {
-						databaseHandler.deleteTableRencanaMaster();
-						saveAppDataRencanaMasterSameData(act.getApplicationContext()
+						databaseHandler.deleteTableDataSapi();
+						saveAppDataDataSapiSameData(act.getApplicationContext()
 								.getResources()
 								.getString(R.string.app_value_false));
 					}
@@ -555,14 +718,16 @@ public class DashboardActivity extends ActionBarActivity implements
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
 			if (response_data != null) {
-				saveAppDataRencanaMaster(response_data);
-				extractDataRencanaMaster();
+				saveAppDataDataSapi(response_data);
+				extractDataDataSapi();
 				if (progressDialog != null) {
 					progressDialog.dismiss();
 				}
 				msg_success=act.getApplicationContext().getResources()
 						.getString(R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_SUCCESS);
 				showCustomDialog(msg_success);
+				listview.setVisibility(View.VISIBLE);
+				showListRencana();
 			} else {
 				message = act.getApplicationContext().getResources()
 						.getString(R.string.MSG_DLG_LABEL_DOWNLOAD_FAILED);
@@ -572,37 +737,64 @@ public class DashboardActivity extends ActionBarActivity implements
 					}
 				});
 			}
-			showListRencana();
 		}
 	}
 
-	public void saveAppDataRencanaDetail(String responsedata) {
+	public void saveAppDataDataSapiSameData(String responsedata) {
 		SharedPreferences sp = getSharedPrefereces();
 		SharedPreferences.Editor editor = sp.edit();
-		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_RENCANA_DETAIL, responsedata);
-		editor.commit();
-	}
-
-	public void saveAppDataRencanaMaster(String responsedata) {
-		SharedPreferences sp = getSharedPrefereces();
-		SharedPreferences.Editor editor = sp.edit();
-		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_RENCANA_MASTER, responsedata);
-		editor.commit();
-	}
-
-	public void saveAppDataRencanaDetailSameData(String responsedata) {
-		SharedPreferences sp = getSharedPrefereces();
-		SharedPreferences.Editor editor = sp.edit();
-		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_RENCANA_DETAIL_SAME_DATA,
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_DATA_SAPI_SAME_DATA,
 				responsedata);
 		editor.commit();
 	}
+	public void extractDataDataSapi() {
+		SharedPreferences spPreferences = getSharedPrefereces();
+		String main_app_table_same_data = spPreferences.getString(
+				AppVar.SHARED_PREFERENCES_TABLE_DATA_SAPI_SAME_DATA, null);
+		String main_app_table = spPreferences.getString(
+				AppVar.SHARED_PREFERENCES_TABLE_DATA_SAPI, null);
+		if (main_app_table_same_data.equalsIgnoreCase(act
+				.getApplicationContext().getResources()
+				.getString(R.string.app_value_false))) {
+			JSONObject oResponse;
+			try {
+				oResponse = new JSONObject(main_app_table);
+				JSONArray jsonarr = oResponse.getJSONArray("data_sapi");
+				id=databaseHandler.getCountSapi();
+				if(id==0) {
+					databaseHandler.addDataSapi(new DataSapi(0, "0", "0", "0", "Pilih Eartag"));
+				}
+				for (int i = 0; i < jsonarr.length(); i++) {
+					JSONObject oResponsealue = jsonarr.getJSONObject(i);
+					String id = oResponsealue.isNull("id") ? null
+							: oResponsealue.getString("id");
+					String indnr = oResponsealue.isNull("indnr") ? null
+							: oResponsealue.getString("indnr");
+					String lifnr = oResponsealue.isNull("lifnr") ? null
+							: oResponsealue.getString("lifnr");
+					String beastid = oResponsealue.isNull("beastid") ? null
+							: oResponsealue.getString("beastid");
+					String vistgid = oResponsealue.isNull("vistgid") ? null
+							: oResponsealue.getString("vistgid");
+					Log.d(LOG_TAG, "indnr:" + indnr);
+					Log.d(LOG_TAG, "lifnr:" + lifnr);
+					databaseHandler.addDataSapi(new DataSapi(Integer.parseInt(id),indnr,lifnr,beastid,vistgid));
+				}
+			} catch (JSONException e) {
+				final String message = e.toString();
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			}
+		}
+	}
 
-	public void saveAppDataRencanaMasterSameData(String responsedata) {
+	public void saveAppDataDataSapi(String responsedata) {
 		SharedPreferences sp = getSharedPrefereces();
 		SharedPreferences.Editor editor = sp.edit();
-		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_RENCANA_MASTER_SAME_DATA,
-				responsedata);
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_DATA_SAPI, responsedata);
 		editor.commit();
 	}
 
@@ -654,53 +846,55 @@ public class DashboardActivity extends ActionBarActivity implements
 		}
 	}
 
-	public void extractDataRencanaMaster() {
-		SharedPreferences spPreferences = getSharedPrefereces();
-		String main_app_table_rm_same_data = spPreferences.getString(
-				AppVar.SHARED_PREFERENCES_TABLE_RENCANA_MASTER_SAME_DATA, null);
-		String main_app_table = spPreferences.getString(
-				AppVar.SHARED_PREFERENCES_TABLE_RENCANA_MASTER, null);
-		if (main_app_table_rm_same_data.equalsIgnoreCase(act
-				.getApplicationContext().getResources()
-				.getString(R.string.app_value_false))) {
-			JSONObject oResponse;
-			try {
-				oResponse = new JSONObject(main_app_table);
-				JSONArray jsonarr = oResponse.getJSONArray("rencana_master");
-				for (int i = 0; i < jsonarr.length(); i++) {
-					JSONObject oResponsealue = jsonarr.getJSONObject(i);
-					String id_rencana_header = oResponsealue.isNull("id_rencana_header") ? null
-							: oResponsealue.getString("id_rencana_header");
-					String nomor_rencana = oResponsealue.isNull("nomor_rencana") ? null
-							: oResponsealue.getString("nomor_rencana");
-					String tanggal_penetapan = oResponsealue.isNull("tanggal_penetapan") ? null
-							: oResponsealue.getString("tanggal_penetapan");
-					String tanggal_rencana = oResponsealue.isNull("tanggal_rencana") ? null
-							: oResponsealue.getString("tanggal_rencana");
-					String id_user_input_rencana = oResponsealue.isNull("id_user_input_rencana") ? null
-							: oResponsealue.getString("id_user_input_rencana");
-					String keterangan = oResponsealue.isNull("keterangan") ? null
-							: oResponsealue.getString("keterangan");
-					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
-					Log.d(LOG_TAG, "nomor_rencana:" + nomor_rencana);
-					databaseHandler.addMasterRencana(new MasterRencana(Integer.parseInt(id_rencana_header),nomor_rencana,
-							tanggal_penetapan,tanggal_rencana,Integer.parseInt(id_user_input_rencana),keterangan));
-				}
-			} catch (JSONException e) {
-				final String message = e.toString();
-				handler.post(new Runnable() {
-					public void run() {
-						showCustomDialog(message);
-					}
-				});
-			}
-		}
+	public void saveAppDataRencanaDetail(String responsedata) {
+		SharedPreferences sp = getSharedPrefereces();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_RENCANA_DETAIL, responsedata);
+		editor.commit();
 	}
 
+	public void saveAppDataRencanaMaster(String responsedata) {
+		SharedPreferences sp = getSharedPrefereces();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_RENCANA_MASTER, responsedata);
+		editor.commit();
+	}
+
+	public void saveAppDataRencanaDetailSameData(String responsedata) {
+		SharedPreferences sp = getSharedPrefereces();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_RENCANA_DETAIL_SAME_DATA,
+				responsedata);
+		editor.commit();
+	}
+
+	public void saveAppDataRencanaMasterSameData(String responsedata) {
+		SharedPreferences sp = getSharedPrefereces();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_RENCANA_MASTER_SAME_DATA,
+				responsedata);
+		editor.commit();
+	}
+
+	public void saveAppDataBranch(String responsedata) {
+		SharedPreferences sp = getSharedPrefereces();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_MST_CUSTOMER, responsedata);
+		editor.commit();
+	}
+
+	public void saveAppDataBranchSameData(String responsedata) {
+		SharedPreferences sp = getSharedPrefereces();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_MST_CUSTOMER_SAME_DATA,
+				responsedata);
+		editor.commit();
+	}
 	public class ListViewAdapter extends ArrayAdapter<Rencana> {
 		Activity activity;
 		int layoutResourceId;
 		Rencana rencanaData;
+
 		ArrayList<Rencana> data = new ArrayList<Rencana>();
 
 		public ListViewAdapter(Activity act, int layoutResourceId,
@@ -767,15 +961,14 @@ public class DashboardActivity extends ActionBarActivity implements
 
 			return row;
 		}
-
 		class UserHolder {
 			TextView list_namaCustomer;
 			TextView list_alamatCustomer;
 			TextView list_status;
 			TextView list_tanggal;
 		}
-	}
 
+	}
 	public void saveAppDataDetailJadwal(String responsedata) {
 		SharedPreferences sp = getSharedPrefereces();
 		SharedPreferences.Editor editor = sp.edit();
@@ -797,6 +990,7 @@ public class DashboardActivity extends ActionBarActivity implements
 				responsedata);
 		editor.commit();
 	}
+
 	public void saveAppDataStatusCst(String responsedata) {
 		SharedPreferences sp = getSharedPrefereces();
 		SharedPreferences.Editor editor = sp.edit();
@@ -812,75 +1006,9 @@ public class DashboardActivity extends ActionBarActivity implements
 		finish();
 	}
 
-	public void extractDataBranch() {
-		SharedPreferences spPreferences = getSharedPrefereces();
-		String main_app_table_same_data = spPreferences.getString(
-				AppVar.SHARED_PREFERENCES_TABLE_MST_CUSTOMER_SAME_DATA, null);
-		String main_app_table = spPreferences.getString(
-				AppVar.SHARED_PREFERENCES_TABLE_MST_CUSTOMER, null);
-		if (main_app_table_same_data.equalsIgnoreCase(act
-				.getApplicationContext().getResources()
-				.getString(R.string.app_value_false))) {
-			JSONObject oResponse;
-			try {
-				oResponse = new JSONObject(main_app_table);
-				JSONArray jsonarr = oResponse.getJSONArray("customer");
-				for (int i = 0; i < jsonarr.length(); i++) {
-					JSONObject oResponsealue = jsonarr.getJSONObject(i);
-					String id_customer = oResponsealue.isNull("id_customer") ? null
-							: oResponsealue.getString("id_customer");
-					String kode_customer = oResponsealue.isNull("kode_customer") ? null
-							: oResponsealue.getString("kode_customer");
-					String nama_customer = oResponsealue.isNull("nama_customer") ? null
-							: oResponsealue.getString("nama_customer");
-					String alamat = oResponsealue.isNull("alamat") ? null
-							: oResponsealue.getString("alamat");
-					String no_hp = oResponsealue.isNull("no_hp") ? null
-							: oResponsealue.getString("no_hp");
-					String lats = oResponsealue.isNull("lats") ? null
-							: oResponsealue.getString("lats");
-					String longs = oResponsealue.isNull("longs") ? null
-							: oResponsealue.getString("longs");
-					String id_wilayah = oResponsealue.isNull("id_wilayah") ? null
-							: oResponsealue.getString("id_wilayah");
-					Log.d(LOG_TAG, "id_customer:" + id_customer);
-					Log.d(LOG_TAG, "kode_customer:" + kode_customer);
-					Log.d(LOG_TAG, "nama_customer:" + nama_customer);
-					Log.d(LOG_TAG, "lats:" + lats);
-					Log.d(LOG_TAG, "longs:" + longs);
-					db.addMst_customer(new Mst_Customer(Integer.parseInt(id_customer),kode_customer,nama_customer,alamat,no_hp,lats,longs,Integer.parseInt(id_wilayah)));
-				}
-
-			} catch (JSONException e) {
-				final String message = e.toString();
-				handler.post(new Runnable() {
-					public void run() {
-						showCustomDialog(message);
-					}
-				});
-
-			}
-		}
-	}
-
 	private SharedPreferences getSharedPrefereces() {
 		return act.getSharedPreferences(AppVar.SHARED_PREFERENCES_NAME,
 				Context.MODE_PRIVATE);
-	}
-
-	public void saveAppDataBranch(String responsedata) {
-		SharedPreferences sp = getSharedPrefereces();
-		SharedPreferences.Editor editor = sp.edit();
-		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_MST_CUSTOMER, responsedata);
-		editor.commit();
-	}
-
-	public void saveAppDataBranchSameData(String responsedata) {
-		SharedPreferences sp = getSharedPrefereces();
-		SharedPreferences.Editor editor = sp.edit();
-		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_MST_CUSTOMER_SAME_DATA,
-				responsedata);
-		editor.commit();
 	}
 
 	public HttpResponse getDownloadData(String url) {
@@ -904,143 +1032,34 @@ public class DashboardActivity extends ActionBarActivity implements
 		return response;
 	}
 
-//	private void getCkin() {
-//		class getCkinClass extends AsyncTask<Void, Void, String> {
-//			ProgressDialog loading;
-//
-//			@Override
-//			protected void onPreExecute() {
-//				super.onPreExecute();
-//				loading = ProgressDialog.show(DashboardActivity.this,"Loading..","mohon tunggu..",false,false);
-//			}
-//
-//			@Override
-//			protected void onPostExecute(String s) {
-//				super.onPostExecute(s);
-//				loading.dismiss();
-//				showDataCkin(s);
-//			}
-//
-//			@Override
-//			protected String doInBackground(Void... params) {
-//				SharedPreferences prefs = getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);
-//				String id_user = prefs.getString("id_user","0");
-//
-//				RequestHandler rh = new RequestHandler();
-//				String s = rh.sendGetRequestParam(AppVar.GET_CKIN,id_user);
-//				return s;
-//			}
-//		}
-//
-//		getCkinClass ge = new getCkinClass();
-//		ge.execute();
-//	}
-
-	private void showDataCkin(String json){
-		try {
-			JSONObject jsonObject = new JSONObject(json);
-			JSONObject out = jsonObject.getJSONObject("out");
-
-			String ckin = out.getString("ckin");
-			jml_ckin.setText(ckin);
-
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
-
-//	private void getRencana() {
-//		class getAbsenClass extends AsyncTask<Void, Void, String> {
-//			ProgressDialog loading;
-//
-//			@Override
-//			protected void onPreExecute() {
-//				super.onPreExecute();
-//				loading = ProgressDialog.show(DashboardActivity.this,"Loading..","mohon tunggu..",false,false);
-//			}
-//
-//			@Override
-//			protected void onPostExecute(String s) {
-//				super.onPostExecute(s);
-//				loading.dismiss();
-//				showDataRencana(s);
-//			}
-//
-//			@Override
-//			protected String doInBackground(Void... params) {
-//				SharedPreferences prefs = getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);
-//				String id_user = prefs.getString("id_user","0");
-//
-//				RequestHandler rh = new RequestHandler();
-//				String s = rh.sendGetRequestParam(AppVar.GET_RENCANA,id_user);
-//				return s;
-//			}
-//		}
-//
-//		getAbsenClass ge = new getAbsenClass();
-//		ge.execute();
-//	}
-
-	private void showDataRencana(String json){
-		try {
-			JSONObject jsonObject = new JSONObject(json);
-			JSONObject out = jsonObject.getJSONObject("out");
-
-			String ckin = out.getString("rencana");
-			jml_rcn.setText(ckin);
-			hitungPersentase();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void hitungPersentase() {
-		double ckin = Double.parseDouble(jml_ckin.getText().toString());
-		double rencana = Double.parseDouble(jml_rcn.getText().toString());
-		double persentase = ckin/rencana*100;
-		percent.setText(String.valueOf(persentase));
-
-	}
-
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		if (mNavigationDrawerFragment != null) {
-			if (mNavigationDrawerFragment.getCurrentSelectedPosition() != 0) {
-//				if (position == 1) {
-//					Intent intentActivity = new Intent(this,
-//							IconTextTabsActivity.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}else if (position == 2) {
-//					Intent intentActivity = new Intent(this,
-//							CheckoutActivity.class);
-//					startActivity(intentActivity);
-//					finish();
-//				} else
-				if (position ==1) {
+			if (mNavigationDrawerFragment.getCurrentSelectedPosition() != 3) {
+				if (position ==0) {
 					Intent intentActivity = new Intent(this,
-							IconTextTabsActivity.class);
+							PlanVisitActivity.class);
 					startActivity(intentActivity);
 					finish();
-				}else if (position ==2) {
+				}else if (position ==1) {
 					Intent intentActivity = new Intent(this,
-							CheckoutActivity.class);
+							PlanVisitActivity2.class);
 					startActivity(intentActivity);
 					finish();
-				}else if (position ==3) {
+				}
+				else if (position == 2) {
 					Intent intentActivity = new Intent(this,
-							History_Canvassing.class);
+							ProspectPlanVisit.class);
 					startActivity(intentActivity);
 					finish();
 				}else if (position == 4) {
 					Intent intentActivity = new Intent(this,
-							ChangePassword.class);
+							History_Canvassing.class);
 					startActivity(intentActivity);
 					finish();
 				}else if (position == 5) {
 					Intent intentActivity = new Intent(this,
-							Orderan.class);
+							ChangePassword.class);
 					startActivity(intentActivity);
 					finish();
 				}
@@ -1115,20 +1134,6 @@ public class DashboardActivity extends ActionBarActivity implements
 		AlertDialog alertDialog = alertDialogBuilder.create();
 		alertDialog.show();
 
-	}
-
-	public void gotoCheckin(){
-		Intent intentActivity = new Intent(this,
-				IconTextTabsActivity.class);
-		startActivity(intentActivity);
-		finish();
-	}
-
-	public void gotoCheckout(){
-		Intent intentActivity = new Intent(this,
-				CheckoutActivity.class);
-		startActivity(intentActivity);
-		finish();
 	}
 
 	@Override

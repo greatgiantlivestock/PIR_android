@@ -3,69 +3,43 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
-    android:padding="10dip" >
-
-    <TextView
-        android:id="@+id/sales_order_title_nama_product"
-        android:layout_width="0dip"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.6"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
-
-    <!--<TextView-->
-        <!--android:id="@+id/sales_order_title_penjualan"-->
-        <!--android:layout_width="0dip"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="0.7"-->
-        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-        <!--android:textColor="@color/black"-->
-        <!--android:textSize="14sp" />-->
-    <TextView
-        android:id="@+id/sales_order_title_batch"
-        android:layout_width="0dip"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.3"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/sales_order_title_jumlah_order"
-        android:layout_width="0dip"
-        android:padding="5dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
-
-    <!--<TextView-->
-        <!--android:id="@+id/sales_order_title_jumlah_order1"-->
-        <!--android:layout_width="0dip"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="0.4"-->
-        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-        <!--android:textColor="@color/black"-->
-        <!--android:textSize="14sp" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/sales_order_title_jumlah_order2"-->
-        <!--android:layout_width="0dip"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="0.4"-->
-        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-        <!--android:textColor="@color/black"-->
-        <!--android:textSize="14sp" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/sales_order_title_jumlah_order3"-->
-        <!--android:layout_width="0dip"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="0.4"-->
-        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-        <!--android:textColor="@color/black"-->
-        <!--android:textSize="14sp" />-->
-
+    android:background="@drawable/roundedactive"
+    android:weightSum="5">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:paddingLeft="5dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/sales_order_title_nama_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginTop="7dp"/>
+        <TextView
+            android:id="@+id/alamat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/android_blue"
+            android:textSize="14sp"
+            android:layout_marginBottom="7dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/perm_identity_black_48dp"/>
+    </LinearLayout>
 </LinearLayout>

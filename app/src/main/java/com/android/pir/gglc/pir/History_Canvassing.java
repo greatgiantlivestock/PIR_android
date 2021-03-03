@@ -128,7 +128,7 @@ public class History_Canvassing extends ActionBarActivity implements
 		mNavigationDrawerFragment.setup(R.id.fragment_drawer,
 				(DrawerLayout) findViewById(R.id.drawer), mToolbar);
 		databaseHandler = new DatabaseHandler(this);
-		mNavigationDrawerFragment.selectItem(3);
+		mNavigationDrawerFragment.selectItem(4);
 		listview = (ListView) findViewById(R.id.list);
 		listview.setItemsCanFocus(false);
 
@@ -462,13 +462,13 @@ public class History_Canvassing extends ActionBarActivity implements
 				JSONArray jsonarr = oResponse.getJSONArray("canvassing");
 				for (int i = 0; i < jsonarr.length(); i++) {
 					JSONObject oResponsealue = jsonarr.getJSONObject(i);
-					String nama_customer = oResponsealue.isNull("nama_customer") ? null
-							: oResponsealue.getString("nama_customer");
+					String nama_customer = oResponsealue.isNull("name1") ? null
+							: oResponsealue.getString("name1");
 					String nomor_rencana = oResponsealue
 							.isNull("nomor_rencana") ? null : oResponsealue
 							.getString("nomor_rencana");
-					String alamat = oResponsealue.isNull("alamat") ? null
-							: oResponsealue.getString("alamat");
+					String alamat = oResponsealue.isNull("desa") ? null
+							: oResponsealue.getString("desa");
 					String tanggal_checkin = oResponsealue.isNull("tanggal_checkin") ? null
 							: oResponsealue.getString("tanggal_checkin");
 					String tanggal_checkout = oResponsealue.isNull("tanggal_checkout") ? null
@@ -709,35 +709,51 @@ public class History_Canvassing extends ActionBarActivity implements
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		if (mNavigationDrawerFragment != null) {
-			if (mNavigationDrawerFragment.getCurrentSelectedPosition() != 3) {
-				if (position == 0) {
+			if (mNavigationDrawerFragment.getCurrentSelectedPosition() != 4) {
+				if (position ==0) {
+					Intent intentActivity = new Intent(this,
+							PlanVisitActivity.class);
+					startActivity(intentActivity);
+					finish();
+				}else if (position ==1) {
+					Intent intentActivity = new Intent(this,
+							PlanVisitActivity2.class);
+					startActivity(intentActivity);
+					finish();
+				}else if (position ==2) {
+					Intent intentActivity = new Intent(this,
+							ProspectPlanVisit.class);
+					startActivity(intentActivity);
+					finish();
+				}
+//				else if (position ==3) {
+//					Intent intentActivity = new Intent(this,
+//							IconTextTabsActivity_lap.class);
+//					startActivity(intentActivity);
+//					finish();
+//				}else if (position == 4) {
+//					Intent intentActivity = new Intent(this,
+//							CheckoutActivity.class);
+//					startActivity(intentActivity);
+//					finish();
+//				}
+				else if (position == 3) {
 					Intent intentActivity = new Intent(this,
 							DashboardActivity.class);
 					startActivity(intentActivity);
 					finish();
-				}
-				else if (position == 1) {
-					Intent intentActivity = new Intent(this,
-							IconTextTabsActivity.class);
-					startActivity(intentActivity);
-					finish();
-				} else if (position == 2) {
-					Intent intentActivity = new Intent(this,
-							CheckoutActivity.class);
-					startActivity(intentActivity);
-					finish();
-				}
-				else if (position == 4) {
+				}else if (position == 5) {
 					Intent intentActivity = new Intent(this,
 							ChangePassword.class);
 					startActivity(intentActivity);
 					finish();
-				}else if (position == 5) {
-					Intent intentActivity = new Intent(this,
-							Orderan.class);
-					startActivity(intentActivity);
-					finish();
 				}
+//				else if (position == 5) {
+//					Intent intentActivity = new Intent(this,
+//							Orderan.class);
+//					startActivity(intentActivity);
+//					finish();
+//				}
 			}
 		}
 	}

@@ -7,4 +7,9 @@
         android:orderInCategory="1"
         android:title="@string/menu1"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_upload"
+        android:orderInCategory="1"
+        android:title="@string/menu2"
+        app:showAsAction="never"/>
 </menu>

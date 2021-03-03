@@ -104,7 +104,7 @@
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.2"
-                        android:text="@string/app_customer_hint_customer"
+                        android:text="Petani"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/black"
                         android:textSize="14sp"

@@ -10,8 +10,11 @@
     <string name="drawer_open">Menu opened</string>
     <string name="drawer_close">Menu closed</string>
     <string name="menu1">Refresh</string>
-    <string name="menu_1">Absen</string>
-    <string name="menu_2">Dashboard</string>
+    <string name="menu2">Upload</string>
+    <string name="menu_1">Plan Visit</string>
+    <string name="menu_1_2">Urgent Plan Visit</string>
+    <string name="menu_1_3">Prospect Plan Visit</string>
+    <string name="menu_2">Visit</string>
     <string name="menu_3">Change Password</string>
     <string name="menu_4">CheckIn Prospect</string>
     <string name="menu_5">CheckOut Prospect</string>
@@ -37,6 +40,7 @@
     <string name="checkin">Checkin</string>
 
     <string name="MSG_DLG_LABEL_EXIT_DIALOG">Apakah anda yakin keluar dari aplikasi ?</string>
+    <string name="MSG_DLG_LABEL_EXIT_DIALOG_EDIT_RENCANA">Status aproval rencana akan kembali menjadi (Belum Diaprove), Lanjutkan?</string>
     <string name="MSG_DLG_LABEL_CHANGE_PASSWORD_DIALOG">Aplikasi akan direstart untuk login ulang, lanjutkan?</string>
 
     <string name="you_want_to_buy_format">You want to buy %1$s</string>
@@ -338,6 +342,7 @@
     <string name="app_checkin_incorrect_jenis_kendaraan">Anda belum memilih jenis kendaraan</string>
     <string name="app_reqload_ttd_empty_box">Mohon tanda tangan terlebih dahulu</string>
     <string name="app_reqload_product_empty_box">Mohon tambahkan product terlebih dahulu</string>
+    <string name="app_reqload_customer_empty_box">Mohon tambahkan petani terlebih dahulu</string>
     <string name="app_customer_prospect_save_failed_empty">Mohon mengisi data customer dengan benar</string>
     <string name="saleskanvas_alret_disc">Jumlah Diskon harus antara 0.0 sampai 2.0</string>
 
@@ -454,10 +459,10 @@
     <string name="app_penjualan_upload_success">Upload data penjualan sukses</string>
     <string name="app_req_load_processing_upload_success">Proses upload Req Load customer berhasil !</string>
     <string name="app_retur_processing_upload_success">Proses upload retur customer berhasil !</string>
-    <string name="app_sales_order_processing_upload">Proses Upload Sales Order</string>
-    <string name="app_kanvas_processing_upload">Proses Upload Sales Kanvas</string>
-    <string name="app_reqload_processing_upload">Proses Upload Request Kanvas</string>
-    <string name="app_req_load_processing_upload">Proses Upload Req Load</string>
+    <string name="app_sales_order_processing_upload">Proses Upload</string>
+    <string name="app_kanvas_processing_upload">Proses Upload</string>
+    <string name="app_reqload_processing_upload">Proses Upload</string>
+    <string name="app_req_load_processing_upload">Proses Upload</string>
     <!-- Stock On Hand -->
     <string name="app_stock_on_hand_save_success">Stock On Hand berhasil di tambah !</string>
     <string name="app_stock_on_hand_update_success">Stock On Hand berhasil di ubah !</string>
@@ -616,6 +621,7 @@
     <string name="app_supplier_button_foto_4">Foto 4</string>
     <string name="app_supplier_failed_no_keterangan">Mohon masukkan keterangan</string>
     <string name="app_supplier_failed_jumlah">Mohon masukkan jumlah</string>
+    <string name="app_supplier_failed_tanggal">Mohon masukkan tanggal kunjungan</string>
     <string name="app_supplier_failed_batch">Mohon masukkan batch</string>
     <string name="app_supplier_already_take_foto_1">Anda sudah mengambil Foto 1, apakah anda ingin mengganti dengan gambar baru ?</string>
     <string name="app_supplier_already_take_foto_2">Anda sudah mengambil Foto 2, apakah anda ingin mengganti dengan gambar baru ?</string>
@@ -634,4 +640,8 @@
     <string name="app_sales_to_failed_no_keterangan">Mohon masukkan keterangan</string>
     <string name="app_sales_to_failed_no_foto">Mohon mengambil Foto outlet</string>
     <string name="app_sales_to_failed_no_ttd">Mohon mengambil TTD pembeli</string>
+    <string name="title_shop">Shop</string>
+    <string name="title_gifts">Gifts</string>
+    <string name="title_cart">Cart</string>
+    <string name="title_profile">Profile</string>
 </resources>

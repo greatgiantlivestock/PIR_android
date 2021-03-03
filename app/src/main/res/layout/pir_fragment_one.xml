@@ -17,56 +17,6 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/activity_nomor_detail"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:focusableInTouchMode="true"
-            android:orientation="horizontal"
-            android:padding="5dip" >
-
-            <TextView
-                android:id="@+id/nomor_rencana"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/nomor_rencana"
-                android:textColor="@color/black"/>
-
-            <Spinner
-                android:id="@+id/nomor_rencana_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/activity_history_date"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:focusableInTouchMode="true"
-            android:orientation="horizontal"
-            android:padding="5dip" >
-
-            <TextView
-                android:id="@+id/title_id_renacana"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/id_rencana"
-                android:textColor="@color/black"/>
-
-            <Spinner
-                android:id="@+id/id_rencna_detail"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/activity_customer"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
@@ -74,21 +24,71 @@
             android:padding="5dip" >
 
             <TextView
-                android:id="@+id/title_id_customer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/nama_customer"
+                android:text="Nama Petani "
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/nama_petani"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:padding="5dip" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Alamat"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/alamat_pertani"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
                 android:textColor="@color/black"/>
 
-            <Spinner
-                android:id="@+id/id_customer"
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lstatus_checkin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:padding="5dip" >
+
+            <TextView
+                android:id="@+id/status_checkin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:textSize="16sp"/>
-
+                android:text="Status Checkin"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -110,14 +110,16 @@
                 android:id="@+id/foto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Foto"
+                android:textColor="@color/white"
+                android:background="@drawable/roundedbutton"
+                android:text="Foto"
                 android:layout_centerHorizontal="true"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/activity_no_checkin"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:focusableInTouchMode="true"
             android:orientation="horizontal"
             android:padding="5dip" >
@@ -146,6 +148,7 @@
         android:id="@+id/ImgCust"
         android:layout_width="250dp"
         android:layout_height="250dp"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/Linear1"
         android:layout_centerHorizontal="true"
         android:src="@drawable/avatar"/>
@@ -155,16 +158,12 @@
         android:layout_below="@+id/ImgCust"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:background="@drawable/roundedbutton"
         android:text="@string/checkin"
         android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:id="@+id/kanvassing"
-        android:layout_below="@+id/checkin"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Kanvassing"
-        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
 
 <!--    </android.support.v4.widget.SwipeRefreshLayout>-->

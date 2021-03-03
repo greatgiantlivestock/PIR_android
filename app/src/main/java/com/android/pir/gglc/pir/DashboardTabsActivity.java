@@ -31,11 +31,15 @@ import com.android.pir.gglc.absen.Orderan;
 import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
 import com.android.pir.gglc.database.MasterRencana;
+import com.android.pir.gglc.database.Mst_Customer;
 import com.android.pir.gglc.fragment.OneFragment;
 import com.android.pir.gglc.fragment.ThreeFragment;
 import com.android.pir.gglc.fragment.TwoFragment;
+import com.android.pir.gglc.fragment1.CheckoutFragment;
+import com.android.pir.gglc.fragment1.DataSapiFragment;
 import com.android.pir.gglc.fragment1.OneFragment1;
 import com.android.pir.gglc.fragment1.ThreeFragment1;
+import com.android.pir.gglc.fragment1.ThreeFragment2;
 import com.android.pir.gglc.fragment1.ThreeFragmentweb_view1;
 import com.android.pir.gglc.fragment1.TwoFragment1;
 import com.android.pir.mobile.R;
@@ -64,6 +68,8 @@ public class DashboardTabsActivity extends AppCompatActivity{
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Context act;
+    private DetailRencana rencanaDetail;
+    private int idrencanaDetail = 0;
     private DatabaseHandler databaseHandler;
     private Handler handler = new Handler();
     private ProgressDialog progressDialog;
@@ -109,40 +115,40 @@ public class DashboardTabsActivity extends AppCompatActivity{
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main1, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_refresh:
-                if (GlobalApp.checkInternetConnection(act)) {
-//                    int countUpload = databaseHandler.getCountRencanaDetailWhereValidAndUpdateAll();
-                    new DownloadDataRencanaDetail().execute();
-//                    if(countUpload == 0){
-//                        new DownloadDataRencanaDetail().execute();
-//                    }else{
-//                        String message = act
-//                                .getApplicationContext()
-//                                .getResources()
-//                                .getString(
-//                                        R.string.app_customer_processing_refresh_failed);
-//                        showCustomDialog(message);
-//                    }
-
-                } else {
-                    String message = act.getApplicationContext().getResources()
-                            .getString(R.string.app_customer_processing_empty);
-                    showCustomDialog(message);
-                }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main1, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.menu_refresh:
+//                if (GlobalApp.checkInternetConnection(act)) {
+////                    int countUpload = databaseHandler.getCountRencanaDetailWhereValidAndUpdateAll();
+//                    new DownloadDataRencanaDetail().execute();
+////                    if(countUpload == 0){
+////                        new DownloadDataRencanaDetail().execute();
+////                    }else{
+////                        String message = act
+////                                .getApplicationContext()
+////                                .getResources()
+////                                .getString(
+////                                        R.string.app_customer_processing_refresh_failed);
+////                        showCustomDialog(message);
+////                    }
+//
+//                } else {
+//                    String message = act.getApplicationContext().getResources()
+//                            .getString(R.string.app_customer_processing_empty);
+//                    showCustomDialog(message);
+//                }
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     private class DownloadDataRencanaDetail extends AsyncTask<String, Integer, String> {
         @Override
@@ -169,7 +175,7 @@ public class DashboardTabsActivity extends AppCompatActivity{
             String id_karyawan = prefs.getString("id_awo","null");
 
             String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
-                    + AppVar.CONFIG_APP_URL_DOWNLOAD_RENCANA_DETAIL+ "?id_karyawan="
+                    + AppVar.CONFIG_APP_URL_DOWNLOAD_RENCANA_DETAIL_APROVED+ "?id_karyawan="
                     + id_karyawan;
             HttpResponse response = getDownloadData(download_data_url);
             int retCode = (response != null) ? response.getStatusLine()
@@ -432,10 +438,12 @@ public class DashboardTabsActivity extends AppCompatActivity{
                             : oResponsealue.getString("id_user_input_rencana");
                     String keterangan = oResponsealue.isNull("keterangan") ? null
                             : oResponsealue.getString("keterangan");
+                    String aproved = oResponsealue.isNull("aproved") ? null
+                            : oResponsealue.getString("aproved");
                     Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
                     Log.d(LOG_TAG, "nomor_rencana:" + nomor_rencana);
                     databaseHandler.addMasterRencana(new MasterRencana(Integer.parseInt(id_rencana_header),nomor_rencana,
-                            tanggal_penetapan,tanggal_rencana,Integer.parseInt(id_user_input_rencana),keterangan));
+                            tanggal_penetapan,tanggal_rencana,Integer.parseInt(id_user_input_rencana),keterangan,aproved));
                 }
             } catch (JSONException e) {
                 final String message = e.toString();
@@ -593,11 +601,24 @@ public class DashboardTabsActivity extends AppCompatActivity{
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new OneFragment1(), "absen");
-        adapter.addFrag(new TwoFragment1(), "sapi");
-        adapter.addFrag(new ThreeFragment1(), "pakan");
-        adapter.addFrag(new ThreeFragmentweb_view1(), "pengobatan");
+        adapter.addFrag(new OneFragment1(), "Check In");
+        adapter.addFrag(new DataSapiFragment(), "Data Sapi");
+//        adapter.addFrag(new ThreeFragment1(), "pakan");
+//        adapter.addFrag(new ThreeFragmentweb_view1(), "Obat");
+        adapter.addFrag(new CheckoutFragment(), "Check Out");
         viewPager.setAdapter(adapter);
+
+        SharedPreferences spPreferences = getSharedPrefereces();
+//        String status_checkin = spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_STATUS, null);
+        idrencanaDetail = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL, null));
+        ArrayList<DetailRencana> rencana_list = databaseHandler.getAlldetailRencanaParam(idrencanaDetail);
+        rencanaDetail = new DetailRencana();
+        for (DetailRencana detailRencana : rencana_list)
+            rencanaDetail = detailRencana;
+        int id_status =rencanaDetail.getStatus_rencana();
+        if(id_status==1){
+            viewPager.setCurrentItem(1);
+        }
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

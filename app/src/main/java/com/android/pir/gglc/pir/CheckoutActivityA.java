@@ -31,9 +31,7 @@ import android.widget.Toast;
 
 import com.android.pir.gglc.absen.AppVar;
 import com.android.pir.gglc.absen.RequestHandler;
-import com.android.pir.gglc.database.Absen;
 import com.android.pir.gglc.database.DatabaseHandler;
-import com.android.pir.gglc.database.Jenis_kendaraan;
 import com.android.pir.gglc.database.MstUser;
 import com.android.pir.gglc.database.Mst_Customer;
 import com.android.pir.gglc.database.TmpCustomer;
@@ -54,7 +52,7 @@ public class CheckoutActivityA extends FragmentActivity {
 	private DatabaseHandler databaseHandler;
 	private ListView listview;
 	private LinearLayout layout;
-	private ArrayList<Absen> customer_list = new ArrayList<Absen>();
+//	private ArrayList<Absen> customer_list = new ArrayList<Absen>();
 	private ProgressDialog progressDialog;
 	private Handler handler = new Handler();
 	private String message;
@@ -63,7 +61,7 @@ public class CheckoutActivityA extends FragmentActivity {
 	private EditText description_kegiatan;
 	private Spinner checkin_number,jenis_kendaraan;
 	private ArrayList<Trx_Checkin> checkinNumber;
-	private ArrayList<Jenis_kendaraan> jenisKendaraan;
+//	private ArrayList<Jenis_kendaraan> jenisKendaraan;
 	private ArrayList<String> checkinNumberStringList;
 	private ArrayList<String> jenisKendaraanStringList;
 	private int id_checkin = 0;
@@ -75,7 +73,7 @@ public class CheckoutActivityA extends FragmentActivity {
 	private TextView tvNamaCustomer;
 	private TextView tvNamaAlamat;
     private String response;
-    private Absen customer;
+//    private Absen customer;
 	private Button chat,map;
 	private EditText mulai,sampai;
 	private Button checkout;
@@ -162,13 +160,13 @@ public class CheckoutActivityA extends FragmentActivity {
 			nomor_checkin_ = checkinNumber.get(0).getNomor_checkin();
 
 			//set list jenis kendaraan
-			jenisKendaraan = new ArrayList<Jenis_kendaraan>();
+//			jenisKendaraan = new ArrayList<Jenis_kendaraan>();
 			jenisKendaraanStringList= new ArrayList<String>();
-			List<Jenis_kendaraan> dataJenisKedaraan = databaseHandler.getAllJenisKendaraan();
-			for (Jenis_kendaraan jeniskendaraan : dataJenisKedaraan) {
-				jenisKendaraan.add(jeniskendaraan);
-				jenisKendaraanStringList.add(String.valueOf(jeniskendaraan.getNama_jenis()));
-			}
+//			List<Jenis_kendaraan> dataJenisKedaraan = databaseHandler.getAllJenisKendaraan();
+//			for (Jenis_kendaraan jeniskendaraan : dataJenisKedaraan) {
+//				jenisKendaraan.add(jeniskendaraan);
+//				jenisKendaraanStringList.add(String.valueOf(jeniskendaraan.getNama_jenis()));
+//			}
 
 			//set spinner jenis kendaraan
 			ArrayAdapter<String> adapter_jenis = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, jenisKendaraanStringList);
@@ -176,12 +174,12 @@ public class CheckoutActivityA extends FragmentActivity {
 			jenis_kendaraan.setAdapter(adapter_jenis);
 			jenis_kendaraan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 				public void onItemSelected(AdapterView<?> parent,View view, int position, long id) {
-					id_jenis_kendaraan = jenisKendaraan.get(position).getId_jenis_kendaraan();
+//					id_jenis_kendaraan = jenisKendaraan.get(position).getId_jenis_kendaraan();
 				}
 				public void onNothingSelected(AdapterView<?> parent) {
 				}
 			});
-			id_jenis_kendaraan = jenisKendaraan.get(0).getId_jenis_kendaraan();
+//			id_jenis_kendaraan = jenisKendaraan.get(0).getId_jenis_kendaraan();
 		}
 
 		ArrayList<MstUser> staff_list = databaseHandler.getAllUser();

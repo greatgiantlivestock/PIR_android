@@ -2,456 +2,24 @@
 <project version="4">
   <component name="AndroidLayouts">
     <shared>
-      <config>
-        <pickBest>false</pickBest>
-        <target>android-22</target>
-      </config>
+      <config />
     </shared>
-    <layouts>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_request.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_data_penjualan.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_data_stock_fisik.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_detail_jadwal.xml">
-        <config>
-          <theme>@android:style/Theme.Holo.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_display.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_icon_text_tabs.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_checkout.xml">
-        <config>
-          <theme>@android:style/Theme.Holo.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_checkouta.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Light.DarkActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_chiller.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Light.DarkActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_dashboard.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Light.DarkActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_display.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_history_canvassing.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_kompetitor.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Light.DarkActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_orderan.xml">
-        <config>
-          <theme>@android:style/Theme.Holo.Light.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_perbaikan.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_perbaikana.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_perbaikanb.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_product_choose_dialog_req_load.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.MinWidth</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_spg.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Light.DarkActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_popup_image_supplier.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_stock_fisik.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/checkinfragment_oneactivity.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Light.DarkActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/design_.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_one.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Light.DarkActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_two.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/hitungbutton.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_customer_rencana.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Light.DarkActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_detail_penjualan.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_detail_sales_order.xml">
-        <config>
-          <theme>@android:style/Theme.Holo.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_product_sales_order.xml">
-        <config>
-          <theme>@android:style/Theme.Material.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_stock_customer.xml">
-        <config>
-          <theme>@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar</theme>
-        </config>
-      </layout>
-    </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="669c1e3f-9b34-4c0e-9d39-24f4471394f3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle____local_jars___D__Android_Workspace_PIR_app_src_libs_httpclient_4_3_6_jar_unspecified_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle____local_jars___D__Android_Workspace_PIR_app_src_libs_httpcore_4_3_3_jar_unspecified_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle____local_jars___D__Android_Workspace_PIR_app_src_libs_httpmime_4_3_6_jar_unspecified_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_25_3_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_25_3_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_design_25_3_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_recyclerview_v7_25_3_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_annotations_25_3_1_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_25_3_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_25_3_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_25_3_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_25_3_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_media_compat_25_3_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_25_3_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_25_3_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_2_2_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_2_2_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_exposed_instrumentation_api_publish_0_5_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_rules_0_5_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_0_5_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_transition_25_3_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_volley_volley_1_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_base_11_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_basement_11_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_location_11_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_maps_11_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_tasks_11_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_findbugs_jsr305_2_0_1_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_javawriter_2_1_1_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_annotation_javax_annotation_api_1_2_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_inject_javax_inject_1_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_4_12_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_gotev_uploadservice_2_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_http_legacy_android_25.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_integration_1_3_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_library_1_3_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/httpclient_4_3_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/httpcore_4_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/httpmime_4_3_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/play_services_location_11_0_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PIR.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/libs/httpclient-4.3.6.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/libs/httpcore-4.3.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/libs/httpmime-4.3.6.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/Dashboard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/HitungButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/LocationAssistant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/LocationAssistantLogin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/LoginAbsenActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/Mainss.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/Orderan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/CheckDataStockFisik.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Checkpoint_absen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DetailReqLoad.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/History_canvassing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Jenis_kendaraan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/MasterRencana.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/NewDetailPenjualan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Rencana.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Stock_customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/OneFragment1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/ThreeFragment1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/ThreeFragmentweb_view1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/TwoFragment1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/AddRequestActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/CheckinOneFragmentActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/CheckinOneFragmentActivity1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/CheckoutActivityA.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/Chiller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardTabsActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DataPenjualan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DataStockFisik.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DetailJadwalActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DisplayActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/GlobalApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/History_Canvassing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/Kompetitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/Log2File.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PerbaikanActivityB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/SalesKanvasActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/Spg.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/StockFisikActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/TestCheckin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_tab_call.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_tab_contacts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_tab_favourite.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_tab_call.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_tab_contacts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_tab_favourite.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_tab_call.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_tab_contacts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_tab_favourite.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_tab_call.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_tab_contacts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_tab_favourite.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bonanzabeef.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ckin_button.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ckout_button.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/dash.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ggllog.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/hometownlog.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_action_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_action_refresh.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/moving_trucks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/roundedbutton.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/roundededt.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_Display.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_request.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_aktifitas_spg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_dashboard.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_data_chiller.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_data_penjualan.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_data_stock_fisik.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_detail_jadwal.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_kompetitor.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_absen.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_checkouta.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_chiller.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_dashboard.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_dashboard_old.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_display.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_history_canvassing.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_kompetitor.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_orderan.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_orderan_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_perbaikan.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_perbaikana.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_perbaikanb.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_product_choose_dialog_req_load.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_spg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_popup_image_supplier.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_stock_fisik.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/checkinfragment_oneactivity.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/design_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_signature.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/hitungButton.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_customer_rencana.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_detail_new_penjualan.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_detail_penjualan.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_detail_sales_order.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_product_sales_order.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_stock_customer.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/pir_checkinfragment_oneactivity.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_one.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_main1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_main3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/fileContent/annotation-processors.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/fileContent/annotation-processors.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/javaCompile/taskJars.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/javaCompile/taskJars.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/taskHistory/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/taskHistory/fileSnapshots.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.0/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.0/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/android_android_25.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/design_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/design_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/hamcrest_integration_1_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_integration_1_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/hamcrest_library_1_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_library_1_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/httpmime_4_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javawriter_2_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javawriter_2_1_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_annotation_api_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javax_annotation_api_1_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_inject_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javax_inject_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_apache_http_legacy_android_25.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_http_legacy_android_25.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/play_services_base_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_base_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/play_services_basement_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_basement_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/play_services_maps_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_maps_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/play_services_tasks_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_tasks_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/support_compat_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/support_compat_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/support_core_ui_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_ui_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/support_core_utils_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_utils_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/support_fragment_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/support_fragment_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/support_media_compat_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/support_media_compat_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/transition_25_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/transition_25_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/uploadservice_2_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/uploadservice_2_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/volley_1_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/volley_1_0_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CANVASING.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/AbsenActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AbsenActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/AppVar.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/ChangePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/ChangePassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/GpsChecking.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/GpsChecking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/History_absen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/History_absen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/NavigationDrawerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/NavigationDrawerAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/NavigationDrawerCallbacks.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/NavigationDrawerCallbacks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/NavigationDrawerFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/NavigationDrawerFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/NavigationItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/NavigationItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/ScrimInsertsFrameLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/ScrimInsertsFrameLayout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/TrackingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/TrackingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/UselessHistoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/UselessHistoryActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/CheckoutActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/CheckoutActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/IconTextTabsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/IconTextTabsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/IconTextTabsActivity_lap.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/IconTextTabsActivity_lap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/database/Absen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Absen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/database/DatabaseHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/database/DetailRencana.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DetailRencana.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/database/Kegiatan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Kegiatan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/database/MstUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/MstUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/database/Mst_Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Mst_Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/database/TmpCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/TmpCustomer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/database/TrackingLogs.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/TrackingLogs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/database/Trx_Checkin.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Trx_Checkin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/database/Trx_Checkout.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Trx_Checkout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/database/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/fragment/OneFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment/OneFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/fragment/ThreeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment/ThreeFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/fragment/ThreeFragmentweb_view.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment/ThreeFragmentweb_view.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/fragment/TwoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment/TwoFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bonanza.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/history.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/waa.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/waa.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/wll.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/wll.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_icon_text_tabs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_icon_text_tabs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_absensi.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_absensi.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_change_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_change_password.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_checkout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_checkout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_history_absen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_history_absen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_history_jadwal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_history_jadwal.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/drawer_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/drawer_row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_navigation_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_navigation_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_one.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_one.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_two.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_two.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/generated/mockable-android-25.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
-    </list>
-    <ignored path="CANVASING.iws" />
-    <ignored path=".idea/workspace.xml" />
-    <ignored path="$PROJECT_DIR$/.gradle/" />
-    <ignored path="$PROJECT_DIR$/build/classes/" />
+    <list default="true" id="2e1c6a39-96ae-4b64-a749-b08c46a0591b" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CreatePatchCommitExecutor">
-    <option name="PATCH_PATH" value="" />
-  </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_API_26_ROOTED" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -460,48 +28,27 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view>
-          <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="PIR" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
-            <select />
-          </tree_state>
-        </projects_view>
+        <projects_view />
       </state>
     </system>
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="CANVASING" />
-  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="240">
+              <caret line="175" column="17" selection-start-line="169" selection-start-column="16" selection-end-line="175" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/LoginActivity.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main3.xml">
+          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="250" selection-start-line="250" selection-end-line="250" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DetailJadwalActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="682" column="32" selection-start-line="682" selection-start-column="32" selection-end-line="682" selection-end-column="32" />
+            <state relative-caret-position="204">
+              <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -509,8 +56,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardTabsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="598" column="68" selection-start-line="598" selection-start-column="68" selection-end-line="598" selection-end-column="68" />
+            <state relative-caret-position="10047">
+              <caret line="611" column="31" selection-start-line="611" selection-start-column="17" selection-end-line="611" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -518,138 +68,105 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/OneFragment1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="2000" column="26" selection-start-line="2000" selection-start-column="26" selection-end-line="2000" selection-end-column="26" />
+            <state relative-caret-position="8721">
+              <caret line="604" column="24" selection-start-line="604" selection-start-column="24" selection-end-line="604" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/DataSapiFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1785">
+              <caret line="182" column="31" selection-start-line="182" selection-start-column="31" selection-end-line="182" selection-end-column="31" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#22490#22799#0" expanded="true" />
-                <element signature="e#22798#22799#0" expanded="true" />
-                <element signature="e#22837#22987#0" expanded="true" />
-                <element signature="e#22986#22987#0" expanded="true" />
-                <element signature="e#23029#23184#0" expanded="true" />
-                <element signature="e#23183#23184#0" expanded="true" />
-                <element signature="e#66675#66787#0" expanded="true" />
-                <element signature="e#66813#67212#0" expanded="true" />
-                <element signature="e#67211#67212#0" expanded="true" />
-                <element signature="e#67721#67833#0" expanded="true" />
-                <element signature="e#67859#68405#0" expanded="true" />
-                <element signature="e#68404#68405#0" expanded="true" />
-                <element signature="e#70014#70245#0" expanded="true" />
-                <element signature="e#76530#76775#0" expanded="true" />
-                <element signature="e#76954#77087#0" expanded="true" />
-                <element signature="e#78037#78280#0" expanded="true" />
-                <element signature="e#83748#84005#0" expanded="true" />
-                <element signature="e#84204#84341#0" expanded="true" />
-                <element signature="e#85427#85658#0" expanded="true" />
-                <element signature="e#90660#90905#0" expanded="true" />
-                <element signature="e#91084#91217#0" expanded="true" />
-                <element signature="e#97966#97967#0" expanded="true" />
-                <element signature="e#98028#98029#0" expanded="true" />
+                <element signature="e#56002#56003#0" expanded="true" />
+                <element signature="e#56063#56064#0" expanded="true" />
+                <element signature="e#56113#56114#0" expanded="true" />
+                <element signature="e#56175#56176#0" expanded="true" />
+                <element signature="e#56225#56226#0" expanded="true" />
+                <element signature="e#56287#56288#0" expanded="true" />
+                <element signature="e#56337#56338#0" expanded="true" />
+                <element signature="e#56399#56400#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/CheckinOneFragmentActivity.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/CheckoutFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9503">
-              <caret line="1040" column="28" selection-start-line="1040" selection-start-column="19" selection-end-line="1040" selection-end-column="28" />
-              <folding>
-                <element signature="e#5857#12493#1" />
-                <element signature="e#16533#18416#0" />
-                <element signature="e#18422#19515#0" />
-                <element signature="e#19521#20151#0" />
-                <element signature="e#20157#21183#0" />
-                <element signature="e#21189#22376#0" />
-                <element signature="e#45580#47741#0" />
-                <element signature="class#47795:49540" />
-                <element signature="method#onStatusChanged#0;class#47795:49540" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="80" column="24" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_one.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="170" selection-start-line="170" selection-end-line="170" />
-              <folding>
-                <marker date="1603182046000" expanded="true" signature="4:6287" ph="..." />
-              </folding>
-            </state>
-          </provider>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_checkout.xml">
           <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment/OneFragment.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3543">
-              <caret line="603" column="44" selection-start-line="603" selection-start-column="44" selection-end-line="603" selection-end-column="44" />
+            <state relative-caret-position="408">
+              <caret line="26" column="74" selection-start-line="26" selection-start-column="74" selection-end-line="26" selection-end-column="74" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_checkinfragment_oneactivity.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Trx_Checkout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="69" column="41" selection-end-line="214" />
+            <state relative-caret-position="680">
+              <caret line="44" selection-start-line="44" selection-end-line="44" />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
     </leaf>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="layoutResourceFile_vertical" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>DashboardTabsActivity</find>
-      <find>key</find>
-      <find>visit-pir</find>
-      <find>foto</find>
-      <find>row.se</find>
-      <find>nomor_rencana</find>
-      <find>one</find>
-      <find>http://192.168.181.43/visit-pir</find>
-      <find>swipe</find>
-      <find>getActivity</find>
-      <find>topbar</find>
-      <find>goto</find>
-      <find>CheckinOneFragmentActivity</find>
-      <find>onPostExecute</find>
-      <find>checkin</find>
-      <find>CheckinOneFragmentActivity.this</find>
-      <find>CheckinOneFragmentActivity.</find>
-      <find>UploadData()</find>
-      <find>new</find>
-      <find>UploadData</find>
-      <find>execute</find>
-      <find>gotoDetailJadwal</find>
-      <find>gotoD</find>
-      <find>gotoDa</find>
-      <find>gotoDashboard</find>
-      <find>dash</find>
-      <find>change</find>
-      <find>no_checkin1</find>
-      <find>no_checkin</find>
-      <find>onKeyDown</find>
+      <find>appva</find>
+      <find>https://visit-pir.gg-livestock.com</find>
+      <find>inten</find>
+      <find>reset</find>
+      <find>Onefra</find>
+      <find>databasehandler.get</find>
+      <find>database</find>
+      <find>id_rencana</find>
+      <find>databasehan</find>
+      <find>Anda</find>
+      <find>string</find>
+      <find>baru (</find>
+      <find>sho</find>
+      <find>Anda belum</find>
+      <find>string.</find>
+      <find>R.string.</find>
+      <find>Anda Belum</find>
+      <find>silahkan lakukan checkin terlebih dahulu</find>
+      <find>delete</find>
+      <find>tempFile.delete</find>
+      <find>String date</find>
+      <find>sukses</find>
+      <find>sukse</find>
+      <find>belum</find>
+      <find>SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_STATUS</find>
+      <find>menu</find>
+      <find>onpost</find>
+      <find>status_checkin</find>
+      <find>refresh</find>
+      <find>menu_main</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
-    <option name="KEY_STORE_PATH" value="C:\ANDROID_WORKSPACES\keypath\ggl.jks" />
-    <option name="KEY_ALIAS" value="ggl" />
+    <option name="KEY_STORE_PATH" value="D:\Android Workspace\Keystore\keystore absen" />
+    <option name="KEY_ALIAS" value="key0" />
     <option name="REMEMBER_PASSWORDS" value="true" />
+    <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -657,149 +174,145 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main_kompetitor.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main_spg.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_data_penjualan.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main3.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/Activity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/TestCheckin.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/DataPenjualan.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/DataStockFisik.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/CheckoutActivityA.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/DisplayActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/Spg.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/Kompetitor.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/PerbaikanActivityB.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/Chiller.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/CheckinOneFragmentActivity1.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/CheckinOneFragmentActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/DetailJadwalActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/LoginAbsenActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/Dashboard.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/History_Canvassing.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/DashboardActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/IconTextTabsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/canvassing/CheckoutActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/History_absen.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/ChangePassword.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/AbsenActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/UselessHistoryActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/LoginActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/Orderan.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/absen/AppVar.java" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/canvasing/gglc/pir/DetailJadwalActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment/TwoFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_detail_jadwal.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/IconTextTabsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/OneFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/CheckoutActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_detail_penjualan.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_plan_visit_two.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_plan_visit.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_prospect_plan_visit.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/library_books_black_48dp.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/library_add_check_black_48dp.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/NavigationDrawerFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/library_add_black_48dp.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity2.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/History_Canvassing.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/ChangePassword.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/Orderan.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/ThreeFragmentweb_view1.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_icon_text_tabs.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardTabsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_one.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/OneFragment1.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main_product_choose_dialog_req_load_urgent.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/roundedheader.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/ProspectPlanVisit.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_prospect.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_one.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Trx_Checkin.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/UploadDataSapi.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_data_sapi.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Trx_Checkout.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardTabsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/OneFragment1.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/DataSapiFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/CheckoutFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main1.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main3.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="27" />
-    <option name="width" value="1366" />
-    <option name="height" value="741" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="168" />
+    <option name="y" value="84" />
+    <option name="width" value="1026" />
+    <option name="height" value="516" />
   </component>
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
-      <hideEmptyPackages AndroidView="false" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="ProjectPane">
+      <pane id="AndroidView">
         <subPane>
           <expand>
             <path>
-              <item name="PIR" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PIR" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="PIR" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
             </path>
             <path>
-              <item name="PIR" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PIR" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="PIR" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
             </path>
             <path>
-              <item name="PIR" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PIR" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PIR" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
             <path>
-              <item name="PIR" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PIR" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="PIR" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="PIR" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PIR" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="PIR" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="pir" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PIR" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="pir" type="462c0819:PsiDirectoryNode" />
+              <item name="gglc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PIR" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="pir" type="462c0819:PsiDirectoryNode" />
+              <item name="gglc" type="462c0819:PsiDirectoryNode" />
+              <item name="fragment1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PIR" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="pir" type="462c0819:PsiDirectoryNode" />
+              <item name="gglc" type="462c0819:PsiDirectoryNode" />
+              <item name="pir" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="ce12160c2d76361601" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-10-15T01:53:14.149Z" />
-    <property name="ExportApk.ApkPath" value="C:\ANDROID_WORKSPACES\CANVASING\app" />
-    <property name="ExportApk.BuildType" value="release" />
-    <property name="ExportApk.Flavors" value="" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="127.0.0.1:62001" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-03-03T06:32:44.467Z" />
+    <property name="ExportApk.ApkPath" value="D:\Android Workspace\New\PIR\app" />
+    <property name="ExportApk.BuildVariants" value="release" />
+    <property name="ExportApk.SignV1" value="true" />
+    <property name="ExportApk.SignV2" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="android.project.structure.last.selected" value="app" />
-    <property name="android.project.structure.proportion" value="0.15" />
-    <property name="android.sdk.path" value="C:/android/sdk" />
-    <property name="device.picker.selection" value="127.0.0.1:52001" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
-    <property name="not.eligible.for.single.variant.sync" value="true" />
-    <property name="settings.editor.selected.configurable" value="instant.run" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RafaksiUja" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\ANDROID_WORKSPACES\CANVASING\app\src\main\res\drawable" />
-    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.android.pir.gglc.database" />
       <recent name="com.android.pir.gglc.pir" />
-      <recent name="com.android.canvasing.gglc.absen" />
-      <recent name="com.android.canvasing.gglc.fragment" />
-      <recent name="com.android.canvasing.gglc.canvassing" />
-      <recent name="com.android.canvasing.gglc.database" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Android Workspace\PIR\app\src\main\res\layout" />
-      <recent name="D:\Android Workspace\PIR\app\src\main\java\com\android\pir\gglc\fragment1" />
-      <recent name="C:\ANDROID_WORKSPACES\CANVASING\app\src\main\res\drawable" />
-      <recent name="C:\ANDROID_WORKSPACES\CANVASING\app\src\main\res\layout" />
-      <recent name="C:\ANDROID_WORKSPACES\CANVASING\app\src\libs" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -814,150 +327,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android App.app">
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Auto" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <Native>
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-      </Native>
-      <Java />
-      <Hybrid>
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-      </Hybrid>
-      <Profilers>
-        <option name="GAPID_DISABLE_PCS" value="false" />
-      </Profilers>
-      <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="EXTRA_OPTIONS" value="" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Auto" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <Native>
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-      </Native>
-      <Java />
-      <Hybrid>
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-      </Hybrid>
-      <Profilers>
-        <option name="GAPID_DISABLE_PCS" value="false" />
-      </Profilers>
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method>
-        <option name="Make" enabled="false" />
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -1018,445 +388,457 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="false" name="app" type="AndroidRunConfigurationType" factoryName="Android Application" activateToolWindowBeforeRun="false">
-      <module name="app" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Java" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <Native>
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-      </Native>
-      <Java />
-      <Hybrid>
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-      </Hybrid>
-      <Profilers>
-        <option name="GAPID_DISABLE_PCS" value="false" />
-      </Profilers>
-      <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet">
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Android App.app" />
-    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="669c1e3f-9b34-4c0e-9d39-24f4471394f3" name="Default" comment="" />
-      <created>1535888037080</created>
+      <changelist id="2e1c6a39-96ae-4b64-a749-b08c46a0591b" name="Default Changelist" comment="" />
+      <created>1612756281791</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1535888037080</updated>
+      <updated>1612756281791</updated>
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.23373677" />
-      <window_info id="Structure" order="1" weight="0.25" />
-      <window_info id="Captures" order="2" side_tool="true" weight="0.25" />
-      <window_info id="Build Variants" order="3" side_tool="true" />
-      <window_info id="Palette&#9;" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="Image Layers" order="7" />
-      <window_info id="Resources Explorer" order="8" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3289689" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39930955" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50428724" side_tool="true" weight="0.6697353" />
-      <window_info anchor="bottom" id="Android Monitor" order="8" sideWeight="0.49571276" weight="0.39700806" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Gradle Console" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32911393" />
-      <window_info anchor="bottom" id="Build" order="13" weight="0.3535188" />
-      <window_info anchor="bottom" id="Android Profiler" order="14" />
-      <window_info anchor="bottom" id="Logcat" order="15" weight="0.83797055" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24973205" />
-      <window_info anchor="right" id="Designer" order="3" />
-      <window_info anchor="right" id="Android Model" order="4" side_tool="true" weight="0.329582" />
-      <window_info anchor="right" id="Gradle" order="5" weight="0.3290469" />
-      <window_info anchor="right" id="Preview" order="6" visible="true" weight="0.33963692" />
-      <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="right" id="Device File Explorer" order="8" side_tool="true" />
-      <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2437247" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Build Variants" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Designer" order="6" />
+      <window_info id="Resources Explorer" order="7" />
+      <window_info id="Capture Tool" order="8" />
+      <window_info anchor="bottom" id="Run" order="0" weight="0.32820514" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.48134992" />
+      <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49924356" weight="0.3285968" />
+      <window_info anchor="bottom" id="Debug" order="3" />
+      <window_info anchor="bottom" id="Terminal" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50075644" side_tool="true" weight="0.3285968" />
+      <window_info anchor="bottom" id="Version Control" order="6" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.60923624" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="9" weight="0.3289689" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Gradle" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.32793522" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+      <window_info anchor="right" id="Assistant" order="6" weight="0.32956383" />
     </layout>
   </component>
-  <component name="Vcs.Log.UiProperties">
-    <option name="RECENTLY_FILTERED_USER_GROUPS">
-      <collection />
-    </option>
-    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-      <collection />
-    </option>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java</url>
+          <line>518</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/ProspectPlanVisit.java</url>
+          <line>299</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/ProspectPlanVisit.java</url>
+          <line>862</line>
+          <properties>
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/android/sdk/platforms/android-25/android.jar!/android/app/Activity.class" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/TestCheckin.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DataPenjualan.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DataStockFisik.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/CheckoutActivityA.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DisplayActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/Spg.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/Kompetitor.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PerbaikanActivityB.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/Chiller.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/CheckinOneFragmentActivity1.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/LoginAbsenActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/Dashboard.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/History_absen.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret line="94" column="8" selection-start-line="94" selection-start-column="8" selection-end-line="94" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AbsenActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="66" selection-start-line="66" selection-end-line="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/UselessHistoryActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/NavigationDrawerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-882">
-          <caret line="219" column="37" selection-start-line="219" selection-start-column="37" selection-end-line="219" selection-end-column="37" />
           <folding>
-            <element signature="e#7668#7709#0" expanded="true" />
+            <element signature="e#0#5144#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_orderan_new.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/CartFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
+        <state relative-caret-position="60">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+        <state relative-caret-position="165">
+          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/NavigationDrawerAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="15" column="66" selection-start-line="15" selection-start-column="66" selection-end-line="15" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="52" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_detail_jadwal.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-229">
-          <caret line="174" column="47" selection-start-line="174" selection-start-column="47" selection-end-line="174" selection-end-column="47" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_plan_visit.xml">
       <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment/ThreeFragmentweb_view.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        <state relative-caret-position="135">
+          <caret line="33" column="48" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_two.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="260" column="32" selection-start-line="260" selection-start-column="25" selection-end-line="260" selection-end-column="32" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_plan_visit_two.xml">
       <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment/TwoFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="135" column="49" selection-start-line="135" selection-start-column="49" selection-end-line="135" selection-end-column="49" />
+        <state relative-caret-position="202">
+          <caret line="44" column="33" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/TwoFragment1.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/ThreeFragment1.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/moving_truck.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="147" column="79" selection-start-line="147" selection-start-column="79" selection-end-line="147" selection-end-column="79" />
+        <state relative-caret-position="240">
+          <caret line="16" column="38" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="38" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/History_Canvassing.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/library_add_check_black_48dp.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="731" column="36" selection-start-line="731" selection-start-column="36" selection-end-line="731" selection-end-column="36" />
+        <state relative-caret-position="150">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/library_books_black_48dp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="38" lean-forward="true" selection-start-column="38" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/library_add_black_48dp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/ChangePassword.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="245" column="31" selection-start-line="245" selection-start-column="31" selection-end-line="245" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="530">
+          <caret line="256" column="40" selection-start-line="256" selection-start-column="40" selection-end-line="256" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/Orderan.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/History_Canvassing.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="228" column="5" selection-start-line="228" selection-start-column="5" selection-end-line="228" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="361">
+          <caret line="746" column="35" lean-forward="true" selection-start-line="746" selection-start-column="35" selection-end-line="746" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_checkout.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3403" />
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/ThreeFragmentweb_view1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="58" column="24" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/IconTextTabsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="662" column="25" selection-start-line="662" selection-start-column="25" selection-end-line="662" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/CheckoutActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="102" column="43" selection-start-line="102" selection-start-column="43" selection-end-line="102" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_dashboard.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/checkinfragment_oneactivity.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/roundedbutton.xml">
       <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_product_choose_dialog_req_load_urgent.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11985">
-          <caret line="800" column="53" selection-start-line="800" selection-start-column="53" selection-end-line="800" selection-end-column="53" />
+        <state relative-caret-position="99">
+          <caret line="47" column="4" lean-forward="true" selection-start-line="47" selection-start-column="4" selection-end-line="102" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Android/Sdk/platforms/android-25/android.jar!/android/widget/ListView.class" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_detail_penjualan.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_product_sales_order.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="56" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DetailReqLoadNew.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="77" column="25" selection-start-line="77" selection-start-column="25" selection-end-line="77" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_prospect.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2227">
+          <caret line="131" column="17" selection-start-line="131" selection-start-column="17" selection-end-line="131" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/roundedheader.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_icon_text_tabs.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="59" selection-start-line="10" selection-start-column="59" selection-end-line="10" selection-end-column="59" />
-        </state>
-      </provider>
       <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="85">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DetailJadwalActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_two.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/TwoFragment1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="682" column="32" selection-start-line="682" selection-start-column="32" selection-end-line="682" selection-end-column="32" />
+        <state relative-caret-position="391">
+          <caret line="135" column="53" selection-start-line="135" selection-start-column="53" selection-end-line="135" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-25/android.jar!/android/graphics/Bitmap.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="121" column="8" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_one.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2601">
+          <caret line="153" column="40" selection-start-line="145" selection-end-line="153" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1836">
+          <caret line="108" selection-start-line="108" selection-end-line="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/NavigationDrawerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2941">
+          <caret line="211" column="68" selection-start-line="211" selection-start-column="68" selection-end-line="211" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_prospect_plan_visit.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2550">
+          <caret line="150" column="67" selection-start-line="150" selection-start-column="54" selection-end-line="150" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/ProspectPlanVisit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="1352" column="50" lean-forward="true" selection-start-line="1352" selection-start-column="50" selection-end-line="1352" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="189" lean-forward="true" selection-start-line="189" selection-end-line="189" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DataSapi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="250" selection-start-line="250" selection-end-line="250" />
+        <state relative-caret-position="6936">
+          <caret line="462" column="14" selection-start-line="462" selection-start-column="14" selection-end-line="462" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_one.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="951" column="47" lean-forward="true" selection-start-line="951" selection-start-column="47" selection-end-line="951" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_data_sapi.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="126" column="55" lean-forward="true" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/UploadDataSapi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding>
+            <element signature="e#1847#1848#0" expanded="true" />
+            <element signature="e#1873#1874#0" expanded="true" />
+            <element signature="e#1914#1915#0" expanded="true" />
+            <element signature="e#1941#1942#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="433" column="51" selection-start-line="433" selection-start-column="51" selection-end-line="433" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Trx_Checkin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#3247#3248#0" expanded="true" />
+            <element signature="e#3277#3278#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main1.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#270#294#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="31" lean-forward="true" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+          <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_checkinfragment_oneactivity.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="69" column="41" selection-end-line="214" />
+        <state relative-caret-position="240">
+          <caret line="175" column="17" selection-start-line="169" selection-start-column="16" selection-end-line="175" selection-end-column="17" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment/OneFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main3.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3543">
-          <caret line="603" column="44" selection-start-line="603" selection-start-column="44" selection-end-line="603" selection-end-column="44" />
+        <state relative-caret-position="204">
+          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardTabsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="598" column="68" selection-start-line="598" selection-start-column="68" selection-end-line="598" selection-end-column="68" />
+        <state relative-caret-position="10047">
+          <caret line="611" column="31" selection-start-line="611" selection-start-column="17" selection-end-line="611" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/OneFragment1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="2000" column="26" selection-start-line="2000" selection-start-column="26" selection-end-line="2000" selection-end-column="26" />
+        <state relative-caret-position="8721">
+          <caret line="604" column="24" selection-start-line="604" selection-start-column="24" selection-end-line="604" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/DataSapiFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1785">
+          <caret line="182" column="31" selection-start-line="182" selection-start-column="31" selection-end-line="182" selection-end-column="31" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#22490#22799#0" expanded="true" />
-            <element signature="e#22798#22799#0" expanded="true" />
-            <element signature="e#22837#22987#0" expanded="true" />
-            <element signature="e#22986#22987#0" expanded="true" />
-            <element signature="e#23029#23184#0" expanded="true" />
-            <element signature="e#23183#23184#0" expanded="true" />
-            <element signature="e#66675#66787#0" expanded="true" />
-            <element signature="e#66813#67212#0" expanded="true" />
-            <element signature="e#67211#67212#0" expanded="true" />
-            <element signature="e#67721#67833#0" expanded="true" />
-            <element signature="e#67859#68405#0" expanded="true" />
-            <element signature="e#68404#68405#0" expanded="true" />
-            <element signature="e#70014#70245#0" expanded="true" />
-            <element signature="e#76530#76775#0" expanded="true" />
-            <element signature="e#76954#77087#0" expanded="true" />
-            <element signature="e#78037#78280#0" expanded="true" />
-            <element signature="e#83748#84005#0" expanded="true" />
-            <element signature="e#84204#84341#0" expanded="true" />
-            <element signature="e#85427#85658#0" expanded="true" />
-            <element signature="e#90660#90905#0" expanded="true" />
-            <element signature="e#91084#91217#0" expanded="true" />
-            <element signature="e#97966#97967#0" expanded="true" />
-            <element signature="e#98028#98029#0" expanded="true" />
+            <element signature="e#56002#56003#0" expanded="true" />
+            <element signature="e#56063#56064#0" expanded="true" />
+            <element signature="e#56113#56114#0" expanded="true" />
+            <element signature="e#56175#56176#0" expanded="true" />
+            <element signature="e#56225#56226#0" expanded="true" />
+            <element signature="e#56287#56288#0" expanded="true" />
+            <element signature="e#56337#56338#0" expanded="true" />
+            <element signature="e#56399#56400#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/CheckinOneFragmentActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/CheckoutFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9503">
-          <caret line="1040" column="28" selection-start-line="1040" selection-start-column="19" selection-end-line="1040" selection-end-column="28" />
-          <folding>
-            <element signature="e#5857#12493#1" />
-            <element signature="e#16533#18416#0" />
-            <element signature="e#18422#19515#0" />
-            <element signature="e#19521#20151#0" />
-            <element signature="e#20157#21183#0" />
-            <element signature="e#21189#22376#0" />
-            <element signature="e#45580#47741#0" />
-            <element signature="class#47795:49540" />
-            <element signature="method#onStatusChanged#0;class#47795:49540" />
-          </folding>
+        <state relative-caret-position="187">
+          <caret line="80" column="24" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_one.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="170" selection-start-line="170" selection-end-line="170" />
-          <folding>
-            <marker date="1603182046000" expanded="true" signature="4:6287" ph="..." />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_checkout.xml">
       <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="26" column="74" selection-start-line="26" selection-start-column="74" selection-end-line="26" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Trx_Checkout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

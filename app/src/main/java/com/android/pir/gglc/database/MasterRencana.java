@@ -10,6 +10,7 @@ public class MasterRencana {
 	String tanggal_rencana;
 	int id_user_input_rencana;
 	String keterangan;
+	String aproved;
 
 	// Empty constructor
 	public MasterRencana(){
@@ -17,7 +18,7 @@ public class MasterRencana {
 	}
 	// constructor
 	public MasterRencana(int id, int id_rencana_header, String nomor_rencana, String tanggal_penetapan, String tanggal_rencana,
-						 int id_user_input_rencana, String keterangan){
+						 int id_user_input_rencana, String keterangan, String aproved){
 		this.id = id;
 		this.id_rencana_header = id_rencana_header;
 		this.nomor_rencana = nomor_rencana;
@@ -25,17 +26,19 @@ public class MasterRencana {
 		this.tanggal_rencana = tanggal_rencana;
 		this.id_user_input_rencana = id_user_input_rencana;
 		this.keterangan = keterangan;
+		this.aproved = aproved;
 	}
 
 	// constructor
 	public MasterRencana(int id_rencana_header, String nomor_rencana, String tanggal_penetapan, String tanggal_rencana,
-						 int id_user_input_rencana, String keterangan){
+						 int id_user_input_rencana, String keterangan, String aproved){
 		this.id_rencana_header = id_rencana_header;
 		this.nomor_rencana = nomor_rencana;
 		this.tanggal_penetapan = tanggal_penetapan;
 		this.tanggal_rencana = tanggal_rencana;
 		this.id_user_input_rencana = id_user_input_rencana;
 		this.keterangan = keterangan;
+		this.aproved = aproved;
 	}
 
 	public int getId(){
@@ -85,5 +88,12 @@ public class MasterRencana {
 	}
 	public void setKeterangan(String keterangan){
 		this.keterangan=keterangan;
+	}
+
+	public String getAproved(){
+		return this.aproved;
+	}
+	public void setAproved(String aproved){
+		this.aproved=aproved;
 	}
 }

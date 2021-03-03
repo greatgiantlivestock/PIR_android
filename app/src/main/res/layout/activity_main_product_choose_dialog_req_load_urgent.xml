@@ -1,0 +1,105 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/eula_relative_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="10dip" >
+
+    <LinearLayout
+        android:id="@+id/activity_customer_linear_search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/activity_product_edittext_search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/description_back_shape"
+            android:hint="Cari Petani"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:layout_margin="5dip"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Ivory3" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/activity_customer_linear_keterangan"
+        android:layout_width="fill_parent"
+        android:layout_below="@+id/activity_customer_linear_search"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/activity_product_edittext_keterangan"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/description_back_shape"
+            android:hint="Keterangan"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:layout_margin="5dip"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Ivory3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_customer_linear_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_customer_linear_keterangan"
+        android:orientation="horizontal"
+        android:padding="7dip" >
+
+        <TextView
+            android:id="@+id/activity_sales_order_title_kode_product"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:text="Nama Petani"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/activity_sales_order_title_action"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:text="Desa"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:text="Act"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dividerHeaderBottom"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/activity_customer_linear_title"
+        android:background="#414141" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/dividerHeaderBottom"
+        android:background="@color/white"
+        android:divider="@color/listview_divider"
+        android:dividerHeight="0.8dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
+</RelativeLayout>

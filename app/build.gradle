@@ -51,5 +51,7 @@ dependencies {
     compile files('src/libs/httpcore-4.3.3.jar')
     compile files('src/libs/httpmime-4.3.6.jar')
     compile files('src/libs/httpclient-4.3.6.jar')
+    debugCompile 'com.amitshekhar.android:debug-db:1.0.0'
+    compile 'com.github.bumptech.glide:glide:4.3.1'
 }
 

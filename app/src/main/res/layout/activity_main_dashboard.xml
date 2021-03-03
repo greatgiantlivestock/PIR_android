@@ -35,7 +35,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="List Customer yang Harus Dikunjungi"
+                        android:text="List Petani yang Harus Dikunjungi"
                         android:layout_marginRight="5dp"
                         android:textColor="@color/black"
                         android:textSize="14sp"
@@ -63,7 +63,7 @@
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:text="@string/app_customer_hint_customer"
+                        android:text="Petani"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/black"
                         android:textSize="14sp"

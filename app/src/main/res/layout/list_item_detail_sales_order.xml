@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
-    android:padding="15dip" >
+    android:padding="5dip" >
 
     <TextView
         android:id="@+id/sales_order_title_nama_product"
@@ -12,7 +12,7 @@
         android:layout_weight="1"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="11sp" />
 
     <TextView
         android:id="@+id/sales_order_title_batch"
@@ -21,7 +21,7 @@
         android:layout_weight="0.7"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="11sp" />
 
     <TextView
         android:id="@+id/sales_order_title_jumlah_order"
@@ -30,7 +30,7 @@
         android:layout_weight="0.3"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="11sp" />
 
     <!--<TextView-->
         <!--android:id="@+id/sales_order_title_jumlah_order1"-->
@@ -39,7 +39,7 @@
         <!--android:layout_weight="0.4"-->
         <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
         <!--android:textColor="@color/black"-->
-        <!--android:textSize="14sp" />-->
+        <!--android:textSize="11sp" />-->
 
     <!--<TextView-->
         <!--android:id="@+id/sales_order_title_jumlah_order2"-->
@@ -48,7 +48,7 @@
         <!--android:layout_weight="0.4"-->
         <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
         <!--android:textColor="@color/black"-->
-        <!--android:textSize="14sp" />-->
+        <!--android:textSize="11sp" />-->
 
     <!--<TextView-->
         <!--android:id="@+id/sales_order_title_jumlah_order3"-->
@@ -57,6 +57,6 @@
         <!--android:layout_weight="0.4"-->
         <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
         <!--android:textColor="@color/black"-->
-        <!--android:textSize="14sp" />-->
+        <!--android:textSize="11sp" />-->
 
 </LinearLayout>

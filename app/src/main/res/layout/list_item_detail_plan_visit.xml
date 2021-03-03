@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="80dp"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:id="@+id/list_rencana"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/roundedactive"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.65"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.2">
+                <TextView
+                    android:id="@+id/sales_order_title_nama_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:text="Title"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="5dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.8">
+                <TextView
+                    android:id="@+id/alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="description"
+                    android:layout_marginLeft="5dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="0.15">
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="0.08">
+            <ImageButton
+                android:layout_width="12dp"
+                android:layout_height="18dp"
+                android:background="@drawable/next">
+
+            </ImageButton>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/sales_order_title_penjualan"-->
+        <!--android:layout_width="0dip"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.7"-->
+        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:textSize="14sp" />-->
+<!--    <TextView-->
+<!--        android:id="@+id/sales_order_title_batch"-->
+<!--        android:layout_width="0dip"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="0.3"-->
+<!--        android:textAppearance="?android:attr/textAppearanceSmall"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="14sp" />-->
+
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/sales_order_title_jumlah_order1"-->
+        <!--android:layout_width="0dip"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.4"-->
+        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:textSize="14sp" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/sales_order_title_jumlah_order2"-->
+        <!--android:layout_width="0dip"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.4"-->
+        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:textSize="14sp" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/sales_order_title_jumlah_order3"-->
+        <!--android:layout_width="0dip"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.4"-->
+        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:textSize="14sp" />-->
+
+</LinearLayout>

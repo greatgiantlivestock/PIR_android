@@ -32,7 +32,6 @@ import android.widget.Toast;
 
 import com.android.pir.gglc.absen.Orderan;
 import com.android.pir.gglc.absen.RequestHandler;
-import com.android.pir.gglc.database.Jenis_kendaraan;
 import com.android.pir.gglc.database.MstUser;
 import com.android.pir.gglc.database.Mst_Customer;
 import com.android.pir.gglc.database.TmpCustomer;
@@ -42,7 +41,6 @@ import com.android.pir.gglc.absen.AppVar;
 import com.android.pir.gglc.absen.ChangePassword;
 import com.android.pir.gglc.absen.NavigationDrawerCallbacks;
 import com.android.pir.gglc.absen.NavigationDrawerFragment;
-import com.android.pir.gglc.database.Absen;
 import com.android.pir.gglc.database.DatabaseHandler;
 
 import java.text.SimpleDateFormat;
@@ -60,7 +58,7 @@ public class CheckoutActivity extends ActionBarActivity implements
 	private DatabaseHandler databaseHandler;
 	private ListView listview;
 	private LinearLayout layout;
-	private ArrayList<Absen> customer_list = new ArrayList<Absen>();
+//	private ArrayList<Absen> customer_list = new ArrayList<Absen>();
 	private ProgressDialog progressDialog;
 	private Handler handler = new Handler();
 	private String message;
@@ -69,7 +67,7 @@ public class CheckoutActivity extends ActionBarActivity implements
 	private EditText description_kegiatan;
 	private Spinner checkin_number,jenis_kendaraan;
 	private ArrayList<Trx_Checkin> checkinNumber;
-	private ArrayList<Jenis_kendaraan> jenisKendaraan;
+//	private ArrayList<Jenis_kendaraan> jenisKendaraan;
 	private ArrayList<String> checkinNumberStringList;
 	private ArrayList<String> jenisKendaraanStringList;
 	private int id_checkin = 0;
@@ -81,7 +79,7 @@ public class CheckoutActivity extends ActionBarActivity implements
 	private TextView tvNamaCustomer;
 	private TextView tvNamaAlamat;
     private String response;
-    private Absen customer;
+//    private Absen customer;
 	private Button chat,map;
 	private EditText mulai,sampai;
 	private Button checkout;
@@ -123,7 +121,7 @@ public class CheckoutActivity extends ActionBarActivity implements
 		mNavigationDrawerFragment.setup(R.id.fragment_drawer,
 				(DrawerLayout) findViewById(R.id.drawer), mToolbar);
 		databaseHandler = new DatabaseHandler(this);
-		mNavigationDrawerFragment.selectItem(2);
+		mNavigationDrawerFragment.selectItem(4);
 
 		if(databaseHandler.getCountTrxcheckin()==0){
 			showCustomDialogInvalidCheckin("Data checkin anda kosong, silahkan checkin terlebih dahulu..");
@@ -170,13 +168,13 @@ public class CheckoutActivity extends ActionBarActivity implements
 			nomor_checkin_ = checkinNumber.get(0).getNomor_checkin();
 
 			//set list jenis kendaraan
-			jenisKendaraan = new ArrayList<Jenis_kendaraan>();
+//			jenisKendaraan = new ArrayList<Jenis_kendaraan>();
 			jenisKendaraanStringList= new ArrayList<String>();
-			List<Jenis_kendaraan> dataJenisKedaraan = databaseHandler.getAllJenisKendaraan();
-			for (Jenis_kendaraan jeniskendaraan : dataJenisKedaraan) {
-				jenisKendaraan.add(jeniskendaraan);
-				jenisKendaraanStringList.add(String.valueOf(jeniskendaraan.getNama_jenis()));
-			}
+//			List<Jenis_kendaraan> dataJenisKedaraan = databaseHandler.getAllJenisKendaraan();
+//			for (Jenis_kendaraan jeniskendaraan : dataJenisKedaraan) {
+//				jenisKendaraan.add(jeniskendaraan);
+//				jenisKendaraanStringList.add(String.valueOf(jeniskendaraan.getNama_jenis()));
+//			}
 
 			//set spinner jenis kendaraan
 			ArrayAdapter<String> adapter_jenis = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, jenisKendaraanStringList);
@@ -184,12 +182,12 @@ public class CheckoutActivity extends ActionBarActivity implements
 			jenis_kendaraan.setAdapter(adapter_jenis);
 			jenis_kendaraan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 				public void onItemSelected(AdapterView<?> parent,View view, int position, long id) {
-					id_jenis_kendaraan = jenisKendaraan.get(position).getId_jenis_kendaraan();
+//					id_jenis_kendaraan = jenisKendaraan.get(position).getId_jenis_kendaraan();
 				}
 				public void onNothingSelected(AdapterView<?> parent) {
 				}
 			});
-			id_jenis_kendaraan = jenisKendaraan.get(0).getId_jenis_kendaraan();
+//			id_jenis_kendaraan = jenisKendaraan.get(0).getId_jenis_kendaraan();
 		}
 
 		ArrayList<MstUser> staff_list = databaseHandler.getAllUser();
@@ -583,28 +581,38 @@ public class CheckoutActivity extends ActionBarActivity implements
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		if (mNavigationDrawerFragment != null) {
-			if (mNavigationDrawerFragment.getCurrentSelectedPosition() != 2) {
-				if (position == 0) {
+			if (mNavigationDrawerFragment.getCurrentSelectedPosition() != 4) {
+				if (position ==0) {
+					Intent intentActivity = new Intent(this,
+							PlanVisitActivity.class);
+					startActivity(intentActivity);
+					finish();
+				}else if (position ==1) {
+					Intent intentActivity = new Intent(this,
+							PlanVisitActivity2.class);
+					startActivity(intentActivity);
+					finish();
+				}else if (position ==2) {
 					Intent intentActivity = new Intent(this,
 							DashboardActivity.class);
 					startActivity(intentActivity);
 					finish();
-				}else if (position == 1) {
+				}else if (position ==3) {
 					Intent intentActivity = new Intent(this,
-							IconTextTabsActivity.class);
+							IconTextTabsActivity_lap.class);
 					startActivity(intentActivity);
 					finish();
-				} else if (position == 3) {
+				}else if (position == 5) {
 					Intent intentActivity = new Intent(this,
 							History_Canvassing.class);
 					startActivity(intentActivity);
 					finish();
-				}else if (position == 4) {
+				}else if (position == 6) {
 					Intent intentActivity = new Intent(this,
 							ChangePassword.class);
 					startActivity(intentActivity);
 					finish();
-				}else if (position == 5) {
+				}else if (position == 7) {
 					Intent intentActivity = new Intent(this,
 							Orderan.class);
 					startActivity(intentActivity);

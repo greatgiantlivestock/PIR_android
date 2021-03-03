@@ -17,7 +17,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,11 +34,9 @@ import android.widget.TextView;
 
 import com.android.pir.gglc.absen.AppVar;
 import com.android.pir.gglc.absen.NavigationDrawerFragment;
-import com.android.pir.gglc.database.Absen;
 import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
 import com.android.pir.gglc.database.MstUser;
-import com.android.pir.gglc.database.Stock_customer;
 import com.android.pir.gglc.database.Trx_Checkin;
 import com.android.pir.mobile.R;
 
@@ -47,9 +44,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -63,9 +57,9 @@ public class DetailJadwalActivity extends FragmentActivity{
 	private DatabaseHandler databaseHandler;
 	private ListView listview;
 	private LinearLayout layout;
-	private ArrayList<Absen> customer_list = new ArrayList<Absen>();
-	private ArrayList<Stock_customer> stock_customer_list = new ArrayList<Stock_customer>();
-	private ListViewAdapter cAdapter;
+//	private ArrayList<Absen> customer_list = new ArrayList<Absen>();
+//	private ArrayList<Stock_customer> stock_customer_list = new ArrayList<Stock_customer>();
+//	private ListViewAdapter cAdapter;
 	private ProgressDialog progressDialog;
 	private Handler handler = new Handler();
 	private String message,msg_success;
@@ -83,7 +77,7 @@ public class DetailJadwalActivity extends FragmentActivity{
 	private Typeface typefaceSmall;
 	private TextView test,jml_ckin,jml_rcn,percent, nama,alamat,status,status_,status_1;
     private String response;
-    private Absen customer;
+//    private Absen customer;
 	private Button chat,map;
 	private EditText mulai,sampai;
 	private Button checkin,checkin1,checkout;
@@ -160,54 +154,54 @@ public class DetailJadwalActivity extends FragmentActivity{
 				gotoCheckin();
 			}
 		});
-		checkin1.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				gotoCheckin1();
-			}
-		});
-		stockFisik.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				gotoStockFisik();
-			}
-		});
-		displayProduct.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				gotoDisplay();
-			}
-		});
+//		checkin1.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				gotoCheckin1();
+//			}
+//		});
+//		stockFisik.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				gotoStockFisik();
+//			}
+//		});
+//		displayProduct.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				gotoDisplay();
+//			}
+//		});
 		chiller.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				gotoChiller();
 			}
 		});
-		kompetitor.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				gotoKompetitor();
-			}
-		});
-		spg.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				gotoSpg();
-			}
-		});
+//		kompetitor.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				gotoKompetitor();
+//			}
+//		});
+//		spg.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				gotoSpg();
+//			}
+//		});
 		checkout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				gotoCheckout();
 			}
 		});
-		penjualan.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				gotoPenjualan();
-			}
-		});
+//		penjualan.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				gotoPenjualan();
+//			}
+//		});
 
 		menuBackButton = (ImageView) findViewById(R.id.menuBackButton);
 		menuBackButton.setOnClickListener(new View.OnClickListener() {
@@ -422,146 +416,146 @@ public class DetailJadwalActivity extends FragmentActivity{
 //		showListStock();
 //	}
 
-	public void showListStock() {
-		stock_customer_list.clear();
-		ArrayList<Stock_customer> stockrencana_from_db = null;
-		stockrencana_from_db = databaseHandler.getAllStockCustomer(Integer.parseInt(main_app_id_detail_jadwal));
+//	public void showListStock() {
+//		stock_customer_list.clear();
+//		ArrayList<Stock_customer> stockrencana_from_db = null;
+//		stockrencana_from_db = databaseHandler.getAllStockCustomer(Integer.parseInt(main_app_id_detail_jadwal));
+//
+//		if (stockrencana_from_db.size() > 0) {
+//			listview.setVisibility(View.VISIBLE);
+//			for (int i = 0; i < stockrencana_from_db.size(); i++) {
+//				int id_stock = stockrencana_from_db.get(i).getId_stock();
+//				int id_customer = stockrencana_from_db.get(i).getId_customer();
+//				int id_product = stockrencana_from_db.get(i).getId_product();
+//				String nama_product = stockrencana_from_db.get(i).getNama_product();
+//				int qty = stockrencana_from_db.get(i).getQty();
+//				String satuan = stockrencana_from_db.get(i).getSatuan();
+//				String tanggal_update = stockrencana_from_db.get(i).getTanggal_update();
+//
+//				Stock_customer stock_customer = new Stock_customer();
+//				stock_customer.setId_stock(id_stock);
+//				stock_customer.setId_customer(id_customer);
+//				stock_customer.setId_product(id_product);
+//				stock_customer.setNama_product(nama_product);
+//				stock_customer.setQty(qty);
+//				stock_customer.setSatuan(satuan);
+//				stock_customer.setTanggal_update(tanggal_update);
+//
+//				stock_customer_list.add(stock_customer);
+//			}
+//
+//			cAdapter = new ListViewAdapter(this, R.layout.list_item_stock_customer,
+//					stock_customer_list);
+//			listview.setAdapter(cAdapter);
+//			cAdapter.notifyDataSetChanged();
+//		} else {
+//			listview.setVisibility(View.INVISIBLE);
+//		}
+//	}
 
-		if (stockrencana_from_db.size() > 0) {
-			listview.setVisibility(View.VISIBLE);
-			for (int i = 0; i < stockrencana_from_db.size(); i++) {
-				int id_stock = stockrencana_from_db.get(i).getId_stock();
-				int id_customer = stockrencana_from_db.get(i).getId_customer();
-				int id_product = stockrencana_from_db.get(i).getId_product();
-				String nama_product = stockrencana_from_db.get(i).getNama_product();
-				int qty = stockrencana_from_db.get(i).getQty();
-				String satuan = stockrencana_from_db.get(i).getSatuan();
-				String tanggal_update = stockrencana_from_db.get(i).getTanggal_update();
+//	public class ListViewAdapter extends ArrayAdapter<Stock_customer> {
+//		Activity activity;
+//		int layoutResourceId;
+//		Stock_customer stockCustomer;
+//		ArrayList<Stock_customer> data = new ArrayList<Stock_customer>();
+//
+//		class UserHolder {
+//			TextView list_namaProduct;
+//			TextView list_qty;
+//			TextView list_satuan;
+//			TextView list_tanggal;
+//		}
+//
+//		public ListViewAdapter(Activity act, int layoutResourceId,
+//							   ArrayList<Stock_customer> data) {
+//			super(act, layoutResourceId, data);
+//			this.layoutResourceId = layoutResourceId;
+//			this.activity = act;
+//			this.data = data;
+//			notifyDataSetChanged();
+//		}
+//
+//		@Override
+//		public View getView(final int position, View convertView,
+//							ViewGroup parent) {
+//			View row = convertView;
+//			UserHolder holder = null;
+//
+//			if (row == null) {
+//				LayoutInflater inflater = LayoutInflater.from(activity);
+//				row = inflater.inflate(layoutResourceId, parent, false);
+//				holder = new UserHolder();
+//				holder.list_namaProduct= (TextView) row
+//						.findViewById(R.id.customer_title_nama_product);
+//				holder.list_qty = (TextView) row
+//						.findViewById(R.id.customer_title_qty);
+//				holder.list_satuan = (TextView) row
+//						.findViewById(R.id.customer_title_satuan);
+//				holder.list_tanggal = (TextView) row
+//						.findViewById(R.id.customer_title_tanggal_update);
+//				row.setTag(holder);
+//			} else {
+//				holder = (UserHolder) row.getTag();
+//			}
+//			stockCustomer = data.get(position);
+//			holder.list_namaProduct.setText(stockCustomer.getNama_product());
+//			holder.list_qty.setText(String.valueOf(stockCustomer.getQty()));
+//			holder.list_satuan.setText(stockCustomer.getSatuan());
+//			holder.list_tanggal.setText(stockCustomer.getTanggal_update());
+//			holder.list_namaProduct.setTypeface(typefaceSmall);
+//			holder.list_qty.setTypeface(typefaceSmall);
+//			holder.list_satuan.setTypeface(typefaceSmall);
+//
+//			return row;
+//		}
+//	}
 
-				Stock_customer stock_customer = new Stock_customer();
-				stock_customer.setId_stock(id_stock);
-				stock_customer.setId_customer(id_customer);
-				stock_customer.setId_product(id_product);
-				stock_customer.setNama_product(nama_product);
-				stock_customer.setQty(qty);
-				stock_customer.setSatuan(satuan);
-				stock_customer.setTanggal_update(tanggal_update);
-
-				stock_customer_list.add(stock_customer);
-			}
-
-			cAdapter = new ListViewAdapter(this, R.layout.list_item_stock_customer,
-					stock_customer_list);
-			listview.setAdapter(cAdapter);
-			cAdapter.notifyDataSetChanged();
-		} else {
-			listview.setVisibility(View.INVISIBLE);
-		}
-	}
-
-	public class ListViewAdapter extends ArrayAdapter<Stock_customer> {
-		Activity activity;
-		int layoutResourceId;
-		Stock_customer stockCustomer;
-		ArrayList<Stock_customer> data = new ArrayList<Stock_customer>();
-
-		class UserHolder {
-			TextView list_namaProduct;
-			TextView list_qty;
-			TextView list_satuan;
-			TextView list_tanggal;
-		}
-
-		public ListViewAdapter(Activity act, int layoutResourceId,
-							   ArrayList<Stock_customer> data) {
-			super(act, layoutResourceId, data);
-			this.layoutResourceId = layoutResourceId;
-			this.activity = act;
-			this.data = data;
-			notifyDataSetChanged();
-		}
-
-		@Override
-		public View getView(final int position, View convertView,
-							ViewGroup parent) {
-			View row = convertView;
-			UserHolder holder = null;
-
-			if (row == null) {
-				LayoutInflater inflater = LayoutInflater.from(activity);
-				row = inflater.inflate(layoutResourceId, parent, false);
-				holder = new UserHolder();
-				holder.list_namaProduct= (TextView) row
-						.findViewById(R.id.customer_title_nama_product);
-				holder.list_qty = (TextView) row
-						.findViewById(R.id.customer_title_qty);
-				holder.list_satuan = (TextView) row
-						.findViewById(R.id.customer_title_satuan);
-				holder.list_tanggal = (TextView) row
-						.findViewById(R.id.customer_title_tanggal_update);
-				row.setTag(holder);
-			} else {
-				holder = (UserHolder) row.getTag();
-			}
-			stockCustomer = data.get(position);
-			holder.list_namaProduct.setText(stockCustomer.getNama_product());
-			holder.list_qty.setText(String.valueOf(stockCustomer.getQty()));
-			holder.list_satuan.setText(stockCustomer.getSatuan());
-			holder.list_tanggal.setText(stockCustomer.getTanggal_update());
-			holder.list_namaProduct.setTypeface(typefaceSmall);
-			holder.list_qty.setTypeface(typefaceSmall);
-			holder.list_satuan.setTypeface(typefaceSmall);
-
-			return row;
-		}
-	}
-
-	public void extractDataStock() {
-		SharedPreferences spPreferences = getSharedPrefereces();
-		String main_app_table_same_data = spPreferences.getString(
-				AppVar.SHARED_PREFERENCES_TABLE_STOCK_SAME_DATA, null);
-		String main_app_table = spPreferences.getString(
-				AppVar.SHARED_PREFERENCES_TABLE_STOCK, null);
-		if (main_app_table_same_data.equalsIgnoreCase(act
-				.getApplicationContext().getResources()
-				.getString(R.string.app_value_false))) {
-			JSONObject oResponse;
-			try {
-				oResponse = new JSONObject(main_app_table);
-				JSONArray jsonarr = oResponse.getJSONArray("stock_customer");
-				for (int i = 0; i < jsonarr.length(); i++) {
-					JSONObject oResponsealue = jsonarr.getJSONObject(i);
-					String id_stock = oResponsealue.isNull("id_stock") ? null
-							: oResponsealue.getString("id_stock");
-					String id_customer = oResponsealue.isNull("id_customer") ? null
-							: oResponsealue.getString("id_customer");
-					String id_product = oResponsealue.isNull("id_product") ? null
-							: oResponsealue.getString("id_product");
-					String nama_product = oResponsealue.isNull("nama_product") ? null
-							: oResponsealue.getString("nama_product");
-					String satuan = oResponsealue.isNull("nama_satuan") ? null
-							: oResponsealue.getString("nama_satuan");
-					String qty = oResponsealue.isNull("qty") ? null
-							: oResponsealue.getString("qty");
-					String tanggal_update = oResponsealue.isNull("tanggal_update") ? null
-							: oResponsealue.getString("tanggal_update");
-					Log.d(LOG_TAG, "id_stock:" + id_stock);
-					Log.d(LOG_TAG, "id_product:" + id_product);
-					Log.d(LOG_TAG, "nama_product:" + nama_product);
-					db.addStockCustomer(new Stock_customer(Integer.parseInt(id_stock),Integer.parseInt(id_customer),Integer.parseInt(id_product),nama_product,satuan,Integer.parseInt(qty),tanggal_update));
-				}
-
-			} catch (JSONException e) {
-				final String message = e.toString();
-				handler.post(new Runnable() {
-					public void run() {
-						showCustomDialog(message);
-					}
-				});
-
-			}
-		}
-	}
+//	public void extractDataStock() {
+//		SharedPreferences spPreferences = getSharedPrefereces();
+//		String main_app_table_same_data = spPreferences.getString(
+//				AppVar.SHARED_PREFERENCES_TABLE_STOCK_SAME_DATA, null);
+//		String main_app_table = spPreferences.getString(
+//				AppVar.SHARED_PREFERENCES_TABLE_STOCK, null);
+//		if (main_app_table_same_data.equalsIgnoreCase(act
+//				.getApplicationContext().getResources()
+//				.getString(R.string.app_value_false))) {
+//			JSONObject oResponse;
+//			try {
+//				oResponse = new JSONObject(main_app_table);
+//				JSONArray jsonarr = oResponse.getJSONArray("stock_customer");
+//				for (int i = 0; i < jsonarr.length(); i++) {
+//					JSONObject oResponsealue = jsonarr.getJSONObject(i);
+//					String id_stock = oResponsealue.isNull("id_stock") ? null
+//							: oResponsealue.getString("id_stock");
+//					String id_customer = oResponsealue.isNull("id_customer") ? null
+//							: oResponsealue.getString("id_customer");
+//					String id_product = oResponsealue.isNull("id_product") ? null
+//							: oResponsealue.getString("id_product");
+//					String nama_product = oResponsealue.isNull("nama_product") ? null
+//							: oResponsealue.getString("nama_product");
+//					String satuan = oResponsealue.isNull("nama_satuan") ? null
+//							: oResponsealue.getString("nama_satuan");
+//					String qty = oResponsealue.isNull("qty") ? null
+//							: oResponsealue.getString("qty");
+//					String tanggal_update = oResponsealue.isNull("tanggal_update") ? null
+//							: oResponsealue.getString("tanggal_update");
+//					Log.d(LOG_TAG, "id_stock:" + id_stock);
+//					Log.d(LOG_TAG, "id_product:" + id_product);
+//					Log.d(LOG_TAG, "nama_product:" + nama_product);
+//					db.addStockCustomer(new Stock_customer(Integer.parseInt(id_stock),Integer.parseInt(id_customer),Integer.parseInt(id_product),nama_product,satuan,Integer.parseInt(qty),tanggal_update));
+//				}
+//
+//			} catch (JSONException e) {
+//				final String message = e.toString();
+//				handler.post(new Runnable() {
+//					public void run() {
+//						showCustomDialog(message);
+//					}
+//				});
+//
+//			}
+//		}
+//	}
 
 	private SharedPreferences getSharedPrefereces() {
 		return act.getSharedPreferences(AppVar.SHARED_PREFERENCES_NAME,
@@ -705,26 +699,26 @@ public class DetailJadwalActivity extends FragmentActivity{
 		startActivity(intentActivity);
 		finish();
 	}
-	public void gotoCheckin1(){
-		Intent intentActivity = new Intent(this,
-				CheckinOneFragmentActivity1.class);
-		startActivity(intentActivity);
-		finish();
-	}
+//	public void gotoCheckin1(){
+//		Intent intentActivity = new Intent(this,
+//				CheckinOneFragmentActivity1.class);
+//		startActivity(intentActivity);
+//		finish();
+//	}
 
-	public void gotoStockFisik(){
-		Intent intentActivity = new Intent(this,
-				DataStockFisik.class);
-		startActivity(intentActivity);
-		finish();
-	}
+//	public void gotoStockFisik(){
+//		Intent intentActivity = new Intent(this,
+//				DataStockFisik.class);
+//		startActivity(intentActivity);
+//		finish();
+//	}
 
-	public void gotoDisplay(){
-		Intent intentActivity = new Intent(this,
-				DisplayActivity.class);
-		startActivity(intentActivity);
-		finish();
-	}
+//	public void gotoDisplay(){
+//		Intent intentActivity = new Intent(this,
+//				DisplayActivity.class);
+//		startActivity(intentActivity);
+//		finish();
+//	}
 
 	public void gotoChiller(){
 		Intent intentActivity = new Intent(this,
@@ -733,19 +727,19 @@ public class DetailJadwalActivity extends FragmentActivity{
 		finish();
 	}
 
-	public void gotoKompetitor(){
-		Intent intentActivity = new Intent(this,
-				Kompetitor.class);
-		startActivity(intentActivity);
-		finish();
-	}
+//	public void gotoKompetitor(){
+//		Intent intentActivity = new Intent(this,
+//				Kompetitor.class);
+//		startActivity(intentActivity);
+//		finish();
+//	}
 
-	public void gotoSpg(){
-		Intent intentActivity = new Intent(this,
-				Spg.class);
-		startActivity(intentActivity);
-		finish();
-	}
+//	public void gotoSpg(){
+//		Intent intentActivity = new Intent(this,
+//				Spg.class);
+//		startActivity(intentActivity);
+//		finish();
+//	}
 
 	public void gotoCheckout(){
 		Intent intentActivity = new Intent(this,
@@ -753,12 +747,12 @@ public class DetailJadwalActivity extends FragmentActivity{
 		startActivity(intentActivity);
 		finish();
 	}
-	public void gotoPenjualan(){
-		Intent intentActivity = new Intent(this,
-				DataPenjualan.class);
-		startActivity(intentActivity);
-		finish();
-	}
+//	public void gotoPenjualan(){
+//		Intent intentActivity = new Intent(this,
+//				DataPenjualan.class);
+//		startActivity(intentActivity);
+//		finish();
+//	}
 
 	public void gotoDashboard() {
 		Intent i = new Intent(this, DashboardActivity.class);

@@ -20,12 +20,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.android.pir.gglc.absen.AbsenActivity;
 import com.android.pir.gglc.absen.AppVar;
 import com.android.pir.gglc.absen.ChangePassword;
-import com.android.pir.gglc.absen.History_absen;
 import com.android.pir.gglc.absen.NavigationDrawerCallbacks;
 import com.android.pir.gglc.absen.NavigationDrawerFragment;
+import com.android.pir.gglc.absen.Orderan;
 import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
 import com.android.pir.gglc.fragment.OneFragment;
@@ -130,7 +129,7 @@ public class IconTextTabsActivity_lap extends AppCompatActivity implements Navig
             String id_karyawan = prefs.getString("id_awo","null");
 
             String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
-                    + AppVar.CONFIG_APP_URL_DOWNLOAD_RENCANA_DETAIL+ "?id_karyawan="
+                    + AppVar.CONFIG_APP_URL_DOWNLOAD_RENCANA_DETAIL_APROVED+ "?id_karyawan="
                     + id_karyawan;
             HttpResponse response = getDownloadData(download_data_url);
             int retCode = (response != null) ? response.getStatusLine()
@@ -367,7 +366,7 @@ public class IconTextTabsActivity_lap extends AppCompatActivity implements Navig
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new OneFragment(), "Register Customer");
         adapter.addFrag(new ThreeFragmentweb_view(), "Unregister Customer");
-        //adapter.addFrag(new ThreeFragment1(), "THREE");
+        //adapter.addFrag(new ThreeFragment(), "THREE");
         viewPager.setAdapter(adapter);
     }
 
@@ -404,19 +403,19 @@ public class IconTextTabsActivity_lap extends AppCompatActivity implements Navig
     public void onNavigationDrawerItemSelected(int position) {
         if (mNavigationDrawerFragment != null) {
             if (mNavigationDrawerFragment.getCurrentSelectedPosition() != 3) {
-                if (position == 0) {
+                if (position ==0) {
                     Intent intentActivity = new Intent(this,
-                            AbsenActivity.class);
+                            PlanVisitActivity.class);
                     startActivity(intentActivity);
                     finish();
-                }else if (position == 1) {
+                }else if (position ==1) {
                     Intent intentActivity = new Intent(this,
-                            History_absen.class);
+                            PlanVisitActivity2.class);
                     startActivity(intentActivity);
                     finish();
-                } else if (position == 2) {
+                }else if (position ==2) {
                     Intent intentActivity = new Intent(this,
-                            ChangePassword.class);
+                            DashboardActivity.class);
                     startActivity(intentActivity);
                     finish();
                 }else if (position == 4) {
@@ -424,17 +423,22 @@ public class IconTextTabsActivity_lap extends AppCompatActivity implements Navig
                             CheckoutActivity.class);
                     startActivity(intentActivity);
                     finish();
-                }/*else if (position == 3) {
+                }else if (position == 5) {
                     Intent intentActivity = new Intent(this,
-                            CheckoutActivity.class);
+                            History_Canvassing.class);
                     startActivity(intentActivity);
                     finish();
-                }else if (position == 2) {
-					Intent intentActivity = new Intent(this,
-							ChangePassword.class);
-					startActivity(intentActivity);
-					finish();
-				}*/
+                }else if (position == 6) {
+                    Intent intentActivity = new Intent(this,
+                            ChangePassword.class);
+                    startActivity(intentActivity);
+                    finish();
+                }else if (position == 7) {
+                    Intent intentActivity = new Intent(this,
+                            Orderan.class);
+                    startActivity(intentActivity);
+                    finish();
+                }
             }
         }
 

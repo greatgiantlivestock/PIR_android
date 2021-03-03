@@ -63,8 +63,8 @@ public class ThreeFragmentweb_view1 extends Fragment {
         });
 
         webView.setWebViewClient(new WebViewClient());
-//        webView.loadUrl("http://www.salestrax.hometowndairy.co.id");
-        webView.loadUrl(AppVar.CONFIG_APP_URL_PUBLIC);
+        webView.loadUrl("https://www.google.com");
+//        webView.loadUrl(AppVar.CONFIG_APP_URL_PUBLIC);
 
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.getSettings().setBuiltInZoomControls(false);

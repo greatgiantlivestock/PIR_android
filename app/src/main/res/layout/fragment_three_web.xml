@@ -4,15 +4,23 @@
     android:layout_height="match_parent"
     tools:context="com.android.canvassing.gglc.fragment.ThreeFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Under Constuction !"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"/>
+
     <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/webViewfragment"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
 
     <ProgressBar
         android:id="@+id/progweb"
-        android:layout_height="100dp"
-        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
 

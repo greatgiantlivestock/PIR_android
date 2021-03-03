@@ -1,111 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.android.pir.gglc.absen.LoginActivity"
-    android:labelFor="@+id/header">
+    tools:context="com.android.pir.gglc.pir.MainActivity">
 
-    <include
-        android:id="@+id/toolbar_actionbar"
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/toolbar_default" />
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:itemBackground="@color/colorPrimary"
+        android:foreground="?attr/selectableItemBackground"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:menu="@menu/navigation" />
 
-    <LinearLayout
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar_actionbar"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:srcCompat="@drawable/ggllog"
-            android:layout_weight="0.5"
-            android:layout_marginBottom="18dp"/>
-
-    <LinearLayout
-        android:layout_height="0dp"
-        android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="2"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp">
-
-        <EditText
-            android:id="@+id/txt_username"
-            android:layout_width="260dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="70dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Username"
-            android:layout_gravity="center"
-            tools:layout_editor_absoluteX="67dp"
-            tools:layout_editor_absoluteY="110dp">
-            <requestFocus/>
-        </EditText>
-
-
-        <EditText
-            android:id="@+id/txt_password"
-            android:layout_width="260dp"
-            android:layout_height="50dp"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:hint="Password"
-            tools:layout_editor_absoluteX="67dp"
-            tools:layout_editor_absoluteY="184dp"
-            android:layout_gravity="center"/>
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="Login"
-            android:background="@drawable/roundedbutton"
-            android:textColor="#fff"
-            tools:layout_editor_absoluteX="148dp"
-            tools:layout_editor_absoluteY="260dp"
-            android:layout_marginTop="17dp"
-            android:layout_gravity="center"/>
-
-    </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="PT GREAT GIANT LIVESTOCK" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:layout_marginTop="15dp">
-
-            <ImageView
-                android:id="@+id/howetown"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/hometown"
-                android:layout_marginTop="15dp"
-                android:layout_weight="1"/>
-
-            <ImageView
-                android:id="@+id/bonanza"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/bonanzabeef"
-                android:layout_marginTop="15dp"
-                android:layout_weight="1"/>
-        </LinearLayout>
-    </LinearLayout>
-
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

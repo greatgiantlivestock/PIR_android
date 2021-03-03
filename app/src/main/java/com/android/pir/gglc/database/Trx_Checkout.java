@@ -4,7 +4,7 @@ public class Trx_Checkout {
 
 	//private variables
 	int id_checkout;
-	int id_checkin;
+	int id_rencana_detail;
 	String tanggal_checkout;
 	int id_user;
 	String realisasi_kegiatan;
@@ -16,9 +16,9 @@ public class Trx_Checkout {
 
 	}
 	// constructor
-	public Trx_Checkout(int id_checkout, int id_checkin, String tanggal_checkout, int id_user, String lats, String longs){
+	public Trx_Checkout(int id_checkout, int id_rencana_detail, String tanggal_checkout, int id_user, String lats, String longs){
 		this.id_checkout = id_checkout;
-		this.id_checkin = id_checkin;
+		this.id_rencana_detail = id_rencana_detail;
 		this.tanggal_checkout = tanggal_checkout;
 		this.id_user= id_user;
 		this.realisasi_kegiatan= realisasi_kegiatan;
@@ -27,8 +27,8 @@ public class Trx_Checkout {
 	}
 
 	// constructor
-	public Trx_Checkout(int id_checkin, String tanggal_checkout, int id_user, String lats, String longs){
-		this.id_checkin= id_checkin;
+	public Trx_Checkout(int id_rencana_detail, String tanggal_checkout, int id_user, String lats, String longs){
+		this.id_rencana_detail = id_rencana_detail;
 		this.tanggal_checkout = tanggal_checkout;
 		this.id_user = id_user;
 		this.realisasi_kegiatan = realisasi_kegiatan;
@@ -43,11 +43,11 @@ public class Trx_Checkout {
 		this.id_checkout= id_checkout;
 	}
 
-	public int getId_checkin(){
-		return this.id_checkin;
+	public int getId_rencana_detail(){
+		return this.id_rencana_detail;
 	}
-	public void setId_checkin(int id_checkin){
-		this.id_checkin= id_checkin;
+	public void setId_rencana_detail(int id_rencana_detail){
+		this.id_rencana_detail= id_rencana_detail;
 	}
 
 	public String getTanggal_checkout(){

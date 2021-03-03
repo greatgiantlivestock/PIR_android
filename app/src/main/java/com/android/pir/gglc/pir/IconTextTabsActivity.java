@@ -89,7 +89,7 @@ public class IconTextTabsActivity extends AppCompatActivity implements Navigatio
                 .findFragmentById(R.id.fragment_drawer);
         mNavigationDrawerFragment.setup(R.id.fragment_drawer,
                 (DrawerLayout) findViewById(R.id.drawer), mToolbar);
-        mNavigationDrawerFragment.selectItem(1);
+        mNavigationDrawerFragment.selectItem(3);
 
         if(databaseHandler.getCountDetailrencana()==0){
            new DownloadDataRencanaDetail().execute();
@@ -165,7 +165,7 @@ public class IconTextTabsActivity extends AppCompatActivity implements Navigatio
             String id_karyawan = prefs.getString("id_awo","null");
 
             String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
-                    + AppVar.CONFIG_APP_URL_DOWNLOAD_RENCANA_DETAIL+ "?id_karyawan="
+                    + AppVar.CONFIG_APP_URL_DOWNLOAD_RENCANA_DETAIL_APROVED+ "?id_karyawan="
                     + id_karyawan;
             HttpResponse response = getDownloadData(download_data_url);
             int retCode = (response != null) ? response.getStatusLine()
@@ -428,10 +428,12 @@ public class IconTextTabsActivity extends AppCompatActivity implements Navigatio
                             : oResponsealue.getString("id_user_input_rencana");
                     String keterangan = oResponsealue.isNull("keterangan") ? null
                             : oResponsealue.getString("keterangan");
+                    String aproved = oResponsealue.isNull("aproved") ? null
+                            : oResponsealue.getString("aproved");
                     Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
                     Log.d(LOG_TAG, "nomor_rencana:" + nomor_rencana);
                     databaseHandler.addMasterRencana(new MasterRencana(Integer.parseInt(id_rencana_header),nomor_rencana,
-                            tanggal_penetapan,tanggal_rencana,Integer.parseInt(id_user_input_rencana),keterangan));
+                            tanggal_penetapan,tanggal_rencana,Integer.parseInt(id_user_input_rencana),keterangan,aproved));
                 }
             } catch (JSONException e) {
                 final String message = e.toString();
@@ -627,28 +629,38 @@ public class IconTextTabsActivity extends AppCompatActivity implements Navigatio
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         if (mNavigationDrawerFragment != null) {
-            if (mNavigationDrawerFragment.getCurrentSelectedPosition() != 1) {
-                if (position == 0) {
+            if (mNavigationDrawerFragment.getCurrentSelectedPosition() != 3) {
+                if (position ==0) {
+                    Intent intentActivity = new Intent(this,
+                            PlanVisitActivity.class);
+                    startActivity(intentActivity);
+                    finish();
+                }else if (position ==1) {
+                    Intent intentActivity = new Intent(this,
+                            PlanVisitActivity2.class);
+                    startActivity(intentActivity);
+                    finish();
+                }else if (position ==2) {
                     Intent intentActivity = new Intent(this,
                             DashboardActivity.class);
                     startActivity(intentActivity);
                     finish();
-                }else if (position == 2) {
+                }else if (position == 4) {
                     Intent intentActivity = new Intent(this,
                             CheckoutActivity.class);
                     startActivity(intentActivity);
                     finish();
-                }else if (position == 3) {
+                }else if (position == 5) {
                     Intent intentActivity = new Intent(this,
                             History_Canvassing.class);
                     startActivity(intentActivity);
                     finish();
-                }else if (position == 4) {
+                }else if (position == 6) {
                     Intent intentActivity = new Intent(this,
                             ChangePassword.class);
                     startActivity(intentActivity);
                     finish();
-                }else if (position == 5) {
+                }else if (position == 7) {
                     Intent intentActivity = new Intent(this,
                             Orderan.class);
                     startActivity(intentActivity);

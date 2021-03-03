@@ -10,51 +10,27 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
-	private static final int DATABASE_VERSION = 1;
-	private static final String DATABASE_NAME = "absen_mobile";
+	private static final int DATABASE_VERSION = 3;
+	private static final String DATABASE_NAME = "visit_pir";
 
 	//to define table name
 	private static final String TABLE_MST_USER= "mst_user";
-	private static final String TABLE_LAP_ABSEN= "mst_absen";
-	private static final String TABLE_TRACKING_LOGS = "tracking_logs";
 	private static final String TABLE_DETAIL_RENCANA = "trx_rencana_detail";
 	private static final String TABLE_MASTER_RENCANA = "trx_rencana_master";
-	private static final String TABLE_KEGIATAN = "mst_kegiatan";
 	private static final String TABLE_MST_CUSTOMER = "mst_customer";
 	private static final String TABLE_MST_USER1 = "mst_user1";
 	private static final String TABLE_TMP_CUSTOMER = "tmp_customer";
 	private static final String TABLE_TRX_CHECKIN = "trx_checkin";
+	private static final String TABLE_UPLOAD_DATA_SAPI = "upload_data_sapi";
 	private static final String TABLE_TRX_CHECKOUT = "trx_checkout";
-	private static final String TABLE_CHECKPOINT_ABSEN = "checkpoint_absen";
 	private static final String TABLE_HISTORY_CANVASSING = "history_canvassing";
-	private static final String TABLE_JENIS_KENDARAAN = "jenis_kendaraan";
-	private static final String TABLE_STOCK_CUSTOMER= "stock_customer";
+	private static final String TABLE_DATA_SAPI = "data_sapi";
 	private static final String TABLE_PRODUCT= "mst_product";
 
 	//define field on ms_user
 	private static final String KEY_ID = "id";
 	private static final String KEY_NAME = "name";
 	private static final String KEY_PH_NO = "phone_number";
-
-	//define field on mst_absen
-	private static final String KEY_ID_ABSEN = "id_absen";
-	private static final String KEY_NAMA_KARYAWAN = "nama_karyawan";
-	private static final String KEY_WAKTU = "waktu";
-	private static final String KEY_LOKASI = "lokasi";
-
-	//define Tracking logs field
-	private static final String KEY_TRACKING_LOGS_ID_LOCATOR = "id_locator";
-	private static final String KEY_TRACKING_LOGS_USERNAME = "username";
-	private static final String KEY_TRACKING_LOGS_NAMA_LENGKAP = "nama_lengkap";
-	private static final String KEY_TRACKING_LOGS_LEVEL = "level";
-	private static final String KEY_TRACKING_LOGS_LATS = "lats";
-	private static final String KEY_TRACKING_LOGS_LONGS = "longs";
-	private static final String KEY_TRACKING_LOGS_ADDRESS = "address";
-	private static final String KEY_TRACKING_LOGS_IMEI = "imei";
-	private static final String KEY_TRACKING_LOGS_MCC = "mcc";
-	private static final String KEY_TRACKING_LOGS_MNC = "mnc";
-	private static final String KEY_TRACKING_LOGS_DATE = "date";
-	private static final String KEY_TRACKING_LOGS_TIME = "time";
 
 	//define DetailRencana field
 	private static final String KEY_MASTER_RENCANA_ID = "id";
@@ -64,6 +40,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_MASTER_RENCANA_TANGGAL_RENCANA = "tanggal_rencana";
 	private static final String KEY_MASTER_RENCANA_ID_USER_INPUT_RENCANA = "id_user_input_rencana";
 	private static final String KEY_MASTER_RENCANA_KETERANGAN = "keterangan";
+	private static final String KEY_MASTER_RENCANA_APROVED = "aproved";
 
 	//define DetailRencana field
 	private static final String KEY_DETAIL_RENCANA_ID_RENCANA_DETAIL = "id_rencana_detail";
@@ -74,11 +51,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_DETAIL_RENCANA_STATUS_RENCANA = "status_rencana";
 	private static final String KEY_DETAIL_RENCANA_NOMOR_RENCANA_EDTAIL = "nomor_rencana_detail";
 
-	//define KEGIATAN field
-	private static final String KEY_KEGIATAN_ID_KEGIATAN ="id_kegiatan";
-	private static final String KEY_KEGIATAN_NAMA_KEGIATAN ="nama_kegiatan";
-	private static final String KEY_KEGIATAN_ID_DEPARTEMEN ="nama_departemen";
-	private static final String KEY_KEGIATAN_ID_WILAYAH ="id_wilayah";
+	//define DetailRencana field
+	private static final String KEY_DATA_SAPI_ID_DATA_SAPI = "id_data_sapi";
+	private static final String KEY_DATA_SAPI_INDNR = "indnr";
+	private static final String KEY_DATA_SAPI_LIFNR = "lifnr";
+	private static final String KEY_DATA_SAPI_BEASTID = "beastid";
+	private static final String KEY_DATA_SAPI_VISTGID = "vistgid";
 
 	//define mst_customer field
 	private static final String KEY_MST_CUSTOMER_ID_CUSTOMER ="id_customer";
@@ -122,16 +100,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_TRX_CHECKIN_LONGS ="longs";
 	private static final String KEY_TRX_CHECKIN_FOTO ="foto";
 	private static final String KEY_TRX_CHECKIN_STATUS ="status";
-
-	//define Checkpoint absen
-	private static final String KEY_CHECKPOINT_ABSEN_ID_CHECKPOINT ="id_checkpoint";
-	private static final String KEY_CHECKPOINT_ABSEN_NAMA_CHECKPOINT ="nama_checkpoint";
-	private static final String KEY_CHECKPOINT_ABSEN_LATS ="lats";
-	private static final String KEY_CHECKPOINT_ABSEN_LONGS ="longs";
+	private static final String KEY_TRX_CHECKIN_PROSPECT ="prospect";
 
 	//define trx_checkout field
 	private static final String KEY_TRX_CHECKOUT_ID_CHECKOUT ="id_chekout";
-	private static final String KEY_TRX_CHECKOUT_ID_CHECKIN ="id_checkin";
+	private static final String KEY_TRX_CHECKOUT_ID_CHECKIN ="id_rencana_detail";
 	private static final String KEY_TRX_CHECKOUT_TANGGAL_CHECKOUT ="tanggal_checkout";
 	private static final String KEY_TRX_CHECKOUT_ID_USER ="id_user";
 	private static final String KEY_TRX_CHECKOUT_REALISASI_KEGIATAN ="realisasi_kegiatan";
@@ -147,17 +120,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_HISTORY_CANVASSING_WAKTU_CHECKOUT="waktu_checkout";
 
 	//define trx_checkout field
-	private static final String KEY_JENIS_KENDARAAN_ID_JENIS_KENDARAAN="id_jenis_kendaraan";
-	private static final String KEY_JENIS_KENDARAAN_NAMA_JENIS="nama_jenis";
+	private static final String KEY_UPLOAD_DATA_SAPI_ID_UPLOAD="id_upload";
+	private static final String KEY_UPLOAD_DATA_SAPI_ID_RENCANA_DETAIL="id_rencana_detail";
+	private static final String KEY_UPLOAD_DATA_SAPI_EARTAG="eartag";
+	private static final String KEY_UPLOAD_DATA_SAPI_FOTO="foto";
+	private static final String KEY_UPLOAD_DATA_SAPI_KETERANGAN="keterangan";
+	private static final String KEY_UPLOAD_DATA_SAPI_ASSESSMENT="assessment";
+	private static final String KEY_UPLOAD_DATA_SAPI_TANGGAL="tanggal";
 
-	//define stock_customer
-	private static final String KEY_STOCK_CUSTOMER_ID_STOCK="id_stock";
-	private static final String KEY_STOCK_CUSTOMER_ID_CUSTOMER="id_customer";
-	private static final String KEY_STOCK_CUSTOMER_ID_PRODUCT="id_product";
-	private static final String KEY_STOCK_CUSTOMER_NAMA_PRODUCT="nama_product";
-	private static final String KEY_STOCK_CUSTOMER_SATUAN="satuan";
-	private static final String KEY_STOCK_CUSTOMER_QTY="qty";
-	private static final String KEY_STOCK_CUSTOMER_TANGGAL_UPDATE="tanggal_update";
 
 	//define trx_checkout field
 	private static final String KEY_PRODUCT_ID_PRODUCT="id_product";
@@ -165,11 +135,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	//ArrayList table
 	private final ArrayList<User> user_list = new ArrayList<User>();
-	private final ArrayList<Absen> absen_list = new ArrayList<Absen>();
 	private final ArrayList<TrackingLogs> tracking_logs_list = new ArrayList<TrackingLogs>();
 	private final ArrayList<DetailRencana> detailRencanaArraylist = new ArrayList<DetailRencana>();
+	private final ArrayList<DataSapi> dataSapiArraylist = new ArrayList<DataSapi>();
+	private final ArrayList<DetailReqLoadNew> detailReqLoadNews = new ArrayList<DetailReqLoadNew>();
 	private final ArrayList<MasterRencana> masterRencanaArraylist = new ArrayList<MasterRencana>();
-	private final ArrayList<Kegiatan> kegiatanArrayList = new ArrayList<Kegiatan>();
+	private final ArrayList<MasterRencanaParam> masterRencanaParamArraylist = new ArrayList<MasterRencanaParam>();
 	private final ArrayList<Mst_Customer> mst_customerArrayList = new ArrayList<Mst_Customer>();
 	private final ArrayList<MstUser> mst_userArrayList =new ArrayList<MstUser>();
 	private final ArrayList<TmpCustomer> tmpCustomerArrayList =new ArrayList<TmpCustomer>();
@@ -177,9 +148,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private final ArrayList<Trx_Checkout> trx_checkoutArrayList =new ArrayList<Trx_Checkout>();
 	private final ArrayList<History_canvassing> historyCamvassingArrayList =new ArrayList<History_canvassing>();
 	private final ArrayList<Rencana> rencanaArrayList =new ArrayList<Rencana>();
-	private final ArrayList<Jenis_kendaraan> jenisKendaraanArrayList =new ArrayList<Jenis_kendaraan>();
-	private final ArrayList<Stock_customer> stockCustomerArrayList =new ArrayList<Stock_customer>();
 	private final ArrayList<Product> productArrayList =new ArrayList<Product>();
+	private final ArrayList<UploadDataSapi> uploadDataSapiArrayList=new ArrayList<UploadDataSapi>();
 
 	public DatabaseHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -191,22 +161,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ KEY_PH_NO + " TEXT" + ")";
 		db.execSQL(CREATE_CONTACTS_TABLE);
 
-		String CREATE_LAB_ABSEN_TABLE = "CREATE TABLE " + TABLE_LAP_ABSEN + "("
-				+ KEY_ID_ABSEN + " INTEGER PRIMARY KEY," + KEY_NAMA_KARYAWAN + " TEXT,"
-				+ KEY_WAKTU + " TEXT,"+ KEY_LOKASI + " TEXT" + ")";
-		db.execSQL(CREATE_LAB_ABSEN_TABLE);
-
-		String CREATE_TABLE_TRACKING_LOGS = "CREATE TABLE " + TABLE_TRACKING_LOGS + "("
-				+ KEY_TRACKING_LOGS_ID_LOCATOR + " INTEGER PRIMARY KEY,"
-				+ KEY_TRACKING_LOGS_USERNAME + " TEXT," + KEY_TRACKING_LOGS_NAMA_LENGKAP
-				+ " TEXT," + KEY_TRACKING_LOGS_LEVEL + " INTEGER,"
-				+ KEY_TRACKING_LOGS_LATS + " TEXT," + KEY_TRACKING_LOGS_LONGS + " TEXT,"
-				+ KEY_TRACKING_LOGS_ADDRESS + " TEXT," + KEY_TRACKING_LOGS_IMEI
-				+ " TEXT," + KEY_TRACKING_LOGS_MCC + " TEXT," + KEY_TRACKING_LOGS_MNC
-				+ " TEXT," + KEY_TRACKING_LOGS_DATE + " TEXT," + KEY_TRACKING_LOGS_TIME
-				+ " TEXT" + ")";
-		db.execSQL(CREATE_TABLE_TRACKING_LOGS);
-
 		String CREATE_TABLE_DETAIL_RENCANA = "CREATE TABLE " + TABLE_DETAIL_RENCANA + "("
 				+ KEY_DETAIL_RENCANA_ID_RENCANA_DETAIL + " INTEGER PRIMARY KEY," + KEY_DETAIL_RENCANA_ID_RENCANA_HEADER + " TEXT,"
 				+ KEY_DETAIL_RENCANA_ID_KEGIATAN + " TEXT," + KEY_DETAIL_RENCANA_ID_CUSTOMER + " TEXT,"
@@ -215,18 +169,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ ")";
 		db.execSQL(CREATE_TABLE_DETAIL_RENCANA);
 
+		String CREATE_TABLE_DATA_SAPI = "CREATE TABLE " + TABLE_DATA_SAPI + "("
+				+ KEY_DATA_SAPI_ID_DATA_SAPI + " INTEGER PRIMARY KEY," + KEY_DATA_SAPI_INDNR + " TEXT,"
+				+ KEY_DATA_SAPI_LIFNR + " TEXT," + KEY_DATA_SAPI_BEASTID + " TEXT,"
+				+ KEY_DATA_SAPI_VISTGID + " TEXT"+ ")";
+		db.execSQL(CREATE_TABLE_DATA_SAPI);
+
 		String CREATE_TABLE_MASTER_RENCANA = "CREATE TABLE " + TABLE_MASTER_RENCANA + "("
 				+ KEY_MASTER_RENCANA_ID + " INTEGER PRIMARY KEY," + KEY_MASTER_RENCANA_ID_RENCANA_HEADER + " TEXT,"
 				+ KEY_MASTER_RENCANA_NOMOR_RENCANA + " TEXT," + KEY_MASTER_RENCANA_TANGGAL_PENETAPAN + " TEXT,"
 				+ KEY_MASTER_RENCANA_TANGGAL_RENCANA + " TEXT," + KEY_MASTER_RENCANA_ID_USER_INPUT_RENCANA + " TEXT,"
-				+ KEY_MASTER_RENCANA_KETERANGAN + " TEXT"
+				+ KEY_MASTER_RENCANA_KETERANGAN + " TEXT," + KEY_MASTER_RENCANA_APROVED + " TEXT"
 				+ ")";
 		db.execSQL(CREATE_TABLE_MASTER_RENCANA);
-
-		String CREATE_TABLE_KEGIATAN = "CREATE TABLE " + TABLE_KEGIATAN + "("
-				+ KEY_KEGIATAN_ID_KEGIATAN + " INTEGER PRIMARY KEY," + KEY_KEGIATAN_NAMA_KEGIATAN + " TEXT,"
-				+ KEY_KEGIATAN_ID_DEPARTEMEN + " TEXT," + KEY_KEGIATAN_ID_WILAYAH + " TEXT" + ")";
-		db.execSQL(CREATE_TABLE_KEGIATAN);
 
 		String CREATE_TABLE_MST_CUSTOMER = "CREATE TABLE " + TABLE_MST_CUSTOMER + "("
 				+ KEY_MST_CUSTOMER_ID_CUSTOMER + " INTEGER PRIMARY KEY," + KEY_MST_CUSTOMER_KODE_CUSTOMER + " TEXT,"
@@ -258,9 +213,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ KEY_TRX_CHECKIN_ID_RENCANA_DETAIL + " TEXT,"
 				+ KEY_TRX_CHECKIN_ID_RENCANA_HEADER + " TEXT,"
 				+ KEY_TRX_CHECKIN_KODE_CUSTOMER + " TEXT," + KEY_TRX_CHECKIN_LATS + " TEXT,"
-				+ KEY_TRX_CHECKIN_LONGS + " TEXT," + KEY_TRX_CHECKIN_FOTO + " TEXT,"+ KEY_TRX_CHECKIN_STATUS + " TEXT"
+				+ KEY_TRX_CHECKIN_LONGS + " TEXT," + KEY_TRX_CHECKIN_FOTO + " TEXT,"+ KEY_TRX_CHECKIN_STATUS + " TEXT,"+ KEY_TRX_CHECKIN_PROSPECT + " TEXT"
 				+ ")";
 		db.execSQL(CREATE_TABLE_TRX_CHECKIN);
+		String CREATE_TABLE_UPLOAD_DATA_SAPI = "CREATE TABLE " + TABLE_UPLOAD_DATA_SAPI + "("
+				+ KEY_UPLOAD_DATA_SAPI_ID_UPLOAD + " INTEGER PRIMARY KEY," + KEY_UPLOAD_DATA_SAPI_ID_RENCANA_DETAIL + " TEXT,"
+				+ KEY_UPLOAD_DATA_SAPI_EARTAG + " TEXT,"+ KEY_UPLOAD_DATA_SAPI_FOTO + " TEXT,"
+				+ KEY_UPLOAD_DATA_SAPI_KETERANGAN + " TEXT,"
+				+ KEY_UPLOAD_DATA_SAPI_ASSESSMENT + " TEXT,"
+				+ KEY_UPLOAD_DATA_SAPI_TANGGAL + " TEXT"
+				+ ")";
+		db.execSQL(CREATE_TABLE_UPLOAD_DATA_SAPI);
 
 		String CREATE_TABLE_TRX_CHECKOUT = "CREATE TABLE " + TABLE_TRX_CHECKOUT + "("
 				+ KEY_TRX_CHECKOUT_ID_CHECKOUT + " INTEGER PRIMARY KEY," + KEY_TRX_CHECKOUT_ID_CHECKIN + " TEXT,"
@@ -270,32 +233,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ ")";
 		db.execSQL(CREATE_TABLE_TRX_CHECKOUT);
 
-		String CREATE_TABLE_CHECKPOINT_ABSEN = "CREATE TABLE " + TABLE_CHECKPOINT_ABSEN + "("
-				+ KEY_CHECKPOINT_ABSEN_ID_CHECKPOINT + " INTEGER PRIMARY KEY,"
-				+ KEY_CHECKPOINT_ABSEN_NAMA_CHECKPOINT + " TEXT,"
-				+ KEY_CHECKPOINT_ABSEN_LATS + " TEXT," + KEY_CHECKPOINT_ABSEN_LONGS + " TEXT"
-				+ ")";
-		db.execSQL(CREATE_TABLE_CHECKPOINT_ABSEN);
-
 		String CREATE_TABLE_HISTORY_CANVASSING = "CREATE TABLE " + TABLE_HISTORY_CANVASSING + "("
 				+ KEY_HISTORY_CANVASSING_ID_CANVASSING + " INTEGER PRIMARY KEY," + KEY_HISTORY_CANVASSING_NAMA_CUSTOMER + " TEXT,"
 				+ KEY_HISTORY_CANVASSING_NOMOR_RENCANA + " TEXT," + KEY_HISTORY_CANVASSING_ALAMAT + " TEXT,"
 				+ KEY_HISTORY_CANVASSING_WAKTU_CHECKIN + " TEXT," + KEY_HISTORY_CANVASSING_WAKTU_CHECKOUT+ " TEXT"
 				+ ")";
 		db.execSQL(CREATE_TABLE_HISTORY_CANVASSING);
-
-		String CREATE_TABLE_JENIS_KENDARAAN = "CREATE TABLE " + TABLE_JENIS_KENDARAAN + "("
-				+ KEY_JENIS_KENDARAAN_ID_JENIS_KENDARAAN + " INTEGER PRIMARY KEY," + KEY_JENIS_KENDARAAN_NAMA_JENIS + " TEXT"
-				+ ")";
-		db.execSQL(CREATE_TABLE_JENIS_KENDARAAN);
-
-		String CREATE_TABLE_STOCK_CUSTOMER = "CREATE TABLE " + TABLE_STOCK_CUSTOMER + "("
-				+ KEY_STOCK_CUSTOMER_ID_STOCK + " INTEGER PRIMARY KEY," + KEY_STOCK_CUSTOMER_ID_CUSTOMER + " TEXT,"
-				+ KEY_STOCK_CUSTOMER_ID_PRODUCT + " TEXT," + KEY_STOCK_CUSTOMER_NAMA_PRODUCT + " TEXT,"
-				+ KEY_STOCK_CUSTOMER_SATUAN + " TEXT," + KEY_STOCK_CUSTOMER_QTY + " TEXT,"
-				+ KEY_STOCK_CUSTOMER_TANGGAL_UPDATE + " TEXT"
-				+ ")";
-		db.execSQL(CREATE_TABLE_STOCK_CUSTOMER);
 
 		String CREATE_TABLE_PRODUCT = "CREATE TABLE " + TABLE_PRODUCT + "("
 				+ KEY_PRODUCT_ID_PRODUCT + " INTEGER PRIMARY KEY," + KEY_PRODUCT_NAMA_PRODUCT + " TEXT"
@@ -307,19 +250,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_MST_USER);
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_LAP_ABSEN);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_DETAIL_RENCANA);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_DATA_SAPI);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_MASTER_RENCANA);
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_KEGIATAN);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_MST_CUSTOMER);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_MST_USER1);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TMP_CUSTOMER);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRX_CHECKIN);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_UPLOAD_DATA_SAPI);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRX_CHECKOUT);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_HISTORY_CANVASSING);
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_JENIS_KENDARAAN);
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_STOCK_CUSTOMER);
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCT);
 		onCreate(db);
 	}
 
@@ -335,44 +275,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.insert(TABLE_MST_USER, null, values);
 		db.close(); // Closing database connection
 	}
-
-	//adding trakcing service
-	public void add_TrackingLogs(TrackingLogs tracking) {
-		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		values.put(KEY_TRACKING_LOGS_ID_LOCATOR, tracking.getId_locator());
-		values.put(KEY_TRACKING_LOGS_USERNAME, tracking.getUsername());
-		values.put(KEY_TRACKING_LOGS_NAMA_LENGKAP, tracking.getNama_lengkap());
-		values.put(KEY_TRACKING_LOGS_LEVEL, tracking.getLevel());
-		values.put(KEY_TRACKING_LOGS_LATS, tracking.getLats());
-		values.put(KEY_TRACKING_LOGS_LONGS, tracking.getLongs());
-		values.put(KEY_TRACKING_LOGS_ADDRESS, tracking.getAddress());
-		values.put(KEY_TRACKING_LOGS_IMEI, tracking.getImei());
-		values.put(KEY_TRACKING_LOGS_MCC, tracking.getMcc());
-		values.put(KEY_TRACKING_LOGS_MNC, tracking.getMnc());
-		values.put(KEY_TRACKING_LOGS_DATE, tracking.getDate());
-		values.put(KEY_TRACKING_LOGS_TIME, tracking.getTime());
-		// Inserting Row
-		db.insert(TABLE_TRACKING_LOGS, null, values);
-
-		db.close(); // Closing database connection
-	}
-
-	// Adding LAB absen
-	public void addLabAbsen(Absen absen) {
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		ContentValues values = new ContentValues();
-		values.put(KEY_NAMA_KARYAWAN, absen.getNama_karyawan());
-		values.put(KEY_WAKTU, absen.getWaktu());
-		values.put(KEY_LOKASI, absen.getLokasi());
-
-		// Inserting Row
-		db.insert(TABLE_LAP_ABSEN, null, values);
-		db.close(); // Closing database connection
-	}
-
-
 	//adding detail rencana
 	public void addDetailRencana (DetailRencana detail_rencana){
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -390,6 +292,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.close();
 	}
 
+	//adding data sapi
+	public void addDataSapi (DataSapi dataSapi){
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(KEY_DATA_SAPI_ID_DATA_SAPI, dataSapi.getId_data_sapi());
+		values.put(KEY_DATA_SAPI_INDNR, dataSapi.getIndnr());
+		values.put(KEY_DATA_SAPI_LIFNR, dataSapi.getLifnr());
+		values.put(KEY_DATA_SAPI_BEASTID, dataSapi.getBeastid());
+		values.put(KEY_DATA_SAPI_VISTGID, dataSapi.getVistgid());
+
+		db.insert(TABLE_DATA_SAPI, null, values);
+		db.close();
+	}
+
 	//adding detail rencana
 	public void addMasterRencana (MasterRencana master_rencana){
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -401,21 +317,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_MASTER_RENCANA_TANGGAL_RENCANA, master_rencana.getTanggal_rencana());
 		values.put(KEY_MASTER_RENCANA_ID_USER_INPUT_RENCANA, master_rencana.getId_user_input_rencana());
 		values.put(KEY_MASTER_RENCANA_KETERANGAN, master_rencana.getKeterangan());
+		values.put(KEY_MASTER_RENCANA_APROVED, master_rencana.getAproved());
 
 		db.insert(TABLE_MASTER_RENCANA, null, values);
-		db.close();
-	}
-
-	public void addKegiatan (Kegiatan kegiatan){
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		ContentValues values = new ContentValues();
-		values.put(KEY_KEGIATAN_ID_KEGIATAN, kegiatan.getId_kegiatan());
-		values.put(KEY_KEGIATAN_NAMA_KEGIATAN, kegiatan.getNama_kegiatan());
-		values.put(KEY_KEGIATAN_ID_DEPARTEMEN, kegiatan.getId_departemen());
-		values.put(KEY_KEGIATAN_ID_WILAYAH, kegiatan.getId_wilayah());
-
-		db.insert(TABLE_KEGIATAN, null, values);
 		db.close();
 	}
 
@@ -483,6 +387,42 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_TRX_CHECKIN_LONGS, trx_checkin.getLongs());
 		values.put(KEY_TRX_CHECKIN_FOTO, trx_checkin.getFoto());
 		values.put(KEY_TRX_CHECKIN_STATUS, trx_checkin.getStatus());
+		values.put(KEY_TRX_CHECKIN_PROSPECT, trx_checkin.getProspect());
+
+		db.insert(TABLE_TRX_CHECKIN, null, values);
+		db.close();
+	}
+	public void addUploadDataSapi (UploadDataSapi upload_data_sapi){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_UPLOAD_DATA_SAPI_ID_RENCANA_DETAIL, upload_data_sapi.getId_rencana_detail());
+		values.put(KEY_UPLOAD_DATA_SAPI_EARTAG, upload_data_sapi.getEartag());
+		values.put(KEY_UPLOAD_DATA_SAPI_FOTO, upload_data_sapi.getFoto());
+		values.put(KEY_UPLOAD_DATA_SAPI_KETERANGAN, upload_data_sapi.getKeterangan());
+		values.put(KEY_UPLOAD_DATA_SAPI_ASSESSMENT, upload_data_sapi.getAssessment());
+		values.put(KEY_UPLOAD_DATA_SAPI_TANGGAL, upload_data_sapi.getTanggal());
+
+		db.insert(TABLE_UPLOAD_DATA_SAPI, null, values);
+		db.close();
+	}
+
+	public void addFullCheckin (Trx_Checkin trx_checkin){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_TRX_CHECKIN_ID_CHECKIN, trx_checkin.getId_checkin());
+		values.put(KEY_TRX_CHECKIN_TANGGAL_CHECKIN, trx_checkin.getTanggal_checkin());
+		values.put(KEY_TRX_CHECKIN_NOMOR_CHECKIN, trx_checkin.getNomor_checkin());
+		values.put(KEY_TRX_CHECKIN_ID_USER, trx_checkin.getId_user());
+		values.put(KEY_TRX_CHECKIN_ID_RENCANA_DETAIL, trx_checkin.getId_rencana_detail());
+		values.put(KEY_TRX_CHECKIN_ID_RENCANA_HEADER, trx_checkin.getId_rencana_header());
+		values.put(KEY_TRX_CHECKIN_KODE_CUSTOMER, trx_checkin.getKode_customer());
+		values.put(KEY_TRX_CHECKIN_LATS, trx_checkin.getLats());
+		values.put(KEY_TRX_CHECKIN_LONGS, trx_checkin.getLongs());
+		values.put(KEY_TRX_CHECKIN_FOTO, trx_checkin.getFoto());
+		values.put(KEY_TRX_CHECKIN_STATUS, trx_checkin.getStatus());
+		values.put(KEY_TRX_CHECKIN_PROSPECT, trx_checkin.getProspect());
 
 		db.insert(TABLE_TRX_CHECKIN, null, values);
 		db.close();
@@ -492,8 +432,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(KEY_TRX_CHECKOUT_ID_CHECKOUT, trx_checkout.getId_checkout());
-		values.put(KEY_TRX_CHECKOUT_ID_CHECKIN, trx_checkout.getId_checkin());
+		values.put(KEY_TRX_CHECKOUT_ID_CHECKIN, trx_checkout.getId_rencana_detail());
 		values.put(KEY_TRX_CHECKOUT_TANGGAL_CHECKOUT, trx_checkout.getTanggal_checkout());
 		values.put(KEY_TRX_CHECKOUT_ID_USER, trx_checkout.getId_user());
 		values.put(KEY_TRX_CHECKOUT_REALISASI_KEGIATAN, trx_checkout.getRealisasi_kegiatan());
@@ -518,36 +457,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.insert(TABLE_HISTORY_CANVASSING, null, values);
 		db.close();
 	}
-
-	//adding jenis kegiatan
-	public void addJenisKendaraan (Jenis_kendaraan jenis_kendaraan){
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		ContentValues values = new ContentValues();
-		values.put(KEY_JENIS_KENDARAAN_ID_JENIS_KENDARAAN, jenis_kendaraan.getId_jenis_kendaraan());
-		values.put(KEY_JENIS_KENDARAAN_NAMA_JENIS, jenis_kendaraan.getNama_jenis());
-
-		db.insert(TABLE_JENIS_KENDARAAN, null, values);
-		db.close();
-	}
-
-	//adding stock customer
-	public void addStockCustomer (Stock_customer stock_customer){
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		ContentValues values = new ContentValues();
-		values.put(KEY_STOCK_CUSTOMER_ID_STOCK, stock_customer.getId_stock());
-		values.put(KEY_STOCK_CUSTOMER_ID_CUSTOMER, stock_customer.getId_customer());
-		values.put(KEY_STOCK_CUSTOMER_ID_PRODUCT, stock_customer.getId_product());
-		values.put(KEY_STOCK_CUSTOMER_NAMA_PRODUCT, stock_customer.getNama_product());
-		values.put(KEY_STOCK_CUSTOMER_SATUAN, stock_customer.getSatuan());
-		values.put(KEY_STOCK_CUSTOMER_QTY, stock_customer.getQty());
-		values.put(KEY_STOCK_CUSTOMER_TANGGAL_UPDATE, stock_customer.getTanggal_update());
-
-		db.insert(TABLE_STOCK_CUSTOMER, null, values);
-		db.close();
-	}
-
 	//adding product
 	public void addProduct (Product product){
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -638,6 +547,44 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return detailRencanaArraylist;
 	}
 
+	//getting All user
+	public ArrayList<DetailReqLoadNew> getDetailRencanaParam(String nomor_rencana) {
+		try {
+			detailReqLoadNews.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT "+KEY_MST_CUSTOMER_NAMA_CUSTOMER+","+TABLE_DETAIL_RENCANA+"."+KEY_MST_CUSTOMER_ID_CUSTOMER+","+KEY_MST_CUSTOMER_ALAMAT+" FROM "+
+					TABLE_DETAIL_RENCANA+" JOIN "+ TABLE_MST_CUSTOMER+" ON "+TABLE_DETAIL_RENCANA+"."+KEY_DETAIL_RENCANA_ID_CUSTOMER+"="+
+					TABLE_MST_CUSTOMER+"."+KEY_MST_CUSTOMER_ID_CUSTOMER+" JOIN "+TABLE_MASTER_RENCANA+" ON "+TABLE_MASTER_RENCANA+"."+
+					KEY_MASTER_RENCANA_ID_RENCANA_HEADER+"="+TABLE_DETAIL_RENCANA+"."+KEY_DETAIL_RENCANA_ID_RENCANA_HEADER+" WHERE "+
+					KEY_MASTER_RENCANA_NOMOR_RENCANA+"='"+nomor_rencana+"'";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					DetailReqLoadNew detailRencana = new DetailReqLoadNew();
+					detailRencana.setNama_product(cursor.getString(0));
+					detailRencana.setId_product(cursor.getInt(1));
+					detailRencana.setAlamat(cursor.getString(2));
+
+					// Adding staff to list
+					detailReqLoadNews.add(detailRencana);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return detailReqLoadNews;
+		} catch (Exception e) {
+			Log.e("user_list", "" + e);
+		}
+		return detailReqLoadNews;
+	}
+
 	//getting All Checkin
 	public ArrayList<Trx_Checkin> getAllCheckinParam(String nomor) {
 		try {
@@ -663,6 +610,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					trx_checkin.setLongs(cursor.getString(7));
 					trx_checkin.setFoto(cursor.getString(8));
 					trx_checkin.setStatus(cursor.getString(9));
+					trx_checkin.setProspect(cursor.getString(10));
 
 					// Adding staff to list
 					trx_checkinArrayList.add(trx_checkin);
@@ -679,12 +627,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return trx_checkinArrayList;
 	}
 
-	public ArrayList<TrackingLogs> getAllTrackingLogs() {
+	//getting All Checkin
+	public ArrayList<UploadDataSapi> getAllUploadDataSapi() {
 		try {
-			tracking_logs_list.clear();
+			uploadDataSapiArrayList.clear();
 
 			// Select All Query
-			String selectQuery = "SELECT  * FROM " + TABLE_TRACKING_LOGS;
+			String selectQuery = "SELECT  * FROM " + TABLE_UPLOAD_DATA_SAPI ;
 
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
@@ -692,42 +641,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			// looping through all rows and adding to list
 			if (cursor.moveToFirst()) {
 				do {
-					TrackingLogs tracking = new TrackingLogs();
-					tracking.setId_locator(cursor.getInt(0));
-					tracking.setUsername(cursor.getString(1));
-					tracking.setNama_lengkap(cursor.getString(2));
-					tracking.setLevel(cursor.getInt(3));
-					tracking.setLats(cursor.getString(4));
-					tracking.setLongs(cursor.getString(5));
-					tracking.setAddress(cursor.getString(6));
-					tracking.setImei(cursor.getString(7));
-					tracking.setMcc(cursor.getString(8));
-					tracking.setMnc(cursor.getString(9));
-					tracking.setDate(cursor.getString(10));
-					tracking.setTime(cursor.getString(11));
-					// Adding tracking_logs_list to list
-					tracking_logs_list.add(tracking);
+					UploadDataSapi uploadDataSapi = new UploadDataSapi();
+					uploadDataSapi.setId_upload(cursor.getInt(0));
+					uploadDataSapi.setId_rencana_detail(cursor.getString(1));
+					uploadDataSapi.setEartag(cursor.getString(2));
+					uploadDataSapi.setFoto(cursor.getString(3));
+					uploadDataSapi.setKeterangan(cursor.getString(4));
+					uploadDataSapi.setAssessment(cursor.getString(5));
+					uploadDataSapi.setTanggal(cursor.getString(6));
+
+					// Adding staff to list
+					uploadDataSapiArrayList.add(uploadDataSapi);
 				} while (cursor.moveToNext());
 			}
 
-			// return tracking_logs_list
+			// return staff_list
 			cursor.close();
 			db.close();
-			return tracking_logs_list;
+			return uploadDataSapiArrayList;
 		} catch (Exception e) {
-			Log.e("tracking_logs_list", "" + e);
+			Log.e("Number_checkin_list", "" + e);
 		}
-
-		return tracking_logs_list;
+		return uploadDataSapiArrayList;
 	}
 
-	//getting All user
-	public ArrayList<Absen> getAllAbsen() {
+	//getting All Checkin
+	public ArrayList<Trx_Checkin> getAllCheckinIDParam(int idrencana) {
 		try {
-			absen_list.clear();
+			trx_checkinArrayList.clear();
 
 			// Select All Query
-			String selectQuery = "SELECT  * FROM " + TABLE_LAP_ABSEN;
+			String selectQuery = "SELECT * FROM " + TABLE_TRX_CHECKIN +" WHERE id_rencana_detail ='"+idrencana+"'";
 
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
@@ -735,25 +679,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			// looping through all rows and adding to list
 			if (cursor.moveToFirst()) {
 				do {
-					Absen absen = new Absen();
-					absen.setId_absen(cursor.getInt(0));
-					absen.setNama_karyawan(cursor.getString(1));
-					absen.setWaktu(cursor.getString(2));
-					absen.setLokasi(cursor.getString(3));
+					Trx_Checkin trx_checkin = new Trx_Checkin();
+					trx_checkin.setId_checkin(cursor.getInt(0));
+					trx_checkin.setTanggal_checkin(cursor.getString(1));
+					trx_checkin.setNomor_checkin(cursor.getString(2));
+					trx_checkin.setId_user(cursor.getInt(3));
+					trx_checkin.setId_rencana_detail(cursor.getInt(4));
+					trx_checkin.setKode_customer(cursor.getString(5));
+					trx_checkin.setLats(cursor.getString(6));
+					trx_checkin.setLongs(cursor.getString(7));
+					trx_checkin.setFoto(cursor.getString(8));
+					trx_checkin.setStatus(cursor.getString(9));
+					trx_checkin.setProspect(cursor.getString(10));
 
-					// Adding absen to list
-					absen_list.add(absen);
+					// Adding staff to list
+					trx_checkinArrayList.add(trx_checkin);
 				} while (cursor.moveToNext());
 			}
 
-			// return absen_list
+			// return staff_list
 			cursor.close();
 			db.close();
-			return absen_list;
+			return trx_checkinArrayList;
 		} catch (Exception e) {
-			Log.e("absen_list", "" + e);
+			Log.e("Number_checkin_list", "" + e);
 		}
-		return absen_list;
+		return trx_checkinArrayList;
 	}
 
 	//getting All user
@@ -801,7 +752,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			// Select All Query
 			String selectQuery = "SELECT  id_rencana_detail,nama_customer, alamat, status_rencana, tanggal_rencana FROM trx_rencana_detail " +
 					"JOIN mst_customer ON trx_rencana_detail.id_customer = mst_customer.id_customer JOIN trx_rencana_master ON " +
-					"trx_rencana_detail.id_rencana_header = trx_rencana_master.id_rencana_header WHERE status_rencana !='2'";
+					"trx_rencana_detail.id_rencana_header = trx_rencana_master.id_rencana_header WHERE status_rencana !='2' AND aproved='1'";
 
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
@@ -835,14 +786,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		try {
 			detailRencanaArraylist.clear();
 
-//			final String date = "yyyy-MM-dd";
-//			Calendar calendar = Calendar.getInstance();
-//			SimpleDateFormat dateFormat = new SimpleDateFormat(date);
-//			final String checkDate = dateFormat.format(calendar.getTime());
-
-			// Select All Query
-//			String selectQuery = "SELECT  trd.* FROM " +TABLE_MASTER_RENCANA +" trm JOIN "+ TABLE_DETAIL_RENCANA +" trd ON trm.id_rencana_header =" +
-//					" trd.id_rencana_header WHERE trm.tanggal_rencana = '"+checkDate+"'";
 			String selectQuery = "SELECT  trd.* FROM " +TABLE_MASTER_RENCANA +" trm JOIN "+ TABLE_DETAIL_RENCANA +" trd ON trm.id_rencana_header =" +
 					" trd.id_rencana_header";
 
@@ -890,18 +833,55 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return detailRencanaArraylist;
 	}
 
+	public ArrayList<DataSapi> getAllDataSapiParam(String lifnr) {
+		try {
+			dataSapiArraylist.clear();
+			String selectQuery = "SELECT * FROM " + TABLE_DATA_SAPI + " WHERE lifnr='"+lifnr+"' OR lifnr='0'";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					DataSapi dataSapi = new DataSapi();
+					dataSapi.setId_data_sapi(cursor.getInt(0));
+					dataSapi.setIndnr(cursor.getString(1));
+					dataSapi.setLifnr(cursor.getString(2));
+					dataSapi.setBeastid(cursor.getString(3));
+					dataSapi.setVistgid(cursor.getString(4));
+
+					// Adding staff to list
+					dataSapiArraylist.add(dataSapi);
+				} while (cursor.moveToNext());
+			}else{
+				do {
+					DataSapi dataSapi = new DataSapi();
+					dataSapi.setId_data_sapi(0);
+					dataSapi.setIndnr(null);
+					dataSapi.setLifnr(null);
+					dataSapi.setBeastid(null);
+					dataSapi.setVistgid(null);
+
+					// Adding staff to list
+					dataSapiArraylist.add(dataSapi);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return dataSapiArraylist;
+		} catch (Exception e) {
+			Log.e("Data_sapi_list", "" + e);
+		}
+		return dataSapiArraylist;
+	}
+
 	public ArrayList<DetailRencana> getAllDetailRencanaNEW(int id_rencana_detail) {
 		try {
 			detailRencanaArraylist.clear();
 
-//			final String date = "yyyy-MM-dd";
-//			Calendar calendar = Calendar.getInstance();
-//			SimpleDateFormat dateFormat = new SimpleDateFormat(date);
-//			final String checkDate = dateFormat.format(calendar.getTime());
-
-			// Select All Query
-//			String selectQuery = "SELECT  trd.* FROM " +TABLE_MASTER_RENCANA +" trm JOIN "+ TABLE_DETAIL_RENCANA +" trd ON trm.id_rencana_header =" +
-//					" trd.id_rencana_header WHERE trm.tanggal_rencana = '"+checkDate+"'";
 			String selectQuery = "SELECT  trd.* FROM " +TABLE_MASTER_RENCANA +" trm JOIN "+ TABLE_DETAIL_RENCANA +" trd ON trm.id_rencana_header =" +
 					" trd.id_rencana_header WHERE id_rencana_detail='"+id_rencana_detail+"'";
 
@@ -953,16 +933,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		try {
 			masterRencanaArraylist.clear();
 
-//			final String date = "yyyy-MM-dd";
-//			Calendar calendar = Calendar.getInstance();
-//			SimpleDateFormat dateFormat = new SimpleDateFormat(date);
-//			final String checkDate = dateFormat.format(calendar.getTime());
-
-			//String selectQuery = "SELECT * FROM "+TABLE_MASTER_RENCANA;
-
-			// Select All Query
-//			String selectQuery = "SELECT  trm.* FROM " +TABLE_MASTER_RENCANA +" trm JOIN "+ TABLE_DETAIL_RENCANA +" trd ON trm.id_rencana_header =" +
-//					" trd.id_rencana_header WHERE trm.tanggal_rencana = '"+checkDate+"' GROUP BY trm.id_rencana_header";
 			String selectQuery = "SELECT  trm.* FROM " +TABLE_MASTER_RENCANA +" trm JOIN "+ TABLE_DETAIL_RENCANA +" trd ON trm.id_rencana_header =" +
 					" trd.id_rencana_header GROUP BY trm.id_rencana_header";
 
@@ -1009,14 +979,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		}
 		return masterRencanaArraylist;
 	}
-
-	//getting All user
-	public ArrayList<Jenis_kendaraan> getAllJenisKendaraan() {
+	public ArrayList<MasterRencanaParam> getMasterRencanaParam(String nomor_rencana) {
 		try {
-			jenisKendaraanArrayList.clear();
-
-			// Select All Query
-			String selectQuery = "SELECT  * FROM " + TABLE_JENIS_KENDARAAN;
+			masterRencanaParamArraylist.clear();
+			String selectQuery = "SELECT  * FROM " +TABLE_MASTER_RENCANA +" WHERE nomor_rencana='"+nomor_rencana+"'";
 
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
@@ -1024,23 +990,95 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			// looping through all rows and adding to list
 			if (cursor.moveToFirst()) {
 				do {
-					Jenis_kendaraan jenis_kendaraan = new Jenis_kendaraan();
-					jenis_kendaraan.setId_jenis_kendaraan(cursor.getInt(0));
-					jenis_kendaraan.setNama_jenis(cursor.getString(1));
+					MasterRencanaParam masterRencana = new MasterRencanaParam();
+					masterRencana.setId(cursor.getInt(0));
+					masterRencana.setId_rencana_header(cursor.getInt(1));
+					masterRencana.setNomor_rencana(cursor.getString(2));
+					masterRencana.setTanggal_penetapan(cursor.getString(3));
+					masterRencana.setTanggal_rencana(cursor.getString(4));
+					masterRencana.setId_user_input_rencana(cursor.getInt(5));
+					masterRencana.setKeterangan(cursor.getString(6));
 
 					// Adding staff to list
-					jenisKendaraanArrayList.add(jenis_kendaraan);
+					masterRencanaParamArraylist.add(masterRencana);
+				} while (cursor.moveToNext());
+			}else{
+				do {
+					MasterRencanaParam masterRencana = new MasterRencanaParam();
+					masterRencana.setId(0);
+					masterRencana.setId_rencana_header(0);
+					masterRencana.setNomor_rencana(null);
+					masterRencana.setTanggal_penetapan(null);
+					masterRencana.setTanggal_rencana(null);
+					masterRencana.setId_user_input_rencana(0);
+					masterRencana.setKeterangan(null);
+
+					// Adding staff to list
+					masterRencanaParamArraylist.add(masterRencana);
 				} while (cursor.moveToNext());
 			}
 
 			// return staff_list
 			cursor.close();
 			db.close();
-			return jenisKendaraanArrayList;
+			return masterRencanaParamArraylist;
 		} catch (Exception e) {
-			Log.e("user_list", "" + e);
+			Log.e("Master_rencana_list", "" + e);
 		}
-		return jenisKendaraanArrayList;
+		return masterRencanaParamArraylist;
+	}
+
+	//get Max rencana master
+	public ArrayList<MasterRencana> getMaxMasterRencana() {
+		try {
+			masterRencanaArraylist.clear();
+			String selectQuery = "SELECT "+TABLE_MASTER_RENCANA+".* FROM (SELECT max("+KEY_DETAIL_RENCANA_ID_RENCANA_HEADER+
+					") as "+KEY_DETAIL_RENCANA_ID_RENCANA_HEADER+" FROM " +TABLE_MASTER_RENCANA+") as data1 JOIN "+
+					TABLE_MASTER_RENCANA+" ON "+TABLE_MASTER_RENCANA+"."+KEY_DETAIL_RENCANA_ID_RENCANA_HEADER+
+					"=data1."+KEY_DETAIL_RENCANA_ID_RENCANA_HEADER;
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					MasterRencana masterRencana = new MasterRencana();
+					masterRencana.setId(cursor.getInt(0));
+					masterRencana.setId_rencana_header(cursor.getInt(1));
+					masterRencana.setNomor_rencana(cursor.getString(2));
+					masterRencana.setTanggal_penetapan(cursor.getString(3));
+					masterRencana.setTanggal_rencana(cursor.getString(4));
+					masterRencana.setId_user_input_rencana(cursor.getInt(5));
+					masterRencana.setKeterangan(cursor.getString(6));
+
+					// Adding staff to list
+					masterRencanaArraylist.add(masterRencana);
+				} while (cursor.moveToNext());
+			}else{
+				do {
+					MasterRencana masterRencana = new MasterRencana();
+					masterRencana.setId(0);
+					masterRencana.setId_rencana_header(0);
+					masterRencana.setNomor_rencana(null);
+					masterRencana.setTanggal_penetapan(null);
+					masterRencana.setTanggal_rencana(null);
+					masterRencana.setId_user_input_rencana(0);
+					masterRencana.setKeterangan(null);
+
+					// Adding staff to list
+					masterRencanaArraylist.add(masterRencana);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return masterRencanaArraylist;
+		} catch (Exception e) {
+			Log.e("Master_rencana_list", "" + e);
+		}
+		return masterRencanaArraylist;
 	}
 
 	//getting All user
@@ -1116,46 +1154,39 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		return productArrayList;
 	}
-
-	//getting Stock customer
-	public ArrayList<Stock_customer> getAllStockCustomer(int id_rencana_detail) {
+	// Getting All customer search
+	public ArrayList<Mst_Customer> getAllCustomerBaseOnSearch(String search) {
 		try {
-			stockCustomerArrayList.clear();
-
+			mst_customerArrayList.clear();
 			// Select All Query
-			String selectQuery = "SELECT  "+TABLE_STOCK_CUSTOMER+".* FROM " + TABLE_STOCK_CUSTOMER + " JOIN "+TABLE_DETAIL_RENCANA+
-					" ON "+TABLE_STOCK_CUSTOMER+".id_customer="+TABLE_DETAIL_RENCANA+".id_customer WHERE id_rencana_detail='"+id_rencana_detail+"'";
-
+			String selectQuery = "SELECT  * FROM " + TABLE_MST_CUSTOMER + " WHERE "
+					+ KEY_MST_CUSTOMER_NAMA_CUSTOMER + " LIKE '%" + search + "%' OR " + KEY_MST_CUSTOMER_ALAMAT +" LIKE '%"+search+"%'";
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
 
 			// looping through all rows and adding to list
 			if (cursor.moveToFirst()) {
 				do {
-					Stock_customer stock_customer = new Stock_customer();
-					stock_customer.setId_stock(cursor.getInt(0));
-					stock_customer.setId_customer(cursor.getInt(1));
-					stock_customer.setId_product(cursor.getInt(2));
-					stock_customer.setNama_product(cursor.getString(3));
-					stock_customer.setSatuan(cursor.getString(4));
-					stock_customer.setQty(cursor.getInt(5));
-					stock_customer.setTanggal_update(cursor.getString(6));
+					Mst_Customer customer = new Mst_Customer();
+					customer.setId_customer(cursor.getInt(0));
+					customer.setNama_customer(cursor.getString(2));
+					customer.setAlamat(cursor.getString(3));
 
-					// Adding staff to list
-					stockCustomerArrayList.add(stock_customer);
+					// Adding product to list
+					mst_customerArrayList.add(customer);
 				} while (cursor.moveToNext());
 			}
 
-			// return staff_list
+			// return product_list
 			cursor.close();
 			db.close();
-			return stockCustomerArrayList;
+			return mst_customerArrayList;
 		} catch (Exception e) {
-			Log.e("stock_list", "" + e);
+			Log.e("customer_list", "" + e);
 		}
-		return stockCustomerArrayList;
-	}
 
+		return mst_customerArrayList;
+	}
 	//getting All product
 	public ArrayList<Product> getAllProduct() {
 		try {
@@ -1189,54 +1220,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return productArrayList;
 	}
 
-	//getting All product stock fisik
-	public ArrayList<Product> getAllProductStockFisik() {
-		try {
-			productArrayList.clear();
-
-			// Select All Query
-			String selectQuery = "SELECT  * FROM " + TABLE_PRODUCT + " JOIN "+TABLE_STOCK_CUSTOMER+" ON "+TABLE_PRODUCT+".id_product = " +
-					TABLE_STOCK_CUSTOMER+".id_product GROUP BY "+TABLE_PRODUCT+".id_product";
-
-			SQLiteDatabase db = this.getWritableDatabase();
-			Cursor cursor = db.rawQuery(selectQuery, null);
-
-			// looping through all rows and adding to list
-			if (cursor.moveToFirst()) {
-				do {
-					Product product = new Product();
-					product.setId_product(cursor.getInt(0));
-					product.setNama_product(cursor.getString(1));
-
-					// Adding staff to list
-					productArrayList.add(product);
-				} while (cursor.moveToNext());
-			}
-
-			// return staff_list
-			cursor.close();
-			db.close();
-			return productArrayList;
-		} catch (Exception e) {
-			Log.e("user_list", "" + e);
-		}
-		return productArrayList;
-	}
-
-	// Adding checkpoint absen
-	public void addCheckpoint_absen(Checkpoint_absen checkpoint_absen) {
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		ContentValues values = new ContentValues();
-		values.put(KEY_CHECKPOINT_ABSEN_NAMA_CHECKPOINT, checkpoint_absen.getNama_checkpoint());
-		values.put(KEY_CHECKPOINT_ABSEN_LATS, checkpoint_absen.getLats());
-		values.put(KEY_CHECKPOINT_ABSEN_LONGS, checkpoint_absen.getLongs());
-
-		// Inserting Row
-		db.insert(TABLE_CHECKPOINT_ABSEN, null, values);
-		db.close(); // Closing database connection
-	}
-
 	public ArrayList<Trx_Checkin> getAllCheckinNumber() {
 		try {
 			trx_checkinArrayList.clear();
@@ -1262,6 +1245,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					trx_checkin.setLongs(cursor.getString(7));
 					trx_checkin.setFoto(cursor.getString(8));
 					trx_checkin.setStatus(cursor.getString(9));
+					trx_checkin.setProspect(cursor.getString(10));
 
 					// Adding staff to list
 					trx_checkinArrayList.add(trx_checkin);
@@ -1315,7 +1299,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		Trx_Checkin checkin = new Trx_Checkin(cursor.getString(0),
 				cursor.getString(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4),
-				cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9));
+				cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9),cursor.getString(10));
 		// return customer
 		cursor.close();
 		db.close();
@@ -1353,15 +1337,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		try {
 			mst_customerArrayList.clear();
 
-//			final String date = "yyyy-MM-dd";
-//			Calendar calendar = Calendar.getInstance();
-//			SimpleDateFormat dateFormat = new SimpleDateFormat(date);
-//			final String checkDate = dateFormat.format(calendar.getTime());
-
-			//String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER;
-
-//			String selectQuery = "SELECT mc.* FROM "+TABLE_MST_CUSTOMER+" mc JOIN "+TABLE_DETAIL_RENCANA+" trd ON trd.id_customer = mc.id_customer" +
-//					" JOIN " +TABLE_MASTER_RENCANA+" trm ON trm.id_rencana_header = trd.id_rencana_header WHERE trm.tanggal_rencana ='"+checkDate+"'";
 			String selectQuery = "SELECT mc.* FROM "+TABLE_MST_CUSTOMER+" mc JOIN "+TABLE_DETAIL_RENCANA+" trd ON trd.id_customer = mc.id_customer" +
 					" JOIN " +TABLE_MASTER_RENCANA+" trm ON trm.id_rencana_header = trd.id_rencana_header";
 
@@ -1410,7 +1385,145 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		}
 		return mst_customerArrayList;
 	}
+	public ArrayList<Mst_Customer> getAllCustomerOnly(String nama) {
+		if(nama.equals("SUYANTO")||nama.equals("IT Dev")){
+			try {
+				mst_customerArrayList.clear();
+				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER ;
 
+				SQLiteDatabase db = this.getWritableDatabase();
+				Cursor cursor = db.rawQuery(selectQuery, null);
+
+				// looping through all rows and adding to list
+				if (cursor.moveToFirst()) {
+					do {
+						Mst_Customer customer = new Mst_Customer();
+						customer.setId_customer(cursor.getInt(0));
+						customer.setKode_customer(cursor.getString(1));
+						customer.setNama_customer(cursor.getString(2));
+						customer.setAlamat(cursor.getString(3));
+						customer.setNo_hp(cursor.getString(4));
+						customer.setLats(cursor.getString(5));
+						customer.setLongs(cursor.getString(6));
+						customer.setId_wilayah(cursor.getInt(7));
+
+						// Adding staff to list
+						mst_customerArrayList.add(customer);
+					} while (cursor.moveToNext());
+				}else{
+					do {
+						Mst_Customer customer = new Mst_Customer();
+						customer.setId_customer(0);
+						customer.setKode_customer(null);
+						customer.setNama_customer(null);
+						customer.setAlamat(null);
+						customer.setNo_hp(null);
+						customer.setLats(null);
+						customer.setLongs(null);
+						customer.setId_wilayah(0);
+
+						// Adding staff to list
+						mst_customerArrayList.add(customer);
+					} while (cursor.moveToNext());
+				}
+
+				// return staff_list
+				cursor.close();
+				db.close();
+				return mst_customerArrayList;
+			} catch (Exception e) {
+				Log.e("mst_customer_list", "" + e);
+			}
+			return mst_customerArrayList;
+		}else{
+			try {
+				mst_customerArrayList.clear();
+				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER+ " WHERE "+KEY_MST_CUSTOMER_NO_HP+" LIKE '%"+nama+"%'" ;
+
+				SQLiteDatabase db = this.getWritableDatabase();
+				Cursor cursor = db.rawQuery(selectQuery, null);
+
+				// looping through all rows and adding to list
+				if (cursor.moveToFirst()) {
+					do {
+						Mst_Customer customer = new Mst_Customer();
+						customer.setId_customer(cursor.getInt(0));
+						customer.setKode_customer(cursor.getString(1));
+						customer.setNama_customer(cursor.getString(2));
+						customer.setAlamat(cursor.getString(3));
+						customer.setNo_hp(cursor.getString(4));
+						customer.setLats(cursor.getString(5));
+						customer.setLongs(cursor.getString(6));
+						customer.setId_wilayah(cursor.getInt(7));
+
+						// Adding staff to list
+						mst_customerArrayList.add(customer);
+					} while (cursor.moveToNext());
+				}else{
+					do {
+						Mst_Customer customer = new Mst_Customer();
+						customer.setId_customer(0);
+						customer.setKode_customer(null);
+						customer.setNama_customer(null);
+						customer.setAlamat(null);
+						customer.setNo_hp(null);
+						customer.setLats(null);
+						customer.setLongs(null);
+						customer.setId_wilayah(0);
+
+						// Adding staff to list
+						mst_customerArrayList.add(customer);
+					} while (cursor.moveToNext());
+				}
+
+				// return staff_list
+				cursor.close();
+				db.close();
+				return mst_customerArrayList;
+			} catch (Exception e) {
+				Log.e("mst_customer_list", "" + e);
+			}
+			return mst_customerArrayList;
+		}
+	}
+
+	public ArrayList<Mst_Customer> getAllCustomerParamRencana(int id_rencana_detail) {
+		try {
+			mst_customerArrayList.clear();
+
+			String selectQuery = "SELECT mc.* FROM "+TABLE_MST_CUSTOMER+" mc JOIN "+TABLE_DETAIL_RENCANA+" tc ON mc.id_customer = tc.id_customer" +
+					" WHERE tc.id_rencana_detail ='"+id_rencana_detail+"'";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Mst_Customer customer = new Mst_Customer();
+					customer.setId_customer(cursor.getInt(0));
+					customer.setKode_customer(cursor.getString(1));
+					customer.setNama_customer(cursor.getString(2));
+					customer.setAlamat(cursor.getString(3));
+					customer.setNo_hp(cursor.getString(4));
+					customer.setLats(cursor.getString(5));
+					customer.setLongs(cursor.getString(6));
+					customer.setId_wilayah(cursor.getInt(7));
+
+					// Adding staff to list
+					mst_customerArrayList.add(customer);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return mst_customerArrayList;
+		} catch (Exception e) {
+			Log.e("mst_customer_list", "" + e);
+		}
+		return mst_customerArrayList;
+	}
 	public ArrayList<Mst_Customer> getAllCustomerParamCheckin(String no_checkin) {
 		try {
 			mst_customerArrayList.clear();
@@ -1609,22 +1722,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				new String[] { String.valueOf(user.getID()) });
 	}
 
-
-
-	// Updating single ckin
-	/*
-	public int updateStatusRencana(DetailRencana detailRencana) {
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		ContentValues values = new ContentValues();
-		values.put(KEY_DETAIL_RENCANA_STATUS_RENCANA, detailRencana.getStatus_rencana());
-
-		// updating row
-		return db.update(TABLE_MST_USER, values, KEY_ID + " = ?",
-				new String[] { String.valueOf(detailRencana.getId_rencana_detail()) });
-	}
-	*/
-
 	// Deleting single contact
 	public void deleteContact() {
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -1634,11 +1731,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public void deleteMst_user() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_MST_USER1);
-	}
-
-	public void deleteTableTrackingLogs() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		db.execSQL("DELETE FROM " + TABLE_TRACKING_LOGS);
 	}
 
 	public int getCountUser() {
@@ -1661,13 +1753,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}
 
 	public int getTanggal_rencana_available() {
-//		final String date = "yyyy-MM-dd";
-//		Calendar calendar = Calendar.getInstance();
-//		SimpleDateFormat dateFormat = new SimpleDateFormat(date);
-//		final String checkDate = dateFormat.format(calendar.getTime());
 		SQLiteDatabase db = this.getReadableDatabase();
-//		Cursor mCount = db.rawQuery("select count(*) from " + TABLE_MASTER_RENCANA + " WHERE " + KEY_MASTER_RENCANA_TANGGAL_RENCANA +
-//						" = '"+checkDate+"'", null);
 		Cursor mCount = db.rawQuery("select count(*) from " + TABLE_MASTER_RENCANA, null);
 		mCount.moveToFirst();
 		int count = mCount.getInt(0);
@@ -1676,27 +1762,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}
 
 	public int getCheckinAlready(String kode, int id) {
-//		final String date = "yyyy-MM-dd";
-//		Calendar calendar = Calendar.getInstance();
-//		SimpleDateFormat dateFormat = new SimpleDateFormat(date);
-//		final String checkDate = dateFormat.format(calendar.getTime());
-
 		SQLiteDatabase db = this.getReadableDatabase();
-//		Cursor mCount = db.rawQuery("SELECT count(*) from " + TABLE_TRX_CHECKIN +" where kode_customer='" +kode+"' " +
-//						" AND id_rencana_detail = '"+id+"' AND tanggal_checkin = '"+checkDate+"'", null);
 		Cursor mCount = db.rawQuery("SELECT count(*) from " + TABLE_TRX_CHECKIN +" where kode_customer='" +kode+"' " +
 						" AND id_rencana_detail = '"+id+"'", null);
-		mCount.moveToFirst();
-		int count = mCount.getInt(0);
-		mCount.close();
-		return count;
-	}
-
-
-	public int getCountTrackingLogs() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor mCount = db
-				.rawQuery("select count(*) from " + TABLE_TRACKING_LOGS, null);
 		mCount.moveToFirst();
 		int count = mCount.getInt(0);
 		mCount.close();
@@ -1712,24 +1780,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		mCount.close();
 		return count;
 	}
-
-	public int getCountStockCustomer() {
+	public int getCountMasterRencana() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db
-				.rawQuery("select count(*) from " + TABLE_STOCK_CUSTOMER, null);
-		mCount.moveToFirst();
-		int count = mCount.getInt(0);
-		mCount.close();
-		return count;
-	}
-
-	public int getCountStockCustomerParam(int id_rencana_detail) {
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor mCount = db
-				.rawQuery("SELECT COUNT(*) FROM "+ TABLE_STOCK_CUSTOMER + " JOIN "+TABLE_DETAIL_RENCANA+
-						" ON "+TABLE_STOCK_CUSTOMER+".id_customer="+TABLE_DETAIL_RENCANA+".id_customer WHERE id_rencana_detail='"
-						+id_rencana_detail+"'", null);
-
+				.rawQuery("select count(*) from " + TABLE_MASTER_RENCANA +" JOIN "+ TABLE_DETAIL_RENCANA+" ON "+
+						TABLE_MASTER_RENCANA+"."+KEY_MASTER_RENCANA_ID_RENCANA_HEADER +"="+ TABLE_DETAIL_RENCANA+
+						"."+KEY_DETAIL_RENCANA_ID_RENCANA_HEADER+" WHERE status_rencana !='2'", null);
 		mCount.moveToFirst();
 		int count = mCount.getInt(0);
 		mCount.close();
@@ -1740,16 +1796,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db
 				.rawQuery("select count(*) from " + TABLE_DETAIL_RENCANA +" WHERE status_rencana='1'", null);
-		mCount.moveToFirst();
-		int count = mCount.getInt(0);
-		mCount.close();
-		return count;
-	}
-
-	public int getCountKegiatan() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor mCount = db
-				.rawQuery("select count(*) from " + TABLE_KEGIATAN, null);
 		mCount.moveToFirst();
 		int count = mCount.getInt(0);
 		mCount.close();
@@ -1795,6 +1841,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		mCount.close();
 		return count;
 	}
+	public int getCountUploadDataSapi(int id_rencana_detail) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_UPLOAD_DATA_SAPI + " WHERE id_rencana_detail="+ id_rencana_detail, null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
 	public int getCountTrxcheckinParam(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db.rawQuery("SELECT COUNT(tc.id_chekin) FROM " + TABLE_TRX_CHECKIN +" tc JOIN "+TABLE_DETAIL_RENCANA+
@@ -1806,20 +1860,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return count;
 	}
 
-	public int getCountTrxcheckout() {
+	public int getCountTrxcheckout(int id_rencana_detail) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor mCount = db
-				.rawQuery("select count(*) from " + TABLE_TRX_CHECKOUT, null);
-		mCount.moveToFirst();
-		int count = mCount.getInt(0);
-		mCount.close();
-		return count;
-	}
-
-	public int getCountAsben() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor mCount = db.rawQuery("select count(*) from " + TABLE_LAP_ABSEN,
-				null);
+		Cursor mCount = db.rawQuery("select count(*) from " + TABLE_TRX_CHECKOUT + " Where id_rencana_detail="+id_rencana_detail, null);
 		mCount.moveToFirst();
 		int count = mCount.getInt(0);
 		mCount.close();
@@ -1829,6 +1872,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public int getCountCustomer() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db.rawQuery("select count(*) from " + TABLE_MST_CUSTOMER,
+				null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
+	public int getStatusRencanaHeader(int id_rencana_header) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db.rawQuery("select aproved from " + TABLE_MASTER_RENCANA +" WHERE id_rencana_header='"+id_rencana_header+"'",
+				null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
+	public int getCountSapi() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db.rawQuery("select count(*) from " + TABLE_DATA_SAPI +" WHERE lifnr='0'",
 				null);
 		mCount.moveToFirst();
 		int count = mCount.getInt(0);
@@ -1847,10 +1908,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return cursor.getCount();
 	}
 
-	public void deleteTableAbsen() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		db.execSQL("DELETE FROM " + TABLE_LAP_ABSEN);
-	}
 	public void deleteTableHistoryCanvassing() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_HISTORY_CANVASSING);
@@ -1862,27 +1919,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}public void deleteTableMSTUser() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_MST_USER1);
-	}public void deleteTableMSTKegiattan() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		db.execSQL("DELETE FROM " + TABLE_KEGIATAN);
 	}public void deleteTableRencanaDetail() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_DETAIL_RENCANA);
+	}public void deleteTableDataSapi() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DELETE FROM " + TABLE_DATA_SAPI);
+	}public void deleteTableCheckin(String idRencanaDetail) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DELETE FROM " + TABLE_TRX_CHECKIN +" WHERE id_rencana_detail='"+idRencanaDetail+"'");
+	}public void deleteTableUploadDataSapi(String id_upload) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DELETE FROM " + TABLE_UPLOAD_DATA_SAPI +" WHERE id_upload='"+id_upload+"'");
 	}public void deleteTableRencanaMaster() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_MASTER_RENCANA);
 	}public void deleteCheckin(String nomer_checkin) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_TRX_CHECKIN+" WHERE nomor_checkin = '"+ nomer_checkin+"'");
-	}public void deleteTableJenisKendaraan() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		db.execSQL("DELETE FROM " + TABLE_JENIS_KENDARAAN);
 	}public void deleteTableProduct() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_PRODUCT);
-	}public void deleteTableStock() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		db.execSQL("DELETE FROM " + TABLE_STOCK_CUSTOMER);
 	}
 
 	public void deleteRencanaMaster() {
@@ -1898,6 +1955,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL("UPDATE "+TABLE_DETAIL_RENCANA+" SET "+KEY_DETAIL_RENCANA_STATUS_RENCANA+" ='1' where "+KEY_DETAIL_RENCANA_ID_RENCANA_DETAIL+
 				" = '"+nomor+"'");
 	}
+	public void updateCheckout(String nomor) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.execSQL("UPDATE "+TABLE_DETAIL_RENCANA+" SET "+KEY_DETAIL_RENCANA_STATUS_RENCANA+" ='2' where "+KEY_DETAIL_RENCANA_ID_RENCANA_DETAIL+
+				" = '"+nomor+"'");
+	}
 
 	public void updateRencanaDetailfromCheckout(String id) {
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -1909,10 +1971,5 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("UPDATE "+TABLE_TRX_CHECKIN+" SET "+KEY_TRX_CHECKIN_STATUS+" ='2' where "+KEY_TRX_CHECKIN_NOMOR_CHECKIN+
 				" = '"+nomor+"'");
-	}
-
-	public void deleteTableCheckpoint() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		db.execSQL("DELETE FROM " + TABLE_CHECKPOINT_ABSEN);
 	}
 }

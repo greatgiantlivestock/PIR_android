@@ -14,6 +14,7 @@ public class Trx_Checkin {
 	String longs;
 	String foto;
 	String status;
+	String prospect;
 
 	// Empty constructor
 	public Trx_Checkin(){
@@ -21,7 +22,7 @@ public class Trx_Checkin {
 	}
 	// constructor
 	public Trx_Checkin(int id_checkin, String tanggal_checkin,String nomor_checkin, int id_user, int id_rencana_detail, int id_rencana_header,
-					   String kode_customer,String lats, String longs, String foto, String status){
+					   String kode_customer,String lats, String longs, String foto, String status, String prospect){
 		this.id_checkin = id_checkin;
 		this.tanggal_checkin = tanggal_checkin;
 		this.nomor_checkin = nomor_checkin;
@@ -33,11 +34,12 @@ public class Trx_Checkin {
 		this.longs = longs;
 		this.foto = foto;
 		this.status = status;
+		this.prospect = prospect;
 	}
 
 	// constructor
 	public Trx_Checkin(String tanggal_checkin,String nomor_checkin, int id_user, int id_rencana_detail, int id_rencana_header,
-					   String kode_customer,String lats, String longs, String foto, String status){
+					   String kode_customer,String lats, String longs, String foto, String status, String prospect){
 		this.tanggal_checkin = tanggal_checkin;
 		this.nomor_checkin = nomor_checkin;
 		this.id_user = id_user;
@@ -48,6 +50,7 @@ public class Trx_Checkin {
 		this.longs=longs;
 		this.foto=foto;
 		this.status = status;
+		this.prospect = prospect;
 	}
 
 	public int getId_checkin(){
@@ -125,5 +128,11 @@ public class Trx_Checkin {
 	}
 	public void setStatus(String status){
 		this.status= status;
+	}
+	public String getProspect(){
+		return this.prospect;
+	}
+	public void setProspect(String prospect){
+		this.prospect= prospect;
 	}
 }

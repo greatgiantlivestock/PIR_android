@@ -29,7 +29,9 @@ import android.widget.Toast;
 import com.android.pir.gglc.pir.CheckoutActivity;
 import com.android.pir.gglc.pir.DashboardActivity;
 import com.android.pir.gglc.pir.History_Canvassing;
-import com.android.pir.gglc.pir.IconTextTabsActivity;
+import com.android.pir.gglc.pir.IconTextTabsActivity_lap;
+import com.android.pir.gglc.pir.PlanVisitActivity;
+import com.android.pir.gglc.pir.PlanVisitActivity2;
 import com.android.pir.mobile.R;
 
 @SuppressWarnings("deprecation")
@@ -150,7 +152,10 @@ public class Orderan extends ActionBarActivity implements
 
 				uploadMessage = filePathCallback;
 
-				Intent intent = fileChooserParams.createIntent();
+				Intent intent = null;
+				if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+					intent = fileChooserParams.createIntent();
+				}
 				try
 				{
 					startActivityForResult(intent, REQUEST_SELECT_FILE);
@@ -233,30 +238,39 @@ public class Orderan extends ActionBarActivity implements
 	public void onNavigationDrawerItemSelected(int position) {
 		if (mNavigationDrawerFragment != null) {
 			if (mNavigationDrawerFragment.getCurrentSelectedPosition() != 5) {
-				if (position == 0) {
+				if (position ==0) {
+					Intent intentActivity = new Intent(this,
+							PlanVisitActivity.class);
+					startActivity(intentActivity);
+					finish();
+				}else if (position ==1) {
+					Intent intentActivity = new Intent(this,
+							PlanVisitActivity2.class);
+					startActivity(intentActivity);
+					finish();
+				}else if (position ==2) {
 					Intent intentActivity = new Intent(this,
 							DashboardActivity.class);
 					startActivity(intentActivity);
 					finish();
 				}
-				else if (position == 1) {
-					Intent intentActivity = new Intent(this,
-							IconTextTabsActivity.class);
-					startActivity(intentActivity);
-					finish();
-				}else if (position == 2) {
-					Intent intentActivity = new Intent(this,
-							CheckoutActivity.class);
-					startActivity(intentActivity);
-					finish();
-				}
+//				else if (position ==3) {
+//					Intent intentActivity = new Intent(this,
+//							IconTextTabsActivity_lap.class);
+//					startActivity(intentActivity);
+//					finish();
+//				}else if (position == 4) {
+//					Intent intentActivity = new Intent(this,
+//							CheckoutActivity.class);
+//					startActivity(intentActivity);
+//					finish();
+//				}
 				else if (position == 3) {
 					Intent intentActivity = new Intent(this,
 							History_Canvassing.class);
 					startActivity(intentActivity);
 					finish();
-				}
-				else if (position == 4) {
+				}else if (position == 4) {
 					Intent intentActivity = new Intent(this,
 							ChangePassword.class);
 					startActivity(intentActivity);

@@ -204,19 +204,23 @@ public class NavigationDrawerFragment extends Fragment implements
 
 	public List<NavigationItem> getMenu() {
 		List<NavigationItem> items = new ArrayList<NavigationItem>();
-		//items.add(new NavigationItem(getResources().getString(R.string.menu_1),
-		//		getResources().getDrawable(R.drawable.location_mentah)));
+		items.add(new NavigationItem(getResources().getString(R.string.menu_1),
+				getResources().getDrawable(R.drawable.library_add_check_black_48dp)));
+		items.add(new NavigationItem(getResources().getString(R.string.menu_1_2),
+				getResources().getDrawable(R.drawable.library_books_black_48dp)));
+		items.add(new NavigationItem(getResources().getString(R.string.menu_1_3),
+				getResources().getDrawable(R.drawable.library_add_black_48dp)));
 		items.add(new NavigationItem(getResources().getString(R.string.menu_2),
-				getResources().getDrawable(R.drawable.dash)));
-		items.add(new NavigationItem(getResources().getString(R.string.menu_4),
-				getResources().getDrawable(R.drawable.ckin)));
-		items.add(new NavigationItem(getResources().getString(R.string.menu_5),
-				getResources().getDrawable(R.drawable.ckout)));
+				getResources().getDrawable(R.drawable.moving_truck)));
+//		items.add(new NavigationItem(getResources().getString(R.string.menu_4),
+//				getResources().getDrawable(R.drawable.ckin)));
+//		items.add(new NavigationItem(getResources().getString(R.string.menu_5),
+//				getResources().getDrawable(R.drawable.ckout)));
 		items.add(new NavigationItem(getResources().getString(R.string.menu_6),
 				getResources().getDrawable(R.drawable.history)));
 		items.add(new NavigationItem(getResources().getString(R.string.menu_3),
 				getResources().getDrawable(R.drawable.change)));
-		items.add(new NavigationItem(getResources().getString(R.string.menu_7),null));
+//		items.add(new NavigationItem(getResources().getString(R.string.menu_7),null));
 		return items;
 	}
 
