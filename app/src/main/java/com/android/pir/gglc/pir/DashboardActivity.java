@@ -7,12 +7,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.location.GpsStatus;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -32,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.pir.gglc.absen.AppVar;
 import com.android.pir.gglc.absen.ChangePassword;
@@ -41,27 +45,39 @@ import com.android.pir.gglc.absen.Orderan;
 import com.android.pir.gglc.database.DataSapi;
 import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
+import com.android.pir.gglc.database.DetailReqLoadNew;
 import com.android.pir.gglc.database.MasterRencana;
 import com.android.pir.gglc.database.Rencana;
 import com.android.pir.gglc.database.MstUser;
 import com.android.pir.gglc.database.Mst_Customer;
 import com.android.pir.gglc.database.Trx_Checkin;
+import com.android.pir.gglc.database.Trx_Checkout;
+import com.android.pir.gglc.database.UploadDataSapi;
+import com.android.pir.gglc.fragment1.OneFragment1;
 import com.android.pir.mobile.R;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import static com.android.pir.gglc.absen.AppVar.SHARED_PREFERENCES_NAME;
 
@@ -81,6 +97,9 @@ public class DashboardActivity extends ActionBarActivity implements
 	private Handler handler = new Handler();
 	private String message,msg_success;
 	private String response_data;
+	private String response_data3;
+	private String response_data1;
+	private String response_data2;
 	private static final String LOG_TAG = DashboardActivity.class.getSimpleName();
 	private EditText description_kegiatan;
 	private Spinner checkin_number;
@@ -103,13 +122,18 @@ public class DashboardActivity extends ActionBarActivity implements
 	Calendar cDate;
 	int sDay,sMonth,sYear;
 	private double latitude, longitude;
+	private UploadDataSapi uploadDataSapi;
 	private Location location,location1,location2;
 	protected LocationManager locationManager;
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 	private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
-	private DatabaseHandler db;
 	private ViewPager viewPager;
 	private int id=0;
+	private ArrayList<UploadDataSapi> uploadDataSapiArrayList = new ArrayList<UploadDataSapi>();
+	private ArrayList<Trx_Checkin> checkinArrayList = new ArrayList<Trx_Checkin>();
+	private ArrayList<Trx_Checkout> checkoutArrayList = new ArrayList<Trx_Checkout>();
+	private String IMAGE_DIRECTORY_NAME = "Data_sapi";
+	private String IMAGE_DIRECTORY_CHECKIN_NAME = "Checkin_pir";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +145,6 @@ public class DashboardActivity extends ActionBarActivity implements
 		setSupportActionBar(mToolbar);
 		getSupportActionBar().setTitle(R.string.title_activity_all);
 		act = this;
-		db = new DatabaseHandler(this);
 
 		listview = (ListView) findViewById(R.id.list);
 		listview.setItemsCanFocus(false);
@@ -167,13 +190,21 @@ public class DashboardActivity extends ActionBarActivity implements
 				}
 				return true;
 			case R.id.menu_upload:
-				if (GlobalApp.checkInternetConnection(act)) {
-					new DownloadDataCustomer().execute();
-				} else {
-					String message = act.getApplicationContext().getResources()
-							.getString(R.string.app_customer_processing_empty);
-					showCustomDialog(message);
+				int CountDs = databaseHandler.getCountUploadAllDataSapi();
+				if(CountDs>0){
+					new UploadDataIMG().execute();
+				}else{
+					new UploadData().execute();
 				}
+//				new UploadDataCkout().execute();
+//				Toast.makeText(DashboardActivity.this, "upload",Toast.LENGTH_LONG).show();
+//				if (GlobalApp.checkInternetConnection(act)) {
+//					new DownloadDataCustomer().execute();
+//				} else {
+//					String message = act.getApplicationContext().getResources()
+//							.getString(R.string.app_customer_processing_empty);
+//					showCustomDialog(message);
+//				}
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -210,6 +241,611 @@ public class DashboardActivity extends ActionBarActivity implements
 		showListRencana();
 	}
 
+	public class UploadDataIMG extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			progressDialog
+					.setMessage(getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.app_supplier_processing));
+			progressDialog.show();
+			progressDialog.setCancelable(false);
+			progressDialog
+					.setOnCancelListener(new DialogInterface.OnCancelListener() {
+						@Override
+						public void onCancel(DialogInterface dialog) {
+							String msg = getApplicationContext()
+									.getResources()
+									.getString(
+											R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
+							showCustomDialog(msg);
+						}
+					});
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			int cekDS = databaseHandler.getCountUploadAllDataSapi();
+			if(cekDS>0){
+				String url = AppVar.CONFIG_APP_URL_PUBLIC;
+				String uploadSupplier = AppVar.CONFIG_APP_URL_UPLOAD_INSERT_DATA_SAPI_ALL;
+				String upload_image_supplier_url = url + uploadSupplier;
+
+				ArrayList<UploadDataSapi> staff_list = databaseHandler.getAllUploadDataSapi();
+				for(UploadDataSapi detailReqLoadNew : staff_list){
+					updateListViewDetailOrder(detailReqLoadNew);
+				}
+
+//				ArrayList<UploadDataSapi> staff_list = databaseHandler.getAllUploadDataSapi();
+//				uploadDataSapi = new UploadDataSapi();
+//
+//				for (UploadDataSapi tempStaff : staff_list)
+//					uploadDataSapi = tempStaff;
+//				String id_rencana_detail=String.valueOf(uploadDataSapi.getId_rencana_detail());
+//				String data_assessment=String.valueOf(uploadDataSapi.getAssessment());
+//				String data_eartag=String.valueOf(uploadDataSapi.getEartag());
+//				String data_keterangan=String.valueOf(uploadDataSapi.getKeterangan());
+//				String foto=String.valueOf(uploadDataSapi.getFoto());
+//				String tanggal=String.valueOf(uploadDataSapi.getTanggal());
+
+				for (UploadDataSapi uploadDataSapi : uploadDataSapiArrayList) {
+					response_data3 = uploadImageAll(upload_image_supplier_url,
+							String.valueOf(uploadDataSapi.getId_rencana_detail()),
+							uploadDataSapi.getAssessment(),
+							uploadDataSapi.getEartag(),
+							uploadDataSapi.getKeterangan(),
+							uploadDataSapi.getFoto(),
+							uploadDataSapi.getTanggal());
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.d(LOG_TAG, "response:" + response_data3);
+            if (response_data3 != null && response_data3.length() > 0) {
+                if (response_data3.startsWith("Error occurred")) {
+                    final String msg = act
+                            .getApplicationContext()
+                            .getResources()
+                            .getString(
+                                    R.string.app_supplier_processing_failed);
+                    handler.post(new Runnable() {
+                        public void run() {
+                            showCustomDialog(msg);
+                        }
+                    });
+                } else {
+                    handler.post(new Runnable() {
+                        public void run() {
+                            extractUpload();
+                        }
+                    });
+                }
+            } else {
+                final String msg = act
+                        .getApplicationContext()
+                        .getResources()
+                        .getString(
+                                R.string.app_supplier_processing_failed);
+                handler.post(new Runnable() {
+                    public void run() {
+                        showCustomDialog(msg);
+                    }
+                });
+            }
+		}
+	}
+
+	private void updateListViewDetailOrder(UploadDataSapi detailReqLoad) {
+		uploadDataSapiArrayList.add(detailReqLoad);
+	}
+	private void updateListCheckin(Trx_Checkin detailReqLoad) {
+		checkinArrayList.add(detailReqLoad);
+	}
+	private void updateListCheckout(Trx_Checkout detailReqLoad) {
+		checkoutArrayList.add(detailReqLoad);
+	}
+
+	protected String uploadImageAll(final String url, final String id_rencana_detail, final String data_assessment,final String data_eartag, final String data_keterangan,
+									final String foto, final String tanggal) {
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httppost = new HttpPost(url);
+		String responseString = null;
+		try {
+			if (android.os.Build.VERSION.SDK_INT > 9) {
+				StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+						.permitAll().build();
+				StrictMode.setThreadPolicy(policy);
+			}
+			MultipartEntity entity = new MultipartEntity();
+			File dir = new File(AppVar.getFolderPath() + "/"+ IMAGE_DIRECTORY_NAME + "/"+ foto);
+			if (dir.exists() && foto != null) {
+				entity.addPart("image_1", new FileBody(dir));
+				entity.addPart("foto1", new StringBody(foto));
+			} else {
+				entity.addPart("foto1", new StringBody(""));
+			}
+			entity.addPart("id_rencana_detail", new StringBody(id_rencana_detail));
+			entity.addPart("assessment", new StringBody(data_assessment));
+			entity.addPart("eratag1", new StringBody(data_eartag));
+			entity.addPart("keterangan1", new StringBody(data_keterangan));
+			entity.addPart("tanggal", new StringBody(tanggal));
+			httppost.setEntity(entity);
+
+			// Making server call
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity r_entity = response.getEntity();
+
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == 200) {
+				// Server response
+				responseString = EntityUtils.toString(r_entity);
+			} else {
+				responseString = "Error occurred! Http Status Code: "
+						+ statusCode;
+			}
+		} catch (ClientProtocolException e) {
+			responseString = e.toString();
+		} catch (IOException e) {
+			responseString = e.toString();
+		}
+		return responseString;
+	}
+
+	public void extractUpload() {
+		JSONObject oResponse;
+		try {
+			oResponse = new JSONObject(response_data3);
+			String status = oResponse.isNull("error") ? "True" : oResponse
+					.getString("error");
+			if (response_data3.isEmpty()) {
+				final String msg = act
+						.getApplicationContext()
+						.getResources()
+						.getString(
+								R.string.app_supplier_processing_failed);
+				showCustomDialog(msg);
+			} else {
+				Log.d(LOG_TAG, "status=" + status);
+				if (status.equalsIgnoreCase("False")) {
+					File dir = new File(AppVar.getFolderPath() + "/"
+							+ IMAGE_DIRECTORY_NAME);
+					List<File> fileFoto = getListFiles(dir);
+					for (File tempFile : fileFoto) {
+						tempFile.delete();
+					}
+					databaseHandler.deleteTableUploadDataSapi();
+					if (progressDialog != null) {
+						progressDialog.dismiss();
+					}
+					new UploadData().execute();
+//					final String msg = act
+//							.getApplicationContext()
+//							.getResources()
+//							.getString(
+//									R.string.app_supplier_processing_sukses);
+//					showCustomDialog(msg);
+				} else {
+					final String msg = act
+							.getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.app_supplier_processing_failed);
+					showCustomDialog(msg);
+				}
+			}
+		} catch (JSONException e) {
+			final String message = e.toString();
+			showCustomDialog(message);
+		}
+	}
+
+	protected List<File> getListFiles(File parentDir) {
+		ArrayList<File> inFiles = new ArrayList<File>();
+		File[] files = parentDir.listFiles();
+		for (File file : files) {
+			inFiles.add(file);
+			if (file.isDirectory())
+				inFiles.addAll(getListFiles(file));
+		}
+		return inFiles;
+	}
+
+	public class UploadData extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			progressDialog
+					.setMessage(getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.app_supplier_processing));
+			progressDialog.show();
+			progressDialog.setCancelable(false);
+			progressDialog
+					.setOnCancelListener(new DialogInterface.OnCancelListener() {
+						@Override
+						public void onCancel(DialogInterface dialog) {
+							String msg = getApplicationContext()
+									.getResources()
+									.getString(
+											R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
+							showCustomDialog(msg);
+						}
+					});
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+            String url = AppVar.CONFIG_APP_URL_PUBLIC;
+            String uploadSupplier = AppVar.CONFIG_APP_URL_UPLOAD_INSERT_CHECKIN_NEW;
+            String upload_image_supplier_url = url + uploadSupplier;
+
+			ArrayList<Trx_Checkin> staff_list = databaseHandler.getAllCheckin();
+			for(Trx_Checkin detailReqLoadNew : staff_list){
+				updateListCheckin(detailReqLoadNew);
+			}
+
+			for (Trx_Checkin uploadcheckin : checkinArrayList) {
+				if(uploadcheckin.getFoto().equals("")) {
+					response_data1 = uploadImage1(upload_image_supplier_url, String.valueOf(id_user), String.valueOf(uploadcheckin.getId_rencana_detail()), uploadcheckin.getLats(), uploadcheckin.getLongs(),uploadcheckin.getTanggal_checkin());
+				}else{
+					response_data1 = uploadImage(upload_image_supplier_url, String.valueOf(id_user), String.valueOf(uploadcheckin.getId_rencana_detail()), uploadcheckin.getLats(), uploadcheckin.getLongs(),uploadcheckin.getTanggal_checkin(),uploadcheckin.getFoto());
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+            Log.d(LOG_TAG, "response:" + response_data1);
+            if (response_data1 != null && response_data1.length() > 0) {
+                if (response_data1.startsWith("Error occurred")) {
+                    final String msg = act
+                            .getApplicationContext()
+                            .getResources()
+                            .getString(
+                                    R.string.app_supplier_processing_failed);
+                    handler.post(new Runnable() {
+                        public void run() {
+                            showCustomDialog(msg);
+                        }
+                    });
+                } else {
+                    handler.post(new Runnable() {
+                        public void run() {
+//                            new DownloadDataRencanaDetail().execute();
+//                            SharedPreferences spPreferences = getSharedPrefereces();
+//                            String foto = spPreferences.getString(AppVar.SHARED_PREFERENCES_CHILLER_FOTO_1, null);
+//                            Log.d(LOG_TAG, "foto : "+ foto);
+//                            if(foto!=null) {
+//                                extractUpload();
+//                            }
+							resetIMG();
+                        }
+                    });
+                }
+            } else {
+                final String msg = act
+                        .getApplicationContext()
+                        .getResources()
+                        .getString(
+                                R.string.app_supplier_processing_failed);
+                handler.post(new Runnable() {
+                    public void run() {
+                        showCustomDialog(msg);
+                    }
+                });
+            }
+		}
+	}
+
+	protected String uploadImage(final String url,  final String id_user,
+								 final String id_rencana_detail, final String lats, final String longs,final String tanggal, final String foto_1) {
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httppost = new HttpPost(url);
+		String responseString = null;
+		Log.d(LOG_TAG, "Cek Foto : "+foto_1);
+		try {
+			if (android.os.Build.VERSION.SDK_INT > 9) {
+				StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+						.permitAll().build();
+				StrictMode.setThreadPolicy(policy);
+			}
+			MultipartEntity entity = new MultipartEntity();
+			File dir1 = new File(AppVar.getFolderPath() + "/"
+					+ IMAGE_DIRECTORY_CHECKIN_NAME + "/"
+					+ foto_1);
+			if (dir1.exists() && foto_1 != null) {
+				entity.addPart("image_1", new FileBody(dir1));
+				entity.addPart("foto1", new StringBody(foto_1));
+			}
+			else {
+				entity.addPart("foto1", new StringBody(""));
+			}
+			entity.addPart("id_user", new StringBody(id_user));
+			entity.addPart("id_rencana_detail", new StringBody(id_rencana_detail));
+			entity.addPart("lats", new StringBody(lats));
+			entity.addPart("longs", new StringBody(longs));
+			entity.addPart("tanggal", new StringBody(tanggal));
+			httppost.setEntity(entity);
+			Log.d(LOG_TAG, "uploadImage: "+entity);
+
+			// Making server call
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity r_entity = response.getEntity();
+
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == 200) {
+				// Server response
+				responseString = EntityUtils.toString(r_entity);
+			} else {
+				responseString = "Error occurred! Http Status Code: "
+						+ statusCode;
+			}
+		} catch (ClientProtocolException e) {
+			responseString = e.toString();
+		} catch (IOException e) {
+			responseString = e.toString();
+		}
+		return responseString;
+	}
+
+	protected String uploadImage1(final String url,  final String id_user,
+								  final String id_rencana_detail, final String lats, final String longs, final String tanggal) {
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httppost = new HttpPost(url);
+		String responseString = null;
+		try {
+			if (android.os.Build.VERSION.SDK_INT > 9) {
+				StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+						.permitAll().build();
+				StrictMode.setThreadPolicy(policy);
+			}
+			MultipartEntity entity = new MultipartEntity();
+			entity.addPart("id_user", new StringBody(id_user));
+			entity.addPart("id_rencana_detail", new StringBody(id_rencana_detail));
+			entity.addPart("lats", new StringBody(lats));
+			entity.addPart("longs", new StringBody(longs));
+			entity.addPart("tanggal", new StringBody(tanggal));
+			httppost.setEntity(entity);
+			Log.d(LOG_TAG, "uploadImage: "+entity);
+
+			// Making server call
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity r_entity = response.getEntity();
+
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == 200) {
+				// Server response
+				responseString = EntityUtils.toString(r_entity);
+			} else {
+				responseString = "Error occurred! Http Status Code: "
+						+ statusCode;
+			}
+		} catch (ClientProtocolException e) {
+			responseString = e.toString();
+		} catch (IOException e) {
+			responseString = e.toString();
+		}
+		return responseString;
+	}
+
+	public void resetIMG() {
+		JSONObject oResponse;
+		try {
+			oResponse = new JSONObject(response_data1);
+			String status = oResponse.isNull("error") ? "True" : oResponse
+					.getString("error");
+			if (response_data1.isEmpty()) {
+				final String msg = act
+						.getApplicationContext()
+						.getResources()
+						.getString(
+								R.string.app_supplier_processing_failed);
+				showCustomDialog(msg);
+			} else {
+				Log.d(LOG_TAG, "status=" + status);
+				if (status.equalsIgnoreCase("False")) {
+					File dir = new File(AppVar.getFolderPath() + "/"
+							+ IMAGE_DIRECTORY_CHECKIN_NAME);
+					List<File> fileFoto = getListFiles(dir);
+					for (File tempFile : fileFoto) {
+						tempFile.delete();
+					}
+					if (progressDialog != null) {
+						progressDialog.dismiss();
+					}
+					databaseHandler.deleteCheckin();
+					new UploadDataCkout().execute();
+//					final String msg = act
+//							.getApplicationContext()
+//							.getResources()
+//							.getString(
+//									R.string.app_supplier_processing_sukses);
+//					showCustomDialog(msg);
+				} else {
+					final String msg = act
+							.getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.app_supplier_processing_failed);
+					showCustomDialog(msg);
+				}
+			}
+		} catch (JSONException e) {
+			final String message = e.toString();
+			showCustomDialog(message);
+		}
+	}
+
+	public class UploadDataCkout extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			progressDialog
+					.setMessage(getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.app_supplier_processing));
+			progressDialog.show();
+			progressDialog.setCancelable(false);
+			progressDialog
+					.setOnCancelListener(new DialogInterface.OnCancelListener() {
+						@Override
+						public void onCancel(DialogInterface dialog) {
+							String msg = getApplicationContext()
+									.getResources()
+									.getString(
+											R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
+							showCustomDialog(msg);
+						}
+					});
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+            String url = AppVar.CONFIG_APP_URL_PUBLIC;
+            String uploadSupplier = AppVar.CONFIG_APP_URL_UPLOAD_INSERT_CHECKOUT;
+            String upload_image_supplier_url = url + uploadSupplier;
+
+			ArrayList<Trx_Checkout> staff_list = databaseHandler.getAllCheckout();
+			for(Trx_Checkout detailReqLoadNew : staff_list){
+				updateListCheckout(detailReqLoadNew);
+			}
+
+			for (Trx_Checkout dataCheckout : checkoutArrayList) {
+				response_data2 = uploadCheckout(upload_image_supplier_url,
+						String.valueOf(dataCheckout.getId_user()),
+						String.valueOf(dataCheckout.getId_rencana_detail()),
+						dataCheckout.getLats(),
+						dataCheckout.getLongs(),
+						dataCheckout.getRealisasi_kegiatan(),
+						dataCheckout.getTanggal_checkout()
+				);
+			}
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.d(LOG_TAG, "response:" + response_data2);
+            if (response_data2 != null && response_data2.length() > 0) {
+                if (response_data2.startsWith("Error occurred")) {
+                    final String msg = act
+                            .getApplicationContext()
+                            .getResources()
+                            .getString(
+                                    R.string.app_supplier_processing_failed);
+                    handler.post(new Runnable() {
+                        public void run() {
+                            showCustomDialog(msg);
+                        }
+                    });
+                } else {
+                    handler.post(new Runnable() {
+                        public void run() {
+                            extractUploadCkout();
+                        }
+                    });
+                }
+            } else {
+                final String msg = act
+                        .getApplicationContext()
+                        .getResources()
+                        .getString(
+                                R.string.app_supplier_processing_failed);
+                handler.post(new Runnable() {
+                    public void run() {
+                        showCustomDialog(msg);
+                    }
+                });
+            }
+		}
+	}
+
+	public void extractUploadCkout() {
+		JSONObject oResponse;
+		try {
+			oResponse = new JSONObject(response_data2);
+			String status = oResponse.isNull("error") ? "True" : oResponse
+					.getString("error");
+			if (response_data2.isEmpty()) {
+				final String msg = act
+						.getApplicationContext()
+						.getResources()
+						.getString(
+								R.string.app_supplier_processing_failed);
+				showCustomDialog(msg);
+			} else {
+				Log.d(LOG_TAG, "status=" + status);
+				if (status.equalsIgnoreCase("False")) {
+					databaseHandler.deleteCheckout();
+					final String msg = act
+							.getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.app_supplier_processing_sukses);
+					showCustomDialog(msg);
+				} else {
+					final String msg = act
+							.getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.app_supplier_processing_failed);
+					showCustomDialog(msg);
+				}
+			}
+		} catch (JSONException e) {
+			final String message = e.toString();
+			showCustomDialog(message);
+		}
+	}
+
+	protected String uploadCheckout(final String url,  final String id_user,final String id_rencana_detail, final String lats,
+								 final String longs, final String keterangan_, final String tanggal_) {
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httppost = new HttpPost(url);
+		String responseString = null;
+		try {
+			if (android.os.Build.VERSION.SDK_INT > 9) {
+				StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+						.permitAll().build();
+				StrictMode.setThreadPolicy(policy);
+			}
+			MultipartEntity entity = new MultipartEntity();
+			entity.addPart("id_user", new StringBody(id_user));
+			entity.addPart("id_rencana_detail", new StringBody(id_rencana_detail));
+			entity.addPart("lats", new StringBody(lats));
+			entity.addPart("longs", new StringBody(longs));
+			entity.addPart("keterangan", new StringBody(keterangan_));
+			entity.addPart("tanggal", new StringBody(tanggal_));
+			httppost.setEntity(entity);
+			// Making server call
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity r_entity = response.getEntity();
+
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == 200) {
+				// Server response
+				responseString = EntityUtils.toString(r_entity);
+			} else {
+				responseString = "Error occurred! Http Status Code: "
+						+ statusCode;
+			}
+		} catch (ClientProtocolException e) {
+			responseString = e.toString();
+		} catch (IOException e) {
+			responseString = e.toString();
+		}
+		return responseString;
+	}
+
 	public void showListRencana() {
 		rencana_list.clear();
 //		SharedPreferences spPreferences = getSharedPrefereces();
@@ -243,7 +879,6 @@ public class DashboardActivity extends ActionBarActivity implements
 			listview.setVisibility(View.INVISIBLE);
 		}
 	}
-
 
 	private class DownloadDataCustomer extends AsyncTask<String, Integer, String> {
 		@Override
@@ -290,13 +925,13 @@ public class DashboardActivity extends ActionBarActivity implements
 									.getApplicationContext().getResources()
 									.getString(R.string.app_value_true));
 						} else {
-							db.deleteTableMSTCustomer();
+							databaseHandler.deleteTableMSTCustomer();
 							saveAppDataBranchSameData(act
 									.getApplicationContext().getResources()
 									.getString(R.string.app_value_false));
 						}
 					} else {
-						db.deleteTableMSTCustomer();
+						databaseHandler.deleteTableMSTCustomer();
 						saveAppDataBranchSameData(act.getApplicationContext()
 								.getResources()
 								.getString(R.string.app_value_false));
@@ -370,7 +1005,7 @@ public class DashboardActivity extends ActionBarActivity implements
 					Log.d(LOG_TAG, "id_customer:" + id_customer);
 					Log.d(LOG_TAG, "kode_customer:" + kode_customer);
 					Log.d(LOG_TAG, "nama_customer:" + nama_customer);
-					db.addMst_customer(new Mst_Customer(Integer.parseInt(id_customer),kode_customer,nama_customer,alamat,no_hp,lats,longs,Integer.parseInt(id_wilayah)));
+					databaseHandler.addMst_customer(new Mst_Customer(Integer.parseInt(id_customer),kode_customer,nama_customer,alamat,no_hp,lats,longs,Integer.parseInt(id_wilayah)));
 				}
 
 			} catch (JSONException e) {

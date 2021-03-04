@@ -626,6 +626,86 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		}
 		return trx_checkinArrayList;
 	}
+	//getting All Checkin
+	public ArrayList<Trx_Checkin> getAllCheckin() {
+		try {
+			trx_checkinArrayList.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT  * FROM " + TABLE_TRX_CHECKIN ;
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Trx_Checkin trx_checkin = new Trx_Checkin();
+					trx_checkin.setId_checkin(cursor.getInt(0));
+					trx_checkin.setTanggal_checkin(cursor.getString(1));
+					trx_checkin.setNomor_checkin(cursor.getString(2));
+					trx_checkin.setId_user(cursor.getInt(3));
+					trx_checkin.setId_rencana_detail(cursor.getInt(4));
+					trx_checkin.setId_rencana_header(cursor.getInt(5));
+					trx_checkin.setKode_customer(cursor.getString(6));
+					trx_checkin.setLats(cursor.getString(7));
+					trx_checkin.setLongs(cursor.getString(8));
+					trx_checkin.setFoto(cursor.getString(9));
+					trx_checkin.setStatus(cursor.getString(10));
+					trx_checkin.setProspect(cursor.getString(11));
+
+					// Adding staff to list
+					trx_checkinArrayList.add(trx_checkin);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return trx_checkinArrayList;
+		} catch (Exception e) {
+			Log.e("Number_checkin_list", "" + e);
+		}
+		return trx_checkinArrayList;
+	}
+
+	//getting All Checkout
+	public ArrayList<Trx_Checkout> getAllCheckout() {
+		try {
+			trx_checkoutArrayList.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT  * FROM " + TABLE_TRX_CHECKOUT ;
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Trx_Checkout trx_checkout = new Trx_Checkout();
+					trx_checkout.setId_checkout(cursor.getInt(0));
+					trx_checkout.setId_rencana_detail(cursor.getInt(1));
+					trx_checkout.setTanggal_checkout(cursor.getString(2));
+					trx_checkout.setId_user(cursor.getInt(3));
+					trx_checkout.setRealisasi_kegiatan(cursor.getString(4));
+					trx_checkout.setLats(cursor.getString(5));
+					trx_checkout.setLongs(cursor.getString(6));
+
+					// Adding staff to list
+					trx_checkoutArrayList.add(trx_checkout);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return trx_checkoutArrayList;
+		} catch (Exception e) {
+			Log.e("Number_checkin_list", "" + e);
+		}
+		return trx_checkoutArrayList;
+	}
 
 	//getting All Checkin
 	public ArrayList<UploadDataSapi> getAllUploadDataSapi() {
@@ -1841,6 +1921,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		mCount.close();
 		return count;
 	}
+	public int getCountUploadAllDataSapi() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_UPLOAD_DATA_SAPI , null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
 	public int getCountUploadDataSapi(int id_rencana_detail) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_UPLOAD_DATA_SAPI + " WHERE id_rencana_detail="+ id_rencana_detail, null);
@@ -1928,15 +2016,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}public void deleteTableCheckin(String idRencanaDetail) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_TRX_CHECKIN +" WHERE id_rencana_detail='"+idRencanaDetail+"'");
-	}public void deleteTableUploadDataSapi(String id_upload) {
+	}public void deleteTableUploadDataSapi() {
 		SQLiteDatabase db = this.getReadableDatabase();
-		db.execSQL("DELETE FROM " + TABLE_UPLOAD_DATA_SAPI +" WHERE id_upload='"+id_upload+"'");
+		db.execSQL("DELETE FROM " + TABLE_UPLOAD_DATA_SAPI );
 	}public void deleteTableRencanaMaster() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_MASTER_RENCANA);
-	}public void deleteCheckin(String nomer_checkin) {
+	}public void deleteCheckin() {
 		SQLiteDatabase db = this.getReadableDatabase();
-		db.execSQL("DELETE FROM " + TABLE_TRX_CHECKIN+" WHERE nomor_checkin = '"+ nomer_checkin+"'");
+		db.execSQL("DELETE FROM " + TABLE_TRX_CHECKIN);
+	}public void deleteCheckout() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DELETE FROM " + TABLE_TRX_CHECKOUT);
 	}public void deleteTableProduct() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_PRODUCT);
@@ -1960,7 +2051,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL("UPDATE "+TABLE_DETAIL_RENCANA+" SET "+KEY_DETAIL_RENCANA_STATUS_RENCANA+" ='2' where "+KEY_DETAIL_RENCANA_ID_RENCANA_DETAIL+
 				" = '"+nomor+"'");
 	}
-
 	public void updateRencanaDetailfromCheckout(String id) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("UPDATE "+TABLE_DETAIL_RENCANA+" SET "+KEY_DETAIL_RENCANA_STATUS_RENCANA+" ='2' where "+KEY_DETAIL_RENCANA_ID_RENCANA_DETAIL+
