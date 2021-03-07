@@ -173,7 +173,7 @@ public class DashboardActivity extends ActionBarActivity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu_main3, menu);
+		getMenuInflater().inflate(R.menu.menu_main4, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -182,7 +182,12 @@ public class DashboardActivity extends ActionBarActivity implements
 		switch (item.getItemId()) {
 			case R.id.menu_refresh:
 				if (GlobalApp.checkInternetConnection(act)) {
-					new DownloadDataCustomer().execute();
+					int countChk = databaseHandler.getCountAllTrxcheckin();
+					if(countChk==0){
+						new DownloadDataCustomer().execute();
+					}else{
+						showCustomDialog("Ada data ofline yang masih tersimpan di HP, lakukan upload terlebih dahulu sebelum memperbarui data petani.");
+					}
 				} else {
 					String message = act.getApplicationContext().getResources()
 							.getString(R.string.app_customer_processing_empty);
@@ -194,6 +199,9 @@ public class DashboardActivity extends ActionBarActivity implements
 				if(CountDs>0){
 					new UploadDataIMG().execute();
 				}else{
+					if (progressDialog != null) {
+						progressDialog.dismiss();
+					}
 					new UploadData().execute();
 				}
 //				new UploadDataCkout().execute();
@@ -489,8 +497,12 @@ public class DashboardActivity extends ActionBarActivity implements
 				updateListCheckin(detailReqLoadNew);
 			}
 
+//			String nilaiVal = "";
 			for (Trx_Checkin uploadcheckin : checkinArrayList) {
-				if(uploadcheckin.getFoto().equals("")) {
+//				nilaiVal = uploadcheckin.getFoto();
+//				Log.d(LOG_TAG, "doInBackground: "+nilaiVal);
+//				Toast.makeText(DashboardActivity.this, "Nilai Val :("+nilaiVal+")", Toast.LENGTH_LONG).show();
+				if(uploadcheckin.getFoto()!=null) {
 					response_data1 = uploadImage1(upload_image_supplier_url, String.valueOf(id_user), String.valueOf(uploadcheckin.getId_rencana_detail()), uploadcheckin.getLats(), uploadcheckin.getLongs(),uploadcheckin.getTanggal_checkin());
 				}else{
 					response_data1 = uploadImage(upload_image_supplier_url, String.valueOf(id_user), String.valueOf(uploadcheckin.getId_rencana_detail()), uploadcheckin.getLats(), uploadcheckin.getLongs(),uploadcheckin.getTanggal_checkin(),uploadcheckin.getFoto());

@@ -11,10 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e1c6a39-96ae-4b64-a749-b08c46a0591b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle____local_aars___C__AndroidWorkspaces_PIR_android_app_src_libs_httpclient_4_3_6_jar_unspecified_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle____local_aars___C__AndroidWorkspaces_PIR_android_app_src_libs_httpcore_4_3_3_jar_unspecified_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle____local_aars___C__AndroidWorkspaces_PIR_android_app_src_libs_httpmime_4_3_6_jar_unspecified_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PIR_android.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_main4.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -27,14 +24,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIR.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_main3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_main3.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +41,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="127.0.0.1:52001" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -73,54 +68,45 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="787" column="44" lean-forward="true" selection-start-line="787" selection-start-column="44" selection-end-line="787" selection-end-column="44" />
+            <state relative-caret-position="1870">
+              <caret line="189" column="21" selection-start-line="184" selection-start-column="20" selection-end-line="189" selection-end-column="21" />
               <folding>
-                <element signature="e#4696#4712#0" expanded="true" />
-                <element signature="e#4943#4956#0" expanded="true" />
-                <element signature="e#5173#5187#0" expanded="true" />
-                <element signature="e#6994#7094#0" expanded="true" />
-                <element signature="e#11350#11567#0" expanded="true" />
-                <element signature="e#11602#11761#0" expanded="true" />
-                <element signature="e#11760#11761#0" expanded="true" />
-                <element signature="e#11822#11975#0" expanded="true" />
-                <element signature="e#11974#11975#0" expanded="true" />
-                <element signature="e#12052#12253#0" expanded="true" />
-                <element signature="e#12284#12427#0" expanded="true" />
-                <element signature="e#12426#12427#0" expanded="true" />
-                <element signature="e#12214#12215#0" expanded="true" />
-                <element signature="e#12256#12257#0" expanded="true" />
-                <element signature="e#14850#14973#0" expanded="true" />
-                <element signature="e#15674#15801#0" expanded="true" />
-                <element signature="e#14449#14455#0" expanded="true" />
-                <element signature="e#16388#16496#0" expanded="true" />
-                <element signature="e#16609#16913#0" expanded="true" />
-                <element signature="e#16739#16867#0" expanded="true" />
-                <element signature="e#16912#16913#0" expanded="true" />
-                <element signature="e#18319#18536#0" expanded="true" />
-                <element signature="e#18571#18730#0" expanded="true" />
-                <element signature="e#18729#18730#0" expanded="true" />
-                <element signature="e#18791#19415#0" expanded="true" />
-                <element signature="e#19414#19415#0" expanded="true" />
-                <element signature="e#19492#19693#0" expanded="true" />
-                <element signature="e#19724#19867#0" expanded="true" />
-                <element signature="e#19866#19867#0" expanded="true" />
-                <element signature="e#23482#23605#0" expanded="true" />
-                <element signature="e#24282#24409#0" expanded="true" />
-                <element signature="e#24714#24822#0" expanded="true" />
-                <element signature="e#25065#25193#0" expanded="true" />
-                <element signature="e#26289#26506#0" expanded="true" />
-                <element signature="e#26541#26700#0" expanded="true" />
-                <element signature="e#26699#26700#0" expanded="true" />
-                <element signature="e#26761#26919#0" expanded="true" />
-                <element signature="e#26918#26919#0" expanded="true" />
-                <element signature="e#26996#27197#0" expanded="true" />
-                <element signature="e#27228#27371#0" expanded="true" />
-                <element signature="e#27370#27371#0" expanded="true" />
-                <element signature="e#27661#27784#0" expanded="true" />
-                <element signature="e#27933#28060#0" expanded="true" />
-                <element signature="e#28195#28322#0" expanded="true" />
+                <marker date="1615002552227" expanded="true" signature="17993:18492" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2108">
+              <caret line="210" selection-start-line="210" selection-end-line="210" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main3.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main4.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -128,8 +114,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardTabsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="378" column="19" selection-start-line="378" selection-start-column="16" selection-end-line="378" selection-end-column="19" />
+            <state relative-caret-position="4862">
+              <caret line="361" column="13" selection-start-line="361" selection-start-column="13" selection-end-line="361" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -138,52 +124,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/OneFragment1.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="600" column="49" selection-start-line="600" selection-start-column="49" selection-end-line="600" selection-end-column="49" />
-              <folding>
-                <element signature="e#8335#8485#0" expanded="true" />
-                <element signature="e#8484#8485#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/DataSapiFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="505" column="54" lean-forward="true" selection-start-line="505" selection-start-column="54" selection-end-line="505" selection-end-column="54" />
-              <folding>
-                <element signature="e#51196#51202#0" expanded="true" />
-                <element signature="e#56002#56003#0" expanded="true" />
-                <element signature="e#56063#56064#0" expanded="true" />
-                <element signature="e#56113#56114#0" expanded="true" />
-                <element signature="e#56175#56176#0" expanded="true" />
-                <element signature="e#56225#56226#0" expanded="true" />
-                <element signature="e#56287#56288#0" expanded="true" />
-                <element signature="e#56337#56338#0" expanded="true" />
-                <element signature="e#56399#56400#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/CheckoutFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="435" lean-forward="true" selection-start-line="396" selection-end-line="435" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="2029" column="27" lean-forward="true" selection-start-line="2029" selection-start-column="27" selection-end-line="2029" selection-end-column="27" />
+            <state relative-caret-position="32538">
+              <caret line="1923" column="36" selection-start-line="1923" selection-start-column="15" selection-end-line="1923" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -194,11 +138,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+            <state relative-caret-position="493">
+              <caret line="31" column="82" lean-forward="true" selection-start-line="31" selection-start-column="82" selection-end-line="31" selection-end-column="82" />
             </state>
           </provider>
         </entry>
@@ -207,7 +151,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Trx_Checkout.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
-              <caret line="2" column="27" lean-forward="true" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+              <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -216,13 +160,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>179.15.30.234</find>
-      <find>Datasa</find>
-      <find>uploadImageAll</find>
-      <find>IMAGE_DIRECTORY_NAME</find>
-      <find>UploadData</find>
-      <find>locationListener</find>
-      <find>OneFragment1.</find>
       <find>if(c</find>
       <find>uploadImage1</find>
       <find>getActivity().</find>
@@ -244,12 +181,19 @@
       <find>database</find>
       <find>db.</find>
       <find>databaseHandler.delete</find>
-      <find>getallc</find>
       <find>databaseHandler.deletec</find>
+      <find>getallc</find>
+      <find>179.15.30.102</find>
+      <find>179.15.30.102/visit-pir</find>
+      <find>http://visit-pir.gg-livestock.com</find>
+      <find>onPreExecute</find>
+      <find>http://179.15.30.102/visit-pir/</find>
+      <find>https://visit-pir.gg-livestock.com</find>
+      <find>menu</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
-    <option name="KEY_STORE_PATH" value="D:\Android Workspace\Keystore\keystore absen" />
+    <option name="KEY_STORE_PATH" value="C:\AndroidWorkspaces\PIR_android\keystore\new_key.jks" />
     <option name="KEY_ALIAS" value="key0" />
     <option name="REMEMBER_PASSWORDS" value="true" />
     <option name="BUILD_TARGET_KEY" value="apk" />
@@ -288,11 +232,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/CheckoutFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main1.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main3.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java" />
       </list>
     </option>
   </component>
@@ -308,64 +253,32 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
             <path>
               <item name="PIR_android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="PIR_android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="PIR_android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="gglc" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PIR_android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="gglc" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PIR_android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="gglc" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="fragment1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PIR_android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="gglc" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="pir" type="462c0819:PsiDirectoryNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="127.0.0.1:52001" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-03-04T02:31:17.062Z" />
-    <property name="ExportApk.ApkPath" value="D:\Android Workspace\New\PIR\app" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="R9RN900T51E" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-03-05T04:06:48.296Z" />
+    <property name="ExportApk.ApkPath" value="C:\AndroidWorkspaces\PIR_android\app" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.SignV1" value="true" />
     <property name="ExportApk.SignV2" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/menu" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
@@ -374,6 +287,7 @@
       <recent name="com.android.pir.gglc.pir" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\AndroidWorkspaces\PIR_android\app\src\main\res\menu" />
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
       <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
     </key>
@@ -476,10 +390,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.17776097" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.17776097" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -487,15 +400,15 @@
       <window_info id="Designer" order="6" />
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
-      <window_info anchor="bottom" id="Run" order="0" weight="0.32820514" />
+      <window_info anchor="bottom" id="Run" order="0" weight="0.32569557" />
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.4811784" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49924356" weight="0.3285968" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50075644" side_tool="true" weight="0.3285968" />
-      <window_info anchor="bottom" id="Version Control" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.38134205" />
-      <window_info anchor="bottom" id="Android Profiler" order="8" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.3289689" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -511,7 +424,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java</url>
-          <line>518</line>
+          <line>523</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
@@ -546,13 +459,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -686,12 +592,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1836">
           <caret line="108" selection-start-line="108" selection-end-line="108" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/NavigationDrawerFragment.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -779,18 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main3.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_checkout.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-25/android.jar!/java/util/ArrayList.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -812,31 +706,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Trx_Checkout.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/OneFragment1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="27" lean-forward="true" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="303" column="24" selection-start-line="303" selection-start-column="24" selection-end-line="303" selection-end-column="24" />
-          <folding>
-            <element signature="e#4612#4630#0" expanded="true" />
-            <element signature="e#16636#16784#0" expanded="true" />
-            <element signature="e#16783#16784#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="8653">
+          <caret line="600" column="49" selection-start-line="600" selection-start-column="49" selection-end-line="600" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/DataSapiFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="505" column="54" lean-forward="true" selection-start-line="505" selection-start-column="54" selection-end-line="505" selection-end-column="54" />
+        <state relative-caret-position="7276">
+          <caret line="505" column="54" selection-start-line="505" selection-start-column="54" selection-end-line="505" selection-end-column="54" />
           <folding>
-            <element signature="e#51196#51202#0" expanded="true" />
             <element signature="e#56002#56003#0" expanded="true" />
             <element signature="e#56063#56064#0" expanded="true" />
             <element signature="e#56113#56114#0" expanded="true" />
@@ -849,98 +730,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/OneFragment1.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/CheckoutFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="600" column="49" selection-start-line="600" selection-start-column="49" selection-end-line="600" selection-end-column="49" />
+        <state relative-caret-position="6188">
+          <caret line="435" selection-start-line="396" selection-end-line="435" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1870">
+          <caret line="189" column="21" selection-start-line="184" selection-start-column="20" selection-end-line="189" selection-end-column="21" />
           <folding>
-            <element signature="e#8335#8485#0" expanded="true" />
-            <element signature="e#8484#8485#0" expanded="true" />
+            <marker date="1615002552227" expanded="true" signature="17993:18492" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/CheckoutFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="435" lean-forward="true" selection-start-line="396" selection-end-line="435" />
+        <state relative-caret-position="2108">
+          <caret line="210" selection-start-line="210" selection-end-line="210" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main3.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+        <state relative-caret-position="136">
+          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main4.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardTabsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="378" column="19" selection-start-line="378" selection-start-column="16" selection-end-line="378" selection-end-column="19" />
+        <state relative-caret-position="4862">
+          <caret line="361" column="13" selection-start-line="361" selection-start-column="13" selection-end-line="361" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="787" column="44" lean-forward="true" selection-start-line="787" selection-start-column="44" selection-end-line="787" selection-end-column="44" />
-          <folding>
-            <element signature="e#4696#4712#0" expanded="true" />
-            <element signature="e#4943#4956#0" expanded="true" />
-            <element signature="e#5173#5187#0" expanded="true" />
-            <element signature="e#6994#7094#0" expanded="true" />
-            <element signature="e#11350#11567#0" expanded="true" />
-            <element signature="e#11602#11761#0" expanded="true" />
-            <element signature="e#11760#11761#0" expanded="true" />
-            <element signature="e#11822#11975#0" expanded="true" />
-            <element signature="e#11974#11975#0" expanded="true" />
-            <element signature="e#12052#12253#0" expanded="true" />
-            <element signature="e#12284#12427#0" expanded="true" />
-            <element signature="e#12426#12427#0" expanded="true" />
-            <element signature="e#12214#12215#0" expanded="true" />
-            <element signature="e#12256#12257#0" expanded="true" />
-            <element signature="e#14850#14973#0" expanded="true" />
-            <element signature="e#15674#15801#0" expanded="true" />
-            <element signature="e#14449#14455#0" expanded="true" />
-            <element signature="e#16388#16496#0" expanded="true" />
-            <element signature="e#16609#16913#0" expanded="true" />
-            <element signature="e#16739#16867#0" expanded="true" />
-            <element signature="e#16912#16913#0" expanded="true" />
-            <element signature="e#18319#18536#0" expanded="true" />
-            <element signature="e#18571#18730#0" expanded="true" />
-            <element signature="e#18729#18730#0" expanded="true" />
-            <element signature="e#18791#19415#0" expanded="true" />
-            <element signature="e#19414#19415#0" expanded="true" />
-            <element signature="e#19492#19693#0" expanded="true" />
-            <element signature="e#19724#19867#0" expanded="true" />
-            <element signature="e#19866#19867#0" expanded="true" />
-            <element signature="e#23482#23605#0" expanded="true" />
-            <element signature="e#24282#24409#0" expanded="true" />
-            <element signature="e#24714#24822#0" expanded="true" />
-            <element signature="e#25065#25193#0" expanded="true" />
-            <element signature="e#26289#26506#0" expanded="true" />
-            <element signature="e#26541#26700#0" expanded="true" />
-            <element signature="e#26699#26700#0" expanded="true" />
-            <element signature="e#26761#26919#0" expanded="true" />
-            <element signature="e#26918#26919#0" expanded="true" />
-            <element signature="e#26996#27197#0" expanded="true" />
-            <element signature="e#27228#27371#0" expanded="true" />
-            <element signature="e#27370#27371#0" expanded="true" />
-            <element signature="e#27661#27784#0" expanded="true" />
-            <element signature="e#27933#28060#0" expanded="true" />
-            <element signature="e#28195#28322#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="32538">
+          <caret line="1923" column="36" selection-start-line="1923" selection-start-column="15" selection-end-line="1923" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_checkout.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Trx_Checkout.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="2029" column="27" lean-forward="true" selection-start-line="2029" selection-start-column="27" selection-end-line="2029" selection-end-column="27" />
+        <state relative-caret-position="34">
+          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="31" column="82" lean-forward="true" selection-start-line="31" selection-start-column="82" selection-end-line="31" selection-end-column="82" />
         </state>
       </provider>
     </entry>

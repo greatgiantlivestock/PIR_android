@@ -1921,6 +1921,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		mCount.close();
 		return count;
 	}
+	public int getCountAllTrxcheckin() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db.rawQuery("SELECT COUNT(id_chekin) FROM " + TABLE_TRX_CHECKIN , null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
 	public int getCountUploadAllDataSapi() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_UPLOAD_DATA_SAPI , null);

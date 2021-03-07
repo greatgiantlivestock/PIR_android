@@ -214,7 +214,12 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 		switch (item.getItemId()) {
 			case R.id.menu_refresh:
 				if (GlobalApp.checkInternetConnection(act)) {
-					new DownloadDataCustomer().execute();
+					int countChk = databaseHandler.getCountAllTrxcheckin();
+					if(countChk==0){
+						new DownloadDataCustomer().execute();
+					}else{
+						showCustomDialog("Ada data ofline yang masih tersimpan di HP, lakukan upload terlebih dahulu sebelum memperbarui data petani.");
+					}
 				} else {
 					String message = act.getApplicationContext().getResources()
 							.getString(R.string.app_customer_processing_empty);

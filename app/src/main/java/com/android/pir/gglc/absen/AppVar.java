@@ -8,14 +8,14 @@ import java.io.File;
 public class AppVar {
 
     //URL to our login.php file, url bisa diganti sesuai dengan alamat server kita
-    public static final String LOGIN_URL = "http://179.15.30.102/visit-pir/login/login_member";
-    public static final String LOGIN_URL1 = "http://179.15.30.102/visit-pir/login/login_member1";
-    public static final String POST_CHECKIN = "http://179.15.30.102/visit-pir/checkin/add";
-    public static final String POST_CHECKIN_PROSPECT = "http://179.15.30.102/visit-pir/checkin/add1";
-    public static final String POST_NEW_CHECKIN = "http://179.15.30.102/visit-pir/checkin/addNewCheckin";
-    public static final String POST_CUSTOMER_TMP = "http://179.15.30.102/visit-pir/checkin/addcustomer_tmp";
-    public static final String POST_CHECKOUT = "http://179.15.30.102/visit-pir/checkin/addcheckout";
-    public static final String POST_UPDATE_PASSWORD= "http://179.15.30.102/visit-pir/user/edit_password";
+    public static final String LOGIN_URL = "https://visit-pir.gg-livestock.com/login/login_member";
+    public static final String LOGIN_URL1 = "https://visit-pir.gg-livestock.com/login/login_member1";
+    public static final String POST_CHECKIN = "https://visit-pir.gg-livestock.com/checkin/add";
+    public static final String POST_CHECKIN_PROSPECT = "https://visit-pir.gg-livestock.com/checkin/add1";
+    public static final String POST_NEW_CHECKIN = "https://visit-pir.gg-livestock.com/checkin/addNewCheckin";
+    public static final String POST_CUSTOMER_TMP = "https://visit-pir.gg-livestock.com/checkin/addcustomer_tmp";
+    public static final String POST_CHECKOUT = "https://visit-pir.gg-livestock.com/checkin/addcheckout";
+    public static final String POST_UPDATE_PASSWORD= "https://visit-pir.gg-livestock.com/user/edit_password";
     public static final String SHARED_PREFERENCES_DISPLAY_FOTO_1 = "mahkota_display_foto_1";
     public static final String SHARED_PREFERENCES_DISPLAY_FOTO_2 = "mahkota_display_foto_2";
     public static final String SHARED_PREFERENCES_DISPLAY_FOTO_3 = "mahkota_display_foto_3";
@@ -95,7 +95,7 @@ public class AppVar {
     public static final String SHARED_PREFERENCES_TABLE_STOCK_VAN = "mahkota_table_stock_van";
     public static final String CONFIG_APP_FOLDER_CUSTOMER = "customer";
     public static final String CONFIG_APP_FOLDER_CUSTOMER_PROSPECT = "customer_checkin";
-    public static final String CONFIG_APP_URL_PUBLIC = "http://179.15.30.102/visit-pir/";
+    public static final String CONFIG_APP_URL_PUBLIC = "https://visit-pir.gg-livestock.com/";
     public static final String SHARED_PREFERENCES_STAFF_ID_STAFF = "mahkota_staff_id_staff";
     public static final String SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL = "mahkota_table_jadwal_detail_jadwal";
     public static final String SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_NAMA = "mahkota_table_jadwal_detail_nama_customer";
