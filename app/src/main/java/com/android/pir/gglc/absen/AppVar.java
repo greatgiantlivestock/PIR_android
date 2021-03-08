@@ -19,7 +19,6 @@ public class AppVar {
     public static final String SHARED_PREFERENCES_DISPLAY_FOTO_1 = "mahkota_display_foto_1";
     public static final String SHARED_PREFERENCES_DISPLAY_FOTO_2 = "mahkota_display_foto_2";
     public static final String SHARED_PREFERENCES_DISPLAY_FOTO_3 = "mahkota_display_foto_3";
-    public static final String SHARED_PREFERENCES_TABLE_PRODUCT = "ggl_table_product";
     public static final String SHARED_PREFERENCES_CHILLER_FOTO_1 = "mahkota_chiller_foto_1";
     public static final String SHARED_PREFERENCES_EARTAG = "pir_eartag";
     public static final String SHARED_PREFERENCES_KETERANGAN_CHECKOUT = "pir_keterangan_checkout";
