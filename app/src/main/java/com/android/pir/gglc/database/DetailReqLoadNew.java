@@ -70,13 +70,15 @@ public class DetailReqLoadNew {
 	private int id_product;
 	private String alamat;
 	private String keterangan;
+	private String indnr;
 
 	// constructor
-	public DetailReqLoadNew(String nama_product, int id_product, String alamat, String keterangan) {
+	public DetailReqLoadNew(String nama_product, int id_product, String alamat, String keterangan, String indnr) {
 		this.nama_product = nama_product;
 		this.id_product = id_product;
 		this.alamat = alamat;
 		this.keterangan = keterangan;
+		this.indnr = indnr;
 	}
 
 	public DetailReqLoadNew(){
@@ -113,6 +115,14 @@ public class DetailReqLoadNew {
 
 	public void setKeterangan(String keterangan) {
 		this.keterangan = keterangan;
+	}
+
+	public String getIndnr() {
+		return indnr;
+	}
+
+	public void setIndnr(String indnr) {
+		this.indnr = indnr;
 	}
 
 }

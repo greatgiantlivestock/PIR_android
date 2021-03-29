@@ -258,13 +258,9 @@ public class ChangePassword extends ActionBarActivity implements
 							History_Canvassing.class);
 					startActivity(intentActivity);
 					finish();
+				}else if (position == 6) {
+					showCustomDialogExit();
 				}
-//				else if (position == 5) {
-//					Intent intentActivity = new Intent(this,
-//							Orderan.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}
 			}
 		}
 	}
@@ -350,7 +346,7 @@ public class ChangePassword extends ActionBarActivity implements
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-			showCustomDialogExit();
+//			showCustomDialogExit();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);

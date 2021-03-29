@@ -8,24 +8,27 @@ public class Rencana {
 	String alamat;
 	int status;
 	String tanggal_rencana;
+	String indnr;
 	public Rencana(){
 
 	}
 	// constructor
-	public Rencana(int id_rencana_detail, String nama_customer, String alamat, int status, String tanggal_rencana){
+	public Rencana(int id_rencana_detail, String nama_customer, String alamat, int status, String tanggal_rencana,String indnr){
 		this.id_rencana_detail=id_rencana_detail;
 		this.nama_customer=nama_customer;
 		this.alamat=alamat;
 		this.status=status;
 		this.tanggal_rencana=tanggal_rencana;
+		this.indnr=indnr;
 	}
 
 	// constructor
-	public Rencana(String nama_customer, String alamat, int status, String tanggal_rencana){
+	public Rencana(String nama_customer, String alamat, int status, String tanggal_rencana,String indnr){
 		this.nama_customer=nama_customer;
 		this.alamat=alamat;
 		this.status=status;
 		this.tanggal_rencana=tanggal_rencana;
+		this.indnr=indnr;
 	}
 	// getting id_absen
 	public int getId_rencana_detail(){
@@ -75,6 +78,16 @@ public class Rencana {
 	// setting tanggal rencana
 	public void setTanggal_rencana(String tanggal_rencana){
 		this.tanggal_rencana= tanggal_rencana;
+	}
+
+// getting tanggal rencana
+	public String getIndnr(){
+		return this.indnr;
+	}
+
+	// setting tanggal rencana
+	public void setIndnr(String indnr){
+		this.indnr= indnr;
 	}
 
 }

@@ -382,13 +382,15 @@ public class IconTextTabsActivity extends AppCompatActivity implements Navigatio
                             : oResponsealue.getString("status_rencana");
                     String nomor_rencana_detail = oResponsealue.isNull("nomor_rencana_detail") ? null
                             : oResponsealue.getString("nomor_rencana_detail");
-                    Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
-                    Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
-                    Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
-                    Log.d(LOG_TAG, "id_customer:" + id_customer);
+                    String indnr = oResponsealue.isNull("indnr") ? null
+                            : oResponsealue.getString("indnr");
+//                    Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
+//                    Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
+//                    Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
+//                    Log.d(LOG_TAG, "id_customer:" + id_customer);
                     databaseHandler.addDetailRencana(new DetailRencana(Integer.parseInt(id_rencana_detail),Integer.parseInt(id_rencana_header),
                             Integer.parseInt(id_kegiatan),Integer.parseInt(id_customer),Integer.parseInt(id_karyawan),
-                            Integer.parseInt(status_rencana),nomor_rencana_detail));
+                            Integer.parseInt(status_rencana),nomor_rencana_detail,indnr));
                 }
             } catch (JSONException e) {
                 final String message = e.toString();

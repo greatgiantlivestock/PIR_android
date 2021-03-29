@@ -725,19 +725,7 @@ public class History_Canvassing extends ActionBarActivity implements
 							ProspectPlanVisit.class);
 					startActivity(intentActivity);
 					finish();
-				}
-//				else if (position ==3) {
-//					Intent intentActivity = new Intent(this,
-//							IconTextTabsActivity_lap.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}else if (position == 4) {
-//					Intent intentActivity = new Intent(this,
-//							CheckoutActivity.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}
-				else if (position == 3) {
+				}else if (position == 3) {
 					Intent intentActivity = new Intent(this,
 							DashboardActivity.class);
 					startActivity(intentActivity);
@@ -747,13 +735,9 @@ public class History_Canvassing extends ActionBarActivity implements
 							ChangePassword.class);
 					startActivity(intentActivity);
 					finish();
+				}else if (position == 6) {
+					showCustomDialogExit();
 				}
-//				else if (position == 5) {
-//					Intent intentActivity = new Intent(this,
-//							Orderan.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}
 			}
 		}
 	}
@@ -804,7 +788,7 @@ public class History_Canvassing extends ActionBarActivity implements
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-			showCustomDialogExit();
+//			showCustomDialogExit();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);

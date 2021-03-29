@@ -47,8 +47,8 @@
 
     <LinearLayout
         android:id="@+id/activity_customer_linear_title"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_below="@+id/activity_customer_linear_keterangan"
         android:orientation="horizontal"
         android:padding="7dip" >

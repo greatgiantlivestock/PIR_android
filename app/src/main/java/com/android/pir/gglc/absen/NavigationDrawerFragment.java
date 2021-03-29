@@ -220,6 +220,8 @@ public class NavigationDrawerFragment extends Fragment implements
 				getResources().getDrawable(R.drawable.history)));
 		items.add(new NavigationItem(getResources().getString(R.string.menu_3),
 				getResources().getDrawable(R.drawable.change)));
+		items.add(new NavigationItem("Keluar",
+				getResources().getDrawable(R.drawable.exit_to_app_black_48dp)));
 //		items.add(new NavigationItem(getResources().getString(R.string.menu_7),null));
 		return items;
 	}

@@ -319,7 +319,7 @@ public class ProspectPlanVisit extends ActionBarActivity implements NavigationDr
 				String keteranganpetani = keteranganPetani.getText().toString();
 				String nama_petani = searchCustomer.getText().toString();
 				String desa = desa_.getText().toString();
-				updateListViewDetailOrder(new DetailReqLoadNew(nama_petani, 990124,desa,keteranganpetani));
+				updateListViewDetailOrder(new DetailReqLoadNew(nama_petani, 990124,desa,keteranganpetani,""));
 				chooseCustomerDialog.hide();
 			}
 		});
@@ -779,13 +779,15 @@ public class ProspectPlanVisit extends ActionBarActivity implements NavigationDr
 							: oResponsealue.getString("status_rencana");
 					String nomor_rencana_detail = oResponsealue.isNull("nomor_rencana_detail") ? null
 							: oResponsealue.getString("nomor_rencana_detail");
-					Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
-					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
-					Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
-					Log.d(LOG_TAG, "id_customer:" + id_customer);
+					String indnr = oResponsealue.isNull("indnr") ? null
+							: oResponsealue.getString("indnr");
+//					Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
+//					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
+//					Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
+//					Log.d(LOG_TAG, "id_customer:" + id_customer);
 					databaseHandler.addDetailRencana(new DetailRencana(Integer.parseInt(id_rencana_detail),Integer.parseInt(id_rencana_header),
 							Integer.parseInt(id_kegiatan),Integer.parseInt(id_customer),Integer.parseInt(id_karyawan),
-							Integer.parseInt(status_rencana),nomor_rencana_detail));
+							Integer.parseInt(status_rencana),nomor_rencana_detail,indnr));
 				}
 				resetForm();
 			} catch (JSONException e) {
@@ -945,7 +947,7 @@ public class ProspectPlanVisit extends ActionBarActivity implements NavigationDr
 					String keteranganpetani = keteranganPetani.getText().toString();
 //					Log.d(LOG_TAG, "keterangan Petani: "+keteranganpetani);
 //					saveKeteranganPetani(keteranganpetani);
-					updateListViewDetailOrder(new DetailReqLoadNew(data.get(position).getNama_customer(), data.get(position).getId_customer(),data.get(position).getAlamat(),keteranganpetani));
+					updateListViewDetailOrder(new DetailReqLoadNew(data.get(position).getNama_customer(), data.get(position).getId_customer(),data.get(position).getAlamat(),keteranganpetani,data.get(position).getIndnr()));
 					chooseProductDialog.hide();
 				}
 			});
@@ -1357,19 +1359,7 @@ public class ProspectPlanVisit extends ActionBarActivity implements NavigationDr
 							PlanVisitActivity2.class);
 					startActivity(intentActivity);
 					finish();
-				}
-//				else if (position ==3) {
-//					Intent intentActivity = new Intent(this,
-//							IconTextTabsActivity_lap.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}else if (position == 4) {
-//					Intent intentActivity = new Intent(this,
-//							CheckoutActivity.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}
-				else if (position == 3) {
+				}else if (position == 3) {
 					Intent intentActivity = new Intent(this,
 							DashboardActivity.class);
 					startActivity(intentActivity);
@@ -1384,13 +1374,9 @@ public class ProspectPlanVisit extends ActionBarActivity implements NavigationDr
 							ChangePassword.class);
 					startActivity(intentActivity);
 					finish();
+				}else if (position == 6) {
+					showCustomDialogExit();
 				}
-//				else if (position == 5) {
-//					Intent intentActivity = new Intent(this,
-//							Orderan.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}
 			}
 		}
 	}
@@ -1502,7 +1488,7 @@ public class ProspectPlanVisit extends ActionBarActivity implements NavigationDr
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-			showCustomDialogExit();
+//			showCustomDialogExit();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);

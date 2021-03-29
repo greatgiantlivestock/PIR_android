@@ -234,12 +234,14 @@ public class DashboardActivity extends ActionBarActivity implements
 				String nama_customer = rencana_from_db.get(i).getNama_customer();
 				String alamat = rencana_from_db.get(i).getAlamat();
 				int status_renana = rencana_from_db.get(i).getStatus();
+				String indnr = rencana_from_db.get(i).getIndnr();
 
 				Rencana rencana = new Rencana();
 				rencana.setId_rencana_detail(id_rencana_detail);
 				rencana.setNama_customer(nama_customer);
 				rencana.setAlamat(alamat);
 				rencana.setStatus(status_renana);
+				rencana.setIndnr(indnr);
 
 				rencana_list.add(rencana);
 			}
@@ -371,6 +373,9 @@ public class DashboardActivity extends ActionBarActivity implements
 			}
 			MultipartEntity entity = new MultipartEntity();
 			File dir = new File(AppVar.getFolderPath() + "/"+ IMAGE_DIRECTORY_NAME + "/"+ foto);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
 			if (dir.exists() && foto != null) {
 				entity.addPart("image_1", new FileBody(dir));
 				entity.addPart("foto1", new StringBody(foto));
@@ -422,6 +427,9 @@ public class DashboardActivity extends ActionBarActivity implements
 				if (status.equalsIgnoreCase("False")) {
 					File dir = new File(AppVar.getFolderPath() + "/"
 							+ IMAGE_DIRECTORY_NAME);
+					if (!dir.exists()) {
+						dir.mkdirs();
+					}
 					List<File> fileFoto = getListFiles(dir);
 					for (File tempFile : fileFoto) {
 						tempFile.delete();
@@ -572,6 +580,9 @@ public class DashboardActivity extends ActionBarActivity implements
 			File dir1 = new File(AppVar.getFolderPath() + "/"
 					+ IMAGE_DIRECTORY_CHECKIN_NAME + "/"
 					+ foto_1);
+			if (!dir1.exists()) {
+				dir1.mkdirs();
+			}
 			if (dir1.exists() && foto_1 != null) {
 				entity.addPart("image_1", new FileBody(dir1));
 				entity.addPart("foto1", new StringBody(foto_1));
@@ -665,6 +676,9 @@ public class DashboardActivity extends ActionBarActivity implements
 				if (status.equalsIgnoreCase("False")) {
 					File dir = new File(AppVar.getFolderPath() + "/"
 							+ IMAGE_DIRECTORY_CHECKIN_NAME);
+					if (!dir.exists()) {
+						dir.mkdirs();
+					}
 					List<File> fileFoto = getListFiles(dir);
 					for (File tempFile : fileFoto) {
 						tempFile.delete();
@@ -872,6 +886,7 @@ public class DashboardActivity extends ActionBarActivity implements
 				String alamat = rencana_from_db.get(i).getAlamat();
 				int status = rencana_from_db.get(i).getStatus();
 				String tanggal_rencana = rencana_from_db.get(i).getTanggal_rencana();
+				String indnr = rencana_from_db.get(i).getIndnr();
 
 				Rencana rencana = new Rencana();
 				rencana.setId_rencana_detail(id_rencana_detail);
@@ -879,6 +894,7 @@ public class DashboardActivity extends ActionBarActivity implements
 				rencana.setAlamat(alamat);
 				rencana.setStatus(status);
 				rencana.setTanggal_rencana(tanggal_rencana);
+				rencana.setIndnr(indnr);
 
 				rencana_list.add(rencana);
 			}
@@ -1011,13 +1027,15 @@ public class DashboardActivity extends ActionBarActivity implements
 							: oResponsealue.getString("desa");
 					String no_hp = oResponsealue.isNull("veraa_user") ? null
 							: oResponsealue.getString("veraa_user");
+					String indnr = oResponsealue.isNull("indnr") ? null
+							: oResponsealue.getString("indnr");
 					String lats = "0";
 					String longs = "0";
 					String id_wilayah = "3010";
 					Log.d(LOG_TAG, "id_customer:" + id_customer);
 					Log.d(LOG_TAG, "kode_customer:" + kode_customer);
 					Log.d(LOG_TAG, "nama_customer:" + nama_customer);
-					databaseHandler.addMst_customer(new Mst_Customer(Integer.parseInt(id_customer),kode_customer,nama_customer,alamat,no_hp,lats,longs,Integer.parseInt(id_wilayah)));
+					databaseHandler.addMst_customer(new Mst_Customer(Integer.parseInt(id_customer),kode_customer,nama_customer,alamat,no_hp,lats,longs,Integer.parseInt(id_wilayah),indnr));
 				}
 
 			} catch (JSONException e) {
@@ -1474,13 +1492,15 @@ public class DashboardActivity extends ActionBarActivity implements
 							: oResponsealue.getString("status_rencana");
 					String nomor_rencana_detail = oResponsealue.isNull("nomor_rencana_detail") ? null
 							: oResponsealue.getString("nomor_rencana_detail");
-					Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
-					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
-					Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
-					Log.d(LOG_TAG, "id_customer:" + id_customer);
+					String indnr = oResponsealue.isNull("indnr") ? null
+							: oResponsealue.getString("indnr");
+//					Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
+//					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
+//					Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
+//					Log.d(LOG_TAG, "id_customer:" + id_customer);
 					databaseHandler.addDetailRencana(new DetailRencana(Integer.parseInt(id_rencana_detail),Integer.parseInt(id_rencana_header),
 							Integer.parseInt(id_kegiatan),Integer.parseInt(id_customer),Integer.parseInt(id_karyawan),
-							Integer.parseInt(status_rencana),nomor_rencana_detail));
+							Integer.parseInt(status_rencana),nomor_rencana_detail,indnr));
 				}
 			} catch (JSONException e) {
 				final String message = e.toString();
@@ -1571,6 +1591,8 @@ public class DashboardActivity extends ActionBarActivity implements
 						.findViewById(R.id.customer_title_status_customer);
 				holder.list_tanggal = (TextView) row
 						.findViewById(R.id.customer_title_tanggal_rencana);
+				holder.list_index = (TextView) row
+						.findViewById(R.id.index);
 				row.setTag(holder);
 			} else {
 				holder = (UserHolder) row.getTag();
@@ -1586,6 +1608,7 @@ public class DashboardActivity extends ActionBarActivity implements
 				holder.list_status.setText("Selesai");
 			}
 			holder.list_tanggal.setText(rencanaData.getTanggal_rencana());
+			holder.list_index.setText(rencanaData.getIndnr());
 			holder.list_namaCustomer.setTypeface(typefaceSmall);
 			holder.list_alamatCustomer.setTypeface(typefaceSmall);
 			holder.list_status.setTypeface(typefaceSmall);
@@ -1598,10 +1621,12 @@ public class DashboardActivity extends ActionBarActivity implements
 					String nama = String.valueOf(data.get(position).getNama_customer());
 					String alamat = String.valueOf(data.get(position).getAlamat());
 					String status = String.valueOf(data.get(position).getStatus());
+					String index = String.valueOf(data.get(position).getIndnr());
 					saveAppDataDetailJadwal(rencana_detail);
 					saveAppDataNamaCst(nama);
 					saveAppDataAlamatCst(alamat);
 					saveAppDataStatusCst(status);
+					saveAppDataIndex(index);
 					gotoDetailJadwal();
 				}
 			});
@@ -1613,6 +1638,7 @@ public class DashboardActivity extends ActionBarActivity implements
 			TextView list_alamatCustomer;
 			TextView list_status;
 			TextView list_tanggal;
+			TextView list_index;
 		}
 
 	}
@@ -1645,9 +1671,15 @@ public class DashboardActivity extends ActionBarActivity implements
 				responsedata);
 		editor.commit();
 	}
+	public void saveAppDataIndex(String responsedata) {
+		SharedPreferences sp = getSharedPrefereces();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER,
+				responsedata);
+		editor.commit();
+	}
 
 	public void gotoDetailJadwal() {
-//		Intent i = new Intent(this, DetailJadwalActivity.class);
 		Intent i = new Intent(this, DashboardTabsActivity.class);
 		startActivity(i);
 		finish();
@@ -1709,6 +1741,8 @@ public class DashboardActivity extends ActionBarActivity implements
 							ChangePassword.class);
 					startActivity(intentActivity);
 					finish();
+				}else if (position == 6) {
+					showCustomDialogExit();
 				}
 			}
 		}
@@ -1786,7 +1820,7 @@ public class DashboardActivity extends ActionBarActivity implements
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-			showCustomDialogExit();
+//			showCustomDialogExit();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);

@@ -189,16 +189,16 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 				resetForm();
 			}
 		});
-		btn_edit.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				spinnerRencana.setVisibility(View.VISIBLE);
-				mButtonSaveUpload.setVisibility(View.INVISIBLE);
-				resetForm();
-				configSpinner();
-				save_edit.setVisibility(View.VISIBLE);
-			}
-		});
+//		btn_edit.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				spinnerRencana.setVisibility(View.VISIBLE);
+//				mButtonSaveUpload.setVisibility(View.INVISIBLE);
+//				resetForm();
+//				configSpinner();
+//				save_edit.setVisibility(View.VISIBLE);
+//			}
+//		});
 		updateContentRefreshRencana();
 	}
 
@@ -480,12 +480,13 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 		imm.showSoftInput(searchCustomer, InputMethodManager.SHOW_IMPLICIT);
 
 		listview.setItemsCanFocus(false);
-		ArrayList<MstUser> staff_list = databaseHandler.getAllUser();
+		final ArrayList<MstUser> staff_list = databaseHandler.getAllUser();
 		user = new MstUser();
 
 		for (MstUser tempStaff : staff_list)
 			user = tempStaff;
 		String nama1=user.getNama();
+		Log.d(LOG_TAG, "name1: "+nama1);
 		ArrayList<Mst_Customer> customer_from_db = databaseHandler.getAllCustomerOnly(nama1);
 		if (customer_from_db.size() > 0) {
 			listview.setVisibility(View.VISIBLE);
@@ -493,11 +494,13 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 				int id_customer = customer_from_db.get(i).getId_customer();
 				String nama_customer = customer_from_db.get(i).getNama_customer();
 				String alamat = customer_from_db.get(i).getAlamat();
+				String indnr = customer_from_db.get(i).getIndnr();
 
 				Mst_Customer customer = new Mst_Customer();
 				customer.setId_customer(id_customer);
 				customer.setNama_customer(nama_customer);
 				customer.setAlamat(alamat);
+				customer.setIndnr(indnr);
 				customer_list.add(customer);
 				cAdapterChooseAdapter = new ListViewChooseAdapter(
 						this,
@@ -517,8 +520,12 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 									  int arg3) {
 				if (cs.toString().length() > 0) {
 					customer_list.clear();
+					for (MstUser tempStaff : staff_list)
+						user = tempStaff;
+					String nama1=user.getNama();
+					Log.d(LOG_TAG, "name1: "+nama1);
 					ArrayList<Mst_Customer> customer_from_db = databaseHandler
-							.getAllCustomerBaseOnSearch(cs.toString());
+							.getAllCustomerBaseOnSearch(nama1, cs.toString());
 					if (customer_from_db.size() > 0) {
 						listview.setVisibility(View.VISIBLE);
 						for (int i = 0; i < customer_from_db.size(); i++) {
@@ -527,11 +534,13 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 							String nama_customer = customer_from_db.get(i)
 									.getNama_customer();
 							String alamat = customer_from_db.get(i).getAlamat();
+							String indnr = customer_from_db.get(i).getIndnr();
 
 							Mst_Customer customer = new Mst_Customer();
 							customer.setId_customer(id_customer);
 							customer.setNama_customer(nama_customer);
 							customer.setAlamat(alamat);
+							customer.setIndnr(indnr);
 							customer_list.add(customer);
 							cAdapterChooseAdapter = new ListViewChooseAdapter(
 									PlanVisitActivity.this,
@@ -561,11 +570,13 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 							String nama_customer = customer_from_db.get(i)
 									.getNama_customer();
 							String alamat = customer_from_db.get(i).getAlamat();
+							String indnr = customer_from_db.get(i).getIndnr();
 
 							Mst_Customer customer = new Mst_Customer();
 							customer.setId_customer(id_customer);
 							customer.setNama_customer(nama_customer);
 							customer.setAlamat(alamat);
+							customer.setIndnr(indnr);
 							customer_list.add(customer);
 							cAdapterChooseAdapter = new ListViewChooseAdapter(
 									PlanVisitActivity.this,
@@ -621,18 +632,14 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 
 		@Override
 		protected String doInBackground(String... params) {
-//			SharedPreferences spPreferences = getSharedPrefereces();
 			ArrayList<MstUser> staff_list = databaseHandler.getAllUser();
 			user = new MstUser();
 
 			for (MstUser tempStaff : staff_list)
 				user = tempStaff;
 			id_user=user.getId_user();
-//			main_app_nama_cst = spPreferences.getString(
-//					AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_NAMA, null);
 			String url_add_req_load = AppVar.CONFIG_APP_URL_PUBLIC
 					+ AppVar.CONFIG_APP_URL_UPLOAD_RENCANA;
-//			for (DetailReqLoadNew detailReqLoad : detailReqLoadList) {
 				response_data = uploadReqLoad(url_add_req_load,
 						mulai_data,keterangan_data,
 						String.valueOf(id_user)
@@ -952,13 +959,15 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 							: oResponsealue.getString("desa");
 					String no_hp = oResponsealue.isNull("veraa_user") ? null
 							: oResponsealue.getString("veraa_user");
+					String indnr = oResponsealue.isNull("indnr") ? null
+							: oResponsealue.getString("indnr");
 					String lats = "0";
 					String longs = "0";
 					String id_wilayah = "3010";
 					Log.d(LOG_TAG, "id_customer:" + id_customer);
 					Log.d(LOG_TAG, "kode_customer:" + kode_customer);
 					Log.d(LOG_TAG, "nama_customer:" + nama_customer);
-					db.addMst_customer(new Mst_Customer(Integer.parseInt(id_customer),kode_customer,nama_customer,alamat,no_hp,lats,longs,Integer.parseInt(id_wilayah)));
+					db.addMst_customer(new Mst_Customer(Integer.parseInt(id_customer),kode_customer,nama_customer,alamat,no_hp,lats,longs,Integer.parseInt(id_wilayah),indnr));
 				}
 
 			} catch (JSONException e) {
@@ -1108,19 +1117,6 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 	public class UploadDataDetail extends AsyncTask<String, Integer, String> {
 		@Override
 		protected void onPreExecute() {
-//			progressDialog.setMessage(getApplicationContext().getResources()
-//					.getString(R.string.app_reqload_processing_upload));
-//			progressDialog.show();
-//			progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//						@Override
-//						public void onCancel(DialogInterface dialog) {
-//							String msg = getApplicationContext()
-//									.getResources()
-//									.getString(
-//											R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
-//							showCustomDialog(msg);
-//						}
-//					});
 		}
 
 		@Override
@@ -1141,7 +1137,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 							url_add_req_load,
 							id_rencana_header,
 							String.valueOf(detailReqLoad.getId_product()),
-							id_karyawan
+							id_karyawan,detailReqLoad.getIndnr()
 					);
 				}
 //			}
@@ -1320,13 +1316,15 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 							: oResponsealue.getString("status_rencana");
 					String nomor_rencana_detail = oResponsealue.isNull("nomor_rencana_detail") ? null
 							: oResponsealue.getString("nomor_rencana_detail");
-					Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
-					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
-					Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
-					Log.d(LOG_TAG, "id_customer:" + id_customer);
+					String indnr = oResponsealue.isNull("indnr") ? null
+							: oResponsealue.getString("indnr");
+//					Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
+//					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
+//					Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
+//					Log.d(LOG_TAG, "id_customer:" + id_customer);
 					databaseHandler.addDetailRencana(new DetailRencana(Integer.parseInt(id_rencana_detail),Integer.parseInt(id_rencana_header),
 							Integer.parseInt(id_kegiatan),Integer.parseInt(id_customer),Integer.parseInt(id_karyawan),
-							Integer.parseInt(status_rencana),nomor_rencana_detail));
+							Integer.parseInt(status_rencana),nomor_rencana_detail,indnr));
 				}
 				resetForm();
 			} catch (JSONException e) {
@@ -1621,6 +1619,8 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 
 				row = inflater.inflate(layoutResourceId, parent, false);
 				holder = new ListViewChooseAdapter.UserHolder();
+				holder.list_indnr = (TextView) row
+						.findViewById(R.id.indnr);
 				holder.list_namaProduct = (TextView) row
 						.findViewById(R.id.sales_order_title_nama_product);
 				holder.list_desa= (TextView) row
@@ -1633,13 +1633,14 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 				holder = (ListViewChooseAdapter.UserHolder) row.getTag();
 			}
 			productData = data.get(position);
+			holder.list_indnr.setText(productData.getIndnr());
 			holder.list_namaProduct.setText(productData.getNama_customer());
 			holder.list_desa.setText(productData.getAlamat());
 			holder.mButtonAddItem.setOnClickListener(new View.OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					updateListViewDetailOrder(new DetailReqLoadNew(data.get(position).getNama_customer(), data.get(position).getId_customer(),data.get(position).getAlamat(),""));
+					updateListViewDetailOrder(new DetailReqLoadNew(data.get(position).getNama_customer(), data.get(position).getId_customer(),data.get(position).getAlamat(),"",data.get(position).getIndnr()));
 					chooseProductDialog.hide();
 					listview.setVisibility(View.VISIBLE);
 					Log.d(LOG_TAG, "click listener rencana: "+data.get(position).getAlamat()+data.get(position).getNama_customer()+data.get(position).getId_customer());
@@ -1650,7 +1651,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 
 		class UserHolder {
 //			ImageView list_img;
-//			TextView list_kodeProduct;
+			TextView list_indnr;
 			TextView list_namaProduct;
 			TextView list_desa;
 			Button mButtonAddItem;
@@ -1699,7 +1700,8 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 	private String uploadReqLoadDetail(final String url,
 								 final String id_rencana_header,
 								 final String id_customer,
-								 final String id_karyawan) {
+								 final String id_karyawan,
+                                 final String indnr) {
 
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost(url);
@@ -1710,13 +1712,14 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 						.permitAll().build();
 				StrictMode.setThreadPolicy(policy);
 			}
-			Log.d(LOG_TAG, "id_rencana_header: "+id_rencana_header);
-			Log.d(LOG_TAG, "id_customer_plan: "+id_customer);
-			Log.d(LOG_TAG, "id_karyawan: "+id_karyawan);
+//			Log.d(LOG_TAG, "id_rencana_header: "+id_rencana_header);
+//			Log.d(LOG_TAG, "id_customer_plan: "+id_customer);
+//			Log.d(LOG_TAG, "id_karyawan: "+id_karyawan);
 			MultipartEntity entity = new MultipartEntity();
 			entity.addPart("id_rencana_header", new StringBody(id_rencana_header));
 			entity.addPart("id_customer", new StringBody(id_customer));
 			entity.addPart("id_karyawan", new StringBody(id_karyawan));
+			entity.addPart("indnr", new StringBody(indnr));
 			httppost.setEntity(entity);
 			// Making server call
 			HttpResponse response = httpclient.execute(httppost);
@@ -1933,6 +1936,8 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 
 				row = inflater.inflate(layoutResourceId, parent, false);
 				holder = new ListViewAdapter.UserHolder();
+				holder.list_indnr = (TextView) row
+						.findViewById(R.id.sales_order_title_indnr);
 				holder.list_nama_product = (TextView) row
 						.findViewById(R.id.sales_order_title_nama_product);
 				holder.alamat= (TextView) row
@@ -1942,6 +1947,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 				holder = (ListViewAdapter.UserHolder) row.getTag();
 			}
 			productData = data.get(position);
+			holder.list_indnr.setText(productData.getIndnr());
 			holder.list_nama_product.setText(productData.getNama_product());
 			holder.alamat.setText(productData.getAlamat());
 			row.setOnClickListener(new View.OnClickListener() {
@@ -1990,6 +1996,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 		}
 
 		class UserHolder {
+			TextView list_indnr;
 			TextView list_nama_product;
 			TextView alamat;
 		}
@@ -2049,19 +2056,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 							ProspectPlanVisit.class);
 					startActivity(intentActivity);
 					finish();
-				}
-//				else if (position ==3) {
-//					Intent intentActivity = new Intent(this,
-//							IconTextTabsActivity_lap.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}else if (position == 4) {
-//					Intent intentActivity = new Intent(this,
-//							CheckoutActivity.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}
-				else if (position == 3) {
+				}else if (position == 3) {
 					Intent intentActivity = new Intent(this,
 							DashboardActivity.class);
 					startActivity(intentActivity);
@@ -2076,13 +2071,9 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 							ChangePassword.class);
 					startActivity(intentActivity);
 					finish();
+				}else if (position == 6) {
+					showCustomDialogExit();
 				}
-//				else if (position == 5) {
-//					Intent intentActivity = new Intent(this,
-//							Orderan.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}
 			}
 		}
 	}
@@ -2208,7 +2199,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-			showCustomDialogExit();
+//			showCustomDialogExit();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);

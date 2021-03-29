@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true" >
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -278,7 +277,6 @@
         </ScrollView>
 
     </LinearLayout>
-    <!-- android:layout_marginTop="?android:attr/actionBarSize" -->
 
     <com.android.pir.gglc.absen.ScrimInsertsFrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

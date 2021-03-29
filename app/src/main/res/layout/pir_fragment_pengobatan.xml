@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.android.pir.gglc.fragment1.DataSapiFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:fillViewport="true"
+            android:scrollbars="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:baselineAligned="false"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/activity_sales_order_btn_add_product"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginRight="5dip"
+                        android:layout_weight="1"
+                        android:background="@drawable/roundedbutton"
+                        android:minHeight="50dp"
+                        android:minWidth="200dp"
+                        android:text="Tambah Tujuan"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/ttd_customer"
+                        android:layout_width="0dip"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginRight="10dip"
+                        android:layout_weight="1"
+                        android:background="@drawable/roundedbutton"
+                        android:minHeight="50dp"
+                        android:minWidth="200dp"
+                        android:text="@string/ttd_sales_order"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dip">
+
+                    <TextView
+                        android:id="@+id/activity_kanvaser_detail_ttd1"
+                        android:layout_width="0dip"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:gravity="left|center"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:visibility="visible" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5">
+                    <ListView
+                        android:id="@+id/list"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:background="@color/grey"
+                        android:divider="@color/transparent"
+                        android:dividerHeight="5dp"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <com.android.pir.gglc.absen.ScrimInsertsFrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/scrimInsetsFrameLayout"
+        android:layout_width="@dimen/navigation_drawer_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:elevation="10dp"
+        android:fitsSystemWindows="true"
+        app:insetForeground="#4000" >
+    </com.android.pir.gglc.absen.ScrimInsertsFrameLayout>
+</RelativeLayout>

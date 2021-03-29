@@ -50,6 +50,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_DETAIL_RENCANA_ID_KARYAWAN = "id_karyawan";
 	private static final String KEY_DETAIL_RENCANA_STATUS_RENCANA = "status_rencana";
 	private static final String KEY_DETAIL_RENCANA_NOMOR_RENCANA_EDTAIL = "nomor_rencana_detail";
+	private static final String KEY_DETAIL_RENCANA_INDNR = "indnr";
 
 	//define DetailRencana field
 	private static final String KEY_DATA_SAPI_ID_DATA_SAPI = "id_data_sapi";
@@ -67,6 +68,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_MST_CUSTOMER_LATS ="lats";
 	private static final String KEY_MST_CUSTOMER_LONGS ="longs";
 	private static final String KEY_MST_CUSTOMER_ID_WILAYAH ="id_wilayah";
+	private static final String KEY_MST_CUSTOMER_INDNR ="indnr";
 
 	//define mst_user field
 	private static final String KEY_MST_USER_ID_USER ="id_user";
@@ -165,7 +167,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ KEY_DETAIL_RENCANA_ID_RENCANA_DETAIL + " INTEGER PRIMARY KEY," + KEY_DETAIL_RENCANA_ID_RENCANA_HEADER + " TEXT,"
 				+ KEY_DETAIL_RENCANA_ID_KEGIATAN + " TEXT," + KEY_DETAIL_RENCANA_ID_CUSTOMER + " TEXT,"
 				+ KEY_DETAIL_RENCANA_ID_KARYAWAN + " TEXT," + KEY_DETAIL_RENCANA_STATUS_RENCANA + " TEXT,"
-				+ KEY_DETAIL_RENCANA_NOMOR_RENCANA_EDTAIL + " TEXT"
+				+ KEY_DETAIL_RENCANA_NOMOR_RENCANA_EDTAIL + " TEXT," + KEY_DETAIL_RENCANA_INDNR + " TEXT"
 				+ ")";
 		db.execSQL(CREATE_TABLE_DETAIL_RENCANA);
 
@@ -187,7 +189,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ KEY_MST_CUSTOMER_ID_CUSTOMER + " INTEGER PRIMARY KEY," + KEY_MST_CUSTOMER_KODE_CUSTOMER + " TEXT,"
 				+ KEY_MST_CUSTOMER_NAMA_CUSTOMER + " TEXT," + KEY_MST_CUSTOMER_ALAMAT + " TEXT,"
 				+ KEY_MST_CUSTOMER_NO_HP +" TEXT," + KEY_MST_CUSTOMER_LATS +" TEXT,"
-				+ KEY_MST_CUSTOMER_LONGS +" TEXT," + KEY_MST_CUSTOMER_ID_WILAYAH + " TEXT"
+				+ KEY_MST_CUSTOMER_LONGS +" TEXT," + KEY_MST_CUSTOMER_ID_WILAYAH + " TEXT,"
+				+ KEY_MST_CUSTOMER_INDNR +" TEXT"
 				+ ")";
 		db.execSQL(CREATE_TABLE_MST_CUSTOMER);
 
@@ -287,6 +290,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_DETAIL_RENCANA_ID_KARYAWAN, detail_rencana.getId_karyawan());
 		values.put(KEY_DETAIL_RENCANA_STATUS_RENCANA, detail_rencana.getStatus_rencana());
 		values.put(KEY_DETAIL_RENCANA_NOMOR_RENCANA_EDTAIL, detail_rencana.getNomor_rencana_detail());
+		values.put(KEY_DETAIL_RENCANA_INDNR, detail_rencana.getIndnr());
 
 		db.insert(TABLE_DETAIL_RENCANA, null, values);
 		db.close();
@@ -335,6 +339,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_MST_CUSTOMER_LATS, mst_customer.getLats());
 		values.put(KEY_MST_CUSTOMER_LONGS, mst_customer.getLongs());
 		values.put(KEY_MST_CUSTOMER_ID_WILAYAH, mst_customer.getId_wilayah());
+		values.put(KEY_MST_CUSTOMER_INDNR, mst_customer.getIndnr());
 
 		db.insert(TABLE_MST_CUSTOMER, null, values);
 		db.close();
@@ -531,6 +536,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					detailRencana.setId_karyawan(cursor.getInt(4));
 					detailRencana.setStatus_rencana(cursor.getInt(5));
 					detailRencana.setNomor_rencana_detail(cursor.getString(6));
+					detailRencana.setIndnr(cursor.getString(7));
 
 					// Adding staff to list
 					detailRencanaArraylist.add(detailRencana);
@@ -553,7 +559,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			detailReqLoadNews.clear();
 
 			// Select All Query
-			String selectQuery = "SELECT "+KEY_MST_CUSTOMER_NAMA_CUSTOMER+","+TABLE_DETAIL_RENCANA+"."+KEY_MST_CUSTOMER_ID_CUSTOMER+","+KEY_MST_CUSTOMER_ALAMAT+" FROM "+
+			String selectQuery = "SELECT "+KEY_MST_CUSTOMER_NAMA_CUSTOMER+","+TABLE_DETAIL_RENCANA+"."+KEY_MST_CUSTOMER_ID_CUSTOMER+","+KEY_MST_CUSTOMER_ALAMAT+","+" FROM "+
 					TABLE_DETAIL_RENCANA+" JOIN "+ TABLE_MST_CUSTOMER+" ON "+TABLE_DETAIL_RENCANA+"."+KEY_DETAIL_RENCANA_ID_CUSTOMER+"="+
 					TABLE_MST_CUSTOMER+"."+KEY_MST_CUSTOMER_ID_CUSTOMER+" JOIN "+TABLE_MASTER_RENCANA+" ON "+TABLE_MASTER_RENCANA+"."+
 					KEY_MASTER_RENCANA_ID_RENCANA_HEADER+"="+TABLE_DETAIL_RENCANA+"."+KEY_DETAIL_RENCANA_ID_RENCANA_HEADER+" WHERE "+
@@ -569,6 +575,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					detailRencana.setNama_product(cursor.getString(0));
 					detailRencana.setId_product(cursor.getInt(1));
 					detailRencana.setAlamat(cursor.getString(2));
+					detailRencana.setIndnr(cursor.getString(3));
 
 					// Adding staff to list
 					detailReqLoadNews.add(detailRencana);
@@ -830,7 +837,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			rencanaArrayList.clear();
 
 			// Select All Query
-			String selectQuery = "SELECT  id_rencana_detail,nama_customer, alamat, status_rencana, tanggal_rencana FROM trx_rencana_detail " +
+			String selectQuery = "SELECT  id_rencana_detail,nama_customer, alamat, status_rencana, tanggal_rencana,trx_rencana_detail.indnr FROM trx_rencana_detail " +
 					"JOIN mst_customer ON trx_rencana_detail.id_customer = mst_customer.id_customer JOIN trx_rencana_master ON " +
 					"trx_rencana_detail.id_rencana_header = trx_rencana_master.id_rencana_header WHERE status_rencana !='2' AND aproved='1'";
 
@@ -846,6 +853,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					rencana.setAlamat(cursor.getString(2));
 					rencana.setStatus(cursor.getInt(3));
 					rencana.setTanggal_rencana(cursor.getString(4));
+					rencana.setIndnr(cursor.getString(5));
 
 					// Adding absen to list
 					rencanaArrayList.add(rencana);
@@ -883,6 +891,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					detailRencana.setId_karyawan(cursor.getInt(4));
 					detailRencana.setStatus_rencana(cursor.getInt(5));
 					detailRencana.setNomor_rencana_detail(cursor.getString(6));
+					detailRencana.setIndnr(cursor.getString(7));
 
 					// Adding staff to list
 					detailRencanaArraylist.add(detailRencana);
@@ -897,6 +906,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					detailRencana.setId_karyawan(4);
 					detailRencana.setStatus_rencana(5);
 					detailRencana.setNomor_rencana_detail(null);
+					detailRencana.setIndnr(null);
 
 					// Adding staff to list
 					detailRencanaArraylist.add(detailRencana);
@@ -979,6 +989,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					detailRencana.setId_karyawan(cursor.getInt(4));
 					detailRencana.setStatus_rencana(cursor.getInt(5));
 					detailRencana.setNomor_rencana_detail(cursor.getString(6));
+					detailRencana.setIndnr(cursor.getString(7));
 
 					// Adding staff to list
 					detailRencanaArraylist.add(detailRencana);
@@ -993,6 +1004,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					detailRencana.setId_karyawan(0);
 					detailRencana.setStatus_rencana(0);
 					detailRencana.setNomor_rencana_detail(null);
+					detailRencana.setIndnr(null);
 
 					// Adding staff to list
 					detailRencanaArraylist.add(detailRencana);
@@ -1183,6 +1195,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					detailRencana.setId_karyawan(cursor.getInt(4));
 					detailRencana.setStatus_rencana(cursor.getInt(5));
 					detailRencana.setNomor_rencana_detail(cursor.getString(6));
+					detailRencana.setIndnr(cursor.getString(7));
 
 					// Adding staff to list
 					detailRencanaArraylist.add(detailRencana);
@@ -1235,12 +1248,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return productArrayList;
 	}
 	// Getting All customer search
-	public ArrayList<Mst_Customer> getAllCustomerBaseOnSearch(String search) {
+	public ArrayList<Mst_Customer> getAllCustomerBaseOnSearch(String nama, String search) {
 		try {
 			mst_customerArrayList.clear();
 			// Select All Query
-			String selectQuery = "SELECT  * FROM " + TABLE_MST_CUSTOMER + " WHERE "
-					+ KEY_MST_CUSTOMER_NAMA_CUSTOMER + " LIKE '%" + search + "%' OR " + KEY_MST_CUSTOMER_ALAMAT +" LIKE '%"+search+"%'";
+			String selectQuery = "SELECT  * FROM " + TABLE_MST_CUSTOMER + " WHERE " + KEY_MST_CUSTOMER_NO_HP + " LIKE '%" + nama + "%' AND "
+					+ KEY_MST_CUSTOMER_NAMA_CUSTOMER + " LIKE '%" + search + "%' AND kode_customer LIKE '20%' OR " + KEY_MST_CUSTOMER_ALAMAT +" LIKE '%"+search+"%' AND kode_customer LIKE '20%' ";
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -1251,6 +1264,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					customer.setId_customer(cursor.getInt(0));
 					customer.setNama_customer(cursor.getString(2));
 					customer.setAlamat(cursor.getString(3));
+					customer.setIndnr(cursor.getString(8));
 
 					// Adding product to list
 					mst_customerArrayList.add(customer);
@@ -1393,7 +1407,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		Cursor cursor = db.query(TABLE_MST_CUSTOMER, new String[] {
 						KEY_MST_CUSTOMER_ID_CUSTOMER,KEY_MST_CUSTOMER_KODE_CUSTOMER,KEY_MST_CUSTOMER_NAMA_CUSTOMER,KEY_MST_CUSTOMER_ALAMAT,
-						KEY_MST_CUSTOMER_NO_HP,KEY_MST_CUSTOMER_LATS,KEY_MST_CUSTOMER_LONGS,KEY_MST_CUSTOMER_ID_WILAYAH},
+						KEY_MST_CUSTOMER_NO_HP,KEY_MST_CUSTOMER_LATS,KEY_MST_CUSTOMER_LONGS,KEY_MST_CUSTOMER_ID_WILAYAH,KEY_MST_CUSTOMER_INDNR},
 				//group outlet
 				//KEY_GROUP_OUTLET_ID_GROUP_OUTLET},
 				KEY_MST_CUSTOMER_ID_CUSTOMER + "=?",
@@ -1405,7 +1419,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		Mst_Customer customer = new Mst_Customer(cursor.getInt(0), cursor.getString(1),
 				cursor.getString(2), cursor.getString(3), cursor.getString(4),
-				cursor.getString(5), cursor.getString(6), cursor.getInt(7));
+				cursor.getString(5), cursor.getString(6), cursor.getInt(7), cursor.getString(8));
 		// return customer
 		cursor.close();
 		db.close();
@@ -1435,6 +1449,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					customer.setLats(cursor.getString(5));
 					customer.setLongs(cursor.getString(6));
 					customer.setId_wilayah(cursor.getInt(7));
+					customer.setIndnr(cursor.getString(8));
 
 					// Adding staff to list
 					mst_customerArrayList.add(customer);
@@ -1450,6 +1465,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					customer.setLats(null);
 					customer.setLongs(null);
 					customer.setId_wilayah(0);
+					customer.setIndnr(null);
 
 					// Adding staff to list
 					mst_customerArrayList.add(customer);
@@ -1469,7 +1485,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		if(nama.equals("SUYANTO")||nama.equals("IT Dev")){
 			try {
 				mst_customerArrayList.clear();
-				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER ;
+				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER +" WHERE kode_customer like '20%'";
 
 				SQLiteDatabase db = this.getWritableDatabase();
 				Cursor cursor = db.rawQuery(selectQuery, null);
@@ -1486,6 +1502,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 						customer.setLats(cursor.getString(5));
 						customer.setLongs(cursor.getString(6));
 						customer.setId_wilayah(cursor.getInt(7));
+						customer.setIndnr(cursor.getString(8));
 
 						// Adding staff to list
 						mst_customerArrayList.add(customer);
@@ -1501,6 +1518,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 						customer.setLats(null);
 						customer.setLongs(null);
 						customer.setId_wilayah(0);
+						customer.setIndnr(null);
 
 						// Adding staff to list
 						mst_customerArrayList.add(customer);
@@ -1518,7 +1536,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		}else{
 			try {
 				mst_customerArrayList.clear();
-				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER+ " WHERE "+KEY_MST_CUSTOMER_NO_HP+" LIKE '%"+nama+"%'" ;
+				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER+ " WHERE "+KEY_MST_CUSTOMER_NO_HP+" LIKE '%"+nama+"%' AND kode_customer like '20%'" ;
 
 				SQLiteDatabase db = this.getWritableDatabase();
 				Cursor cursor = db.rawQuery(selectQuery, null);
@@ -1535,6 +1553,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 						customer.setLats(cursor.getString(5));
 						customer.setLongs(cursor.getString(6));
 						customer.setId_wilayah(cursor.getInt(7));
+						customer.setIndnr(cursor.getString(8));
 
 						// Adding staff to list
 						mst_customerArrayList.add(customer);
@@ -1550,6 +1569,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 						customer.setLats(null);
 						customer.setLongs(null);
 						customer.setId_wilayah(0);
+						customer.setIndnr(null);
 
 						// Adding staff to list
 						mst_customerArrayList.add(customer);
@@ -1589,6 +1609,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					customer.setLats(cursor.getString(5));
 					customer.setLongs(cursor.getString(6));
 					customer.setId_wilayah(cursor.getInt(7));
+					customer.setIndnr(cursor.getString(8));
 
 					// Adding staff to list
 					mst_customerArrayList.add(customer);
@@ -1626,6 +1647,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					customer.setLats(cursor.getString(5));
 					customer.setLongs(cursor.getString(6));
 					customer.setId_wilayah(cursor.getInt(7));
+					customer.setIndnr(cursor.getString(8));
 
 					// Adding staff to list
 					mst_customerArrayList.add(customer);
@@ -1699,6 +1721,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					customer.setLats(cursor.getString(5));
 					customer.setLongs(cursor.getString(6));
 					customer.setId_wilayah(cursor.getInt(7));
+					customer.setIndnr(cursor.getString(8));
 
 					// Adding staff to list
 					mst_customerArrayList.add(customer);
@@ -1735,6 +1758,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					detailRencana.setId_karyawan(cursor.getInt(4));
 					detailRencana.setStatus_rencana(cursor.getInt(5));
 					detailRencana.setNomor_rencana_detail(cursor.getString(6));
+					detailRencana.setIndnr(cursor.getString(7));
 
 					// Adding staff to list
 					detailRencanaArraylist.add(detailRencana);

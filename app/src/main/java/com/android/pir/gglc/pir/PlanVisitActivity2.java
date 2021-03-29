@@ -342,7 +342,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 		imm.showSoftInput(searchCustomer, InputMethodManager.SHOW_IMPLICIT);
 
 		listview.setItemsCanFocus(false);
-		ArrayList<MstUser> staff_list = databaseHandler.getAllUser();
+		final ArrayList<MstUser> staff_list = databaseHandler.getAllUser();
 		user = new MstUser();
 
 		for (MstUser tempStaff : staff_list)
@@ -355,11 +355,13 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 				int id_customer = customer_from_db.get(i).getId_customer();
 				String nama_customer = customer_from_db.get(i).getNama_customer();
 				String alamat = customer_from_db.get(i).getAlamat();
+				String indnr = customer_from_db.get(i).getIndnr();
 
 				Mst_Customer customer = new Mst_Customer();
 				customer.setId_customer(id_customer);
 				customer.setNama_customer(nama_customer);
 				customer.setAlamat(alamat);
+				customer.setIndnr(indnr);
 				customer_list.add(customer);
 				cAdapterChooseAdapter = new ListViewChooseAdapter(
 						this,
@@ -379,8 +381,12 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 									  int arg3) {
 				if (cs.toString().length() > 0) {
 					customer_list.clear();
+
+					for (MstUser tempStaff : staff_list)
+						user = tempStaff;
+					String nama1=user.getNama();
 					ArrayList<Mst_Customer> customer_from_db = databaseHandler
-							.getAllCustomerBaseOnSearch(cs.toString());
+							.getAllCustomerBaseOnSearch(nama1,cs.toString());
 					if (customer_from_db.size() > 0) {
 						listview.setVisibility(View.VISIBLE);
 						for (int i = 0; i < customer_from_db.size(); i++) {
@@ -390,11 +396,13 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 									.getNama_customer();
 							String alamat = customer_from_db.get(i)
 									.getAlamat();
+							String indnr = customer_from_db.get(i).getIndnr();
 
 							Mst_Customer customer = new Mst_Customer();
 							customer.setId_customer(id_customer);
 							customer.setNama_customer(nama_customer);
 							customer.setAlamat(alamat);
+							customer.setIndnr(indnr);
 							customer_list.add(customer);
 							cAdapterChooseAdapter = new ListViewChooseAdapter(
 									PlanVisitActivity2.this,
@@ -425,11 +433,13 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 									.getNama_customer();
 							String alamat = customer_from_db.get(i)
 									.getAlamat();
+							String indnr = customer_from_db.get(i).getIndnr();
 
 							Mst_Customer customer = new Mst_Customer();
 							customer.setId_customer(id_customer);
 							customer.setNama_customer(nama_customer);
 							customer.setAlamat(alamat);
+							customer.setIndnr(indnr);
 							customer_list.add(customer);
 							cAdapterChooseAdapter = new ListViewChooseAdapter(
 									PlanVisitActivity2.this,
@@ -739,7 +749,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 						url_add_req_load,
 						id_rencana_header,
 						String.valueOf(detailReqLoad.getId_product()),
-						id_karyawan,detailReqLoad.getKeterangan()
+						id_karyawan,detailReqLoad.getKeterangan(),detailReqLoad.getIndnr()
 				);
 			}
 			return null;
@@ -915,13 +925,15 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 							: oResponsealue.getString("status_rencana");
 					String nomor_rencana_detail = oResponsealue.isNull("nomor_rencana_detail") ? null
 							: oResponsealue.getString("nomor_rencana_detail");
-					Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
-					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
-					Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
-					Log.d(LOG_TAG, "id_customer:" + id_customer);
+					String indnr = oResponsealue.isNull("indnr") ? null
+							: oResponsealue.getString("indnr");
+//					Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
+//					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
+//					Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
+//					Log.d(LOG_TAG, "id_customer:" + id_customer);
 					databaseHandler.addDetailRencana(new DetailRencana(Integer.parseInt(id_rencana_detail),Integer.parseInt(id_rencana_header),
 							Integer.parseInt(id_kegiatan),Integer.parseInt(id_customer),Integer.parseInt(id_karyawan),
-							Integer.parseInt(status_rencana),nomor_rencana_detail));
+							Integer.parseInt(status_rencana),nomor_rencana_detail,indnr));
 				}
 				resetForm();
 			} catch (JSONException e) {
@@ -1073,6 +1085,8 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 						.findViewById(R.id.sales_order_dialog_btn_add_item);
 				holder.list_alamat = (TextView) row
 						.findViewById(R.id.pir_kegiatan_desa);
+				holder.list_indnr = (TextView) row
+						.findViewById(R.id.indnr);
 
 				row.setTag(holder);
 			} else {
@@ -1081,6 +1095,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 			productData = data.get(position);
 			holder.list_namaProduct.setText(productData.getNama_customer());
 			holder.list_alamat.setText(productData.getAlamat());
+			holder.list_indnr.setText(productData.getIndnr());
 			holder.mButtonAddItem.setOnClickListener(new View.OnClickListener() {
 
 				@Override
@@ -1088,7 +1103,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 					String keteranganpetani = keteranganPetani.getText().toString();
 //					Log.d(LOG_TAG, "keterangan Petani: "+keteranganpetani);
 //					saveKeteranganPetani(keteranganpetani);
-					updateListViewDetailOrder(new DetailReqLoadNew(data.get(position).getNama_customer(), data.get(position).getId_customer(),data.get(position).getAlamat(),keteranganpetani));
+					updateListViewDetailOrder(new DetailReqLoadNew(data.get(position).getNama_customer(), data.get(position).getId_customer(),data.get(position).getAlamat(),keteranganpetani, data.get(position).getIndnr()));
 					chooseProductDialog.hide();
 				}
 			});
@@ -1100,6 +1115,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 //			TextView list_kodeProduct;
 			TextView list_namaProduct;
 			TextView list_alamat;
+			TextView list_indnr;
 			Button mButtonAddItem;
 		}
 	}
@@ -1147,7 +1163,8 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 								 final String id_rencana_header,
 								 final String id_customer,
 								 final String id_karyawan,
-                                 final String keterangan) {
+                                 final String keterangan,
+                                 final String indnr) {
 
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost(url);
@@ -1163,6 +1180,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 			entity.addPart("id_customer", new StringBody(id_customer));
 			entity.addPart("id_karyawan", new StringBody(id_karyawan));
 			entity.addPart("keterangan", new StringBody(keterangan));
+			entity.addPart("indnr", new StringBody(indnr));
 			Log.d(LOG_TAG, "keterangan upload: "+keterangan);
 			httppost.setEntity(entity);
 			// Making server call
@@ -1384,6 +1402,8 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 						.findViewById(R.id.sales_order_title_nama_product);
 				holder.alamat = (TextView) row
 						.findViewById(R.id.alamat);
+				holder.indnr = (TextView) row
+						.findViewById(R.id.sales_order_title_indnr);
 				row.setTag(holder);
 			} else {
 				holder = (ListViewAdapter.UserHolder) row.getTag();
@@ -1391,6 +1411,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 			productData = data.get(position);
 			holder.list_nama_product.setText(productData.getNama_product());
 			holder.alamat.setText(productData.getAlamat());
+			holder.indnr.setText(productData.getIndnr());
 			row.setOnClickListener(new View.OnClickListener() {
 
 				@Override
@@ -1439,6 +1460,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 		class UserHolder {
 			TextView list_nama_product;
 			TextView alamat;
+			TextView indnr;
 		}
 	}
 
@@ -1496,19 +1518,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 							ProspectPlanVisit.class);
 					startActivity(intentActivity);
 					finish();
-				}
-//				else if (position ==3) {
-//					Intent intentActivity = new Intent(this,
-//							IconTextTabsActivity_lap.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}else if (position == 4) {
-//					Intent intentActivity = new Intent(this,
-//							CheckoutActivity.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}
-				else if (position == 3) {
+				} else if (position == 3) {
 					Intent intentActivity = new Intent(this,
 							DashboardActivity.class);
 					startActivity(intentActivity);
@@ -1523,13 +1533,9 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 							ChangePassword.class);
 					startActivity(intentActivity);
 					finish();
+				}else if (position == 6) {
+					showCustomDialogExit();
 				}
-//				else if (position == 5) {
-//					Intent intentActivity = new Intent(this,
-//							Orderan.class);
-//					startActivity(intentActivity);
-//					finish();
-//				}
 			}
 		}
 	}
@@ -1655,7 +1661,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-			showCustomDialogExit();
+//			showCustomDialogExit();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);

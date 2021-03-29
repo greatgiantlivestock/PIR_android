@@ -1,12 +1,10 @@
 package com.android.pir.gglc.absen;
 
-
 import android.os.Environment;
 
 import java.io.File;
 
 public class AppVar {
-
     //URL to our login.php file, url bisa diganti sesuai dengan alamat server kita
     public static final String LOGIN_URL = "https://visit-pir.gg-livestock.com/login/login_member";
     public static final String LOGIN_URL1 = "https://visit-pir.gg-livestock.com/login/login_member1";
@@ -99,6 +97,7 @@ public class AppVar {
     public static final String SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_NAMA = "mahkota_table_jadwal_detail_nama_customer";
     public static final String SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_ALAMAT = "mahkota_table_jadwal_detail_alamat_customer";
     public static final String SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_STATUS = "mahkota_table_jadwal_detail_status_kunjungan";
+    public static final String SHARED_PREFERENCES_TABLE_INDEX_NUMBER = "index_number_rencana";
     public static final String CONFIG_APP_URL_DOWNLOAD_CANVASSING_HISTORY = "get_canvassing_history.php";
     public static final String SHARED_PREFERENCES_TABLE_HISTORY_CANVASSING = "table_history_canvassing";
     public static final String SHARED_PREFERENCES_TABLE_HISTORY_CANVASSING_SAME_DATA = "table_history_canvassing_same_data";

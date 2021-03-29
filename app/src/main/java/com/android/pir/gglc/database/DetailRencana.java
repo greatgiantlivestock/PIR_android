@@ -10,6 +10,7 @@ public class DetailRencana {
 	int id_karyawan;
 	int status_rencana;
 	String nomor_rencana_detail;
+	String indnr;
 
 	// Empty constructor
 	public DetailRencana(){
@@ -17,7 +18,7 @@ public class DetailRencana {
 	}
 	// constructor
 	public DetailRencana(int id_rencana_detail, int id_rencana_header, int id_kegiatan, int id_customer, int id_karyawan,
-						 int status_rencana, String nomor_rencana_detail){
+						 int status_rencana, String nomor_rencana_detail,String indnr){
 		this.id_rencana_detail = id_rencana_detail;
 		this.id_rencana_header = id_rencana_header;
 		this.id_kegiatan = id_kegiatan;
@@ -25,17 +26,19 @@ public class DetailRencana {
 		this.id_karyawan = id_karyawan;
 		this.status_rencana = status_rencana;
 		this.nomor_rencana_detail = nomor_rencana_detail;
+		this.indnr = indnr;
 	}
 
 	// constructor
 	public DetailRencana(int id_rencana_header, int id_kegiatan, int id_customer, int id_karyawan,
-						 int status_rencana,String nomor_rencana_detail){
+						 int status_rencana,String nomor_rencana_detail,String indnr){
 		this.id_rencana_header = id_rencana_header;
 		this.id_kegiatan = id_kegiatan;
 		this.id_customer = id_customer;
 		this.id_karyawan = id_karyawan;
 		this.status_rencana = status_rencana;
 		this.nomor_rencana_detail = nomor_rencana_detail;
+		this.indnr = indnr;
 	}
 
 	public int getId_rencana_detail(){
@@ -85,5 +88,12 @@ public class DetailRencana {
 	}
 	public void setNomor_rencana_detail(String nomor_rencana_detail){
 		this.nomor_rencana_detail=nomor_rencana_detail;
+	}
+
+	public String getIndnr(){
+		return this.indnr;
+	}
+	public void setIndnr(String indnr){
+		this.indnr=indnr;
 	}
 }

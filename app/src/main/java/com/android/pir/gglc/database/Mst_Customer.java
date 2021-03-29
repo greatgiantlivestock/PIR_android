@@ -11,6 +11,7 @@ public class Mst_Customer {
 	String lats;
 	String longs;
 	int id_wilayah;
+	String indnr;
 
 	// Empty constructor
 	public Mst_Customer(){
@@ -18,7 +19,7 @@ public class Mst_Customer {
 	}
 	// constructor
 	public Mst_Customer(int id_customer, String kode_customer, String nama_customer, String alamat, String no_hp,
-						String lats, String longs, int id_wilayah){
+						String lats, String longs, int id_wilayah, String indnr){
 		this.id_customer= id_customer;
 		this.kode_customer= kode_customer;
 		this.nama_customer = nama_customer;
@@ -27,11 +28,12 @@ public class Mst_Customer {
 		this.lats = lats;
 		this.longs = longs;
 		this.id_wilayah = id_wilayah;
+		this.indnr = indnr;
 	}
 
 	// constructor
 	public Mst_Customer(String kode_customer, String nama_customer, String alamat, String no_hp,
-						String lats, String longs, int id_wilayah){
+						String lats, String longs, int id_wilayah, String indnr){
 		this.kode_customer = kode_customer;
 		this.nama_customer = nama_customer;
 		this.alamat = alamat;
@@ -39,6 +41,7 @@ public class Mst_Customer {
 		this.lats=lats;
 		this.longs=longs;
 		this.id_wilayah=id_wilayah;
+		this.indnr=indnr;
 	}
 
 	public int getId_customer(){
@@ -95,5 +98,12 @@ public class Mst_Customer {
 	}
 	public void setId_wilayah(int id_wilayah){
 		this.id_wilayah=id_wilayah;
+	}
+
+	public String getIndnr(){
+		return this.indnr;
+	}
+	public void setIndnr(String indnr){
+		this.indnr=indnr;
 	}
 }

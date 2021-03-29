@@ -875,7 +875,7 @@
 //                    Log.d(LOG_TAG, "id_customer:" + id_customer);
 //                    Log.d(LOG_TAG, "kode_customer:" + kode_customer);
 //                    Log.d(LOG_TAG, "nama_customer:" + nama_customer);
-//                    db.addMst_customer(new Mst_Customer(Integer.parseInt(id_customer),kode_customer,nama_customer,alamat,no_hp,lats,longs,Integer.parseInt(id_wilayah)));
+//                    db.addMst_customer(new Mst_Customer(Integer.parseInt(id_customer),kode_customer,nama_customer,alamat,no_hp,lats,longs,Integer.parseInt(id_wilayah),""));
 //                }
 //
 //            } catch (JSONException e) {
@@ -1243,7 +1243,7 @@
 //                    Log.d(LOG_TAG, "id_customer:" + id_customer);
 //                    databaseHandler.addDetailRencana(new DetailRencana(Integer.parseInt(id_rencana_detail),Integer.parseInt(id_rencana_header),
 //                            Integer.parseInt(id_kegiatan),Integer.parseInt(id_customer),Integer.parseInt(id_karyawan),
-//                            Integer.parseInt(status_rencana),nomor_rencana_detail));
+//                            Integer.parseInt(status_rencana),nomor_rencana_detail,""));
 //                }
 //                resetForm();
 //            } catch (JSONException e) {
