@@ -44,6 +44,7 @@ import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
 import com.android.pir.gglc.database.MstUser;
 import com.android.pir.gglc.database.Mst_Customer;
+import com.android.pir.gglc.database.Pakan;
 import com.android.pir.gglc.database.Trx_Checkin;
 import com.android.pir.gglc.database.UploadDataSapi;
 import com.android.pir.mobile.R;
@@ -92,6 +93,9 @@ public class DataSapiFragment extends Fragment{
     protected LocationManager locationManager;
     private int idrencanaDetail = 0;
     private int nilai_ass= 0;
+    private int index = 0;
+    private int jmlEkor = 0;
+    private Pakan pakann;
 
     private Button foto,checkin,foto1,foto2,foto3;
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -100,7 +104,7 @@ public class DataSapiFragment extends Fragment{
     private File mediaFile,mediaFile1,mediaFile2,mediaFile3;
     private String newImageName,newImageName1,newImageName2,newImageName3;
     private String response_data,response_data_download,main_app_id_detail_jadwal;
-    private TextView tvFotoCustomer,tvnama_petani,tvalamat_petani,tvstatus_checkin,tvFotoCustomer1,tvFotoCustomer2,tvFotoCustomer3;
+    private TextView tvFotoCustomer,tvnama_petani,tvalamat_petani,tvstatus_checkin,tvFotoCustomer1,tvFotoCustomer2,tvFotoCustomer3,tvindex_petani,tvdof,tvjmlEkor;
     private ImageView imgCust,imgCust1,imgCust2,imgCust3;
     private EditText edketerangan,edketerangan1,edketerangan2,edketerangan3;
     private Spinner edeartag,edeartag1,edeartag2,edeartag3;
@@ -149,6 +153,9 @@ public class DataSapiFragment extends Fragment{
         tvFotoCustomer2 = (TextView) view.findViewById(R.id.foto_sapi2);
         tvFotoCustomer3 = (TextView) view.findViewById(R.id.foto_sapi3);
         tvnama_petani = (TextView) view.findViewById(R.id.nama_petani);
+        tvindex_petani = (TextView) view.findViewById(R.id.index);
+        tvjmlEkor = (TextView) view.findViewById(R.id.jmlEkor);
+        tvdof = (TextView) view.findViewById(R.id.dof);
         tvalamat_petani = (TextView) view.findViewById(R.id.alamat_pertani);
         tvstatus_checkin = (TextView) view.findViewById(R.id.status_checkin);
         lsstatus = (LinearLayout) view.findViewById(R.id.lstatus_checkin);
@@ -173,6 +180,7 @@ public class DataSapiFragment extends Fragment{
         edketerangan3 = (EditText) view.findViewById(R.id.keterangan3);
         SharedPreferences spPreferences = getSharedPrefereces();
         idrencanaDetail = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL, null));
+        index = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null));
 //        status_checkin = spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_STATUS, null);
 
         ArrayList<DetailRencana> rencana_list = databaseHandler.getAlldetailRencanaParam(idrencanaDetail);
@@ -293,6 +301,13 @@ public class DataSapiFragment extends Fragment{
         mst_customer = new Mst_Customer();
         for (Mst_Customer customer : customer_list)
             mst_customer = customer;
+        ArrayList<Pakan> pakan_list = databaseHandler.getMaxPakan(String.valueOf(index));
+        pakann = new Pakan();
+        for (Pakan paakan : pakan_list)
+            pakann = paakan;
+        tvindex_petani.setText(String.valueOf(pakann.getIndnr()));
+        tvjmlEkor.setText(String.valueOf(pakann.getNofanim()));
+        tvdof.setText(pakann.getDof()+" Hari");
         tvnama_petani.setText(mst_customer.getNama_customer());
         tvalamat_petani.setText(mst_customer.getAlamat());
 

@@ -26,11 +26,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String TABLE_HISTORY_CANVASSING = "history_canvassing";
 	private static final String TABLE_DATA_SAPI = "data_sapi";
 	private static final String TABLE_PRODUCT= "mst_product";
+	private static final String TABLE_OBAT= "mst_obat";
+	private static final String TABLE_PENGOBATAN= "pengobatan";
+	private static final String TABLE_PAKAN= "mst_pakan";
+	private static final String TABLE_FEEDBACK_PAKAN= "feedback_pakan";
 
 	//define field on ms_user
 	private static final String KEY_ID = "id";
 	private static final String KEY_NAME = "name";
 	private static final String KEY_PH_NO = "phone_number";
+
+	//define field on ms_user
+	private static final String KEY_OBAT_ID = "id_obat";
+	private static final String KEY_OBAT_KODE = "kode_obat";
+	private static final String KEY_OBAT_NAME = "nama_obat";
+	private static final String KEY_OBAT_UNIT = "satuan_obat";
+
+	//define field on pengobatan
+	private static final String KEY_PENGOBATAN_ID = "id_pengobatan";
+	private static final String KEY_PENGOBATAN_ID_RENCANA_DETAIL = "id_rencana_detail";
+	private static final String KEY_PENGOBATAN_KODE_OBAT = "kode_obat";
+	private static final String KEY_PENGOBATAN_QTY = "qty";
+	private static final String KEY_PENGOBATAN_FOTO = "foto_pengobatan";
+	private static final String KEY_PENGOBATAN_TANGGAL = "tanggal_pengobatan";
 
 	//define DetailRencana field
 	private static final String KEY_MASTER_RENCANA_ID = "id";
@@ -130,10 +148,33 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_UPLOAD_DATA_SAPI_ASSESSMENT="assessment";
 	private static final String KEY_UPLOAD_DATA_SAPI_TANGGAL="tanggal";
 
+	//define feedback pakan field
+	private static final String KEY_FEEDBACK_PAKAN_ID="id_feedback";
+	private static final String KEY_FEEDBACK_PAKAN_ID_RENCANA_DETAIL="id_rencana_detail";
+	private static final String KEY_FEEDBACK_PAKAN_FEEDBACK_PAKAN="feedback_pakan";
+	private static final String KEY_FEEDBACK_PAKAN_FOTO="foto";
 
 	//define trx_checkout field
 	private static final String KEY_PRODUCT_ID_PRODUCT="id_product";
 	private static final String KEY_PRODUCT_NAMA_PRODUCT="nama_product";
+
+	//define mst_pakan fields
+	private static final String KEY_PAKAN_ID="id";
+	private static final String KEY_PAKAN_INDNR="indnr";
+	private static final String KEY_PAKAN_KODE_PAKAN="kode_pakan";
+	private static final String KEY_PAKAN_DESC_PAKAN="desc_pakan";
+	private static final String KEY_PAKAN_STD="std";
+	private static final String KEY_PAKAN_BUDGET="budget";
+	private static final String KEY_PAKAN_TERKIRIM="terkirim";
+	private static final String KEY_PAKAN_SISA="sisa";
+	private static final String KEY_PAKAN_NOFANIM="nofanim";
+	private static final String KEY_PAKAN_DOF="dof";
+	private static final String KEY_PAKAN_SATUAN="satuan";
+	private static final String KEY_PAKAN_TANGGAL_KIRIM="tanggal_kirim";
+	private static final String KEY_PAKAN_QTY_TERIMA="qty_terima";
+	private static final String KEY_PAKAN_CREATE_DATE="create_date";
+
+
 
 	//ArrayList table
 	private final ArrayList<User> user_list = new ArrayList<User>();
@@ -152,6 +193,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private final ArrayList<Rencana> rencanaArrayList =new ArrayList<Rencana>();
 	private final ArrayList<Product> productArrayList =new ArrayList<Product>();
 	private final ArrayList<UploadDataSapi> uploadDataSapiArrayList=new ArrayList<UploadDataSapi>();
+	private final ArrayList<Obat> obatArrayList=new ArrayList<Obat>();
+	private final ArrayList<Pengobatan> pengobatanArrayList=new ArrayList<Pengobatan>();
+	private final ArrayList<Pakan> pakanArrayList=new ArrayList<Pakan>();
+	private final ArrayList<FeedbackPakan> feedbackpakanArrayList=new ArrayList<FeedbackPakan>();
 
 	public DatabaseHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -170,6 +215,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ KEY_DETAIL_RENCANA_NOMOR_RENCANA_EDTAIL + " TEXT," + KEY_DETAIL_RENCANA_INDNR + " TEXT"
 				+ ")";
 		db.execSQL(CREATE_TABLE_DETAIL_RENCANA);
+
+		String CREATE_TABLE_PENGOBATAN= "CREATE TABLE " + TABLE_PENGOBATAN + "("
+				+ KEY_PENGOBATAN_ID + " INTEGER PRIMARY KEY," + KEY_PENGOBATAN_ID_RENCANA_DETAIL + " INTEGER,"
+				+ KEY_PENGOBATAN_KODE_OBAT + " TEXT," + KEY_PENGOBATAN_QTY + " INTEGER,"
+				+ KEY_PENGOBATAN_FOTO + " TEXT," +  KEY_PENGOBATAN_TANGGAL + " TEXT" + ")";
+		db.execSQL(CREATE_TABLE_PENGOBATAN);
 
 		String CREATE_TABLE_DATA_SAPI = "CREATE TABLE " + TABLE_DATA_SAPI + "("
 				+ KEY_DATA_SAPI_ID_DATA_SAPI + " INTEGER PRIMARY KEY," + KEY_DATA_SAPI_INDNR + " TEXT,"
@@ -247,6 +298,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ KEY_PRODUCT_ID_PRODUCT + " INTEGER PRIMARY KEY," + KEY_PRODUCT_NAMA_PRODUCT + " TEXT"
 				+ ")";
 		db.execSQL(CREATE_TABLE_PRODUCT);
+
+		String CREATE_TABLE_OBAT = "CREATE TABLE " + TABLE_OBAT + "("
+				+ KEY_OBAT_ID + " INTEGER PRIMARY KEY," + KEY_OBAT_KODE + " TEXT,"
+				+ KEY_OBAT_NAME+ " TEXT," + KEY_OBAT_UNIT + " TEXT"
+				+ ")";
+		db.execSQL(CREATE_TABLE_OBAT);
+
+		String CREATE_TABLE_FEEDBACK_PAKAN = "CREATE TABLE " + TABLE_FEEDBACK_PAKAN + "("
+				+ KEY_FEEDBACK_PAKAN_ID + " INTEGER PRIMARY KEY," + KEY_FEEDBACK_PAKAN_ID_RENCANA_DETAIL + " TEXT,"
+				+ KEY_FEEDBACK_PAKAN_FEEDBACK_PAKAN + " TEXT," + KEY_FEEDBACK_PAKAN_FOTO + " TEXT"
+				+ ")";
+		db.execSQL(CREATE_TABLE_FEEDBACK_PAKAN);
+
+		String CREATE_TABLE_PAKAN = "CREATE TABLE " + TABLE_PAKAN + "("
+				+ KEY_PAKAN_ID + " INTEGER PRIMARY KEY," + KEY_PAKAN_INDNR + " INTEGER," + KEY_PAKAN_KODE_PAKAN + " TEXT," + KEY_PAKAN_DESC_PAKAN + " TEXT," + KEY_PAKAN_STD + " TEXT," + KEY_PAKAN_BUDGET + " INTEGER," +
+                KEY_PAKAN_TERKIRIM + " INTEGER," + KEY_PAKAN_SISA  + " INTEGER," + KEY_PAKAN_NOFANIM  + " INTEGER," + KEY_PAKAN_DOF  + " TEXT," + KEY_PAKAN_SATUAN  + " TEXT," + KEY_PAKAN_TANGGAL_KIRIM  + " TEXT," +
+                KEY_PAKAN_QTY_TERIMA + " INTEGER," + KEY_PAKAN_CREATE_DATE + " TEXT" + ")";
+		db.execSQL(CREATE_TABLE_PAKAN);
 	}
 
 	// Upgrading database
@@ -263,6 +332,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_UPLOAD_DATA_SAPI);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRX_CHECKOUT);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_HISTORY_CANVASSING);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_OBAT);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PENGOBATAN);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PAKAN);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_FEEDBACK_PAKAN);
 		onCreate(db);
 	}
 
@@ -293,6 +366,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_DETAIL_RENCANA_INDNR, detail_rencana.getIndnr());
 
 		db.insert(TABLE_DETAIL_RENCANA, null, values);
+		db.close();
+	}
+	//adding pengobatan
+	public void addPengobatan (Pengobatan pengobatan){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_PENGOBATAN_ID, pengobatan.getId_pengobatan());
+		values.put(KEY_PENGOBATAN_ID_RENCANA_DETAIL, pengobatan.getId_rencana_detail());
+		values.put(KEY_PENGOBATAN_KODE_OBAT, pengobatan.getKode_obat());
+		values.put(KEY_PENGOBATAN_QTY, pengobatan.getQty());
+		values.put(KEY_PENGOBATAN_FOTO, pengobatan.getFoto_pengobatan());
+		values.put(KEY_PENGOBATAN_TANGGAL, pengobatan.getTanggal());
+
+		db.insert(TABLE_PENGOBATAN, null, values);
 		db.close();
 	}
 
@@ -342,6 +430,53 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_MST_CUSTOMER_INDNR, mst_customer.getIndnr());
 
 		db.insert(TABLE_MST_CUSTOMER, null, values);
+		db.close();
+	}
+
+	public void addObat (Obat obat){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_OBAT_ID, obat.getId_obat());
+		values.put(KEY_OBAT_KODE, obat.getKode_obat());
+		values.put(KEY_OBAT_NAME, obat.getNama_obat());
+		values.put(KEY_OBAT_UNIT, obat.getUnit_obat());
+
+		db.insert(TABLE_OBAT, null, values);
+		db.close();
+	}
+
+	public void addPakan (Pakan pakan){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_PAKAN_INDNR, pakan.getIndnr());
+		values.put(KEY_PAKAN_KODE_PAKAN, pakan.getKode_pakan());
+		values.put(KEY_PAKAN_DESC_PAKAN, pakan.getDesc_pakan());
+		values.put(KEY_PAKAN_STD, pakan.getStd());
+		values.put(KEY_PAKAN_BUDGET, pakan.getBudget());
+		values.put(KEY_PAKAN_TERKIRIM, pakan.getTerkirim());
+		values.put(KEY_PAKAN_SISA, pakan.getSisa());
+		values.put(KEY_PAKAN_NOFANIM, pakan.getNofanim());
+		values.put(KEY_PAKAN_DOF, pakan.getDof());
+		values.put(KEY_PAKAN_SATUAN, pakan.getSatuan());
+		values.put(KEY_PAKAN_TANGGAL_KIRIM, pakan.getTanggal_kirim());
+		values.put(KEY_PAKAN_QTY_TERIMA, pakan.getQty_terima());
+		values.put(KEY_PAKAN_CREATE_DATE, pakan.getCreate_date());
+
+		db.insert(TABLE_PAKAN, null, values);
+		db.close();
+	}
+
+	public void addFeedbackPakan (FeedbackPakan pakan){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_FEEDBACK_PAKAN_ID_RENCANA_DETAIL, pakan.getId_rencana_detail());
+		values.put(KEY_FEEDBACK_PAKAN_FEEDBACK_PAKAN, pakan.getFeedback_pakan());
+		values.put(KEY_FEEDBACK_PAKAN_FOTO, pakan.getFoto());
+
+		db.insert(TABLE_FEEDBACK_PAKAN, null, values);
 		db.close();
 	}
 
@@ -515,6 +650,167 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}
 
 	//getting All user
+	public ArrayList<Obat> getAllObat() {
+		try {
+			obatArrayList.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT  * FROM " + TABLE_OBAT;
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Obat user = new Obat();
+					user.setId_obat(cursor.getInt(0));
+					user.setKode_obat(cursor.getString(1));
+					user.setNama_obat(cursor.getString(2));
+					user.setUnit_obat(cursor.getString(3));
+
+					// Adding staff to list
+					obatArrayList.add(user);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return obatArrayList;
+		} catch (Exception e) {
+			Log.e("obat_list", "" + e);
+		}
+		return obatArrayList;
+	}
+
+	//getting All Pakan
+	public ArrayList<Pakan> getAllPakan(String indnr) {
+		try {
+			pakanArrayList.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT pakan.* FROM " + TABLE_PAKAN +" pakan JOIN(SELECT max(id) as maxid,indnr,kode_pakan FROM "
+					+TABLE_PAKAN+" GROUP BY indnr,kode_pakan) as dt1 ON pakan.id=dt1.maxid WHERE pakan.indnr ='"+indnr+"'";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Pakan user = new Pakan();
+					user.setId(cursor.getInt(0));
+					user.setIndnr(cursor.getInt(1));
+					user.setKode_pakan(cursor.getString(2));
+					user.setDesc_pakan(cursor.getString(3));
+					user.setStd(cursor.getString(4));
+					user.setBudget(cursor.getInt(5));
+					user.setTerkirim(cursor.getInt(6));
+					user.setSisa(cursor.getInt(7));
+					user.setNofanim(cursor.getInt(8));
+					user.setDof(cursor.getString(9));
+					user.setSatuan(cursor.getString(10));
+					user.setTanggal_kirim(cursor.getString(11));
+					user.setQty_terima(cursor.getInt(12));
+					user.setCreate_date(cursor.getString(13));
+
+					// Adding staff to list
+					pakanArrayList.add(user);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return pakanArrayList;
+		} catch (Exception e) {
+			Log.e("pakan_list", "" + e);
+		}
+		return pakanArrayList;
+	}
+
+	//getting All Pakan
+	public ArrayList<FeedbackPakan> getAllFeedbackPakan() {
+		try {
+			feedbackpakanArrayList.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT * FROM " + TABLE_FEEDBACK_PAKAN ;
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					FeedbackPakan user = new FeedbackPakan();
+					user.setId_feedback(cursor.getInt(0));
+					user.setId_rencana_detail(cursor.getString(1));
+					user.setFeedback_pakan(cursor.getString(2));
+					user.setFoto(cursor.getString(3));
+
+					// Adding staff to list
+					feedbackpakanArrayList.add(user);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return feedbackpakanArrayList;
+		} catch (Exception e) {
+			Log.e("feedback_pakan_list", "" + e);
+		}
+		return feedbackpakanArrayList;
+	}
+
+	//getting All Pakan
+	public ArrayList<Pakan> getMaxPakan(String indnr) {
+		try {
+			pakanArrayList.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT max(id) as id,indnr,kode_pakan,desc_pakan,std,budget,terkirim,sisa,nofanim,dof,satuan,tanggal_kirim,qty_terima,create_date FROM " + TABLE_PAKAN +" WHERE indnr ='"+indnr+"'";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Pakan user = new Pakan();
+					user.setId(cursor.getInt(0));
+					user.setIndnr(cursor.getInt(1));
+					user.setKode_pakan(cursor.getString(2));
+					user.setDesc_pakan(cursor.getString(3));
+					user.setStd(cursor.getString(4));
+					user.setBudget(cursor.getInt(5));
+					user.setTerkirim(cursor.getInt(6));
+					user.setSisa(cursor.getInt(7));
+					user.setNofanim(cursor.getInt(8));
+					user.setDof(cursor.getString(9));
+					user.setSatuan(cursor.getString(10));
+					user.setTanggal_kirim(cursor.getString(11));
+					user.setQty_terima(cursor.getInt(12));
+					user.setCreate_date(cursor.getString(13));
+
+					// Adding staff to list
+					pakanArrayList.add(user);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return pakanArrayList;
+		} catch (Exception e) {
+			Log.e("pakan_list", "" + e);
+		}
+		return pakanArrayList;
+	}
+
+	//getting All user
 	public ArrayList<DetailRencana> getAllRencanaParam(int id_rencana_header) {
 		try {
 			detailRencanaArraylist.clear();
@@ -551,6 +847,43 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			Log.e("user_list", "" + e);
 		}
 		return detailRencanaArraylist;
+	}
+
+	//getting All pengobatan
+	public ArrayList<Pengobatan> getAllPengobatanParam(int id_pengobatan) {
+		try {
+			pengobatanArrayList.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT  * FROM " + TABLE_PENGOBATAN + " WHERE id_rencana_detail='"+id_pengobatan+"'";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Pengobatan pengobatan = new Pengobatan();
+					pengobatan.setId_pengobatan(cursor.getInt(0));
+					pengobatan.setId_rencana_detail(cursor.getInt(1));
+					pengobatan.setKode_obat(cursor.getString(2));
+					pengobatan.setQty(cursor.getInt(3));
+					pengobatan.setFoto_pengobatan(cursor.getString(4));
+					pengobatan.setTanggal(cursor.getString(5));
+
+					// Adding staff to list
+					pengobatanArrayList.add(pengobatan);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return pengobatanArrayList;
+		} catch (Exception e) {
+			Log.e("pengobatan_list", "" + e);
+		}
+		return pengobatanArrayList;
 	}
 
 	//getting All user
@@ -923,6 +1256,41 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return detailRencanaArraylist;
 	}
 
+	public ArrayList<Pengobatan> getAllPengobatan() {
+		try {
+			pengobatanArrayList.clear();
+
+			String selectQuery = "SELECT * FROM " +TABLE_PENGOBATAN ;
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Pengobatan detailRencana = new Pengobatan();
+					detailRencana.setId_pengobatan(cursor.getInt(0));
+					detailRencana.setId_rencana_detail(cursor.getInt(1));
+					detailRencana.setKode_obat(cursor.getString(2));
+					detailRencana.setQty(cursor.getInt(3));
+					detailRencana.setFoto_pengobatan(cursor.getString(4));
+					detailRencana.setTanggal(cursor.getString(5));
+
+					// Adding staff to list
+					pengobatanArrayList.add(detailRencana);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return pengobatanArrayList;
+		} catch (Exception e) {
+			Log.e("pengobatan_list", "" + e);
+		}
+		return pengobatanArrayList;
+	}
+
 	public ArrayList<DataSapi> getAllDataSapiParam(String lifnr) {
 		try {
 			dataSapiArraylist.clear();
@@ -1247,6 +1615,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		return productArrayList;
 	}
+
 	// Getting All customer search
 	public ArrayList<Mst_Customer> getAllCustomerBaseOnSearch(String nama, String search) {
 		try {
@@ -1281,6 +1650,40 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		return mst_customerArrayList;
 	}
+	// Getting All obat search
+	public ArrayList<Obat> getAllObatBaseOnSearch(String search) {
+		try {
+			obatArrayList.clear();
+			// Select All Query
+			String selectQuery = "SELECT  * FROM " + TABLE_OBAT + " WHERE " + KEY_OBAT_NAME + " LIKE '%" + search + "%'";
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Obat obat = new Obat();
+					obat.setId_obat(cursor.getInt(0));
+					obat.setKode_obat(cursor.getString(1));
+					obat.setNama_obat(cursor.getString(2));
+					obat.setUnit_obat(cursor.getString(3));
+
+					// Adding product to list
+					obatArrayList.add(obat);
+				} while (cursor.moveToNext());
+			}
+
+			// return product_list
+			cursor.close();
+			db.close();
+			return obatArrayList;
+		} catch (Exception e) {
+			Log.e("obat_list", "" + e);
+		}
+
+		return obatArrayList;
+	}
+
 	//getting All product
 	public ArrayList<Product> getAllProduct() {
 		try {
@@ -1427,6 +1830,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return customer;
 	}
 
+	// Getting single obat per baris
+	public Obat getObat(int id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor cursor = db.query(TABLE_OBAT, new String[] {
+						KEY_OBAT_ID,KEY_OBAT_KODE,KEY_OBAT_NAME,KEY_OBAT_UNIT},
+
+				KEY_OBAT_ID + "=?",
+				new String[] { String.valueOf(id) }, null, null, null, null);
+
+
+		if (cursor != null)
+			cursor.moveToFirst();
+
+		Obat obat = new Obat(cursor.getInt(0), cursor.getString(1),
+				cursor.getString(2), cursor.getString(3));
+		// return customer
+		cursor.close();
+		db.close();
+
+		return obat;
+	}
+
 	public ArrayList<Mst_Customer> getAllCustomer() {
 		try {
 			mst_customerArrayList.clear();
@@ -1481,6 +1907,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		}
 		return mst_customerArrayList;
 	}
+
 	public ArrayList<Mst_Customer> getAllCustomerOnly(String nama) {
 		if(nama.equals("SUYANTO")||nama.equals("IT Dev")){
 			try {
@@ -1585,6 +2012,49 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			}
 			return mst_customerArrayList;
 		}
+	}
+
+	public ArrayList<Obat> getAllObatOnly(String nama) {
+			try {
+				obatArrayList.clear();
+				String selectQuery = "SELECT * FROM "+TABLE_OBAT+ " WHERE "+KEY_OBAT_NAME+" LIKE '%"+nama+"%'" ;
+
+				SQLiteDatabase db = this.getWritableDatabase();
+				Cursor cursor = db.rawQuery(selectQuery, null);
+
+				// looping through all rows and adding to list
+				if (cursor.moveToFirst()) {
+					do {
+						Obat customer = new Obat();
+						customer.setId_obat(cursor.getInt(0));
+						customer.setKode_obat(cursor.getString(1));
+						customer.setNama_obat(cursor.getString(2));
+						customer.setUnit_obat(cursor.getString(3));
+
+						// Adding staff to list
+						obatArrayList.add(customer);
+					} while (cursor.moveToNext());
+				}else{
+					do {
+						Obat customer = new Obat();
+						customer.setId_obat(0);
+						customer.setKode_obat(null);
+						customer.setNama_obat(null);
+						customer.setUnit_obat(null);
+
+						// Adding staff to list
+						obatArrayList.add(customer);
+					} while (cursor.moveToNext());
+				}
+
+				// return staff_list
+				cursor.close();
+				db.close();
+				return obatArrayList;
+			} catch (Exception e) {
+				Log.e("obat_list", "" + e);
+			}
+			return obatArrayList;
 	}
 
 	public ArrayList<Mst_Customer> getAllCustomerParamRencana(int id_rencana_detail) {
@@ -1846,6 +2316,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		mCount.close();
 		return count;
 	}
+	public int getCountPengobatan() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db
+				.rawQuery("SELECT count(*) from " + TABLE_PENGOBATAN, null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
+	public int getCountPengobatanParam(int id_rencana_detail) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db
+				.rawQuery("SELECT count(*) from " + TABLE_PENGOBATAN +" WHERE id_rencana_detail="+id_rencana_detail, null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
 
 	public int getCountProduct() {
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -1900,6 +2388,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db
 				.rawQuery("select count(*) from " + TABLE_DETAIL_RENCANA +" WHERE status_rencana='1'", null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
+	public int getCountDetailRencanaSelesai() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db
+				.rawQuery("SELECT count(*) from " + TABLE_DETAIL_RENCANA + " JOIN trx_checkout ON trx_checkout.id_rencana_detail=trx_rencana_detail.id_rencana_detail" +" WHERE status_rencana='2'", null);
 		mCount.moveToFirst();
 		int count = mCount.getInt(0);
 		mCount.close();
@@ -1969,6 +2466,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		mCount.close();
 		return count;
 	}
+	public int getCountUploadFeedbackPakan(int id_rencana_detail) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_FEEDBACK_PAKAN + " WHERE id_rencana_detail="+ id_rencana_detail, null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
+	public int getCountAllFeedback() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_FEEDBACK_PAKAN , null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
 	public int getCountTrxcheckinParam(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db.rawQuery("SELECT COUNT(tc.id_chekin) FROM " + TABLE_TRX_CHECKIN +" tc JOIN "+TABLE_DETAIL_RENCANA+
@@ -1992,6 +2505,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public int getCountCustomer() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db.rawQuery("select count(*) from " + TABLE_MST_CUSTOMER,
+				null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
+	public int getCountCheckin() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db.rawQuery("SELECT count(*) from " + TABLE_TRX_CHECKIN,
 				null);
 		mCount.moveToFirst();
 		int count = mCount.getInt(0);
@@ -2045,12 +2567,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}public void deleteTableDataSapi() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_DATA_SAPI);
+	}public void deleteTableDataObat() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DELETE FROM " + TABLE_OBAT);
 	}public void deleteTableCheckin(String idRencanaDetail) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_TRX_CHECKIN +" WHERE id_rencana_detail='"+idRencanaDetail+"'");
 	}public void deleteTableUploadDataSapi() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_UPLOAD_DATA_SAPI );
+	}public void deleteTablePengobatan() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DELETE FROM " + TABLE_PENGOBATAN );
 	}public void deleteTableRencanaMaster() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_MASTER_RENCANA);
@@ -2063,6 +2591,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}public void deleteTableProduct() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_PRODUCT);
+	}public void deleteTablePakan() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DELETE FROM " + TABLE_PAKAN);
+	}public void deleteTableFeedbackPakan() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DELETE FROM " + TABLE_FEEDBACK_PAKAN);
 	}
 
 	public void deleteRencanaMaster() {

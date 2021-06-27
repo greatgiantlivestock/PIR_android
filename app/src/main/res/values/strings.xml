@@ -343,6 +343,7 @@
     <string name="app_reqload_ttd_empty_box">Mohon tanda tangan terlebih dahulu</string>
     <string name="app_reqload_product_empty_box">Mohon tambahkan product terlebih dahulu</string>
     <string name="app_reqload_customer_empty_box">Mohon tambahkan petani terlebih dahulu</string>
+    <string name="app_reqload_pengobatan_empty_box">Mohon tambahkan data obat terlebih dahulu</string>
     <string name="app_customer_prospect_save_failed_empty">Mohon mengisi data customer dengan benar</string>
     <string name="saleskanvas_alret_disc">Jumlah Diskon harus antara 0.0 sampai 2.0</string>
 

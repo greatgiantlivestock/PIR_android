@@ -46,7 +46,9 @@ import com.android.pir.gglc.database.DataSapi;
 import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
 import com.android.pir.gglc.database.DetailReqLoadNew;
+import com.android.pir.gglc.database.FeedbackPakan;
 import com.android.pir.gglc.database.MasterRencana;
+import com.android.pir.gglc.database.Pengobatan;
 import com.android.pir.gglc.database.Rencana;
 import com.android.pir.gglc.database.MstUser;
 import com.android.pir.gglc.database.Mst_Customer;
@@ -98,6 +100,8 @@ public class DashboardActivity extends ActionBarActivity implements
 	private String message,msg_success;
 	private String response_data;
 	private String response_data3;
+	private String response_dataFeedback;
+	private String response_data4;
 	private String response_data1;
 	private String response_data2;
 	private static final String LOG_TAG = DashboardActivity.class.getSimpleName();
@@ -108,6 +112,7 @@ public class DashboardActivity extends ActionBarActivity implements
 	private int id_checkin = 0;
 	private String nomor_checkin_ = null;
 	private int id_user;
+	private String nama_user;
 	private MstUser user;
 	private Typeface typefaceSmall;
 	private TextView jml_ckin,jml_rcn,percent;
@@ -129,10 +134,14 @@ public class DashboardActivity extends ActionBarActivity implements
 	private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
 	private ViewPager viewPager;
 	private int id=0;
+	private ArrayList<FeedbackPakan> uploadFeedbackArrayList = new ArrayList<FeedbackPakan>();
 	private ArrayList<UploadDataSapi> uploadDataSapiArrayList = new ArrayList<UploadDataSapi>();
+	private ArrayList<Pengobatan> pengobatanArrayList = new ArrayList<Pengobatan>();
 	private ArrayList<Trx_Checkin> checkinArrayList = new ArrayList<Trx_Checkin>();
 	private ArrayList<Trx_Checkout> checkoutArrayList = new ArrayList<Trx_Checkout>();
+	private String IMAGE_DIRECTORY_NAME_PAKAN = "Pakan";
 	private String IMAGE_DIRECTORY_NAME = "Data_sapi";
+	private String IMAGE_DIRECTORY_PENGOBATAN = "Pengobatan";
 	private String IMAGE_DIRECTORY_CHECKIN_NAME = "Checkin_pir";
 
 	@Override
@@ -168,6 +177,7 @@ public class DashboardActivity extends ActionBarActivity implements
 		for (MstUser tempStaff : staff_list)
 			user = tempStaff;
 		id_user=user.getId_user();
+		nama_user=user.getNama();
 		updateContentRefreshRencana();
 	}
 
@@ -196,14 +206,30 @@ public class DashboardActivity extends ActionBarActivity implements
 				return true;
 			case R.id.menu_upload:
 				int CountDs = databaseHandler.getCountUploadAllDataSapi();
-				if(CountDs>0){
-					new UploadDataIMG().execute();
-				}else{
-					if (progressDialog != null) {
-						progressDialog.dismiss();
+				int CountPg = databaseHandler.getCountPengobatan();
+				int CountFP = databaseHandler.getCountAllFeedback();
+				int stts = databaseHandler.getCountDetailRencanaSelesai();
+				if(stts>0){
+					if(CountFP>0){
+						new UploadDataIMGPakan().execute();
+					}else {
+						if (CountDs > 0) {
+							new UploadDataIMG().execute();
+						} else {
+							if (progressDialog != null) {
+								progressDialog.dismiss();
+							}
+							if (CountPg > 0) {
+								new UploadDataPengobatan().execute();
+							} else {
+								new UploadData().execute();
+							}
+						}
 					}
-					new UploadData().execute();
+				}else{
+					showCustomDialog("Belum ada data visit yang terselesaikan, silahkan selesaikan visit terlebih dahulu untuk upload.");
 				}
+
 //				new UploadDataCkout().execute();
 //				Toast.makeText(DashboardActivity.this, "upload",Toast.LENGTH_LONG).show();
 //				if (GlobalApp.checkInternetConnection(act)) {
@@ -287,18 +313,6 @@ public class DashboardActivity extends ActionBarActivity implements
 					updateListViewDetailOrder(detailReqLoadNew);
 				}
 
-//				ArrayList<UploadDataSapi> staff_list = databaseHandler.getAllUploadDataSapi();
-//				uploadDataSapi = new UploadDataSapi();
-//
-//				for (UploadDataSapi tempStaff : staff_list)
-//					uploadDataSapi = tempStaff;
-//				String id_rencana_detail=String.valueOf(uploadDataSapi.getId_rencana_detail());
-//				String data_assessment=String.valueOf(uploadDataSapi.getAssessment());
-//				String data_eartag=String.valueOf(uploadDataSapi.getEartag());
-//				String data_keterangan=String.valueOf(uploadDataSapi.getKeterangan());
-//				String foto=String.valueOf(uploadDataSapi.getFoto());
-//				String tanggal=String.valueOf(uploadDataSapi.getTanggal());
-
 				for (UploadDataSapi uploadDataSapi : uploadDataSapiArrayList) {
 					response_data3 = uploadImageAll(upload_image_supplier_url,
 							String.valueOf(uploadDataSapi.getId_rencana_detail()),
@@ -350,8 +364,184 @@ public class DashboardActivity extends ActionBarActivity implements
 		}
 	}
 
+	public class UploadDataIMGPakan extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			progressDialog
+					.setMessage(getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.app_supplier_processing));
+			progressDialog.show();
+			progressDialog.setCancelable(false);
+			progressDialog
+					.setOnCancelListener(new DialogInterface.OnCancelListener() {
+						@Override
+						public void onCancel(DialogInterface dialog) {
+							String msg = getApplicationContext()
+									.getResources()
+									.getString(
+											R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
+							showCustomDialog(msg);
+						}
+					});
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			int cekFP = databaseHandler.getCountAllFeedback();
+			if(cekFP>0){
+				String url = AppVar.CONFIG_APP_URL_PUBLIC;
+				String uploadSupplier = AppVar.CONFIG_APP_URL_UPLOAD_INSERT_DATA_PAKAN;
+				String upload_image_supplier_url = url + uploadSupplier;
+
+				ArrayList<FeedbackPakan> feedback_list = databaseHandler.getAllFeedbackPakan();
+				for(FeedbackPakan feedbackPakan : feedback_list){
+					updateListViewDetailFeedback(feedbackPakan);
+				}
+
+				for (FeedbackPakan uploadDataSapi : uploadFeedbackArrayList) {
+					response_dataFeedback = uploadImageAllPakan(upload_image_supplier_url,
+							String.valueOf(uploadDataSapi.getId_rencana_detail()),
+							uploadDataSapi.getFeedback_pakan(),
+							uploadDataSapi.getFoto());
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+//            Log.d(LOG_TAG, "response:" + response_dataFeedback);
+            if (response_dataFeedback != null && response_dataFeedback.length() > 0) {
+                if (response_dataFeedback.startsWith("Error occurred")) {
+                    final String msg = act
+                            .getApplicationContext()
+                            .getResources()
+                            .getString(
+                                    R.string.app_supplier_processing_failed);
+                    handler.post(new Runnable() {
+                        public void run() {
+                            showCustomDialog(msg);
+                        }
+                    });
+                } else {
+                    handler.post(new Runnable() {
+                        public void run() {
+                            extractUploadPakan();
+                        }
+                    });
+                }
+            } else {
+                final String msg = act
+                        .getApplicationContext()
+                        .getResources()
+                        .getString(
+                                R.string.app_supplier_processing_failed);
+                handler.post(new Runnable() {
+                    public void run() {
+                        showCustomDialog(msg);
+                    }
+                });
+            }
+		}
+	}
+
+	public class UploadDataPengobatan extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			progressDialog
+					.setMessage(getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.app_supplier_processing));
+			progressDialog.show();
+			progressDialog.setCancelable(false);
+			progressDialog
+					.setOnCancelListener(new DialogInterface.OnCancelListener() {
+						@Override
+						public void onCancel(DialogInterface dialog) {
+							String msg = getApplicationContext()
+									.getResources()
+									.getString(
+											R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
+							showCustomDialog(msg);
+						}
+					});
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			int cekPG = databaseHandler.getCountPengobatan();
+			if(cekPG>0){
+				String url = AppVar.CONFIG_APP_URL_PUBLIC;
+				String uploadSupplier = AppVar.CONFIG_APP_URL_UPLOAD_INSERT_DATA_PENGOBATAN;
+				String upload_image_supplier_url = url + uploadSupplier;
+
+				ArrayList<Pengobatan> staff_list = databaseHandler.getAllPengobatan();
+				for(Pengobatan detailReqLoadNew : staff_list){
+					updateListViewPengobatan(detailReqLoadNew);
+				}
+
+				for (Pengobatan uploadDataSapi : pengobatanArrayList) {
+					response_data4 = uploadImagePengobatan(upload_image_supplier_url,
+							String.valueOf(uploadDataSapi.getId_rencana_detail()),
+							uploadDataSapi.getKode_obat(),
+							uploadDataSapi.getQty(),
+							uploadDataSapi.getFoto_pengobatan(),
+							uploadDataSapi.getTanggal());
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.d(LOG_TAG, "response:" + response_data4);
+            if (response_data4 != null && response_data4.length() > 0) {
+                if (response_data4.startsWith("Error occurred")) {
+                    final String msg = act
+                            .getApplicationContext()
+                            .getResources()
+                            .getString(
+                                    R.string.app_supplier_processing_failed);
+                    handler.post(new Runnable() {
+                        public void run() {
+                            showCustomDialog(msg);
+                        }
+                    });
+                } else {
+                    handler.post(new Runnable() {
+                        public void run() {
+                            extractUploadPengobatan();
+                        }
+                    });
+                }
+            } else {
+                final String msg = act
+                        .getApplicationContext()
+                        .getResources()
+                        .getString(
+                                R.string.app_supplier_processing_failed);
+                handler.post(new Runnable() {
+                    public void run() {
+                        showCustomDialog(msg);
+                    }
+                });
+            }
+		}
+	}
+
+	private void updateListViewDetailFeedback(FeedbackPakan detailReqLoad) {
+		uploadFeedbackArrayList.add(detailReqLoad);
+	}
 	private void updateListViewDetailOrder(UploadDataSapi detailReqLoad) {
 		uploadDataSapiArrayList.add(detailReqLoad);
+	}
+	private void updateListViewPengobatan(Pengobatan detailReqLoad) {
+		pengobatanArrayList.add(detailReqLoad);
 	}
 	private void updateListCheckin(Trx_Checkin detailReqLoad) {
 		checkinArrayList.add(detailReqLoad);
@@ -409,6 +599,98 @@ public class DashboardActivity extends ActionBarActivity implements
 		return responseString;
 	}
 
+	protected String uploadImageAllPakan(final String url, final String id_rencana_detail, final String feedback,final String foto) {
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httppost = new HttpPost(url);
+		String responseString = null;
+		try {
+			if (android.os.Build.VERSION.SDK_INT > 9) {
+				StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+						.permitAll().build();
+				StrictMode.setThreadPolicy(policy);
+			}
+			MultipartEntity entity = new MultipartEntity();
+			File dir = new File(AppVar.getFolderPath() + "/"+ IMAGE_DIRECTORY_NAME_PAKAN + "/"+ foto);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			if (dir.exists() && foto != null) {
+				entity.addPart("image_1", new FileBody(dir));
+				entity.addPart("foto1", new StringBody(foto));
+			} else {
+				entity.addPart("foto1", new StringBody(""));
+			}
+			entity.addPart("id_rencana_detail", new StringBody(id_rencana_detail));
+			entity.addPart("feedback", new StringBody(feedback));
+			httppost.setEntity(entity);
+
+			// Making server call
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity r_entity = response.getEntity();
+
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == 200) {
+				// Server response
+				responseString = EntityUtils.toString(r_entity);
+			} else {
+				responseString = "Error occurred! Http Status Code: "
+						+ statusCode;
+			}
+		} catch (ClientProtocolException e) {
+			responseString = e.toString();
+		} catch (IOException e) {
+			responseString = e.toString();
+		}
+		return responseString;
+	}
+
+	protected String uploadImagePengobatan(final String url, final String id_rencana_detail, final String kode_obat,final int qty, final String foto, final String tanggal) {
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httppost = new HttpPost(url);
+		String responseString = null;
+		try {
+			if (android.os.Build.VERSION.SDK_INT > 9) {
+				StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+						.permitAll().build();
+				StrictMode.setThreadPolicy(policy);
+			}
+			MultipartEntity entity = new MultipartEntity();
+			File dir = new File(AppVar.getFolderPath() + "/"+ IMAGE_DIRECTORY_PENGOBATAN + "/"+ foto);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			if (dir.exists() && foto != null) {
+				entity.addPart("image_pengobatan", new FileBody(dir));
+				entity.addPart("foto_pengobatan", new StringBody(foto));
+			} else {
+				entity.addPart("foto_pengobatan", new StringBody(""));
+			}
+			entity.addPart("id_rencana_detail", new StringBody(id_rencana_detail));
+			entity.addPart("kode_obat", new StringBody(kode_obat));
+			entity.addPart("qty", new StringBody(String.valueOf(qty)));
+			entity.addPart("tanggal", new StringBody(tanggal));
+			httppost.setEntity(entity);
+
+			// Making server call
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity r_entity = response.getEntity();
+
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == 200) {
+				// Server response
+				responseString = EntityUtils.toString(r_entity);
+			} else {
+				responseString = "Error occurred! Http Status Code: "
+						+ statusCode;
+			}
+		} catch (ClientProtocolException e) {
+			responseString = e.toString();
+		} catch (IOException e) {
+			responseString = e.toString();
+		}
+		return responseString;
+	}
+
 	public void extractUpload() {
 		JSONObject oResponse;
 		try {
@@ -438,13 +720,121 @@ public class DashboardActivity extends ActionBarActivity implements
 					if (progressDialog != null) {
 						progressDialog.dismiss();
 					}
+					int CountPg = databaseHandler.getCountPengobatan();
+					if(CountPg>0){
+						new UploadDataPengobatan().execute();
+					}else{
+						new UploadData().execute();
+					}
+				} else {
+					final String msg = act
+							.getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.app_supplier_processing_failed);
+					showCustomDialog(msg);
+				}
+			}
+		} catch (JSONException e) {
+			final String message = e.toString();
+			showCustomDialog(message);
+		}
+	}
+
+	public void extractUploadPakan() {
+		JSONObject oResponse;
+		try {
+			oResponse = new JSONObject(response_dataFeedback);
+			String status = oResponse.isNull("error") ? "True" : oResponse
+					.getString("error");
+			if (response_dataFeedback.isEmpty()) {
+				final String msg = act
+						.getApplicationContext()
+						.getResources()
+						.getString(
+								R.string.app_supplier_processing_failed);
+				showCustomDialog(msg);
+			} else {
+				Log.d(LOG_TAG, "status=" + status);
+				if (status.equalsIgnoreCase("False")) {
+					File dir = new File(AppVar.getFolderPath() + "/"
+							+ IMAGE_DIRECTORY_NAME_PAKAN);
+					if (!dir.exists()) {
+						dir.mkdirs();
+					}
+					List<File> fileFoto = getListFiles(dir);
+					for (File tempFile : fileFoto) {
+						tempFile.delete();
+					}
+					databaseHandler.deleteTableFeedbackPakan();
+					if (progressDialog != null) {
+						progressDialog.dismiss();
+					}
+					int CountDs = databaseHandler.getCountUploadAllDataSapi();
+					int CountPg = databaseHandler.getCountPengobatan();
+					if (CountDs > 0) {
+						new UploadDataIMG().execute();
+					} else {
+						if (progressDialog != null) {
+							progressDialog.dismiss();
+						}
+						if(CountPg>0){
+							new UploadDataPengobatan().execute();
+						}else{
+							new UploadData().execute();
+						}
+					}
+				} else {
+					final String msg = act
+							.getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.app_supplier_processing_failed);
+					showCustomDialog(msg);
+				}
+			}
+		} catch (JSONException e) {
+			final String message = e.toString();
+			showCustomDialog(message);
+		}
+	}
+
+	public void extractUploadPengobatan() {
+		JSONObject oResponse;
+		try {
+			oResponse = new JSONObject(response_data4);
+			String status = oResponse.isNull("error") ? "True" : oResponse
+					.getString("error");
+			if (response_data4.isEmpty()) {
+				final String msg = act
+						.getApplicationContext()
+						.getResources()
+						.getString(
+								R.string.app_supplier_processing_failed);
+				showCustomDialog(msg);
+			} else {
+				Log.d(LOG_TAG, "status=" + status);
+				if (status.equalsIgnoreCase("False")) {
+					File dir = new File(AppVar.getFolderPath() + "/"
+							+ IMAGE_DIRECTORY_PENGOBATAN);
+					if (!dir.exists()) {
+						dir.mkdirs();
+					}
+					List<File> fileFoto = getListFiles(dir);
+					for (File tempFile : fileFoto) {
+						tempFile.delete();
+					}
+					databaseHandler.deleteTablePengobatan();
+					if (progressDialog != null) {
+						progressDialog.dismiss();
+					}
 					new UploadData().execute();
-//					final String msg = act
-//							.getApplicationContext()
-//							.getResources()
-//							.getString(
-//									R.string.app_supplier_processing_sukses);
-//					showCustomDialog(msg);
+//					int CountPg = databaseHandler.getCountPengobatan();
+//					if(CountPg>0){
+//						new UploadDataPengobatan().execute();
+//					}else{
+//						new UploadData().execute();
+//					}
 				} else {
 					final String msg = act
 							.getApplicationContext()
@@ -929,7 +1319,7 @@ public class DashboardActivity extends ActionBarActivity implements
 		@Override
 		protected String doInBackground(String... params) {
 			String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
-					+ AppVar.CONFIG_APP_URL_DOWNLOAD_CUSTOMER_NEW;
+					+ AppVar.CONFIG_APP_URL_DOWNLOAD_CUSTOMER_NEW+ "?id_user="+1797;
 			HttpResponse response = getDownloadData(download_data_url);
 			int retCode = (response != null) ? response.getStatusLine().getStatusCode() : -1;
 			if (retCode != 200) {

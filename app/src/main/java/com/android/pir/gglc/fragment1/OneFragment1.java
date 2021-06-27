@@ -49,6 +49,7 @@ import com.android.pir.gglc.database.DetailRencana;
 import com.android.pir.gglc.database.MasterRencana;
 import com.android.pir.gglc.database.MstUser;
 import com.android.pir.gglc.database.Mst_Customer;
+import com.android.pir.gglc.database.Pakan;
 import com.android.pir.gglc.database.Trx_Checkin;
 import com.android.pir.gglc.fragment.OneFragment;
 import com.android.pir.gglc.pir.CheckinOneFragmentActivity;
@@ -101,6 +102,8 @@ public class OneFragment1 extends Fragment{
     private String message;
     protected LocationManager locationManager;
     private int idrencanaDetail = 0;
+    private int index = 0;
+    private int jmlEkor = 0;
 
     private Button foto,checkin;
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -109,10 +112,11 @@ public class OneFragment1 extends Fragment{
     private File mediaFile;
     private String newImageName1;
     private String response_data,response_data_download,main_app_id_detail_jadwal;
-    private TextView tvFotoCustomer,tvnama_petani,tvalamat_petani,tvstatus_checkin;
+    private TextView tvFotoCustomer,tvnama_petani,tvalamat_petani,tvstatus_checkin,tvindex_petani,tvdof,tvjmlEkor;
     private ImageView imgCust;
 //    private EditText no_checkin1;
     private Mst_Customer mst_customer;
+    private Pakan pakann;
     private double latitude, longitude;
     private Location location;
     private Location location1;
@@ -153,6 +157,9 @@ public class OneFragment1 extends Fragment{
         tvFotoCustomer = (TextView) view.findViewById(R.id.title_foto_customer);
         tvnama_petani = (TextView) view.findViewById(R.id.nama_petani);
         tvalamat_petani = (TextView) view.findViewById(R.id.alamat_pertani);
+        tvindex_petani = (TextView) view.findViewById(R.id.index);
+        tvjmlEkor = (TextView) view.findViewById(R.id.jmlEkor);
+        tvdof = (TextView) view.findViewById(R.id.dof);
         tvstatus_checkin = (TextView) view.findViewById(R.id.status_checkin);
         lsstatus = (LinearLayout) view.findViewById(R.id.lstatus_checkin);
         foto = (Button) view.findViewById(R.id.foto);
@@ -162,6 +169,7 @@ public class OneFragment1 extends Fragment{
 //        no_checkin1.setEnabled(false);
         SharedPreferences spPreferences = getSharedPrefereces();
         idrencanaDetail = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL, null));
+        index = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null));
 //        status_checkin = spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_STATUS, null);
         ArrayList<DetailRencana> rencana_list = databaseHandler.getAlldetailRencanaParam(idrencanaDetail);
         rencanaDetail = new DetailRencana();
@@ -181,6 +189,13 @@ public class OneFragment1 extends Fragment{
         mst_customer = new Mst_Customer();
         for (Mst_Customer customer : customer_list)
             mst_customer = customer;
+        ArrayList<Pakan> pakan_list = databaseHandler.getMaxPakan(String.valueOf(index));
+        pakann = new Pakan();
+        for (Pakan paakan : pakan_list)
+            pakann = paakan;
+        tvindex_petani.setText(String.valueOf(pakann.getIndnr()));
+        tvjmlEkor.setText(String.valueOf(pakann.getNofanim()));
+        tvdof.setText(pakann.getDof()+" Hari");
         tvnama_petani.setText(mst_customer.getNama_customer());
         tvalamat_petani.setText(mst_customer.getAlamat());
 

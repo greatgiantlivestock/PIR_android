@@ -38,6 +38,7 @@ import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
 import com.android.pir.gglc.database.MstUser;
 import com.android.pir.gglc.database.Mst_Customer;
+import com.android.pir.gglc.database.Pakan;
 import com.android.pir.gglc.database.Trx_Checkin;
 import com.android.pir.gglc.database.Trx_Checkout;
 import com.android.pir.gglc.database.UploadDataSapi;
@@ -85,6 +86,9 @@ public class CheckoutFragment extends Fragment{
     private String message;
     protected LocationManager locationManager;
     private int idrencanaDetail = 0;
+    private int index = 0;
+    private int jmlEkor = 0;
+    private Pakan pakann;
 
     private Button checkin;
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -93,7 +97,7 @@ public class CheckoutFragment extends Fragment{
     private File mediaFile;
     private String newImageName1;
     private String response_data,response_data_download,main_app_id_detail_jadwal;
-    private TextView tvnama_petani,tvalamat_petani,tvstatus_checkin;
+    private TextView tvnama_petani,tvalamat_petani,tvstatus_checkin,tvindex_petani,tvdof,tvjmlEkor;
     private ImageView imgCust;
     private EditText keterangan;
     private Mst_Customer mst_customer;
@@ -138,10 +142,14 @@ public class CheckoutFragment extends Fragment{
         tvstatus_checkin = (TextView) view.findViewById(R.id.status_checkin);
         keterangan = (EditText) view.findViewById(R.id.edketerangan);
         lsstatus = (LinearLayout) view.findViewById(R.id.lstatus_checkin);
+        tvindex_petani = (TextView) view.findViewById(R.id.index);
+        tvjmlEkor = (TextView) view.findViewById(R.id.jmlEkor);
+        tvdof = (TextView) view.findViewById(R.id.dof);
         checkin = (Button) view.findViewById(R.id.checkin);
         imgCust = (ImageView) view.findViewById(R.id.ImgCust);
         SharedPreferences spPreferences = getSharedPrefereces();
         idrencanaDetail = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL, null));
+        index = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null));
 //        status_checkin = spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_STATUS, null);
 
         ArrayList<DetailRencana> rencana_list = databaseHandler.getAlldetailRencanaParam(idrencanaDetail);
@@ -163,6 +171,13 @@ public class CheckoutFragment extends Fragment{
         mst_customer = new Mst_Customer();
         for (Mst_Customer customer : customer_list)
             mst_customer = customer;
+        ArrayList<Pakan> pakan_list = databaseHandler.getMaxPakan(String.valueOf(index));
+        pakann = new Pakan();
+        for (Pakan paakan : pakan_list)
+            pakann = paakan;
+        tvindex_petani.setText(String.valueOf(pakann.getIndnr()));
+        tvjmlEkor.setText(String.valueOf(pakann.getNofanim()));
+        tvdof.setText(pakann.getDof()+" Hari");
         tvnama_petani.setText(mst_customer.getNama_customer());
         tvalamat_petani.setText(mst_customer.getAlamat());
 

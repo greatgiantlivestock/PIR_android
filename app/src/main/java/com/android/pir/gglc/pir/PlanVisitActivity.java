@@ -54,6 +54,8 @@ import com.android.pir.gglc.database.DetailReqLoadNew;
 import com.android.pir.gglc.database.MasterRencana;
 import com.android.pir.gglc.database.MasterRencanaParam;
 import com.android.pir.gglc.database.MstUser;
+import com.android.pir.gglc.database.Obat;
+import com.android.pir.gglc.database.Pakan;
 import com.android.pir.gglc.database.Product;
 import com.android.pir.gglc.database.Mst_Customer;
 import com.android.pir.gglc.database.Rencana;
@@ -103,7 +105,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 	private MasterRencanaParam mstRencanaParam;
 	private Typeface typefaceSmall;
 	private TextView jml_ckin,jml_rcn,percent;
-    private String nama_customer,response,mulai_data,response_data,main_app_nama_cst,keterangan_data,message,msg_success,nomor_rencana,tanggal_edit,keterangan_edit;
+    private String nama_user,response,mulai_data,response_data,main_app_nama_cst,keterangan_data,message,msg_success,nomor_rencana,tanggal_edit,keterangan_edit;
     private Button mButtonAddPetani,mButtonSaveUpload,btn_new,btn_edit,save_edit;
 	private EditText mulai,keterangan;
 	final int Date_Dialog_ID=0;
@@ -200,6 +202,12 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 //			}
 //		});
 		updateContentRefreshRencana();
+		ArrayList<MstUser> staff_list = databaseHandler.getAllUser();
+		user = new MstUser();
+
+		for (MstUser tempStaff : staff_list)
+			user = tempStaff;
+		id_user=user.getId_user();
 	}
 
 
@@ -404,16 +412,22 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 			int getId = arg0.getId();
 			switch (getId) {
 				case R.id.activity_sales_order_btn_add_product:
+					int countCheckin = databaseHandler.getCountCheckin();
 					int countCustomer = databaseHandler.getCountCustomer();
-					if (countCustomer == 0) {
-						String msg = getApplicationContext()
-								.getResources()
-								.getString(R.string.app_sales_order_no_data_product);
-						showCustomDialog(msg);
-					} else {
-						ChooseCustomerDialog();
+					if(countCheckin>0){
+						showCustomDialog("Tidak bisa membuat rencana baru, karena terdapat realisasi visit yang gantung atau belum di upload ke server. " +
+								"Silahkan selesaikan rencana visit yang statusnya masih checkin. Atau upload data realisasi terlebih dahulu.");
+					}else{
+						if (countCustomer == 0) {
+							String msg = getApplicationContext()
+									.getResources()
+									.getString(R.string.app_sales_order_no_data_product);
+							showCustomDialog(msg);
+						} else {
+							ChooseCustomerDialog();
+						}
+						break;
 					}
-					break;
 				case R.id.activity_sales_order_btn_save:
 					if (detailReqLoadList.isEmpty()){
 						String msg = getApplicationContext()
@@ -861,7 +875,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 //					+ AppVar.CONFIG_APP_URL_DOWNLOAD_CUSTOMER+ "?id_wilayah="
 //					+ id_wilayah;
 			String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
-					+ AppVar.CONFIG_APP_URL_DOWNLOAD_CUSTOMER_NEW;
+					+ AppVar.CONFIG_APP_URL_DOWNLOAD_CUSTOMER_NEW+ "?id_user="+id_user;
 			HttpResponse response = getDownloadData(download_data_url);
 			int retCode = (response != null) ? response.getStatusLine().getStatusCode() : -1;
 			if (retCode != 200) {
@@ -1345,7 +1359,6 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 		editor.commit();
 	}
 
-
 	private class DownloadDataSapi extends AsyncTask<String, Integer, String> {
 		@Override
 		protected void onPreExecute() {
@@ -1429,13 +1442,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 			if (response_data != null) {
 				saveAppDataDataSapi(response_data);
 				extractDataDataSapi();
-				if (progressDialog != null) {
-					progressDialog.dismiss();
-				}
-				msg_success=act.getApplicationContext().getResources()
-						.getString(R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_SUCCESS);
-				showCustomDialog(msg_success);
-				listview.setVisibility(View.VISIBLE);
+				new DownloadDataObat().execute();
 			} else {
 				message = act.getApplicationContext().getResources()
 						.getString(R.string.MSG_DLG_LABEL_DOWNLOAD_FAILED);
@@ -1504,6 +1511,327 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 		SharedPreferences sp = getSharedPrefereces();
 		SharedPreferences.Editor editor = sp.edit();
 		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_DATA_SAPI, responsedata);
+		editor.commit();
+	}
+
+	private class DownloadDataObat extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			progressDialog.setMessage(getApplicationContext().getResources()
+					.getString(R.string.MSG_DLG_LABEL_SYNRONISASI_DATA));
+			progressDialog.show();
+			progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+						@Override
+						public void onCancel(DialogInterface dialog) {
+							String msg = getApplicationContext()
+									.getResources()
+									.getString(
+											R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
+							showCustomDialog(msg);
+						}
+					});
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
+					+ AppVar.CONFIG_APP_URL_DOWNLOAD_DATA_OBAT;
+			HttpResponse response = getDownloadData(download_data_url);
+			int retCode = (response != null) ? response.getStatusLine()
+					.getStatusCode() : -1;
+			if (retCode != 200) {
+				message = act.getApplicationContext().getResources()
+						.getString(R.string.MSG_DLG_LABEL_URL_NOT_FOUND);
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			} else {
+				try {
+					response_data = EntityUtils.toString(response.getEntity());
+
+					SharedPreferences spPreferences = getSharedPrefereces();
+					String main_app_table_data = spPreferences.getString(
+							AppVar.SHARED_PREFERENCES_TABLE_DATA_OBAT, null);
+					if (main_app_table_data != null) {
+						if (main_app_table_data.equalsIgnoreCase(response_data)) {
+							saveAppDataDataObatSameData(act
+									.getApplicationContext().getResources()
+									.getString(R.string.app_value_true));
+						} else {
+							databaseHandler.deleteTableDataObat();
+							saveAppDataDataObatSameData(act
+									.getApplicationContext().getResources()
+									.getString(R.string.app_value_false));
+						}
+					} else {
+						databaseHandler.deleteTableDataObat();
+						saveAppDataDataObatSameData(act.getApplicationContext()
+								.getResources()
+								.getString(R.string.app_value_false));
+					}
+				} catch (org.apache.http.ParseException e) {
+					message = e.toString();
+					handler.post(new Runnable() {
+						public void run() {
+							showCustomDialog(message);
+						}
+					});
+				} catch (IOException e) {
+					message = e.toString();
+					handler.post(new Runnable() {
+						public void run() {
+							showCustomDialog(message);
+						}
+					});
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			if (response_data != null) {
+				saveAppDataDataObat(response_data);
+				extractDataDataObat();
+				new DownloadDataPakan().execute();
+			} else {
+				message = act.getApplicationContext().getResources()
+						.getString(R.string.MSG_DLG_LABEL_DOWNLOAD_FAILED);
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			}
+		}
+	}
+
+	public void saveAppDataDataObatSameData(String responsedata) {
+		SharedPreferences sp = getSharedPrefereces();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_DATA_OBAT_SAME_DATA,
+				responsedata);
+		editor.commit();
+	}
+	public void extractDataDataObat() {
+		SharedPreferences spPreferences = getSharedPrefereces();
+		String main_app_table_same_data = spPreferences.getString(
+				AppVar.SHARED_PREFERENCES_TABLE_DATA_OBAT_SAME_DATA, null);
+		String main_app_table = spPreferences.getString(
+				AppVar.SHARED_PREFERENCES_TABLE_DATA_OBAT, null);
+		if (main_app_table_same_data.equalsIgnoreCase(act
+				.getApplicationContext().getResources()
+				.getString(R.string.app_value_false))) {
+			JSONObject oResponse;
+			try {
+				oResponse = new JSONObject(main_app_table);
+				JSONArray jsonarr = oResponse.getJSONArray("mst_obat");
+				id=databaseHandler.getCountSapi();
+
+				for (int i = 0; i < jsonarr.length(); i++) {
+					JSONObject oResponsealue = jsonarr.getJSONObject(i);
+					String id = oResponsealue.isNull("id_obat") ? null
+							: oResponsealue.getString("id_obat");
+					String kode = oResponsealue.isNull("kode_obat") ? null
+							: oResponsealue.getString("kode_obat");
+					String nama = oResponsealue.isNull("nama_obat") ? null
+							: oResponsealue.getString("nama_obat");
+					String unit = oResponsealue.isNull("unit_obat") ? null
+							: oResponsealue.getString("unit_obat");
+					databaseHandler.addObat(new Obat(Integer.parseInt(id),kode,nama,unit));
+				}
+				resetForm();
+			} catch (JSONException e) {
+				final String message = e.toString();
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			}
+		}
+	}
+
+	public void saveAppDataDataObat(String responsedata) {
+		SharedPreferences sp = getSharedPrefereces();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_DATA_OBAT, responsedata);
+		editor.commit();
+	}
+
+
+	private class DownloadDataPakan extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			progressDialog.setMessage(getApplicationContext().getResources()
+					.getString(R.string.MSG_DLG_LABEL_SYNRONISASI_DATA));
+			progressDialog.show();
+			progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					String msg = getApplicationContext()
+							.getResources()
+							.getString(
+									R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_CANCEL);
+					showCustomDialog(msg);
+				}
+			});
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
+					+ AppVar.CONFIG_APP_URL_DOWNLOAD_PAKAN + "?id_user="
+					+ id_user ;
+			HttpResponse response = getDownloadData(download_data_url);
+			int retCode = (response != null) ? response.getStatusLine().getStatusCode() : -1;
+			if (retCode != 200) {
+				message = act.getApplicationContext().getResources()
+						.getString(R.string.MSG_DLG_LABEL_URL_NOT_FOUND);
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			} else {
+				try {
+					response_data = EntityUtils.toString(response.getEntity());
+
+					SharedPreferences spPreferences = getSharedPrefereces();
+					String main_app_table_data = spPreferences.getString(
+							AppVar.SHARED_PREFERENCES_TABLE_PAKAN, null);
+					if (main_app_table_data != null) {
+						if (main_app_table_data.equalsIgnoreCase(response_data)) {
+							saveAppDatapakanSameData(act.getApplicationContext().getResources()
+									.getString(R.string.app_value_true));
+						} else {
+							db.deleteTablePakan();
+							saveAppDatapakanSameData(act
+									.getApplicationContext().getResources()
+									.getString(R.string.app_value_false));
+						}
+					} else {
+						db.deleteTablePakan();
+						saveAppDatapakanSameData(act.getApplicationContext()
+								.getResources()
+								.getString(R.string.app_value_false));
+					}
+				} catch (ParseException e) {
+					message = e.toString();
+					handler.post(new Runnable() {
+						public void run() {
+							showCustomDialog(message);
+						}
+					});
+				} catch (IOException e) {
+					message = e.toString();
+					handler.post(new Runnable() {
+						public void run() {
+							showCustomDialog(message);
+						}
+					});
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			if (response_data != null) {
+				saveAppDataPakan(response_data);
+				extractDataPakan();
+				if (progressDialog != null) {
+					progressDialog.dismiss();
+				}
+				msg_success=act.getApplicationContext().getResources()
+						.getString(R.string.MSG_DLG_LABEL_SYNRONISASI_DATA_SUCCESS);
+				showCustomDialog(msg_success);
+				listview.setVisibility(View.VISIBLE);
+			} else {
+				message = act.getApplicationContext().getResources()
+						.getString(R.string.MSG_DLG_LABEL_DOWNLOAD_FAILED);
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			}
+		}
+	}
+
+	public void extractDataPakan() {
+		SharedPreferences spPreferences = getSharedPrefereces();
+		String main_app_table_same_data = spPreferences.getString(
+				AppVar.SHARED_PREFERENCES_TABLE_PAKAN_SAME_DATA, null);
+		String main_app_table = spPreferences.getString(
+				AppVar.SHARED_PREFERENCES_TABLE_PAKAN, null);
+		if (main_app_table_same_data.equalsIgnoreCase(act
+				.getApplicationContext().getResources()
+				.getString(R.string.app_value_false))) {
+			JSONObject oResponse;
+			try {
+				oResponse = new JSONObject(main_app_table);
+				JSONArray jsonarr = oResponse.getJSONArray("mst_pakan");
+				for (int i = 0; i < jsonarr.length(); i++) {
+					JSONObject oResponsealue = jsonarr.getJSONObject(i);
+					String indnr = oResponsealue.isNull("indnr") ? null
+							: oResponsealue.getString("indnr");
+					String kode_pakan= oResponsealue.isNull("kode_pakan") ? null
+							: oResponsealue.getString("kode_pakan");
+					String desc_pakan = oResponsealue.isNull("desc_pakan") ? null
+							: oResponsealue.getString("desc_pakan");
+					String std = oResponsealue.isNull("std") ? null
+							: oResponsealue.getString("std");
+					String budget = oResponsealue.isNull("budget") ? null
+							: oResponsealue.getString("budget");
+					String terkirim = oResponsealue.isNull("terkirim") ? null
+							: oResponsealue.getString("terkirim");
+					String sisa = oResponsealue.isNull("sisa") ? null
+							: oResponsealue.getString("sisa");
+					String nofanim = oResponsealue.isNull("nofanim") ? null
+							: oResponsealue.getString("nofanim");
+					String dof = oResponsealue.isNull("dof") ? null
+							: oResponsealue.getString("dof");
+					String satuan = oResponsealue.isNull("satuan") ? null
+							: oResponsealue.getString("satuan");
+					String tanggal_kirim = oResponsealue.isNull("tanggal_kirim") ? null
+							: oResponsealue.getString("tanggal_kirim");
+					String qty_terima = oResponsealue.isNull("qty_terima") ? null
+							: oResponsealue.getString("qty_terima");
+					String create_date = oResponsealue.isNull("created_date") ? null
+							: oResponsealue.getString("created_date");
+
+					db.addPakan(new Pakan(Integer.parseInt(indnr),kode_pakan,desc_pakan,std,Integer.parseInt(budget),Integer.parseInt(terkirim),
+							Integer.parseInt(sisa),Integer.parseInt(nofanim),dof,satuan,tanggal_kirim,Integer.parseInt(qty_terima),create_date));
+				}
+
+			} catch (JSONException e) {
+				final String message = e.toString();
+				handler.post(new Runnable() {
+					public void run() {
+						showCustomDialog(message);
+					}
+				});
+			}
+		}
+	}
+
+	public void saveAppDataPakan(String responsedata) {
+		SharedPreferences sp = getSharedPrefereces();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_PAKAN, responsedata);
+		editor.commit();
+	}
+
+	public void saveAppDatapakanSameData(String responsedata) {
+		SharedPreferences sp = getSharedPrefereces();
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString(AppVar.SHARED_PREFERENCES_TABLE_PAKAN_SAME_DATA,
+				responsedata);
 		editor.commit();
 	}
 

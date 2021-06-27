@@ -263,8 +263,14 @@ public class ProspectPlanVisit extends ActionBarActivity implements NavigationDr
 			int getId = arg0.getId();
 			switch (getId) {
 				case R.id.activity_sales_order_btn_add_product:
-					ChooseCustomerDialog();
-					break;
+					int countCheckin = databaseHandler.getCountCheckin();
+					if(countCheckin>0){
+						showCustomDialog("Tidak bisa membuat rencana baru, karena terdapat realisasi visit yang gantung atau belum di upload ke server. " +
+								"Silahkan selesaikan rencana visit yang statusnya masih checkin. Atau upload data realisasi terlebih dahulu.");
+					}else {
+						ChooseCustomerDialog();
+						break;
+					}
 				case R.id.activity_sales_order_btn_save:
 					if (detailReqLoadList.isEmpty()){
 						String msg = getApplicationContext()

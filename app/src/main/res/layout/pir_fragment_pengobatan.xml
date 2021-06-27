@@ -25,13 +25,145 @@
 
                 <LinearLayout
                     android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal"
+                    android:paddingLeft="5dip" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nama Petani "
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text=":"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/nama_petani"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal"
+                    android:paddingLeft="5dip" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Alamat"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text=":"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/alamat_pertani"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal"
+                    android:paddingLeft="5dip" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Index"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text=":"
+                        android:textColor="@color/black"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/index"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"/>
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:text="("
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"/>
+                        <TextView
+                            android:id="@+id/jmlEkor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"/>
+                        <TextView
+                            android:text=" Ekor)"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal"
+                    android:paddingLeft="5dip" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="DoF"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text=":"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/dof"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.8"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="5dp"
                     android:gravity="center"
                     android:orientation="horizontal" >
 
                     <Button
-                        android:id="@+id/activity_sales_order_btn_add_product"
+                        android:id="@+id/addObat"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dip"
@@ -40,46 +172,39 @@
                         android:background="@drawable/roundedbutton"
                         android:minHeight="50dp"
                         android:minWidth="200dp"
-                        android:text="Tambah Tujuan"
+                        android:text="Tambah Obat"
                         android:textColor="@color/white" />
 
-                    <Button
-                        android:id="@+id/ttd_customer"
+                    <LinearLayout
                         android:layout_width="0dip"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="5dip"
                         android:layout_marginRight="10dip"
                         android:layout_weight="1"
-                        android:background="@drawable/roundedbutton"
-                        android:minHeight="50dp"
-                        android:minWidth="200dp"
-                        android:text="@string/ttd_sales_order"
-                        android:textColor="@color/white"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="10dip">
-
-                    <TextView
-                        android:id="@+id/activity_kanvaser_detail_ttd1"
-                        android:layout_width="0dip"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center"
-                        android:gravity="left|center"
-                        android:text=""
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:visibility="visible" />
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Tersimpan : "/>
+                        <TextView
+                            android:id="@+id/cSave"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="0"/>
+                        <LinearLayout
+                            android:id="@+id/ln_cout"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="5">
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="3.5">
                     <ListView
                         android:id="@+id/list"
                         android:layout_width="fill_parent"
@@ -90,6 +215,88 @@
                         android:dividerHeight="5dp"
                         android:focusable="false"
                         android:focusableInTouchMode="false" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.8"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/addFoto"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginRight="5dip"
+                        android:layout_weight="0.4"
+                        android:background="@drawable/roundedbutton"
+                        android:minHeight="50dp"
+                        android:minWidth="200dp"
+                        android:text="Foto"
+                        android:textColor="@color/white" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/ImgCust_obat"
+                            android:layout_width="150dp"
+                            android:layout_height="120dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/avatar"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/desc_foto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:layout_width="0dip"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginRight="10dip"
+                        android:layout_weight="1"
+                        android:background="@drawable/roundedbutton"
+                        android:minHeight="50dp"
+                        android:minWidth="200dp"
+                        android:text="@string/ttd_sales_order"
+                        android:textColor="@color/white"/>
+                    <Button
+                        android:id="@+id/save_pir_obat"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginRight="5dip"
+                        android:layout_weight="0.4"
+                        android:background="@drawable/roundedbutton"
+                        android:minHeight="50dp"
+                        android:minWidth="200dp"
+                        android:text="Simpan"
+                        android:textColor="@color/white" />
+
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

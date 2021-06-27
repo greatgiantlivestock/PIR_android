@@ -264,16 +264,22 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 			int getId = arg0.getId();
 			switch (getId) {
 				case R.id.activity_sales_order_btn_add_product:
+					int countCheckin = databaseHandler.getCountCheckin();
 					int countCustomer = databaseHandler.getCountCustomer();
-					if (countCustomer == 0) {
-						String msg = getApplicationContext()
-								.getResources()
-								.getString(R.string.app_sales_order_no_data_product);
-						showCustomDialog(msg);
-					} else {
-						ChooseCustomerDialog();
+					if(countCheckin>0){
+						showCustomDialog("Tidak bisa membuat rencana baru, karena terdapat realisasi visit yang gantung atau belum di upload ke server. " +
+								"Silahkan selesaikan rencana visit yang statusnya masih checkin. Atau upload data realisasi terlebih dahulu.");
+					}else{
+						if (countCustomer == 0) {
+							String msg = getApplicationContext()
+									.getResources()
+									.getString(R.string.app_sales_order_no_data_product);
+							showCustomDialog(msg);
+						} else {
+							ChooseCustomerDialog();
+						}
+						break;
 					}
-					break;
 				case R.id.activity_sales_order_btn_save:
 					if (detailReqLoadList.isEmpty()){
 						String msg = getApplicationContext()
