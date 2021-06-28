@@ -901,9 +901,9 @@ public class DashboardActivity extends ActionBarActivity implements
 //				Log.d(LOG_TAG, "doInBackground: "+nilaiVal);
 //				Toast.makeText(DashboardActivity.this, "Nilai Val :("+nilaiVal+")", Toast.LENGTH_LONG).show();
 				if(uploadcheckin.getFoto()!=null) {
-					response_data1 = uploadImage1(upload_image_supplier_url, String.valueOf(id_user), String.valueOf(uploadcheckin.getId_rencana_detail()), uploadcheckin.getLats(), uploadcheckin.getLongs(),uploadcheckin.getTanggal_checkin());
-				}else{
 					response_data1 = uploadImage(upload_image_supplier_url, String.valueOf(id_user), String.valueOf(uploadcheckin.getId_rencana_detail()), uploadcheckin.getLats(), uploadcheckin.getLongs(),uploadcheckin.getTanggal_checkin(),uploadcheckin.getFoto());
+				}else{
+					response_data1 = uploadImage1(upload_image_supplier_url, String.valueOf(id_user), String.valueOf(uploadcheckin.getId_rencana_detail()), uploadcheckin.getLats(), uploadcheckin.getLongs(),uploadcheckin.getTanggal_checkin());
 				}
 			}
 			return null;

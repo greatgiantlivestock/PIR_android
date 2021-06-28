@@ -196,8 +196,8 @@ public class PakanFragment extends Fragment{
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(desc.getText().toString()==""){
-                    showCustomDialog("Isi deskripsi yang ingin disampaikan terlebih dahulu");
+                if(desc_foto.getText().toString().equals("")||desc.getText().toString().equals("")){
+                    showCustomDialog("Ambil foto dan isi keterangan terlebih dahulu");
                 }else{
                     saveAppKeterangan(desc.getText().toString());
                     new UploadData().execute();
