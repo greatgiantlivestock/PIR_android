@@ -375,7 +375,6 @@ public class LoginActivity extends AppCompatActivity{
         if(db.getCountUser()==0){
             db.addUser(new User(nama_awo, no_hp));
             new DownloadDataUser().execute();
-            gotoNavigationdrawer();
         }else{
             db.deleteContact();
             db.addUser(new User(nama_awo, no_hp));
@@ -979,6 +978,7 @@ public class LoginActivity extends AppCompatActivity{
                     db.addMst_user(new MstUser(Integer.parseInt(id_user),nama,username,password,Integer.parseInt(id_departemen),
                             Integer.parseInt(id_wilayah),Integer.parseInt(id_karyawan),no_hp,Integer.parseInt(id_role)));
                 }
+                gotoNavigationdrawer();
             } catch (JSONException e) {
                 final String message = e.toString();
                 handler.post(new Runnable() {

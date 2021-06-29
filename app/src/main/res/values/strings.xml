@@ -413,7 +413,7 @@
     <string name="app_sales_order_deskripsi">Deskripsi</string>
     <string name="app_sales_order_failed_to_add">Anda belum melakukan check-in customer, silahkan check-in pada menu jadwal terlebih dahulu !</string>
     <string name="app_sales_order_no_data_jadwal">Mohon download data jadwal terlebih dahulu !</string>
-    <string name="app_sales_order_no_data_product">Mohon download data product terlebih dahulu !</string>
+    <string name="app_sales_order_no_data_product">Mohon download data petani terlebih dahulu !</string>
     <string name="app_sales_order_search_product">Search Product</string>
     <string name="app_sales_order_title_kode_product">Kode Product</string>
     <string name="app_sales_order_title_gambar_product">Gambar Sample</string>

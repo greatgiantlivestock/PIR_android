@@ -111,7 +111,7 @@ public class DashboardActivity extends ActionBarActivity implements
 	private ArrayList<String> checkinNumberStringList;
 	private int id_checkin = 0;
 	private String nomor_checkin_ = null;
-	private int id_user;
+	private int id_user=0;
 	private String nama_user;
 	private MstUser user;
 	private Typeface typefaceSmall;
@@ -1319,7 +1319,7 @@ public class DashboardActivity extends ActionBarActivity implements
 		@Override
 		protected String doInBackground(String... params) {
 			String download_data_url = AppVar.CONFIG_APP_URL_PUBLIC
-					+ AppVar.CONFIG_APP_URL_DOWNLOAD_CUSTOMER_NEW+ "?id_user="+1797;
+					+ AppVar.CONFIG_APP_URL_DOWNLOAD_CUSTOMER_NEW+ "?id_user="+id_user;
 			HttpResponse response = getDownloadData(download_data_url);
 			int retCode = (response != null) ? response.getStatusLine().getStatusCode() : -1;
 			if (retCode != 200) {

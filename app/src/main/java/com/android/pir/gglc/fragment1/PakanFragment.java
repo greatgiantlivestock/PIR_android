@@ -98,13 +98,15 @@ public class PakanFragment extends Fragment{
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private String response_data,response_data_download,main_app_id_detail_jadwal;
     private ArrayList<Pakan> pakan_list = new ArrayList<Pakan>();
-    private TextView tvnama_petani,tvalamat_petani,desc_foto,tvindex_petani,tvdof,tvjmlEkor;
+    private ArrayList<Pakan> pakan_header_list = new ArrayList<Pakan>();
+    private TextView tvnama_petani,tvalamat_petani,desc_foto,tvindex_petani,tvdof,tvjmlEkor,budgettv,terkirimtv,sisatv;
     private Button foto;
     private Mst_Customer mst_customer;
     private double latitude, longitude;
     private static final String LOG_TAG = PakanFragment.class.getSimpleName();
     private int id_checkin,id_user,id_customer;
     private MstUser user;
+    private Pakan pakan_header;
     private DetailRencana rencanaDetail;
     private String idrd,idcst,fto,nmr,lts,lng,idus,tgl,kode_customer,status_checkin;
     private LinearLayout lsstatus;
@@ -149,6 +151,9 @@ public class PakanFragment extends Fragment{
         foto = (Button) view.findViewById(R.id.foto);
         desc_foto = (TextView) view.findViewById(R.id.desc_foto);
         checkin = (Button) view.findViewById(R.id.save_pakan_feedback);
+        budgettv = (TextView) view.findViewById(R.id.budget_all);
+        terkirimtv = (TextView) view.findViewById(R.id.sum_all);
+        sisatv = (TextView) view.findViewById(R.id.sisa_all);
         SharedPreferences spPreferences = getSharedPrefereces();
         idrencanaDetail = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL, null));
         indnr = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null));
@@ -185,6 +190,18 @@ public class PakanFragment extends Fragment{
             showCustomDialog("Download dencana detail terlebih dahulu");
         }
 
+        ArrayList<Pakan> pakan_header_list = databaseHandler.getAllPakanHeader(String.valueOf(indnr));
+        pakan_header = new Pakan();
+
+        for (Pakan pakanHeader : pakan_header_list)
+            pakan_header = pakanHeader;
+        int budget = pakan_header.getBudget();
+        int terkirim = pakan_header.getTerkirim();
+        int sisa = budget-terkirim;
+
+        budgettv.setText(String.valueOf(budget));
+        terkirimtv.setText(String.valueOf(terkirim));
+        sisatv.setText(String.valueOf(sisa));
 
         foto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -292,7 +309,7 @@ public class PakanFragment extends Fragment{
                 pakan_list.add(pakan);
             }
 
-            cAdapter = new ListViewAdapter(PakanFragment.this.getActivity(), R.layout.list_item_pakan,
+            cAdapter = new ListViewAdapter(PakanFragment.this.getActivity(), R.layout.list_item_pakan_rev,
                     pakan_list);
             listView.setAdapter(cAdapter);
             cAdapter.notifyDataSetChanged();
@@ -328,14 +345,14 @@ public class PakanFragment extends Fragment{
                 holder = new ListViewAdapter.UserHolder();
                 holder.list_namaPakan = (TextView) row
                         .findViewById(R.id.nama_pakan);
-                holder.list_budget = (TextView) row
-                        .findViewById(R.id.budget_value);
+//                holder.list_budget = (TextView) row
+//                        .findViewById(R.id.budget_value);
                 holder.list_terkirim = (TextView) row
                         .findViewById(R.id.terkirim_value);
-                holder.list_sisa = (TextView) row
-                        .findViewById(R.id.sisa_value);
-                holder.list_std = (TextView) row
-                        .findViewById(R.id.std_value);
+//                holder.list_sisa = (TextView) row
+//                        .findViewById(R.id.sisa_value);
+//                holder.list_std = (TextView) row
+//                        .findViewById(R.id.std_value);
                 row.setTag(holder);
             } else {
                 holder = (ListViewAdapter.UserHolder) row.getTag();
@@ -343,7 +360,7 @@ public class PakanFragment extends Fragment{
             pakanData = data.get(position);
             String satuan = pakanData.getSatuan();
             holder.list_namaPakan.setText(pakanData.getDesc_pakan());
-            holder.list_budget.setText(pakanData.getBudget()+" "+satuan);
+//            holder.list_budget.setText(pakanData.getBudget()+" "+satuan);
 //            if (pakanData.getStatus() == 0) {
 //                holder.list_status.setText("Baru");
 //            }else if (pakanData.getStatus() == 1){
@@ -351,9 +368,9 @@ public class PakanFragment extends Fragment{
 //            }else if (pakanData.getStatus() == 2){
 //                holder.list_status.setText("Selesai");
 //            }
-            holder.list_terkirim.setText(pakanData.getTerkirim()+" "+satuan);
-            holder.list_sisa.setText(pakanData.getSisa()+" "+satuan);
-            holder.list_std.setText(pakanData.getStd()+" "+satuan);
+            holder.list_terkirim.setText(pakanData.getQty_terima()+" "+satuan);
+//            holder.list_sisa.setText(pakanData.getSisa()+" "+satuan);
+//            holder.list_std.setText(pakanData.getStd()+" "+satuan);
 
 //            row.setOnClickListener(new View.OnClickListener() {
 //
@@ -376,10 +393,10 @@ public class PakanFragment extends Fragment{
         }
         class UserHolder {
             TextView list_namaPakan;
-            TextView list_budget;
+//            TextView list_budget;
             TextView list_terkirim;
-            TextView list_sisa;
-            TextView list_std;
+//            TextView list_sisa;
+//            TextView list_std;
         }
     }
 

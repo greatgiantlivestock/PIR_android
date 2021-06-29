@@ -685,6 +685,51 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}
 
 	//getting All Pakan
+	public ArrayList<Pakan> getAllPakanHeader(String indnr) {
+		try {
+			pakanArrayList.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT pakan.* FROM " + TABLE_PAKAN +" pakan JOIN(SELECT max(id) as maxid,indnr,kode_pakan FROM "
+					+TABLE_PAKAN+" GROUP BY indnr) as dt1 ON pakan.id=dt1.maxid WHERE pakan.indnr ='"+indnr+"'";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Pakan user = new Pakan();
+					user.setId(cursor.getInt(0));
+					user.setIndnr(cursor.getInt(1));
+					user.setKode_pakan(cursor.getString(2));
+					user.setDesc_pakan(cursor.getString(3));
+					user.setStd(cursor.getString(4));
+					user.setBudget(cursor.getInt(5));
+					user.setTerkirim(cursor.getInt(6));
+					user.setSisa(cursor.getInt(7));
+					user.setNofanim(cursor.getInt(8));
+					user.setDof(cursor.getString(9));
+					user.setSatuan(cursor.getString(10));
+					user.setTanggal_kirim(cursor.getString(11));
+					user.setQty_terima(cursor.getInt(12));
+					user.setCreate_date(cursor.getString(13));
+
+					// Adding staff to list
+					pakanArrayList.add(user);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return pakanArrayList;
+		} catch (Exception e) {
+			Log.e("pakan_list", "" + e);
+		}
+		return pakanArrayList;
+	}
+	//getting All Pakan
 	public ArrayList<Pakan> getAllPakan(String indnr) {
 		try {
 			pakanArrayList.clear();

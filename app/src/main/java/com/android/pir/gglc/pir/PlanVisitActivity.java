@@ -201,13 +201,14 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 //				save_edit.setVisibility(View.VISIBLE);
 //			}
 //		});
-		updateContentRefreshRencana();
 		ArrayList<MstUser> staff_list = databaseHandler.getAllUser();
 		user = new MstUser();
 
 		for (MstUser tempStaff : staff_list)
 			user = tempStaff;
 		id_user=user.getId_user();
+		Log.d(LOG_TAG, "onCreate: "+id_user);
+		updateContentRefreshRencana();
 	}
 
 
