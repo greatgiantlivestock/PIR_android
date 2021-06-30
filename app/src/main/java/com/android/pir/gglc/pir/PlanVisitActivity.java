@@ -1805,9 +1805,11 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 							: oResponsealue.getString("qty_terima");
 					String create_date = oResponsealue.isNull("created_date") ? null
 							: oResponsealue.getString("created_date");
+					String pakan_type = oResponsealue.isNull("pakan_type") ? null
+							: oResponsealue.getString("pakan_type");
 
 					db.addPakan(new Pakan(Integer.parseInt(indnr),kode_pakan,desc_pakan,std,Integer.parseInt(budget),Integer.parseInt(terkirim),
-							Integer.parseInt(sisa),Integer.parseInt(nofanim),dof,satuan,tanggal_kirim,Integer.parseInt(qty_terima),create_date));
+							Integer.parseInt(sisa),Integer.parseInt(nofanim),dof,satuan,tanggal_kirim,Integer.parseInt(qty_terima),create_date,pakan_type));
 				}
 
 			} catch (JSONException e) {

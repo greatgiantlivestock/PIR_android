@@ -15,13 +15,14 @@ public class Pakan {
 	String tanggal_kirim;
 	int qty_terima;
 	String create_date;
+	String pakan_type;
 
 	// Empty constructor
 	public Pakan(){
 
 	}
 	// constructor
-	public Pakan(int id,int indnr,String kode_pakan,String desc_pakan,String std,int budget,int terkirim,int sisa,int nofanim,String dof,String satuan,String tanggal_kirim,int qty_terima,String create_date){
+	public Pakan(int id,int indnr,String kode_pakan,String desc_pakan,String std,int budget,int terkirim,int sisa,int nofanim,String dof,String satuan,String tanggal_kirim,int qty_terima,String create_date, String pakan_type){
 		this.id= id;
 		this.indnr=indnr;
 		this.kode_pakan=kode_pakan;
@@ -36,10 +37,11 @@ public class Pakan {
 		this.tanggal_kirim=tanggal_kirim;
 		this.qty_terima=qty_terima;
 		this.create_date=create_date;
+		this.pakan_type=pakan_type;
 	}
 
 	// constructor
-	public Pakan(int indnr,String kode_pakan,String desc_pakan,String std,int budget,int terkirim,int sisa,int nofanim,String dof,String satuan,String tanggal_kirim,int qty_terima,String create_date){
+	public Pakan(int indnr,String kode_pakan,String desc_pakan,String std,int budget,int terkirim,int sisa,int nofanim,String dof,String satuan,String tanggal_kirim,int qty_terima,String create_date, String pakan_type){
 		this.indnr=indnr;
 		this.kode_pakan=kode_pakan;
 		this.desc_pakan=desc_pakan;
@@ -53,6 +55,7 @@ public class Pakan {
 		this.tanggal_kirim=tanggal_kirim;
 		this.qty_terima=qty_terima;
 		this.create_date=create_date;
+		this.pakan_type=pakan_type;
 	}
 
 	public int getId(){
@@ -138,5 +141,11 @@ public class Pakan {
 	}
 	public void setCreate_date(String create_date){
 		this.create_date= create_date;
+	}
+	public String getPakan_type(){
+		return this.pakan_type;
+	}
+	public void setPakan_type(String pakan_type){
+		this.pakan_type= pakan_type;
 	}
 }

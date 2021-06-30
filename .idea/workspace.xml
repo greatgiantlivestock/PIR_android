@@ -12,18 +12,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e1c6a39-96ae-4b64-a749-b08c46a0591b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan_rev.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_detail_pakan.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_detail_pakan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Pakan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Pakan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PakanFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PakanFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PengobatanFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PengobatanFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity2.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan_rev.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan_rev.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_pakan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_pakan.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +42,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="ce12160c2d76361601" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="127.0.0.1:62001" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -97,25 +105,99 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PakanFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="203" column="43" selection-start-line="203" selection-start-column="43" selection-end-line="203" selection-end-column="43" />
+            <state relative-caret-position="201">
+              <caret line="396" column="44" selection-start-line="396" selection-start-column="44" selection-end-line="396" selection-end-column="44" />
               <folding>
+                <element signature="e#3549#3556#0" expanded="true" />
                 <element signature="e#3615#3622#0" expanded="true" />
-                <element signature="e#8406#8565#0" expanded="true" />
-                <element signature="e#8564#8565#0" expanded="true" />
-                <element signature="e#7901#8363#0" expanded="true" />
-                <element signature="e#8362#8363#0" expanded="true" />
-                <marker date="1624962902000" expanded="true" signature="28823:29158" ph="..." />
+                <element signature="e#4434#4435#0" expanded="true" />
+                <element signature="e#4484#4485#0" expanded="true" />
+                <element signature="e#5261#5359#0" expanded="true" />
+                <element signature="e#8144#8303#0" expanded="true" />
+                <element signature="e#8302#8303#0" expanded="true" />
+                <element signature="e#8342#8804#0" expanded="true" />
+                <element signature="e#8803#8804#0" expanded="true" />
+                <element signature="e#12770#12777#0" expanded="true" />
+                <element signature="e#15552#15831#0" expanded="true" />
+                <element signature="e#15830#15831#0" expanded="true" />
+                <element signature="e#16788#16789#0" expanded="true" />
+                <element signature="e#16796#16803#0" expanded="true" />
+                <element signature="e#18848#18855#0" expanded="true" />
+                <element signature="e#34173#34174#0" expanded="true" />
+                <marker date="1625045280000" expanded="true" signature="33501:33836" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_pakan.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PengobatanFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="243" column="50" selection-start-line="243" selection-start-column="50" selection-end-line="243" selection-end-column="50" />
+            <state relative-caret-position="209">
+              <caret line="663" column="16" selection-start-line="663" selection-start-column="16" selection-end-line="663" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#11989#13398#0" expanded="true" />
+                <element signature="e#13397#13398#0" expanded="true" />
+                <element signature="e#30466#30578#0" expanded="true" />
+                <element signature="e#30604#31003#0" expanded="true" />
+                <element signature="e#31002#31003#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_pengobatan.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="287" column="54" selection-start-line="287" selection-start-column="41" selection-end-line="287" selection-end-column="54" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_detail_pakan.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="629">
+              <caret line="37" column="37" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_detail_pakan.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="75" column="17" selection-start-line="75" selection-start-column="17" selection-end-line="75" selection-end-column="17" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="334">
+              <caret line="484" column="14" selection-start-line="484" selection-start-column="14" selection-end-line="484" selection-end-column="14" />
+              <folding>
+                <element signature="e#15255#17105#0" expanded="true" />
+                <element signature="e#17104#17105#0" expanded="true" />
+                <element signature="e#17525#17673#0" expanded="true" />
+                <element signature="e#17672#17673#0" expanded="true" />
+                <element signature="e#18199#18213#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="395">
+              <caret line="58" column="41" selection-start-line="58" selection-start-column="41" selection-end-line="58" selection-end-column="41" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
@@ -124,78 +206,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="693" column="49" selection-start-line="693" selection-start-column="49" selection-end-line="693" selection-end-column="49" />
+            <state relative-caret-position="281">
+              <caret line="733" column="30" selection-start-line="733" selection-start-column="30" selection-end-line="733" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Pakan.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-              <folding>
-                <element signature="e#2204#2205#0" expanded="true" />
-                <element signature="e#2234#2235#0" expanded="true" />
-                <element signature="e#2424#2425#0" expanded="true" />
-                <element signature="e#2452#2453#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="312">
+              <caret line="393" column="96" selection-start-line="393" selection-start-column="63" selection-end-line="393" selection-end-column="96" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan_rev.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/ProspectPlanVisit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="28" column="40" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="70" column="91" selection-start-line="70" selection-start-column="71" selection-end-line="70" selection-end-column="91" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="538">
-              <caret line="203" column="20" selection-start-line="203" selection-start-column="20" selection-end-line="203" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="604">
-              <caret line="178" column="12" selection-start-line="178" selection-start-column="12" selection-end-line="178" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="415" column="77" selection-start-line="415" selection-start-column="77" selection-end-line="415" selection-end-column="77" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/LoginActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="380" column="35" selection-start-line="380" selection-start-column="35" selection-end-line="380" selection-end-column="35" />
+            <state relative-caret-position="400">
+              <caret line="369" column="52" selection-start-line="369" selection-start-column="52" selection-end-line="369" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -204,36 +234,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pir_foto_pakan</find>
-      <find>30.102</find>
-      <find>CONFIG_APP_URL_UPLOAD_INSERT_DATA_PENGOBATAN</find>
-      <find>getallpaka</find>
-      <find>getallpak</find>
-      <find>http://179.15.30.13</find>
-      <find>gg-livestock.com/visit-pir-dev</find>
-      <find>appvar</find>
-      <find>save</find>
-      <find>id_rencana_detail</find>
-      <find>customer</find>
-      <find>?</find>
-      <find>get</find>
-      <find>user.get</find>
-      <find>spPreferences</find>
-      <find>dev-visit.</find>
-      <find>list.</find>
-      <find>list</find>
-      <find>list_</find>
-      <find>Pakan</find>
-      <find>pakan.</find>
       <find>getAllPakan</find>
-      <find>pakan_list</find>
       <find>string</find>
       <find>mohon do</find>
       <find>customer_n</find>
       <find>?id</find>
       <find>mst_user</find>
-      <find>toast</find>
       <find>toas</find>
+      <find>budget_all</find>
+      <find>list_i</find>
+      <find>pakan_list.add(pakan);</find>
+      <find>pakan_list</find>
+      <find>UserHolder</find>
+      <find>toast</find>
+      <find>db.get</find>
+      <find>databasehandler.get</find>
+      <find>databaseHandler.getAllCustomerBas</find>
+      <find>appva</find>
+      <find>setonclick</find>
+      <find>std_value</find>
+      <find>Mst_Customer</find>
+      <find>KEY_PAKAN_CREATE_DATE</find>
+      <find>cAdapterChooseAdapter</find>
+      <find>getdesc</find>
+      <find>customer_list</find>
+      <find>ListViewChooseAdapter</find>
+      <find>adapter</find>
+      <find>productData</find>
+      <find>dismiss</find>
+      <find>!= null</find>
+      <find>searc</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -248,9 +278,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main_product_choose_dialog_req_loadnew.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_product_sales_order.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main_product_choose_dialog_req_load_urgent.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/NavigationDrawerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/History_Canvassing.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/ChangePassword.java" />
@@ -269,12 +296,10 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_detail_obat.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Pengobatan.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity2.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/ProspectPlanVisit.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/charting/components/LegendEntry.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/xxmassdeveloper/mpchartexample/ScatterChartActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/HorizontalBarChartActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Pakan.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/PakanList.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/roundedactivebudget.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/roundedactiveterkirim.xml" />
@@ -284,21 +309,26 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_checkout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/OneFragment1.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/DataSapiFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PengobatanFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/CheckoutFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/FeedbackPakan.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_data_sapi.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_pengobatan.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan_rev.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/DashboardActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan_rev.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Pakan.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PakanFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_pakan.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan_child.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity2.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_detail_pakan.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main_detail_pakan.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PakanFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PengobatanFragment.java" />
       </list>
     </option>
   </component>
@@ -367,12 +397,28 @@
               <item name="android" type="462c0819:PsiDirectoryNode" />
               <item name="pir" type="462c0819:PsiDirectoryNode" />
               <item name="gglc" type="462c0819:PsiDirectoryNode" />
+              <item name="fragment1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PIR_android" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="pir" type="462c0819:PsiDirectoryNode" />
+              <item name="gglc" type="462c0819:PsiDirectoryNode" />
               <item name="pir" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PIR_android" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="PIR_android" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="PIR_android" type="1abcf292:AndroidViewProjectNode" />
@@ -389,8 +435,8 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="ce12160c2d76361601" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-06-26T15:19:11.915Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="127.0.0.1:62001" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-06-30T04:34:11.203Z" />
     <property name="ExportApk.ApkPath" value="D:\Android Workspace\New\070421\PIR_android\app" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.SignV1" value="true" />
@@ -539,7 +585,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49945828" visible="true" weight="0.21073826" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49945828" visible="true" weight="0.21073826" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" sideWeight="0.5005417" side_tool="true" weight="0.16791044" />
@@ -561,7 +607,7 @@
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" weight="0.15618336" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info active="true" anchor="right" id="Preview" order="4" visible="true" weight="0.3872483" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.3872483" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Assistant" order="6" weight="0.3290469" />
     </layout>
@@ -595,14 +641,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/charting/interfaces/dataprovider/BarDataProvider.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/charting/formatter/IndexAxisValueFormatter.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/charting/components/ComponentBase.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/charting/data/BarLineScatterCandleBubbleData.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/charting/renderer/scatter/XShapeRenderer.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/charting/renderer/YAxisRendererRadarChart.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/charting/renderer/XAxisRendererHorizontalBarChart.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/charting/formatter/StackedValueFormatter.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/charting/components/LegendEntry.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/xxmassdeveloper/mpchartexample/BarChartActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/xxmassdeveloper/mpchartexample/InvertedLineChartActivity.java" />
@@ -730,24 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PengobatanFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="108" column="56" selection-start-line="108" selection-start-column="56" selection-end-line="108" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_pengobatan.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4199">
-          <caret line="247" column="53" selection-start-line="247" selection-start-column="53" selection-end-line="247" selection-end-column="53" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_data_sapi.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9231">
@@ -756,53 +776,10 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="42" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan_rev.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="28" column="40" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Pakan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-          <folding>
-            <element signature="e#2204#2205#0" expanded="true" />
-            <element signature="e#2234#2235#0" expanded="true" />
-            <element signature="e#2424#2425#0" expanded="true" />
-            <element signature="e#2452#2453#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="70" column="91" selection-start-line="70" selection-start-column="71" selection-end-line="70" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="415" column="77" selection-start-line="415" selection-start-column="77" selection-end-line="415" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="693" column="49" selection-start-line="693" selection-start-column="49" selection-end-line="693" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -820,35 +797,173 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="203" column="20" selection-start-line="203" selection-start-column="20" selection-end-line="203" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PakanFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan_rev.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
-          <caret line="203" column="43" selection-start-line="203" selection-start-column="43" selection-end-line="203" selection-end-column="43" />
+          <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/Pakan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="148" column="20" selection-start-line="148" selection-start-column="20" selection-end-line="148" selection-end-column="20" />
           <folding>
-            <element signature="e#3615#3622#0" expanded="true" />
-            <element signature="e#8406#8565#0" expanded="true" />
-            <element signature="e#8564#8565#0" expanded="true" />
-            <element signature="e#7901#8363#0" expanded="true" />
-            <element signature="e#8362#8363#0" expanded="true" />
-            <marker date="1624962902000" expanded="true" signature="28823:29158" ph="..." />
+            <element signature="e#2204#2205#0" expanded="true" />
+            <element signature="e#2234#2235#0" expanded="true" />
+            <element signature="e#2424#2425#0" expanded="true" />
+            <element signature="e#2452#2453#0" expanded="true" />
+            <element signature="e#3265#3266#0" expanded="true" />
+            <element signature="e#3295#3296#0" expanded="true" />
+            <element signature="e#3344#3345#0" expanded="true" />
+            <element signature="e#3380#3381#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_pakan.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan_child.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="243" column="50" selection-start-line="243" selection-start-column="50" selection-end-line="243" selection-end-column="50" />
+        <state relative-caret-position="459">
+          <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_plan_visit_two.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_pakan.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6">
+          <caret line="175" column="23" selection-start-line="175" selection-start-column="23" selection-end-line="175" selection-end-column="23" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/absen/AppVar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="50" column="31" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="393" column="96" selection-start-line="393" selection-start-column="63" selection-end-line="393" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/ProspectPlanVisit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="369" column="52" selection-start-line="369" selection-start-column="52" selection-end-line="369" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_product_choose_dialog_req_loadnew.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/database/DatabaseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="733" column="30" selection-start-line="733" selection-start-column="30" selection-end-line="733" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_product_sales_order.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_detail_pakan.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="75" column="17" selection-start-line="75" selection-start-column="17" selection-end-line="75" selection-end-column="17" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_detail_pakan.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="37" column="37" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PakanFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="396" column="44" selection-start-line="396" selection-start-column="44" selection-end-line="396" selection-end-column="44" />
+          <folding>
+            <element signature="e#3549#3556#0" expanded="true" />
+            <element signature="e#3615#3622#0" expanded="true" />
+            <element signature="e#4434#4435#0" expanded="true" />
+            <element signature="e#4484#4485#0" expanded="true" />
+            <element signature="e#5261#5359#0" expanded="true" />
+            <element signature="e#8144#8303#0" expanded="true" />
+            <element signature="e#8302#8303#0" expanded="true" />
+            <element signature="e#8342#8804#0" expanded="true" />
+            <element signature="e#8803#8804#0" expanded="true" />
+            <element signature="e#12770#12777#0" expanded="true" />
+            <element signature="e#15552#15831#0" expanded="true" />
+            <element signature="e#15830#15831#0" expanded="true" />
+            <element signature="e#16788#16789#0" expanded="true" />
+            <element signature="e#16796#16803#0" expanded="true" />
+            <element signature="e#18848#18855#0" expanded="true" />
+            <element signature="e#34173#34174#0" expanded="true" />
+            <marker date="1625045280000" expanded="true" signature="33501:33836" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_pakan.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="58" column="41" selection-start-line="58" selection-start-column="41" selection-end-line="58" selection-end-column="41" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/pir/PlanVisitActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="484" column="14" selection-start-line="484" selection-start-column="14" selection-end-line="484" selection-end-column="14" />
+          <folding>
+            <element signature="e#15255#17105#0" expanded="true" />
+            <element signature="e#17104#17105#0" expanded="true" />
+            <element signature="e#17525#17673#0" expanded="true" />
+            <element signature="e#17672#17673#0" expanded="true" />
+            <element signature="e#18199#18213#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pir_fragment_pengobatan.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="287" column="54" selection-start-line="287" selection-start-column="41" selection-end-line="287" selection-end-column="54" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/android/pir/gglc/fragment1/PengobatanFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="663" column="16" selection-start-line="663" selection-start-column="16" selection-end-line="663" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11989#13398#0" expanded="true" />
+            <element signature="e#13397#13398#0" expanded="true" />
+            <element signature="e#30466#30578#0" expanded="true" />
+            <element signature="e#30604#31003#0" expanded="true" />
+            <element signature="e#31002#31003#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">

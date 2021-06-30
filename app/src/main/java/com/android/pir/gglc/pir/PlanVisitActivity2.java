@@ -354,7 +354,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 		for (MstUser tempStaff : staff_list)
 			user = tempStaff;
 		String nama=user.getNama();
-		ArrayList<Mst_Customer> customer_from_db = databaseHandler.getAllCustomerOnly(nama);
+		ArrayList<Mst_Customer> customer_from_db = databaseHandler.getAllCustomerOnlyUrgent(nama);
 		if (customer_from_db.size() > 0) {
 			listview.setVisibility(View.VISIBLE);
 			for (int i = 0; i < customer_from_db.size(); i++) {
@@ -391,8 +391,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 					for (MstUser tempStaff : staff_list)
 						user = tempStaff;
 					String nama1=user.getNama();
-					ArrayList<Mst_Customer> customer_from_db = databaseHandler
-							.getAllCustomerBaseOnSearch(nama1,cs.toString());
+					ArrayList<Mst_Customer> customer_from_db = databaseHandler.getAllCustomerBaseOnSearchUrgent(cs.toString());
 					if (customer_from_db.size() > 0) {
 						listview.setVisibility(View.VISIBLE);
 						for (int i = 0; i < customer_from_db.size(); i++) {

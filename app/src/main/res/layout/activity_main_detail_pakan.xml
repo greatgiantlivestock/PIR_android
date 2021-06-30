@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/eula_relative_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="10dip" >
+
+    <LinearLayout
+        android:id="@+id/activity_customer_linear_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_customer_linear_search"
+        android:orientation="horizontal"
+        android:padding="7dip" >
+
+        <TextView
+            android:id="@+id/activity_sales_order_title_kode_product"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:text="Nama Pakan"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/activity_sales_order_title_action"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.45"
+            android:text="Qty"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="0dip"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Tanggal"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dividerHeaderBottom"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/activity_customer_linear_title"
+        android:background="#414141" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dividerHeaderBottom"
+        android:background="@color/white"
+        android:divider="@color/listview_divider"
+        android:dividerHeight="0.8dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
+    <Button
+        android:id="@+id/close"
+        android:layout_below="@+id/list"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/roundedbutton"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="close"/>
+
+</RelativeLayout>

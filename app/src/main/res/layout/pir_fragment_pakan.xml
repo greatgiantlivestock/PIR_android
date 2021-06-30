@@ -158,121 +158,121 @@
                     android:layout_weight="5"
                     android:orientation="vertical"
                     android:weightSum="5">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.5"
-                        android:padding="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center"
-                        android:background="@drawable/roundedactivebudget"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:layout_weight="1"
-                            android:text="Budget "
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:text=":"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:id="@+id/budget_all"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.8"
-                            android:text="65000 Kg"
-                            android:textStyle="bold"
-                            android:gravity="right"
-                            android:textColor="@color/black"/>
-                    </LinearLayout>
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_weight="0.5"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:layout_marginBottom="5dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:background="@drawable/roundedactivebudget"-->
+<!--                        android:orientation="horizontal">-->
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="Budget "-->
+<!--                            android:textColor="@color/black"/>-->
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="0.2"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text=":"-->
+<!--                            android:textColor="@color/black"/>-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/budget_all"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1.8"-->
+<!--                            android:text="65000 Kg"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:gravity="right"-->
+<!--                            android:textColor="@color/black"/>-->
+<!--                    </LinearLayout>-->
                     <ListView
                         android:id="@+id/list"
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="3.4"
+                        android:layout_weight="5"
                         android:padding="5dp"
                         android:background="@color/grey"
                         android:divider="@color/transparent"
                         android:dividerHeight="5dp"
                         android:focusable="false"
                         android:focusableInTouchMode="false" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.5"
-                        android:padding="5dp"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:background="@drawable/roundedactivestd"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:layout_weight="1"
-                            android:text="Total Terkirim "
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            android:text=":"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:id="@+id/sum_all"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.8"
-                            android:textStyle="bold"
-                            android:text="12000 Kg"
-                            android:gravity="right"
-                            android:layout_marginRight="5dp"
-                            android:textColor="@color/black"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.5"
-                        android:padding="5dp"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:background="@drawable/roundedactivesisa"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Sisa Budget "
-                            android:textStyle="bold"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:textStyle="bold"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
-                            android:gravity="center"
-                            android:text=":"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:id="@+id/sisa_all"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.8"
-                            android:textStyle="bold"
-                            android:text="12000 Kg"
-                            android:gravity="right"
-                            android:layout_marginRight="5dp"
-                            android:textColor="@color/black"/>
-                    </LinearLayout>
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_weight="0.5"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:background="@drawable/roundedactivestd"-->
+<!--                        android:orientation="horizontal">-->
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="Total Terkirim "-->
+<!--                            android:textColor="@color/black"/>-->
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="0.2"-->
+<!--                            android:gravity="center"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:text=":"-->
+<!--                            android:textColor="@color/black"/>-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/sum_all"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1.8"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:text="12000 Kg"-->
+<!--                            android:gravity="right"-->
+<!--                            android:layout_marginRight="5dp"-->
+<!--                            android:textColor="@color/black"/>-->
+<!--                    </LinearLayout>-->
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_weight="0.5"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:background="@drawable/roundedactivesisa"-->
+<!--                        android:orientation="horizontal">-->
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="Sisa Budget "-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:textColor="@color/black"/>-->
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="0.2"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text=":"-->
+<!--                            android:textColor="@color/black"/>-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/sisa_all"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1.8"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:text="12000 Kg"-->
+<!--                            android:gravity="right"-->
+<!--                            android:layout_marginRight="5dp"-->
+<!--                            android:textColor="@color/black"/>-->
+<!--                    </LinearLayout>-->
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="fill_parent"

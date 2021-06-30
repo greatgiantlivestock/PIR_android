@@ -173,6 +173,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_PAKAN_TANGGAL_KIRIM="tanggal_kirim";
 	private static final String KEY_PAKAN_QTY_TERIMA="qty_terima";
 	private static final String KEY_PAKAN_CREATE_DATE="create_date";
+	private static final String KEY_PAKAN_TYPE="pakan_type";
 
 
 
@@ -314,7 +315,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		String CREATE_TABLE_PAKAN = "CREATE TABLE " + TABLE_PAKAN + "("
 				+ KEY_PAKAN_ID + " INTEGER PRIMARY KEY," + KEY_PAKAN_INDNR + " INTEGER," + KEY_PAKAN_KODE_PAKAN + " TEXT," + KEY_PAKAN_DESC_PAKAN + " TEXT," + KEY_PAKAN_STD + " TEXT," + KEY_PAKAN_BUDGET + " INTEGER," +
                 KEY_PAKAN_TERKIRIM + " INTEGER," + KEY_PAKAN_SISA  + " INTEGER," + KEY_PAKAN_NOFANIM  + " INTEGER," + KEY_PAKAN_DOF  + " TEXT," + KEY_PAKAN_SATUAN  + " TEXT," + KEY_PAKAN_TANGGAL_KIRIM  + " TEXT," +
-                KEY_PAKAN_QTY_TERIMA + " INTEGER," + KEY_PAKAN_CREATE_DATE + " TEXT" + ")";
+                KEY_PAKAN_QTY_TERIMA + " INTEGER," + KEY_PAKAN_CREATE_DATE + " TEXT," + KEY_PAKAN_TYPE + " TEXT "+")";
 		db.execSQL(CREATE_TABLE_PAKAN);
 	}
 
@@ -463,6 +464,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_PAKAN_TANGGAL_KIRIM, pakan.getTanggal_kirim());
 		values.put(KEY_PAKAN_QTY_TERIMA, pakan.getQty_terima());
 		values.put(KEY_PAKAN_CREATE_DATE, pakan.getCreate_date());
+		values.put(KEY_PAKAN_TYPE, pakan.getPakan_type());
 
 		db.insert(TABLE_PAKAN, null, values);
 		db.close();
@@ -690,8 +692,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			pakanArrayList.clear();
 
 			// Select All Query
-			String selectQuery = "SELECT pakan.* FROM " + TABLE_PAKAN +" pakan JOIN(SELECT max(id) as maxid,indnr,kode_pakan FROM "
-					+TABLE_PAKAN+" GROUP BY indnr) as dt1 ON pakan.id=dt1.maxid WHERE pakan.indnr ='"+indnr+"'";
+			String selectQuery = "SELECT pakan.* FROM " + TABLE_PAKAN +" pakan WHERE pakan.indnr ='"+indnr+"'";
 
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
@@ -730,13 +731,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return pakanArrayList;
 	}
 	//getting All Pakan
-	public ArrayList<Pakan> getAllPakan(String indnr) {
+	public ArrayList<Pakan> getAllPakan(String indnr, String type) {
 		try {
 			pakanArrayList.clear();
 
 			// Select All Query
-			String selectQuery = "SELECT pakan.* FROM " + TABLE_PAKAN +" pakan JOIN(SELECT max(id) as maxid,indnr,kode_pakan FROM "
-					+TABLE_PAKAN+" GROUP BY indnr,kode_pakan) as dt1 ON pakan.id=dt1.maxid WHERE pakan.indnr ='"+indnr+"'";
+			String selectQuery = "SELECT * FROM "+TABLE_PAKAN+" WHERE indnr ='"+indnr+"' AND pakan_type='"+type+"'";
 
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
@@ -759,6 +759,51 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					user.setTanggal_kirim(cursor.getString(11));
 					user.setQty_terima(cursor.getInt(12));
 					user.setCreate_date(cursor.getString(13));
+
+					// Adding staff to list
+					pakanArrayList.add(user);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return pakanArrayList;
+		} catch (Exception e) {
+			Log.e("pakan_list", "" + e);
+		}
+		return pakanArrayList;
+	}
+	//getting All Pakan
+	public ArrayList<Pakan> getAllPakanType(String indnr) {
+		try {
+			pakanArrayList.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT * FROM "+TABLE_PAKAN+" WHERE indnr ='"+indnr+"' GROUP BY pakan_type";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Pakan user = new Pakan();
+					user.setId(cursor.getInt(0));
+					user.setIndnr(cursor.getInt(1));
+					user.setKode_pakan(cursor.getString(2));
+					user.setDesc_pakan(cursor.getString(3));
+					user.setStd(cursor.getString(4));
+					user.setBudget(cursor.getInt(5));
+					user.setTerkirim(cursor.getInt(6));
+					user.setSisa(cursor.getInt(7));
+					user.setNofanim(cursor.getInt(8));
+					user.setDof(cursor.getString(9));
+					user.setSatuan(cursor.getString(10));
+					user.setTanggal_kirim(cursor.getString(11));
+					user.setQty_terima(cursor.getInt(12));
+					user.setCreate_date(cursor.getString(13));
+					user.setPakan_type(cursor.getString(14));
 
 					// Adding staff to list
 					pakanArrayList.add(user);
@@ -1695,6 +1740,40 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		return mst_customerArrayList;
 	}
+	// Getting All customer search
+	public ArrayList<Mst_Customer> getAllCustomerBaseOnSearchUrgent( String search) {
+		try {
+			mst_customerArrayList.clear();
+			// Select All Query
+			String selectQuery = "SELECT  * FROM " + TABLE_MST_CUSTOMER + " WHERE "
+					+ KEY_MST_CUSTOMER_NAMA_CUSTOMER + " LIKE '%" + search + "%' AND kode_customer LIKE '20%' OR " + KEY_MST_CUSTOMER_ALAMAT +" LIKE '%"+search+"%' AND kode_customer LIKE '20%' ";
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Mst_Customer customer = new Mst_Customer();
+					customer.setId_customer(cursor.getInt(0));
+					customer.setNama_customer(cursor.getString(2));
+					customer.setAlamat(cursor.getString(3));
+					customer.setIndnr(cursor.getString(8));
+
+					// Adding product to list
+					mst_customerArrayList.add(customer);
+				} while (cursor.moveToNext());
+			}
+
+			// return product_list
+			cursor.close();
+			db.close();
+			return mst_customerArrayList;
+		} catch (Exception e) {
+			Log.e("customer_list", "" + e);
+		}
+
+		return mst_customerArrayList;
+	}
 	// Getting All obat search
 	public ArrayList<Obat> getAllObatBaseOnSearch(String search) {
 		try {
@@ -2009,6 +2088,112 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			try {
 				mst_customerArrayList.clear();
 				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER+ " WHERE "+KEY_MST_CUSTOMER_NO_HP+" LIKE '%"+nama+"%' AND kode_customer like '20%'" ;
+
+				SQLiteDatabase db = this.getWritableDatabase();
+				Cursor cursor = db.rawQuery(selectQuery, null);
+
+				// looping through all rows and adding to list
+				if (cursor.moveToFirst()) {
+					do {
+						Mst_Customer customer = new Mst_Customer();
+						customer.setId_customer(cursor.getInt(0));
+						customer.setKode_customer(cursor.getString(1));
+						customer.setNama_customer(cursor.getString(2));
+						customer.setAlamat(cursor.getString(3));
+						customer.setNo_hp(cursor.getString(4));
+						customer.setLats(cursor.getString(5));
+						customer.setLongs(cursor.getString(6));
+						customer.setId_wilayah(cursor.getInt(7));
+						customer.setIndnr(cursor.getString(8));
+
+						// Adding staff to list
+						mst_customerArrayList.add(customer);
+					} while (cursor.moveToNext());
+				}else{
+					do {
+						Mst_Customer customer = new Mst_Customer();
+						customer.setId_customer(0);
+						customer.setKode_customer(null);
+						customer.setNama_customer(null);
+						customer.setAlamat(null);
+						customer.setNo_hp(null);
+						customer.setLats(null);
+						customer.setLongs(null);
+						customer.setId_wilayah(0);
+						customer.setIndnr(null);
+
+						// Adding staff to list
+						mst_customerArrayList.add(customer);
+					} while (cursor.moveToNext());
+				}
+
+				// return staff_list
+				cursor.close();
+				db.close();
+				return mst_customerArrayList;
+			} catch (Exception e) {
+				Log.e("mst_customer_list", "" + e);
+			}
+			return mst_customerArrayList;
+		}
+	}
+
+	public ArrayList<Mst_Customer> getAllCustomerOnlyUrgent(String nama) {
+		if(nama.equals("SUYANTO")||nama.equals("IT Dev")){
+			try {
+				mst_customerArrayList.clear();
+				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER +" WHERE kode_customer like '20%'";
+
+				SQLiteDatabase db = this.getWritableDatabase();
+				Cursor cursor = db.rawQuery(selectQuery, null);
+
+				// looping through all rows and adding to list
+				if (cursor.moveToFirst()) {
+					do {
+						Mst_Customer customer = new Mst_Customer();
+						customer.setId_customer(cursor.getInt(0));
+						customer.setKode_customer(cursor.getString(1));
+						customer.setNama_customer(cursor.getString(2));
+						customer.setAlamat(cursor.getString(3));
+						customer.setNo_hp(cursor.getString(4));
+						customer.setLats(cursor.getString(5));
+						customer.setLongs(cursor.getString(6));
+						customer.setId_wilayah(cursor.getInt(7));
+						customer.setIndnr(cursor.getString(8));
+
+						// Adding staff to list
+						mst_customerArrayList.add(customer);
+					} while (cursor.moveToNext());
+				}else{
+					do {
+						Mst_Customer customer = new Mst_Customer();
+						customer.setId_customer(0);
+						customer.setKode_customer(null);
+						customer.setNama_customer(null);
+						customer.setAlamat(null);
+						customer.setNo_hp(null);
+						customer.setLats(null);
+						customer.setLongs(null);
+						customer.setId_wilayah(0);
+						customer.setIndnr(null);
+
+						// Adding staff to list
+						mst_customerArrayList.add(customer);
+					} while (cursor.moveToNext());
+				}
+
+				// return staff_list
+				cursor.close();
+				db.close();
+				return mst_customerArrayList;
+			} catch (Exception e) {
+				Log.e("mst_customer_list", "" + e);
+			}
+			return mst_customerArrayList;
+		}else{
+			try {
+				mst_customerArrayList.clear();
+				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER+ " WHERE kode_customer like '20%'" ;
 
 				SQLiteDatabase db = this.getWritableDatabase();
 				Cursor cursor = db.rawQuery(selectQuery, null);

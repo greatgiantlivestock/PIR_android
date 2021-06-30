@@ -293,7 +293,7 @@ public class PengobatanFragment extends Fragment{
                         if(descFoto.getText().toString().equals("")){
                             showCustomDialog("Ambil Foto Terlebih Dahulu Sebelum Menyimpan");
                         }else{
-                            savePengobatan();
+                            showCustomDialogConfirm("Data yang disimpan akan langsung terinterface ke SAP setelah proses upload dilakukan. Lanjutkan jika data sudah benar");
                         }
                         break;
                     }
@@ -660,6 +660,29 @@ public class PengobatanFragment extends Fragment{
                         });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
-
+    }
+    public void showCustomDialogConfirm(String msg) {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                act);
+        alertDialogBuilder
+                .setMessage(msg)
+                .setCancelable(false)
+                .setPositiveButton(
+                        act.getApplicationContext().getResources()
+                                .getString(R.string.MSG_DLG_LABEL_OK),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                AlertDialog alertDialog = alertDialogBuilder
+                                        .create();
+                                alertDialog.dismiss();
+                                savePengobatan();
+                            }
+                        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }

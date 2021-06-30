@@ -1,6 +1,7 @@
 package com.android.pir.gglc.fragment1;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,10 +22,14 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -41,6 +46,7 @@ import com.android.pir.gglc.absen.AppVar;
 import com.android.pir.gglc.database.DataSapi;
 import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
+import com.android.pir.gglc.database.DetailReqLoadNew;
 import com.android.pir.gglc.database.FeedbackPakan;
 import com.android.pir.gglc.database.MstUser;
 import com.android.pir.gglc.database.Mst_Customer;
@@ -48,6 +54,7 @@ import com.android.pir.gglc.database.Pakan;
 import com.android.pir.gglc.database.Rencana;
 import com.android.pir.gglc.database.UploadDataSapi;
 import com.android.pir.gglc.pir.DashboardActivity;
+import com.android.pir.gglc.pir.PlanVisitActivity;
 import com.android.pir.mobile.R;
 
 import org.apache.http.HttpEntity;
@@ -98,15 +105,14 @@ public class PakanFragment extends Fragment{
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private String response_data,response_data_download,main_app_id_detail_jadwal;
     private ArrayList<Pakan> pakan_list = new ArrayList<Pakan>();
-    private ArrayList<Pakan> pakan_header_list = new ArrayList<Pakan>();
-    private TextView tvnama_petani,tvalamat_petani,desc_foto,tvindex_petani,tvdof,tvjmlEkor,budgettv,terkirimtv,sisatv;
+    private ArrayList<Pakan> pakan_list_child = new ArrayList<Pakan>();
+    private TextView tvnama_petani,tvalamat_petani,desc_foto,tvindex_petani,tvdof,tvjmlEkor;
     private Button foto;
     private Mst_Customer mst_customer;
     private double latitude, longitude;
     private static final String LOG_TAG = PakanFragment.class.getSimpleName();
     private int id_checkin,id_user,id_customer;
     private MstUser user;
-    private Pakan pakan_header;
     private DetailRencana rencanaDetail;
     private String idrd,idcst,fto,nmr,lts,lng,idus,tgl,kode_customer,status_checkin;
     private LinearLayout lsstatus;
@@ -117,6 +123,8 @@ public class PakanFragment extends Fragment{
     private ListView listView;
     private ListViewAdapter cAdapter;
     private String IMAGE_DIRECTORY_NAME = "Pakan";
+    private ListView listViewchild;
+    private ListViewChooseAdapter cAdapterChooseAdapter;
     public PakanFragment() {
         //no coding in here
     }
@@ -151,9 +159,6 @@ public class PakanFragment extends Fragment{
         foto = (Button) view.findViewById(R.id.foto);
         desc_foto = (TextView) view.findViewById(R.id.desc_foto);
         checkin = (Button) view.findViewById(R.id.save_pakan_feedback);
-        budgettv = (TextView) view.findViewById(R.id.budget_all);
-        terkirimtv = (TextView) view.findViewById(R.id.sum_all);
-        sisatv = (TextView) view.findViewById(R.id.sisa_all);
         SharedPreferences spPreferences = getSharedPrefereces();
         idrencanaDetail = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL, null));
         indnr = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null));
@@ -190,18 +195,6 @@ public class PakanFragment extends Fragment{
             showCustomDialog("Download dencana detail terlebih dahulu");
         }
 
-        ArrayList<Pakan> pakan_header_list = databaseHandler.getAllPakanHeader(String.valueOf(indnr));
-        pakan_header = new Pakan();
-
-        for (Pakan pakanHeader : pakan_header_list)
-            pakan_header = pakanHeader;
-        int budget = pakan_header.getBudget();
-        int terkirim = pakan_header.getTerkirim();
-        int sisa = budget-terkirim;
-
-        budgettv.setText(String.valueOf(budget));
-        terkirimtv.setText(String.valueOf(terkirim));
-        sisatv.setText(String.valueOf(sisa));
 
         foto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,7 +220,7 @@ public class PakanFragment extends Fragment{
 
     public void updateContentRefreshRencana() {
         pakan_list.clear();
-        ArrayList<Pakan> pakan_from_db = databaseHandler.getAllPakan(String.valueOf(indnr));
+        ArrayList<Pakan> pakan_from_db = databaseHandler.getAllPakanType(String.valueOf(indnr));
 
         if (pakan_from_db.size() > 0) {
             listView.setVisibility(View.VISIBLE);
@@ -245,6 +238,7 @@ public class PakanFragment extends Fragment{
                 String tanggal_kirim= pakan_from_db.get(i).getTanggal_kirim();
                 int qty_terima= pakan_from_db.get(i).getQty_terima();
                 String create_date= pakan_from_db.get(i).getCreate_date();
+                String pakan_type= pakan_from_db.get(i).getPakan_type();
 
                 Pakan pakan = new Pakan();
                 pakan.setIndnr(indnr);
@@ -260,6 +254,7 @@ public class PakanFragment extends Fragment{
                 pakan.setTanggal_kirim(tanggal_kirim);
                 pakan.setQty_terima(qty_terima);
                 pakan.setCreate_date(create_date);
+                pakan.setPakan_type(pakan_type);
 
                 pakan_list.add(pakan);
             }
@@ -272,7 +267,7 @@ public class PakanFragment extends Fragment{
     public void showListRencana() {
         pakan_list.clear();
         ArrayList<Pakan> pakan_from_db = null;
-        pakan_from_db = databaseHandler.getAllPakan(String.valueOf(indnr));
+        pakan_from_db = databaseHandler.getAllPakanType(String.valueOf(indnr));
 
         if (pakan_from_db.size() > 0) {
             listView.setVisibility(View.VISIBLE);
@@ -290,6 +285,7 @@ public class PakanFragment extends Fragment{
                 String tanggal_kirim= pakan_from_db.get(i).getTanggal_kirim();
                 int qty_terima= pakan_from_db.get(i).getQty_terima();
                 String create_date= pakan_from_db.get(i).getCreate_date();
+                String pakan_type= pakan_from_db.get(i).getPakan_type();
 
                 Pakan pakan = new Pakan();
                 pakan.setIndnr(indnr);
@@ -305,11 +301,12 @@ public class PakanFragment extends Fragment{
                 pakan.setTanggal_kirim(tanggal_kirim);
                 pakan.setQty_terima(qty_terima);
                 pakan.setCreate_date(create_date);
+                pakan.setPakan_type(pakan_type);
 
                 pakan_list.add(pakan);
             }
 
-            cAdapter = new ListViewAdapter(PakanFragment.this.getActivity(), R.layout.list_item_pakan_rev,
+            cAdapter = new ListViewAdapter(PakanFragment.this.getActivity(), R.layout.list_item_pakan,
                     pakan_list);
             listView.setAdapter(cAdapter);
             cAdapter.notifyDataSetChanged();
@@ -345,58 +342,173 @@ public class PakanFragment extends Fragment{
                 holder = new ListViewAdapter.UserHolder();
                 holder.list_namaPakan = (TextView) row
                         .findViewById(R.id.nama_pakan);
-//                holder.list_budget = (TextView) row
-//                        .findViewById(R.id.budget_value);
+                holder.list_budget = (TextView) row
+                        .findViewById(R.id.budget_value);
                 holder.list_terkirim = (TextView) row
                         .findViewById(R.id.terkirim_value);
-//                holder.list_sisa = (TextView) row
-//                        .findViewById(R.id.sisa_value);
-//                holder.list_std = (TextView) row
-//                        .findViewById(R.id.std_value);
+                holder.list_sisa = (TextView) row
+                        .findViewById(R.id.sisa_value);
+                holder.list_std = (TextView) row
+                        .findViewById(R.id.std_value);
                 row.setTag(holder);
             } else {
                 holder = (ListViewAdapter.UserHolder) row.getTag();
             }
             pakanData = data.get(position);
             String satuan = pakanData.getSatuan();
-            holder.list_namaPakan.setText(pakanData.getDesc_pakan());
-//            holder.list_budget.setText(pakanData.getBudget()+" "+satuan);
-//            if (pakanData.getStatus() == 0) {
-//                holder.list_status.setText("Baru");
-//            }else if (pakanData.getStatus() == 1){
-//                holder.list_status.setText("Checkin");
-//            }else if (pakanData.getStatus() == 2){
-//                holder.list_status.setText("Selesai");
-//            }
-            holder.list_terkirim.setText(pakanData.getQty_terima()+" "+satuan);
+            holder.list_namaPakan.setText(pakanData.getPakan_type());
+            holder.list_budget.setText(pakanData.getBudget()+" "+satuan);
+            holder.list_terkirim.setText(pakanData.getTerkirim()+" "+satuan);
 //            holder.list_sisa.setText(pakanData.getSisa()+" "+satuan);
-//            holder.list_std.setText(pakanData.getStd()+" "+satuan);
+            holder.list_sisa.setText(pakanData.getBudget()-pakanData.getTerkirim()+" "+satuan);
+            holder.list_std.setText("("+pakanData.getStd()+" Kg/Ekor/Hari)");
 
-//            row.setOnClickListener(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View v) {
-//                    String rencana_detail = String.valueOf(data.get(position).getId_rencana_detail());
-//                    String nama = String.valueOf(data.get(position).getNama_customer());
-//                    String alamat = String.valueOf(data.get(position).getAlamat());
-//                    String status = String.valueOf(data.get(position).getStatus());
-//                    String index = String.valueOf(data.get(position).getIndnr());
-//                    saveAppDataDetailJadwal(rencana_detail);
-//                    saveAppDataNamaCst(nama);
-//                    saveAppDataAlamatCst(alamat);
-//                    saveAppDataStatusCst(status);
-//                    saveAppDataIndex(index);
-//                    gotoDetailJadwal();
-//                }
-//            });
+            row.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    String pakan_type = String.valueOf(data.get(position).getPakan_type());
+                    ChooseCustomerDialog(pakan_type);
+                }
+            });
             return row;
         }
         class UserHolder {
             TextView list_namaPakan;
-//            TextView list_budget;
+            TextView list_budget;
             TextView list_terkirim;
-//            TextView list_sisa;
-//            TextView list_std;
+            TextView list_sisa;
+            TextView list_std;
+        }
+    }
+
+    private void ChooseCustomerDialog(String type) {
+        final Dialog chooseCustomerDialog = new Dialog(act);
+        chooseCustomerDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        chooseCustomerDialog
+                .setContentView(R.layout.activity_main_detail_pakan);
+        chooseCustomerDialog.setCanceledOnTouchOutside(false);
+        chooseCustomerDialog.setCancelable(true);
+        Button button = (Button) chooseCustomerDialog
+                .findViewById(R.id.close);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseCustomerDialog.dismiss();
+            }
+        });
+        chooseCustomerDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                chooseCustomerDialog.dismiss();
+            }
+        });
+        final ArrayList<Pakan> customer_list = new ArrayList<Pakan>();
+        final ListView listview = (ListView) chooseCustomerDialog.findViewById(R.id.list);
+
+        listview.setItemsCanFocus(false);
+        ArrayList<Pakan> pakan_from_db = databaseHandler.getAllPakan(String.valueOf(indnr),type);
+        if (pakan_from_db.size() > 0) {
+            listview.setVisibility(View.VISIBLE);
+            for (int i = 0; i < pakan_from_db.size(); i++) {
+                int indnr = pakan_from_db.get(i).getIndnr();
+                String kode_pakan= pakan_from_db.get(i).getKode_pakan();
+                String desc_pakan= pakan_from_db.get(i).getDesc_pakan();
+                String std= pakan_from_db.get(i).getStd();
+                int budget= pakan_from_db.get(i).getBudget();
+                int terkirim= pakan_from_db.get(i).getTerkirim();
+                int sisa= pakan_from_db.get(i).getSisa();
+                int nofanim= pakan_from_db.get(i).getNofanim();
+                String dof= pakan_from_db.get(i).getDof();
+                String satuan= pakan_from_db.get(i).getSatuan();
+                String tanggal_kirim= pakan_from_db.get(i).getTanggal_kirim();
+                int qty_terima= pakan_from_db.get(i).getQty_terima();
+                String create_date= pakan_from_db.get(i).getCreate_date();
+                String pakan_type= pakan_from_db.get(i).getPakan_type();
+
+                Pakan pakan = new Pakan();
+                pakan.setIndnr(indnr);
+                pakan.setKode_pakan(kode_pakan);
+                pakan.setDesc_pakan(desc_pakan);
+                pakan.setStd(std);
+                pakan.setBudget(budget);
+                pakan.setTerkirim(terkirim);
+                pakan.setSisa(sisa);
+                pakan.setNofanim(nofanim);
+                pakan.setDof(dof);
+                pakan.setSatuan(satuan);
+                pakan.setTanggal_kirim(tanggal_kirim);
+                pakan.setQty_terima(qty_terima);
+                pakan.setCreate_date(create_date);
+                pakan.setPakan_type(pakan_type);
+
+                customer_list.add(pakan);
+                cAdapterChooseAdapter = new ListViewChooseAdapter(PakanFragment.this.getActivity(),R.layout.list_item_detail_pakan,customer_list, chooseCustomerDialog);
+                listview.setAdapter(cAdapterChooseAdapter);
+                cAdapterChooseAdapter.notifyDataSetChanged();
+            }
+        } else {
+            listview.setVisibility(View.INVISIBLE);
+        }
+        Handler handler = new Handler();
+        handler.post(new Runnable() {
+            public void run() {
+                chooseCustomerDialog.show();
+            }
+        });
+    }
+
+    class ListViewChooseAdapter extends ArrayAdapter<Pakan> {
+        int layoutResourceId;
+        Pakan productData;
+        ArrayList<Pakan> data = new ArrayList<Pakan>();
+        Activity mainActivity;
+        Dialog chooseProductDialog;
+
+        public ListViewChooseAdapter(Activity mainActivity,int layoutResourceId, ArrayList<Pakan> data, Dialog chooseProductDialog) {
+            super(mainActivity, layoutResourceId, data);
+            this.layoutResourceId = layoutResourceId;
+            this.data = data;
+            this.chooseProductDialog = chooseProductDialog;
+            this.mainActivity = mainActivity;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public View getView(final int position, View convertView,
+                            ViewGroup parent) {
+            View row = convertView;
+            ListViewChooseAdapter.UserHolder holder = null;
+
+            if (row == null) {
+                LayoutInflater inflater = LayoutInflater.from(mainActivity);
+
+                row = inflater.inflate(layoutResourceId, parent, false);
+                holder = new ListViewChooseAdapter.UserHolder();
+                holder.list_nama = (TextView) row
+                        .findViewById(R.id.desc_pakan);
+                holder.list_jml = (TextView) row
+                        .findViewById(R.id.jml);
+                holder.list_tanggal = (TextView) row
+                        .findViewById(R.id.tanggal);
+
+                row.setTag(holder);
+            } else {
+                holder = (ListViewChooseAdapter.UserHolder) row.getTag();
+            }
+            productData = data.get(position);
+            holder.list_nama.setText(productData.getDesc_pakan());
+            holder.list_jml.setText(String.valueOf(productData.getQty_terima()));
+            holder.list_tanggal.setText(productData.getTanggal_kirim());
+            return row;
+        }
+
+        class UserHolder {
+            //			ImageView list_img;
+            TextView list_nama;
+            TextView list_jml;
+            TextView list_tanggal;
         }
     }
 
