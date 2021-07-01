@@ -206,11 +206,15 @@ public class PakanFragment extends Fragment{
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(desc_foto.getText().toString().equals("")||desc.getText().toString().equals("")){
-                    showCustomDialog("Ambil foto dan isi keterangan terlebih dahulu");
-                }else{
-                    saveAppKeterangan(desc.getText().toString());
-                    new UploadData().execute();
+                if(status_checkin.equals("0")){
+                    showCustomDialog("Anda belum checkin, silahkan checkin terlebih dahulu");
+                }else {
+                    if (desc_foto.getText().toString().equals("") || desc.getText().toString().equals("")) {
+                        showCustomDialog("Ambil foto dan isi keterangan terlebih dahulu");
+                    } else {
+                        saveAppKeterangan(desc.getText().toString());
+                        new UploadData().execute();
+                    }
                 }
             }
         });

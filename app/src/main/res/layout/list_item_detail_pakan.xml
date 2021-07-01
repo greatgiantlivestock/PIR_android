@@ -7,35 +7,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:background="@drawable/roundedactivebudget"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp">
-        <TextView
-            android:id="@+id/desc_pakan"
-            android:layout_width="0dip"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.2"
-            android:text="Nama Pakan"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:weightSum="5">
+            <TextView
+                android:id="@+id/desc_pakan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="Nama Pakan"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/jml"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Jumlah"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/jml"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.45"
-            android:text="Jumlah"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-        <TextView
             android:id="@+id/tanggal"
-            android:layout_width="0dip"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
             android:textStyle="bold"
             android:text="Tanggal"
             android:textAppearance="?android:attr/textAppearanceLarge"

@@ -18,31 +18,32 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1.2"
-            android:text="Nama Pakan"
+            android:gravity="center"
+            android:text="Detail Pengiriman Pakan"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/activity_sales_order_title_action"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.45"
-            android:text="Qty"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="0dip"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Tanggal"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black"
-            android:textSize="14sp"/>
+<!--        <TextView-->
+<!--            android:id="@+id/activity_sales_order_title_action"-->
+<!--            android:layout_width="0dip"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="0.45"-->
+<!--            android:text="Qty"-->
+<!--            android:textAppearance="?android:attr/textAppearanceLarge"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="14sp"-->
+<!--            android:textStyle="bold" />-->
+<!--        <TextView-->
+<!--            android:layout_width="0dip"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="0.5"-->
+<!--            android:text="Tanggal"-->
+<!--            android:textAppearance="?android:attr/textAppearanceLarge"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="14sp"/>-->
     </LinearLayout>
 
     <View

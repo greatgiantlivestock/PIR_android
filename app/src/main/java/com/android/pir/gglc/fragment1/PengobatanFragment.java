@@ -37,6 +37,7 @@ import android.widget.Toast;
 
 import com.android.pir.gglc.absen.AppVar;
 import com.android.pir.gglc.database.DatabaseHandler;
+import com.android.pir.gglc.database.DetailRencana;
 import com.android.pir.gglc.database.DetailReqLoadNew;
 import com.android.pir.gglc.database.DetailReqObat;
 import com.android.pir.gglc.database.MstUser;
@@ -88,6 +89,7 @@ public class PengobatanFragment extends Fragment{
     private int index = 0;
     private int jmlEkor = 0;
     private Pakan pakann;
+    private int id_status = 0;
 //    private ListViewAdapter cAdapter;
 
     public PengobatanFragment() {
@@ -135,6 +137,12 @@ public class PengobatanFragment extends Fragment{
         pakann = new Pakan();
         for (Pakan paakan : pakan_list)
             pakann = paakan;
+        int idrencanaDetail = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL, null));
+        ArrayList<DetailRencana> rencana_list = databaseHandler.getAlldetailRencanaParam(idrencanaDetail);
+        DetailRencana rencanaDetail = new DetailRencana();
+        for (DetailRencana detailRencana : rencana_list)
+            rencanaDetail = detailRencana;
+        id_status =rencanaDetail.getStatus_rencana();
         tvindex_petani.setText(String.valueOf(pakann.getIndnr()));
         tvjmlEkor.setText(String.valueOf(pakann.getNofanim()));
         tvdof.setText(pakann.getDof()+" Hari");
@@ -284,18 +292,22 @@ public class PengobatanFragment extends Fragment{
                     }
                     break;
                 case R.id.save_pir_obat:
-                    if (detailReqLoadList.isEmpty()){
-                        String msg = getActivity().getApplicationContext()
-                                .getResources()
-                                .getString(R.string.app_reqload_pengobatan_empty_box);
-                        showCustomDialog(msg);
+                    if(id_status==0){
+                        showCustomDialog("Anda belum checkin, silahkan checkin terlebih dahulu");
                     }else {
-                        if(descFoto.getText().toString().equals("")){
-                            showCustomDialog("Ambil Foto Terlebih Dahulu Sebelum Menyimpan");
-                        }else{
-                            showCustomDialogConfirm("Data yang disimpan akan langsung terinterface ke SAP setelah proses upload dilakukan. Lanjutkan jika data sudah benar");
+                        if (detailReqLoadList.isEmpty()) {
+                            String msg = getActivity().getApplicationContext()
+                                    .getResources()
+                                    .getString(R.string.app_reqload_pengobatan_empty_box);
+                            showCustomDialog(msg);
+                        } else {
+                            if (descFoto.getText().toString().equals("")) {
+                                showCustomDialog("Ambil Foto Terlebih Dahulu Sebelum Menyimpan");
+                            } else {
+                                showCustomDialogConfirm("Data yang disimpan akan langsung terinterface ke SAP setelah proses upload dilakukan. Lanjutkan jika data sudah benar");
+                            }
+                            break;
                         }
-                        break;
                     }
                 default:
                     break;

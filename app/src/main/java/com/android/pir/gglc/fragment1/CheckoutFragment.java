@@ -198,8 +198,12 @@ public class CheckoutFragment extends Fragment{
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveAppKeterangan(keterangan.getText().toString());
-                checkinSave();
+                if(status_checkin.equals("0")){
+                    showCustomDialog("Anda belum checkin, silahkan checkin terlebih dahulu");
+                }else {
+                    saveAppKeterangan(keterangan.getText().toString());
+                    checkinSave();
+                }
             }
         });
         return  view;

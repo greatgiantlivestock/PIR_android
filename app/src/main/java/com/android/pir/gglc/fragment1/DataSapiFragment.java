@@ -281,11 +281,11 @@ public class DataSapiFragment extends Fragment{
         }
 
 
-        if(status_checkin.equals("0")){
-            linAll.setEnabled(false);
-            showCustomDialog("Anda Belum Melakukan checkin, silahkan lakukan checkin terlebih dahulu.");
-            checkin.setClickable(false);
-        }
+//        if(status_checkin.equals("0")){
+//            linAll.setEnabled(false);
+//            showCustomDialog("Anda Belum Melakukan checkin, silahkan lakukan checkin terlebih dahulu.");
+//            checkin.setClickable(false);
+//        }
 
         assesment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -386,10 +386,14 @@ public class DataSapiFragment extends Fragment{
                 saveAppKeterangan2(edketerangan2.getText().toString());
                 saveAppKeterangan3(edketerangan3.getText().toString());
                 saveAppAssessment(String.valueOf(nilai_ass));
-                if(tvFotoCustomer.getText().toString()==""){
-                    showCustomDialog("Belum ada foto sapi yang di ambil");
-                }else{
-                    new UploadData().execute();
+                if(status_checkin.equals("0")){
+                    showCustomDialog("Anda belum checkin, silahkan checkin terlebih dahulu");
+                }else {
+                    if (tvFotoCustomer.getText().toString() == "") {
+                        showCustomDialog("Belum ada foto sapi yang di ambil");
+                    } else {
+                        new UploadData().execute();
+                    }
                 }
             }
         });
