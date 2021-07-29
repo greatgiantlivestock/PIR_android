@@ -69,6 +69,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_DETAIL_RENCANA_STATUS_RENCANA = "status_rencana";
 	private static final String KEY_DETAIL_RENCANA_NOMOR_RENCANA_EDTAIL = "nomor_rencana_detail";
 	private static final String KEY_DETAIL_RENCANA_INDNR = "indnr";
+	private static final String KEY_DETAIL_RENCANA_ACTIVE = "active";
 
 	//define DetailRencana field
 	private static final String KEY_DATA_SAPI_ID_DATA_SAPI = "id_data_sapi";
@@ -78,6 +79,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_DATA_SAPI_VISTGID = "vistgid";
 
 	//define mst_customer field
+	private static final String KEY_MST_CUSTOMER_ID ="id";
 	private static final String KEY_MST_CUSTOMER_ID_CUSTOMER ="id_customer";
 	private static final String KEY_MST_CUSTOMER_KODE_CUSTOMER ="kode_customer";
 	private static final String KEY_MST_CUSTOMER_NAMA_CUSTOMER ="nama_customer";
@@ -87,6 +89,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_MST_CUSTOMER_LONGS ="longs";
 	private static final String KEY_MST_CUSTOMER_ID_WILAYAH ="id_wilayah";
 	private static final String KEY_MST_CUSTOMER_INDNR ="indnr";
+	private static final String KEY_MST_CUSTOMER_DATE_UPDATE ="date_update";
 
 	//define mst_user field
 	private static final String KEY_MST_USER_ID_USER ="id_user";
@@ -138,6 +141,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_HISTORY_CANVASSING_NOMOR_RENCANA="nomor_rencana";
 	private static final String KEY_HISTORY_CANVASSING_WAKTU_CHECKIN="waktu_checkin";
 	private static final String KEY_HISTORY_CANVASSING_WAKTU_CHECKOUT="waktu_checkout";
+	private static final String KEY_HISTORY_CANVASSING_LATS="lats";
+	private static final String KEY_HISTORY_CANVASSING_LONGS="longs";
+	private static final String KEY_HISTORY_CANVASSING_FOTO="foto";
+	private static final String KEY_HISTORY_CANVASSING_INDNR="indnr";
+	private static final String KEY_HISTORY_CANVASSING_ID_RENCANA_DETAIL="id_rencana_detail";
 
 	//define trx_checkout field
 	private static final String KEY_UPLOAD_DATA_SAPI_ID_UPLOAD="id_upload";
@@ -186,6 +194,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private final ArrayList<MasterRencana> masterRencanaArraylist = new ArrayList<MasterRencana>();
 	private final ArrayList<MasterRencanaParam> masterRencanaParamArraylist = new ArrayList<MasterRencanaParam>();
 	private final ArrayList<Mst_Customer> mst_customerArrayList = new ArrayList<Mst_Customer>();
+	private final ArrayList<Mst_Customer_Header> mst_customerArrayList_header = new ArrayList<Mst_Customer_Header>();
 	private final ArrayList<MstUser> mst_userArrayList =new ArrayList<MstUser>();
 	private final ArrayList<TmpCustomer> tmpCustomerArrayList =new ArrayList<TmpCustomer>();
 	private final ArrayList<Trx_Checkin> trx_checkinArrayList =new ArrayList<Trx_Checkin>();
@@ -196,6 +205,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private final ArrayList<UploadDataSapi> uploadDataSapiArrayList=new ArrayList<UploadDataSapi>();
 	private final ArrayList<Obat> obatArrayList=new ArrayList<Obat>();
 	private final ArrayList<Pengobatan> pengobatanArrayList=new ArrayList<Pengobatan>();
+	private final ArrayList<PengobatanJoin> pengobatanArrayListJ=new ArrayList<PengobatanJoin>();
 	private final ArrayList<Pakan> pakanArrayList=new ArrayList<Pakan>();
 	private final ArrayList<FeedbackPakan> feedbackpakanArrayList=new ArrayList<FeedbackPakan>();
 
@@ -213,7 +223,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ KEY_DETAIL_RENCANA_ID_RENCANA_DETAIL + " INTEGER PRIMARY KEY," + KEY_DETAIL_RENCANA_ID_RENCANA_HEADER + " TEXT,"
 				+ KEY_DETAIL_RENCANA_ID_KEGIATAN + " TEXT," + KEY_DETAIL_RENCANA_ID_CUSTOMER + " TEXT,"
 				+ KEY_DETAIL_RENCANA_ID_KARYAWAN + " TEXT," + KEY_DETAIL_RENCANA_STATUS_RENCANA + " TEXT,"
-				+ KEY_DETAIL_RENCANA_NOMOR_RENCANA_EDTAIL + " TEXT," + KEY_DETAIL_RENCANA_INDNR + " TEXT"
+				+ KEY_DETAIL_RENCANA_NOMOR_RENCANA_EDTAIL + " TEXT," + KEY_DETAIL_RENCANA_INDNR + " TEXT," + KEY_DETAIL_RENCANA_ACTIVE + " TEXT"
 				+ ")";
 		db.execSQL(CREATE_TABLE_DETAIL_RENCANA);
 
@@ -238,11 +248,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL(CREATE_TABLE_MASTER_RENCANA);
 
 		String CREATE_TABLE_MST_CUSTOMER = "CREATE TABLE " + TABLE_MST_CUSTOMER + "("
-				+ KEY_MST_CUSTOMER_ID_CUSTOMER + " INTEGER PRIMARY KEY," + KEY_MST_CUSTOMER_KODE_CUSTOMER + " TEXT,"
+				+ KEY_MST_CUSTOMER_ID + " INTEGER PRIMARY KEY," + KEY_MST_CUSTOMER_ID_CUSTOMER + " INTEGER," + KEY_MST_CUSTOMER_KODE_CUSTOMER + " TEXT,"
 				+ KEY_MST_CUSTOMER_NAMA_CUSTOMER + " TEXT," + KEY_MST_CUSTOMER_ALAMAT + " TEXT,"
 				+ KEY_MST_CUSTOMER_NO_HP +" TEXT," + KEY_MST_CUSTOMER_LATS +" TEXT,"
 				+ KEY_MST_CUSTOMER_LONGS +" TEXT," + KEY_MST_CUSTOMER_ID_WILAYAH + " TEXT,"
-				+ KEY_MST_CUSTOMER_INDNR +" TEXT"
+				+ KEY_MST_CUSTOMER_INDNR +" TEXT," + KEY_MST_CUSTOMER_DATE_UPDATE + " TEXT"
 				+ ")";
 		db.execSQL(CREATE_TABLE_MST_CUSTOMER);
 
@@ -291,7 +301,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		String CREATE_TABLE_HISTORY_CANVASSING = "CREATE TABLE " + TABLE_HISTORY_CANVASSING + "("
 				+ KEY_HISTORY_CANVASSING_ID_CANVASSING + " INTEGER PRIMARY KEY," + KEY_HISTORY_CANVASSING_NAMA_CUSTOMER + " TEXT,"
 				+ KEY_HISTORY_CANVASSING_NOMOR_RENCANA + " TEXT," + KEY_HISTORY_CANVASSING_ALAMAT + " TEXT,"
-				+ KEY_HISTORY_CANVASSING_WAKTU_CHECKIN + " TEXT," + KEY_HISTORY_CANVASSING_WAKTU_CHECKOUT+ " TEXT"
+				+ KEY_HISTORY_CANVASSING_WAKTU_CHECKIN + " TEXT," + KEY_HISTORY_CANVASSING_WAKTU_CHECKOUT+ " TEXT,"
+				+ KEY_HISTORY_CANVASSING_LATS + " TEXT," + KEY_HISTORY_CANVASSING_LONGS + " TEXT,"
+				+ KEY_HISTORY_CANVASSING_FOTO + " TEXT," + KEY_HISTORY_CANVASSING_INDNR+ " TEXT," + KEY_HISTORY_CANVASSING_ID_RENCANA_DETAIL+ " TEXT"
 				+ ")";
 		db.execSQL(CREATE_TABLE_HISTORY_CANVASSING);
 
@@ -365,6 +377,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_DETAIL_RENCANA_STATUS_RENCANA, detail_rencana.getStatus_rencana());
 		values.put(KEY_DETAIL_RENCANA_NOMOR_RENCANA_EDTAIL, detail_rencana.getNomor_rencana_detail());
 		values.put(KEY_DETAIL_RENCANA_INDNR, detail_rencana.getIndnr());
+		values.put(KEY_DETAIL_RENCANA_ACTIVE, detail_rencana.getActive());
 
 		db.insert(TABLE_DETAIL_RENCANA, null, values);
 		db.close();
@@ -420,6 +433,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
+		values.put(KEY_MST_CUSTOMER_ID, mst_customer.getId());
 		values.put(KEY_MST_CUSTOMER_ID_CUSTOMER, mst_customer.getId_customer());
 		values.put(KEY_MST_CUSTOMER_KODE_CUSTOMER, mst_customer.getKode_customer());
 		values.put(KEY_MST_CUSTOMER_NAMA_CUSTOMER, mst_customer.getNama_customer());
@@ -429,6 +443,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_MST_CUSTOMER_LONGS, mst_customer.getLongs());
 		values.put(KEY_MST_CUSTOMER_ID_WILAYAH, mst_customer.getId_wilayah());
 		values.put(KEY_MST_CUSTOMER_INDNR, mst_customer.getIndnr());
+		values.put(KEY_MST_CUSTOMER_DATE_UPDATE, mst_customer.getDate_update());
 
 		db.insert(TABLE_MST_CUSTOMER, null, values);
 		db.close();
@@ -595,6 +610,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_HISTORY_CANVASSING_ALAMAT, history_canvassing.getAlamat());
 		values.put(KEY_HISTORY_CANVASSING_WAKTU_CHECKIN, history_canvassing.getWaktu_checkin());
 		values.put(KEY_HISTORY_CANVASSING_WAKTU_CHECKOUT, history_canvassing.getWaktu_checkout());
+		values.put(KEY_HISTORY_CANVASSING_LATS, history_canvassing.getLats());
+		values.put(KEY_HISTORY_CANVASSING_LONGS, history_canvassing.getLongs());
+		values.put(KEY_HISTORY_CANVASSING_FOTO, history_canvassing.getFoto());
+		values.put(KEY_HISTORY_CANVASSING_INDNR, history_canvassing.getIndnr());
+		values.put(KEY_HISTORY_CANVASSING_ID_RENCANA_DETAIL, history_canvassing.getId_rencana_detail());
 
 		db.insert(TABLE_HISTORY_CANVASSING, null, values);
 		db.close();
@@ -854,6 +874,40 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		}
 		return feedbackpakanArrayList;
 	}
+	//getting All Pakan
+	public ArrayList<FeedbackPakan> getAllFeedbackPakanPrm(String idrencanadetail) {
+		try {
+			feedbackpakanArrayList.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT * FROM " + TABLE_FEEDBACK_PAKAN + " WHERE id_rencana_detail='"+idrencanadetail+"'";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					FeedbackPakan user = new FeedbackPakan();
+					user.setId_feedback(cursor.getInt(0));
+					user.setId_rencana_detail(cursor.getString(1));
+					user.setFeedback_pakan(cursor.getString(2));
+					user.setFoto(cursor.getString(3));
+
+					// Adding staff to list
+					feedbackpakanArrayList.add(user);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return feedbackpakanArrayList;
+		} catch (Exception e) {
+			Log.e("feedback_pakan_list", "" + e);
+		}
+		return feedbackpakanArrayList;
+	}
 
 	//getting All Pakan
 	public ArrayList<Pakan> getMaxPakan(String indnr) {
@@ -983,8 +1037,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 			// Select All Query
 			String selectQuery = "SELECT "+KEY_MST_CUSTOMER_NAMA_CUSTOMER+","+TABLE_DETAIL_RENCANA+"."+KEY_MST_CUSTOMER_ID_CUSTOMER+","+KEY_MST_CUSTOMER_ALAMAT+","+" FROM "+
-					TABLE_DETAIL_RENCANA+" JOIN "+ TABLE_MST_CUSTOMER+" ON "+TABLE_DETAIL_RENCANA+"."+KEY_DETAIL_RENCANA_ID_CUSTOMER+"="+
-					TABLE_MST_CUSTOMER+"."+KEY_MST_CUSTOMER_ID_CUSTOMER+" JOIN "+TABLE_MASTER_RENCANA+" ON "+TABLE_MASTER_RENCANA+"."+
+					TABLE_DETAIL_RENCANA+" JOIN "+ TABLE_MST_CUSTOMER+" ON "+TABLE_DETAIL_RENCANA+"."+KEY_DETAIL_RENCANA_INDNR+"="+
+					TABLE_MST_CUSTOMER+"."+KEY_MST_CUSTOMER_INDNR+" JOIN "+TABLE_MASTER_RENCANA+" ON "+TABLE_MASTER_RENCANA+"."+
 					KEY_MASTER_RENCANA_ID_RENCANA_HEADER+"="+TABLE_DETAIL_RENCANA+"."+KEY_DETAIL_RENCANA_ID_RENCANA_HEADER+" WHERE "+
 					KEY_MASTER_RENCANA_NOMOR_RENCANA+"='"+nomor_rencana+"'";
 
@@ -1099,6 +1153,49 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return trx_checkinArrayList;
 	}
 
+	//getting All Checkin
+	public ArrayList<Trx_Checkin> getAllCheckinParamID(String idrencanaDetail) {
+		try {
+			trx_checkinArrayList.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT * FROM " + TABLE_TRX_CHECKIN + " WHERE id_rencana_detail='"+idrencanaDetail+"'";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Trx_Checkin trx_checkin = new Trx_Checkin();
+					trx_checkin.setId_checkin(cursor.getInt(0));
+					trx_checkin.setTanggal_checkin(cursor.getString(1));
+					trx_checkin.setNomor_checkin(cursor.getString(2));
+					trx_checkin.setId_user(cursor.getInt(3));
+					trx_checkin.setId_rencana_detail(cursor.getInt(4));
+					trx_checkin.setId_rencana_header(cursor.getInt(5));
+					trx_checkin.setKode_customer(cursor.getString(6));
+					trx_checkin.setLats(cursor.getString(7));
+					trx_checkin.setLongs(cursor.getString(8));
+					trx_checkin.setFoto(cursor.getString(9));
+					trx_checkin.setStatus(cursor.getString(10));
+					trx_checkin.setProspect(cursor.getString(11));
+
+					// Adding staff to list
+					trx_checkinArrayList.add(trx_checkin);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return trx_checkinArrayList;
+		} catch (Exception e) {
+			Log.e("Number_checkin_list", "" + e);
+		}
+		return trx_checkinArrayList;
+	}
+
 	//getting All Checkout
 	public ArrayList<Trx_Checkout> getAllCheckout() {
 		try {
@@ -1144,6 +1241,44 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 			// Select All Query
 			String selectQuery = "SELECT  * FROM " + TABLE_UPLOAD_DATA_SAPI ;
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					UploadDataSapi uploadDataSapi = new UploadDataSapi();
+					uploadDataSapi.setId_upload(cursor.getInt(0));
+					uploadDataSapi.setId_rencana_detail(cursor.getString(1));
+					uploadDataSapi.setEartag(cursor.getString(2));
+					uploadDataSapi.setFoto(cursor.getString(3));
+					uploadDataSapi.setKeterangan(cursor.getString(4));
+					uploadDataSapi.setAssessment(cursor.getString(5));
+					uploadDataSapi.setTanggal(cursor.getString(6));
+
+					// Adding staff to list
+					uploadDataSapiArrayList.add(uploadDataSapi);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return uploadDataSapiArrayList;
+		} catch (Exception e) {
+			Log.e("Number_checkin_list", "" + e);
+		}
+		return uploadDataSapiArrayList;
+	}
+
+	//getting All Checkin
+	public ArrayList<UploadDataSapi> getAllUploadDataSapiParam(String id_rencana_detail) {
+		try {
+			uploadDataSapiArrayList.clear();
+
+			// Select All Query
+			String selectQuery = "SELECT  * FROM " + TABLE_UPLOAD_DATA_SAPI +" WHERE id_rencana_detail='"+id_rencana_detail+"'";
 
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
@@ -1238,6 +1373,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					canvassing.setAlamat(cursor.getString(3));
 					canvassing.setWaktu_checkin(cursor.getString(4));
 					canvassing.setWaktu_checkout(cursor.getString(5));
+					canvassing.setLats(cursor.getString(6));
+					canvassing.setLongs(cursor.getString(7));
+					canvassing.setFoto(cursor.getString(8));
+					canvassing.setIndnr(cursor.getString(9));
+					canvassing.setId_rencana_detail(cursor.getString(10));
 
 					// Adding absen to list
 					historyCamvassingArrayList.add(canvassing);
@@ -1260,9 +1400,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			rencanaArrayList.clear();
 
 			// Select All Query
-			String selectQuery = "SELECT  id_rencana_detail,nama_customer, alamat, status_rencana, tanggal_rencana,trx_rencana_detail.indnr FROM trx_rencana_detail " +
-					"JOIN mst_customer ON trx_rencana_detail.id_customer = mst_customer.id_customer JOIN trx_rencana_master ON " +
-					"trx_rencana_detail.id_rencana_header = trx_rencana_master.id_rencana_header WHERE status_rencana !='2' AND aproved='1'";
+			String selectQuery = "SELECT id_rencana_detail,nama_customer, alamat, status_rencana, tanggal_rencana,trx_rencana_detail.indnr,active,nomor_rencana_detail,kode_customer FROM trx_rencana_detail " +
+					"JOIN mst_customer ON trx_rencana_detail.indnr = mst_customer.indnr AND trx_rencana_detail.id_customer= mst_customer.id_customer JOIN trx_rencana_master ON " +
+					"trx_rencana_detail.id_rencana_header = trx_rencana_master.id_rencana_header ";
 
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
@@ -1277,6 +1417,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					rencana.setStatus(cursor.getInt(3));
 					rencana.setTanggal_rencana(cursor.getString(4));
 					rencana.setIndnr(cursor.getString(5));
+					rencana.setApproved(cursor.getString(6));
+					rencana.setNomor_rencana(cursor.getString(7));
+					rencana.setKode_customer(cursor.getString(8));
 
 					// Adding absen to list
 					rencanaArrayList.add(rencana);
@@ -1379,6 +1522,41 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			Log.e("pengobatan_list", "" + e);
 		}
 		return pengobatanArrayList;
+	}
+	public ArrayList<PengobatanJoin> getAllPengobatansavedParam(String id) {
+		try {
+			pengobatanArrayListJ.clear();
+
+			String selectQuery = "SELECT pgbt.*,satuan_obat FROM " +TABLE_PENGOBATAN +" pgbt JOIN "+TABLE_OBAT+" mo ON pgbt.kode_obat=mo.kode_obat WHERE id_rencana_detail='"+id+"'";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+                    PengobatanJoin detailRencana = new PengobatanJoin();
+					detailRencana.setId_pengobatan(cursor.getInt(0));
+					detailRencana.setId_rencana_detail(cursor.getInt(1));
+					detailRencana.setKode_obat(cursor.getString(2));
+					detailRencana.setQty(cursor.getInt(3));
+					detailRencana.setFoto_pengobatan(cursor.getString(4));
+					detailRencana.setTanggal(cursor.getString(5));
+					detailRencana.setSatuan(cursor.getString(6));
+
+					// Adding staff to list
+					pengobatanArrayListJ.add(detailRencana);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return pengobatanArrayListJ;
+		} catch (Exception e) {
+			Log.e("pengobatan_list", "" + e);
+		}
+		return pengobatanArrayListJ;
 	}
 
 	public ArrayList<DataSapi> getAllDataSapiParam(String lifnr) {
@@ -1712,7 +1890,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			mst_customerArrayList.clear();
 			// Select All Query
 			String selectQuery = "SELECT  * FROM " + TABLE_MST_CUSTOMER + " WHERE " + KEY_MST_CUSTOMER_NO_HP + " LIKE '%" + nama + "%' AND "
-					+ KEY_MST_CUSTOMER_NAMA_CUSTOMER + " LIKE '%" + search + "%' AND kode_customer LIKE '20%' OR " + KEY_MST_CUSTOMER_ALAMAT +" LIKE '%"+search+"%' AND kode_customer LIKE '20%' ";
+					+ KEY_MST_CUSTOMER_NAMA_CUSTOMER + " LIKE '%" + search + "%' AND kode_customer LIKE '20%' OR " + KEY_MST_CUSTOMER_ALAMAT +" LIKE '%"+search+"%' AND kode_customer LIKE '20%' ORDER BY "+KEY_MST_CUSTOMER_NAMA_CUSTOMER+","+KEY_MST_CUSTOMER_INDNR+" ASC";
 			SQLiteDatabase db = this.getWritableDatabase();
 			Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -1720,10 +1898,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			if (cursor.moveToFirst()) {
 				do {
 					Mst_Customer customer = new Mst_Customer();
-					customer.setId_customer(cursor.getInt(0));
-					customer.setNama_customer(cursor.getString(2));
-					customer.setAlamat(cursor.getString(3));
-					customer.setIndnr(cursor.getString(8));
+					customer.setId_customer(cursor.getInt(1));
+					customer.setNama_customer(cursor.getString(3));
+					customer.setAlamat(cursor.getString(4));
+					customer.setIndnr(cursor.getString(9));
 
 					// Adding product to list
 					mst_customerArrayList.add(customer);
@@ -1754,10 +1932,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			if (cursor.moveToFirst()) {
 				do {
 					Mst_Customer customer = new Mst_Customer();
-					customer.setId_customer(cursor.getInt(0));
-					customer.setNama_customer(cursor.getString(2));
-					customer.setAlamat(cursor.getString(3));
-					customer.setIndnr(cursor.getString(8));
+					customer.setId_customer(cursor.getInt(1));
+					customer.setNama_customer(cursor.getString(3));
+					customer.setAlamat(cursor.getString(4));
+					customer.setIndnr(cursor.getString(9));
 
 					// Adding product to list
 					mst_customerArrayList.add(customer);
@@ -1934,7 +2112,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		Cursor cursor = db.query(TABLE_MST_CUSTOMER, new String[] {
 						KEY_MST_CUSTOMER_ID_CUSTOMER,KEY_MST_CUSTOMER_KODE_CUSTOMER,KEY_MST_CUSTOMER_NAMA_CUSTOMER,KEY_MST_CUSTOMER_ALAMAT,
-						KEY_MST_CUSTOMER_NO_HP,KEY_MST_CUSTOMER_LATS,KEY_MST_CUSTOMER_LONGS,KEY_MST_CUSTOMER_ID_WILAYAH,KEY_MST_CUSTOMER_INDNR},
+						KEY_MST_CUSTOMER_NO_HP,KEY_MST_CUSTOMER_LATS,KEY_MST_CUSTOMER_LONGS,KEY_MST_CUSTOMER_ID_WILAYAH,KEY_MST_CUSTOMER_INDNR,KEY_MST_CUSTOMER_DATE_UPDATE},
 				//group outlet
 				//KEY_GROUP_OUTLET_ID_GROUP_OUTLET},
 				KEY_MST_CUSTOMER_ID_CUSTOMER + "=?",
@@ -1944,9 +2122,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		if (cursor != null)
 			cursor.moveToFirst();
 
-		Mst_Customer customer = new Mst_Customer(cursor.getInt(0), cursor.getString(1),
-				cursor.getString(2), cursor.getString(3), cursor.getString(4),
-				cursor.getString(5), cursor.getString(6), cursor.getInt(7), cursor.getString(8));
+		Mst_Customer customer = new Mst_Customer(cursor.getInt(0),cursor.getInt(1), cursor.getString(2),
+				cursor.getString(3), cursor.getString(4), cursor.getString(5),
+				cursor.getString(6), cursor.getString(7), cursor.getInt(8), cursor.getString(9), cursor.getString(10));
 		// return customer
 		cursor.close();
 		db.close();
@@ -1981,7 +2159,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		try {
 			mst_customerArrayList.clear();
 
-			String selectQuery = "SELECT mc.* FROM "+TABLE_MST_CUSTOMER+" mc JOIN "+TABLE_DETAIL_RENCANA+" trd ON trd.id_customer = mc.id_customer" +
+			String selectQuery = "SELECT mc.* FROM "+TABLE_MST_CUSTOMER+" mc JOIN "+TABLE_DETAIL_RENCANA+" trd ON trd.indnr = mc.indnr" +
 					" JOIN " +TABLE_MASTER_RENCANA+" trm ON trm.id_rencana_header = trd.id_rencana_header";
 
 			SQLiteDatabase db = this.getWritableDatabase();
@@ -1991,15 +2169,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			if (cursor.moveToFirst()) {
 				do {
 					Mst_Customer customer = new Mst_Customer();
-					customer.setId_customer(cursor.getInt(0));
-					customer.setKode_customer(cursor.getString(1));
-					customer.setNama_customer(cursor.getString(2));
-					customer.setAlamat(cursor.getString(3));
-					customer.setNo_hp(cursor.getString(4));
-					customer.setLats(cursor.getString(5));
-					customer.setLongs(cursor.getString(6));
-					customer.setId_wilayah(cursor.getInt(7));
-					customer.setIndnr(cursor.getString(8));
+					customer.setId_customer(cursor.getInt(1));
+					customer.setKode_customer(cursor.getString(2));
+					customer.setNama_customer(cursor.getString(3));
+					customer.setAlamat(cursor.getString(4));
+					customer.setNo_hp(cursor.getString(5));
+					customer.setLats(cursor.getString(6));
+					customer.setLongs(cursor.getString(7));
+					customer.setId_wilayah(cursor.getInt(8));
+					customer.setIndnr(cursor.getString(9));
+					customer.setDate_update(cursor.getString(10));
 
 					// Adding staff to list
 					mst_customerArrayList.add(customer);
@@ -2016,6 +2195,63 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					customer.setLongs(null);
 					customer.setId_wilayah(0);
 					customer.setIndnr(null);
+					customer.setDate_update(null);
+
+					// Adding staff to list
+					mst_customerArrayList.add(customer);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return mst_customerArrayList;
+		} catch (Exception e) {
+			Log.e("mst_customer_list", "" + e);
+		}
+		return mst_customerArrayList;
+	}
+
+	public ArrayList<Mst_Customer> getAllCustomerDate() {
+		try {
+			mst_customerArrayList.clear();
+
+			String selectQuery = "SELECT mc.* FROM "+TABLE_MST_CUSTOMER+" mc GROUP BY date_update";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Mst_Customer customer = new Mst_Customer();
+					customer.setId_customer(cursor.getInt(1));
+					customer.setKode_customer(cursor.getString(2));
+					customer.setNama_customer(cursor.getString(3));
+					customer.setAlamat(cursor.getString(4));
+					customer.setNo_hp(cursor.getString(5));
+					customer.setLats(cursor.getString(6));
+					customer.setLongs(cursor.getString(7));
+					customer.setId_wilayah(cursor.getInt(8));
+					customer.setIndnr(cursor.getString(9));
+					customer.setDate_update(cursor.getString(10));
+
+					// Adding staff to list
+					mst_customerArrayList.add(customer);
+				} while (cursor.moveToNext());
+			}else{
+				do {
+					Mst_Customer customer = new Mst_Customer();
+					customer.setId_customer(0);
+					customer.setKode_customer(null);
+					customer.setNama_customer(null);
+					customer.setAlamat(null);
+					customer.setNo_hp(null);
+					customer.setLats(null);
+					customer.setLongs(null);
+					customer.setId_wilayah(0);
+					customer.setIndnr(null);
+					customer.setDate_update(null);
 
 					// Adding staff to list
 					mst_customerArrayList.add(customer);
@@ -2036,7 +2272,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		if(nama.equals("SUYANTO")||nama.equals("IT Dev")){
 			try {
 				mst_customerArrayList.clear();
-				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER +" WHERE kode_customer like '20%'";
+				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER +" WHERE kode_customer like '20%' ORDER BY "+KEY_MST_CUSTOMER_NAMA_CUSTOMER+","+KEY_MST_CUSTOMER_INDNR+" ASC";
 
 				SQLiteDatabase db = this.getWritableDatabase();
 				Cursor cursor = db.rawQuery(selectQuery, null);
@@ -2045,15 +2281,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				if (cursor.moveToFirst()) {
 					do {
 						Mst_Customer customer = new Mst_Customer();
-						customer.setId_customer(cursor.getInt(0));
-						customer.setKode_customer(cursor.getString(1));
-						customer.setNama_customer(cursor.getString(2));
-						customer.setAlamat(cursor.getString(3));
-						customer.setNo_hp(cursor.getString(4));
-						customer.setLats(cursor.getString(5));
-						customer.setLongs(cursor.getString(6));
-						customer.setId_wilayah(cursor.getInt(7));
-						customer.setIndnr(cursor.getString(8));
+						customer.setId_customer(cursor.getInt(1));
+						customer.setKode_customer(cursor.getString(2));
+						customer.setNama_customer(cursor.getString(3));
+						customer.setAlamat(cursor.getString(4));
+						customer.setNo_hp(cursor.getString(5));
+						customer.setLats(cursor.getString(6));
+						customer.setLongs(cursor.getString(7));
+						customer.setId_wilayah(cursor.getInt(8));
+						customer.setIndnr(cursor.getString(9));
+						customer.setDate_update(cursor.getString(10));
 
 						// Adding staff to list
 						mst_customerArrayList.add(customer);
@@ -2070,6 +2307,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 						customer.setLongs(null);
 						customer.setId_wilayah(0);
 						customer.setIndnr(null);
+						customer.setDate_update(null);
 
 						// Adding staff to list
 						mst_customerArrayList.add(customer);
@@ -2087,7 +2325,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		}else{
 			try {
 				mst_customerArrayList.clear();
-				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER+ " WHERE "+KEY_MST_CUSTOMER_NO_HP+" LIKE '%"+nama+"%' AND kode_customer like '20%'" ;
+				String selectQuery = "SELECT * FROM "+TABLE_MST_CUSTOMER+ " WHERE "+KEY_MST_CUSTOMER_NO_HP+" LIKE '%"+nama+"%' AND kode_customer like '20%' ORDER BY "+KEY_MST_CUSTOMER_NAMA_CUSTOMER+","+KEY_MST_CUSTOMER_INDNR+" ASC" ;
 
 				SQLiteDatabase db = this.getWritableDatabase();
 				Cursor cursor = db.rawQuery(selectQuery, null);
@@ -2096,15 +2334,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				if (cursor.moveToFirst()) {
 					do {
 						Mst_Customer customer = new Mst_Customer();
-						customer.setId_customer(cursor.getInt(0));
-						customer.setKode_customer(cursor.getString(1));
-						customer.setNama_customer(cursor.getString(2));
-						customer.setAlamat(cursor.getString(3));
-						customer.setNo_hp(cursor.getString(4));
-						customer.setLats(cursor.getString(5));
-						customer.setLongs(cursor.getString(6));
-						customer.setId_wilayah(cursor.getInt(7));
-						customer.setIndnr(cursor.getString(8));
+						customer.setId_customer(cursor.getInt(1));
+						customer.setKode_customer(cursor.getString(2));
+						customer.setNama_customer(cursor.getString(3));
+						customer.setAlamat(cursor.getString(4));
+						customer.setNo_hp(cursor.getString(5));
+						customer.setLats(cursor.getString(6));
+						customer.setLongs(cursor.getString(7));
+						customer.setId_wilayah(cursor.getInt(8));
+						customer.setIndnr(cursor.getString(9));
+						customer.setDate_update(cursor.getString(10));
 
 						// Adding staff to list
 						mst_customerArrayList.add(customer);
@@ -2121,6 +2360,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 						customer.setLongs(null);
 						customer.setId_wilayah(0);
 						customer.setIndnr(null);
+						customer.setDate_update(null);
 
 						// Adding staff to list
 						mst_customerArrayList.add(customer);
@@ -2151,15 +2391,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				if (cursor.moveToFirst()) {
 					do {
 						Mst_Customer customer = new Mst_Customer();
-						customer.setId_customer(cursor.getInt(0));
-						customer.setKode_customer(cursor.getString(1));
-						customer.setNama_customer(cursor.getString(2));
-						customer.setAlamat(cursor.getString(3));
-						customer.setNo_hp(cursor.getString(4));
-						customer.setLats(cursor.getString(5));
-						customer.setLongs(cursor.getString(6));
-						customer.setId_wilayah(cursor.getInt(7));
-						customer.setIndnr(cursor.getString(8));
+						customer.setId_customer(cursor.getInt(1));
+						customer.setKode_customer(cursor.getString(2));
+						customer.setNama_customer(cursor.getString(3));
+						customer.setAlamat(cursor.getString(4));
+						customer.setNo_hp(cursor.getString(5));
+						customer.setLats(cursor.getString(6));
+						customer.setLongs(cursor.getString(7));
+						customer.setId_wilayah(cursor.getInt(8));
+						customer.setIndnr(cursor.getString(9));
+						customer.setDate_update(cursor.getString(10));
 
 						// Adding staff to list
 						mst_customerArrayList.add(customer);
@@ -2176,6 +2417,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 						customer.setLongs(null);
 						customer.setId_wilayah(0);
 						customer.setIndnr(null);
+						customer.setDate_update(null);
 
 						// Adding staff to list
 						mst_customerArrayList.add(customer);
@@ -2202,15 +2444,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				if (cursor.moveToFirst()) {
 					do {
 						Mst_Customer customer = new Mst_Customer();
-						customer.setId_customer(cursor.getInt(0));
-						customer.setKode_customer(cursor.getString(1));
-						customer.setNama_customer(cursor.getString(2));
-						customer.setAlamat(cursor.getString(3));
-						customer.setNo_hp(cursor.getString(4));
-						customer.setLats(cursor.getString(5));
-						customer.setLongs(cursor.getString(6));
-						customer.setId_wilayah(cursor.getInt(7));
-						customer.setIndnr(cursor.getString(8));
+						customer.setId_customer(cursor.getInt(1));
+						customer.setKode_customer(cursor.getString(2));
+						customer.setNama_customer(cursor.getString(3));
+						customer.setAlamat(cursor.getString(4));
+						customer.setNo_hp(cursor.getString(5));
+						customer.setLats(cursor.getString(6));
+						customer.setLongs(cursor.getString(7));
+						customer.setId_wilayah(cursor.getInt(8));
+						customer.setIndnr(cursor.getString(9));
+						customer.setDate_update(cursor.getString(10));
 
 						// Adding staff to list
 						mst_customerArrayList.add(customer);
@@ -2227,6 +2470,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 						customer.setLongs(null);
 						customer.setId_wilayah(0);
 						customer.setIndnr(null);
+						customer.setDate_update(null);
 
 						// Adding staff to list
 						mst_customerArrayList.add(customer);
@@ -2291,7 +2535,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		try {
 			mst_customerArrayList.clear();
 
-			String selectQuery = "SELECT mc.* FROM "+TABLE_MST_CUSTOMER+" mc JOIN "+TABLE_DETAIL_RENCANA+" tc ON mc.id_customer = tc.id_customer" +
+			String selectQuery = "SELECT mc.* FROM "+TABLE_MST_CUSTOMER+" mc JOIN "+TABLE_DETAIL_RENCANA+" tc ON mc.indnr = tc.indnr" +
 					" WHERE tc.id_rencana_detail ='"+id_rencana_detail+"'";
 
 			SQLiteDatabase db = this.getWritableDatabase();
@@ -2301,15 +2545,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			if (cursor.moveToFirst()) {
 				do {
 					Mst_Customer customer = new Mst_Customer();
-					customer.setId_customer(cursor.getInt(0));
-					customer.setKode_customer(cursor.getString(1));
-					customer.setNama_customer(cursor.getString(2));
-					customer.setAlamat(cursor.getString(3));
-					customer.setNo_hp(cursor.getString(4));
-					customer.setLats(cursor.getString(5));
-					customer.setLongs(cursor.getString(6));
-					customer.setId_wilayah(cursor.getInt(7));
-					customer.setIndnr(cursor.getString(8));
+					customer.setId_customer(cursor.getInt(1));
+					customer.setKode_customer(cursor.getString(2));
+					customer.setNama_customer(cursor.getString(3));
+					customer.setAlamat(cursor.getString(4));
+					customer.setNo_hp(cursor.getString(5));
+					customer.setLats(cursor.getString(6));
+					customer.setLongs(cursor.getString(7));
+					customer.setId_wilayah(cursor.getInt(8));
+					customer.setIndnr(cursor.getString(9));
+					customer.setDate_update(cursor.getString(10));
 
 					// Adding staff to list
 					mst_customerArrayList.add(customer);
@@ -2325,6 +2570,47 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		}
 		return mst_customerArrayList;
 	}
+
+	public ArrayList<Mst_Customer_Header> getAllCustomerParamRencanaHeader(int id_rencana_detail) {
+		try {
+			mst_customerArrayList_header.clear();
+
+			String selectQuery = "SELECT mc.*,count(beastid)as jml FROM "+TABLE_MST_CUSTOMER+" mc JOIN "+TABLE_DETAIL_RENCANA+" tc ON mc.indnr = tc.indnr JOIN " + TABLE_DATA_SAPI +" ds ON ds.indnr=tc.indnr"+
+					" WHERE tc.id_rencana_detail ='"+id_rencana_detail+"' AND beastid <> '' GROUP BY tc.indnr";
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, null);
+
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					Mst_Customer_Header customer = new Mst_Customer_Header();
+					customer.setId_customer(cursor.getInt(1));
+					customer.setKode_customer(cursor.getString(2));
+					customer.setNama_customer(cursor.getString(3));
+					customer.setAlamat(cursor.getString(4));
+					customer.setNo_hp(cursor.getString(5));
+					customer.setLats(cursor.getString(6));
+					customer.setLongs(cursor.getString(7));
+					customer.setId_wilayah(cursor.getInt(8));
+					customer.setIndnr(cursor.getString(9));
+					customer.setDate_update(cursor.getString(10));
+					customer.setJml(cursor.getString(11));
+
+					// Adding staff to list
+					mst_customerArrayList_header.add(customer);
+				} while (cursor.moveToNext());
+			}
+
+			// return staff_list
+			cursor.close();
+			db.close();
+			return mst_customerArrayList_header;
+		} catch (Exception e) {
+			Log.e("mst_customer_list", "" + e);
+		}
+		return mst_customerArrayList_header;
+	}
 	public ArrayList<Mst_Customer> getAllCustomerParamCheckin(String no_checkin) {
 		try {
 			mst_customerArrayList.clear();
@@ -2339,15 +2625,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			if (cursor.moveToFirst()) {
 				do {
 					Mst_Customer customer = new Mst_Customer();
-					customer.setId_customer(cursor.getInt(0));
-					customer.setKode_customer(cursor.getString(1));
-					customer.setNama_customer(cursor.getString(2));
-					customer.setAlamat(cursor.getString(3));
-					customer.setNo_hp(cursor.getString(4));
-					customer.setLats(cursor.getString(5));
-					customer.setLongs(cursor.getString(6));
-					customer.setId_wilayah(cursor.getInt(7));
-					customer.setIndnr(cursor.getString(8));
+					customer.setId_customer(cursor.getInt(1));
+					customer.setKode_customer(cursor.getString(2));
+					customer.setNama_customer(cursor.getString(3));
+					customer.setAlamat(cursor.getString(4));
+					customer.setNo_hp(cursor.getString(5));
+					customer.setLats(cursor.getString(6));
+					customer.setLongs(cursor.getString(7));
+					customer.setId_wilayah(cursor.getInt(8));
+					customer.setIndnr(cursor.getString(9));
+					customer.setDate_update(cursor.getString(10));
 
 					// Adding staff to list
 					mst_customerArrayList.add(customer);
@@ -2413,15 +2700,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			if (cursor.moveToFirst()) {
 				do {
 					Mst_Customer customer = new Mst_Customer();
-					customer.setId_customer(cursor.getInt(0));
-					customer.setKode_customer(cursor.getString(1));
-					customer.setNama_customer(cursor.getString(2));
-					customer.setAlamat(cursor.getString(3));
-					customer.setNo_hp(cursor.getString(4));
-					customer.setLats(cursor.getString(5));
-					customer.setLongs(cursor.getString(6));
-					customer.setId_wilayah(cursor.getInt(7));
-					customer.setIndnr(cursor.getString(8));
+					customer.setId_customer(cursor.getInt(1));
+					customer.setKode_customer(cursor.getString(2));
+					customer.setNama_customer(cursor.getString(3));
+					customer.setAlamat(cursor.getString(4));
+					customer.setNo_hp(cursor.getString(5));
+					customer.setLats(cursor.getString(6));
+					customer.setLongs(cursor.getString(7));
+					customer.setId_wilayah(cursor.getInt(8));
+					customer.setIndnr(cursor.getString(9));
+					customer.setDate_update(cursor.getString(10));
 
 					// Adding staff to list
 					mst_customerArrayList.add(customer);
@@ -2627,6 +2915,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor mCount = db
 				.rawQuery("SELECT count(*) from " + TABLE_DETAIL_RENCANA + " JOIN trx_checkout ON trx_checkout.id_rencana_detail=trx_rencana_detail.id_rencana_detail" +" WHERE status_rencana='2'", null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
+	}
+	public int getCountDetailRencanaSelesai1() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor mCount = db
+				.rawQuery("SELECT count(*) from " + TABLE_DETAIL_RENCANA + " WHERE status_rencana='1'", null);
 		mCount.moveToFirst();
 		int count = mCount.getInt(0);
 		mCount.close();

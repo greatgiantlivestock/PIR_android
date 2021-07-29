@@ -65,6 +65,7 @@
     <color name="main_green_theme">#8DC63F</color>
     <color name="ColorPrimaryDark">#3367d6</color>
     <color name="ColorPrimary">#4285f4</color>
+    <color name="ListBG">#75E6DA</color>
 
 
     <!-- A light Holo shade of blue -->

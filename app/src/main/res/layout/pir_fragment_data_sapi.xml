@@ -9,10 +9,10 @@
     android:layout_height="match_parent"
     tools:context="com.android.pir.gglc.fragment1.DataSapiFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:fillViewport="true">-->
 
         <LinearLayout
             android:id="@+id/linAll"
@@ -157,318 +157,468 @@
                         android:textColor="@color/black"/>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/lstatus_checkin"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:focusableInTouchMode="true"
-                    android:orientation="horizontal"
-                    android:padding="5dip" >
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/lstatus_checkin"-->
+<!--                    android:layout_width="fill_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:focusableInTouchMode="true"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="5dip" >-->
 
-                    <TextView
-                        android:id="@+id/status_checkin"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:text="Silahkan Upload Foto Sapi Beserta Keterangannya"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/status_checkin"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:gravity="center"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Silahkan Upload Foto Sapi Beserta Keterangannya"-->
+<!--                        android:textColor="@color/black"/>-->
+<!--                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/roundedarea"
                     android:orientation="vertical">
-                    <LinearLayout
-                        android:id="@+id/activity_history_search"
-                        android:layout_width="fill_parent"
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:focusableInTouchMode="true"
-                        android:orientation="horizontal"
-                        android:padding="5dip" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                        android:layout_margin="5dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Foto 1 : "
-                            android:textColor="@color/black"/>
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:gravity="center"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <Spinner
+                                    android:id="@+id/eartag"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="eartag"
+                                    android:textColor="@color/black"/>
+                                <Button
+                                    android:id="@+id/foto"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:text="Foto"
+                                    android:textColor="@color/white"
+                                    android:background="@drawable/roundedbutton"
+                                    android:layout_centerHorizontal="true"/>
+                                <ImageView
+                                    android:id="@+id/ImgCust"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/avatar"/>
 
-                        <TextView
-                            android:id="@+id/foto_sapi"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@color/black"/>
+                                <EditText
+                                    android:id="@+id/keterangan"
+                                    android:layout_width="140dp"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12dp"
+                                    android:hint="keterangan"
+                                    android:textColor="@color/black"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:gravity="center"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <Spinner
+                                    android:id="@+id/eartag1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="eartag"
+                                    android:textColor="@color/black"/>
+                                <Button
+                                    android:id="@+id/foto1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:text="Foto"
+                                    android:textColor="@color/white"
+                                    android:background="@drawable/roundedbutton"
+                                    android:layout_centerHorizontal="true"/>
+                                <ImageView
+                                    android:id="@+id/ImgCust1"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/avatar"/>
 
-                        <Button
-                            android:id="@+id/lihat"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:text="Lihat"
-                            android:textColor="@color/white"
-                            android:background="@drawable/roundedbutton"
-                            android:layout_centerHorizontal="true"/>
-                        <Button
-                            android:id="@+id/foto"
-                            android:layout_width="65dp"
-                            android:layout_height="35dp"
-                            android:text="Foto"
-                            android:textColor="@color/white"
-                            android:background="@drawable/roundedbutton"
-                            android:layout_centerHorizontal="true"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:focusableInTouchMode="true"
-                        android:orientation="horizontal" >
+                                <EditText
+                                    android:id="@+id/keterangan1"
+                                    android:layout_width="140dp"
+                                    android:textSize="12dp"
+                                    android:layout_height="wrap_content"
+                                    android:hint="keterangan"
+                                    android:textColor="@color/black"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:gravity="center"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <Spinner
+                                    android:id="@+id/eartag2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="eartag"
+                                    android:textColor="@color/black"/>
+                                <Button
+                                    android:id="@+id/foto2"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:text="Foto"
+                                    android:textColor="@color/white"
+                                    android:background="@drawable/roundedbutton"
+                                    android:layout_centerHorizontal="true"/>
+                                <ImageView
+                                    android:id="@+id/ImgCust2"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/avatar"/>
 
-                        <Spinner
-                            android:id="@+id/eartag"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:hint="eartag"
-                            android:textColor="@color/black"/>
+                                <EditText
+                                    android:id="@+id/keterangan2"
+                                    android:layout_width="140dp"
+                                    android:textSize="12dp"
+                                    android:layout_height="wrap_content"
+                                    android:hint="keterangan"
+                                    android:textColor="@color/black"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:gravity="center"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <Spinner
+                                    android:id="@+id/eartag3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="eartag"
+                                    android:textColor="@color/black"/>
+                                <Button
+                                    android:id="@+id/foto3"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:text="Foto"
+                                    android:textColor="@color/white"
+                                    android:background="@drawable/roundedbutton"
+                                    android:layout_centerHorizontal="true"/>
+                                <ImageView
+                                    android:id="@+id/ImgCust3"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/avatar"/>
 
-                        <EditText
-                            android:id="@+id/keterangan"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:hint="keterangan"
-                            android:textColor="@color/black"/>
-                    </LinearLayout>
+                                <EditText
+                                    android:id="@+id/keterangan3"
+                                    android:layout_width="140dp"
+                                    android:textSize="12dp"
+                                    android:layout_height="wrap_content"
+                                    android:hint="keterangan"
+                                    android:textColor="@color/black"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:id="@+id/foto_sapi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:textColor="@color/black"/>
+                                <TextView
+                                    android:id="@+id/foto_sapi1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:textColor="@color/black"/>
+                                <TextView
+                                    android:id="@+id/foto_sapi2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:textColor="@color/black"/>
+                                <TextView
+                                    android:id="@+id/foto_sapi3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:textColor="@color/black"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </HorizontalScrollView>
                 </LinearLayout>
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:layout_marginRight="5dp"-->
+<!--                    android:layout_marginBottom="5dp"-->
+<!--                    android:background="@drawable/roundedarea"-->
+<!--                    android:orientation="vertical">-->
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/activity_history_search"-->
+<!--                        android:layout_width="fill_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:focusableInTouchMode="true"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:padding="5dip" >-->
 
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Foto 1 : "-->
+<!--                            android:textColor="@color/black"/>-->
+
+<!--                        -->
+
+<!--                        <Button-->
+<!--                            android:id="@+id/lihat"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="0dp"-->
+<!--                            android:text="Lihat"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:background="@drawable/roundedbutton"-->
+<!--                            android:layout_centerHorizontal="true"/>-->
+<!--                        -->
+<!--                    </LinearLayout>-->
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="fill_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:focusableInTouchMode="true"-->
+<!--                        android:orientation="horizontal" >-->
+
+<!--                        -->
+<!--                    </LinearLayout>-->
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:layout_marginRight="5dp"-->
+<!--                    android:layout_marginBottom="5dp"-->
+<!--                    android:background="@drawable/roundedarea"-->
+<!--                    android:orientation="vertical">-->
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/activity_history_search1"-->
+<!--                        android:layout_width="fill_parent"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:focusableInTouchMode="true"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:padding="5dip" >-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Foto 2 : "-->
+<!--                            android:textColor="@color/black"/>-->
+<!--                        -->
+
+<!--                        <Button-->
+<!--                            android:id="@+id/lihat1"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="0dp"-->
+<!--                            android:text="Lihat"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:background="@drawable/roundedbutton"-->
+<!--                            android:layout_centerHorizontal="true"/>-->
+<!--&lt;!&ndash;                        <Button&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:id="@+id/foto1"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_width="65dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_height="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:textColor="@color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:background="@drawable/roundedbutton"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:text="Foto"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_centerHorizontal="true"/>&ndash;&gt;-->
+<!--                    </LinearLayout>-->
+<!--                    <LinearLayout-->
+<!--                    android:layout_width="fill_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:focusableInTouchMode="true"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--&lt;!&ndash;                    <Spinner&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/eartag1"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_weight="2"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:hint="eartag"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textColor="@color/black"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <EditText&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/keterangan1"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_weight="3"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:hint="keterangan"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textColor="@color/black"/>&ndash;&gt;-->
+<!--                </LinearLayout>-->
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:layout_marginRight="5dp"-->
+<!--                    android:layout_marginBottom="5dp"-->
+<!--                    android:background="@drawable/roundedarea"-->
+<!--                    android:orientation="vertical">-->
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/activity_history_search2"-->
+<!--                        android:layout_width="fill_parent"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:focusableInTouchMode="true"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:padding="5dip" >-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Foto 3 : "-->
+<!--                            android:textColor="@color/black"/>-->
+
+<!--                        -->
+
+<!--                        <Button-->
+<!--                            android:id="@+id/lihat2"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="0dp"-->
+<!--                            android:text="Lihat"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:background="@drawable/roundedbutton"-->
+<!--                            android:layout_centerHorizontal="true"/>-->
+<!--&lt;!&ndash;                        <Button&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:id="@+id/foto2"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_width="65dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_height="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:textColor="@color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:background="@drawable/roundedbutton"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:text="Foto"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_centerHorizontal="true"/>&ndash;&gt;-->
+<!--                    </LinearLayout>-->
+<!--                    <LinearLayout-->
+<!--                    android:layout_width="fill_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:focusableInTouchMode="true"-->
+<!--                    android:orientation="horizontal" >-->
+
+<!--&lt;!&ndash;                    <Spinner&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/eartag2"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_weight="2"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:hint="eartag"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textColor="@color/black"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <EditText&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/keterangan2"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_weight="3"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:hint="keterangan"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textColor="@color/black"/>&ndash;&gt;-->
+<!--                </LinearLayout>-->
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:layout_marginRight="5dp"-->
+<!--                    android:layout_marginBottom="5dp"-->
+<!--                    android:background="@drawable/roundedarea"-->
+<!--                    android:orientation="vertical">-->
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/activity_history_search3"-->
+<!--                        android:layout_width="fill_parent"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:focusableInTouchMode="true"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:padding="5dip" >-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Foto 4 : "-->
+<!--                            android:textColor="@color/black"/>-->
+
+<!--                        -->
+
+<!--                        <Button-->
+<!--                            android:id="@+id/lihat3"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="0dp"-->
+<!--                            android:text="Lihat"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:background="@drawable/roundedbutton"-->
+<!--                            android:layout_centerHorizontal="true"/>-->
+<!--&lt;!&ndash;                        <Button&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:id="@+id/foto3"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_width="65dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_height="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:textColor="@color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:background="@drawable/roundedbutton"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:text="Foto"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_centerHorizontal="true"/>&ndash;&gt;-->
+<!--                    </LinearLayout>-->
+<!--                    <LinearLayout-->
+<!--                    android:layout_width="fill_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:focusableInTouchMode="true"-->
+<!--                    android:orientation="horizontal" >-->
+
+<!--&lt;!&ndash;                    <Spinner&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/eartag3"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_weight="2"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:hint="eartag"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textColor="@color/black"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <EditText&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/keterangan3"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_weight="3"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:hint="keterangan"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textColor="@color/black"/>&ndash;&gt;-->
+<!--                </LinearLayout>-->
+<!--                </LinearLayout>-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/roundedarea"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:id="@+id/activity_history_search1"
-                        android:layout_width="fill_parent"
-                        android:layout_marginTop="15dp"
-                        android:layout_height="wrap_content"
-                        android:focusableInTouchMode="true"
-                        android:orientation="horizontal"
-                        android:padding="5dip" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Foto 2 : "
-                            android:textColor="@color/black"/>
-
-                        <TextView
-                            android:id="@+id/foto_sapi1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@color/black"/>
-
-                        <Button
-                            android:id="@+id/lihat1"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:text="Lihat"
-                            android:textColor="@color/white"
-                            android:background="@drawable/roundedbutton"
-                            android:layout_centerHorizontal="true"/>
-                        <Button
-                            android:id="@+id/foto1"
-                            android:layout_width="65dp"
-                            android:layout_height="35dp"
-                            android:textColor="@color/white"
-                            android:background="@drawable/roundedbutton"
-                            android:text="Foto"
-                            android:layout_centerHorizontal="true"/>
-                    </LinearLayout>
-                    <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:focusableInTouchMode="true"
                     android:orientation="horizontal">
-
-                    <Spinner
-                        android:id="@+id/eartag1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:hint="eartag"
-                        android:textColor="@color/black"/>
-
-                    <EditText
-                        android:id="@+id/keterangan1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:hint="keterangan"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/roundedarea"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:id="@+id/activity_history_search2"
-                        android:layout_width="fill_parent"
-                        android:layout_marginTop="15dp"
-                        android:layout_height="wrap_content"
-                        android:focusableInTouchMode="true"
-                        android:orientation="horizontal"
-                        android:padding="5dip" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Foto 3 : "
-                            android:textColor="@color/black"/>
-
-                        <TextView
-                            android:id="@+id/foto_sapi2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@color/black"/>
-
-                        <Button
-                            android:id="@+id/lihat2"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:text="Lihat"
-                            android:textColor="@color/white"
-                            android:background="@drawable/roundedbutton"
-                            android:layout_centerHorizontal="true"/>
-                        <Button
-                            android:id="@+id/foto2"
-                            android:layout_width="65dp"
-                            android:layout_height="35dp"
-                            android:textColor="@color/white"
-                            android:background="@drawable/roundedbutton"
-                            android:text="Foto"
-                            android:layout_centerHorizontal="true"/>
-                    </LinearLayout>
-                    <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:focusableInTouchMode="true"
-                    android:orientation="horizontal" >
-
-                    <Spinner
-                        android:id="@+id/eartag2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:hint="eartag"
-                        android:textColor="@color/black"/>
-
-                    <EditText
-                        android:id="@+id/keterangan2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:hint="keterangan"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/roundedarea"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:id="@+id/activity_history_search3"
-                        android:layout_width="fill_parent"
-                        android:layout_marginTop="15dp"
-                        android:layout_height="wrap_content"
-                        android:focusableInTouchMode="true"
-                        android:orientation="horizontal"
-                        android:padding="5dip" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Foto 4 : "
-                            android:textColor="@color/black"/>
-
-                        <TextView
-                            android:id="@+id/foto_sapi3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:textColor="@color/black"/>
-
-                        <Button
-                            android:id="@+id/lihat3"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:text="Lihat"
-                            android:textColor="@color/white"
-                            android:background="@drawable/roundedbutton"
-                            android:layout_centerHorizontal="true"/>
-                        <Button
-                            android:id="@+id/foto3"
-                            android:layout_width="65dp"
-                            android:layout_height="35dp"
-                            android:textColor="@color/white"
-                            android:background="@drawable/roundedbutton"
-                            android:text="Foto"
-                            android:layout_centerHorizontal="true"/>
-                    </LinearLayout>
-                    <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:focusableInTouchMode="true"
-                    android:orientation="horizontal" >
-
-                    <Spinner
-                        android:id="@+id/eartag3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:hint="eartag"
-                        android:textColor="@color/black"/>
-
-                    <EditText
-                        android:id="@+id/keterangan3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:hint="keterangan"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:focusableInTouchMode="true"
-                    android:orientation="horizontal"
-                    android:padding="5dip" >
+                    <Button
+                        android:id="@+id/checkin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:background="@drawable/roundedbutton"
+                        android:text="Simpan"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
+                        android:layout_weight="1"
                         android:id="@+id/test_check"/>
                     <CheckBox
                         android:id="@+id/assessment"
@@ -507,52 +657,66 @@
                 </LinearLayout>
             </LinearLayout>
 
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/ImgCust"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="80dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:src="@drawable/avatar"/>-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/ImgCust1"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="80dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:src="@drawable/avatar"/>-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/ImgCust2"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="80dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:src="@drawable/avatar"/>-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/ImgCust3"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="80dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:src="@drawable/avatar"/>-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center">-->
+<!--                -->
+<!--            </LinearLayout>-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/ImgCust"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/avatar"/>
-                <ImageView
-                    android:id="@+id/ImgCust1"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/avatar"/>
-                <ImageView
-                    android:id="@+id/ImgCust2"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/avatar"/>
-                <ImageView
-                    android:id="@+id/ImgCust3"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/avatar"/>
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/roundedarea"
+                android:orientation="vertical">
+                <ListView
+                    android:id="@+id/listDS"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@color/transparent"
+                    android:dividerHeight="5dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
             </LinearLayout>
-
-            <Button
-                android:id="@+id/checkin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="15dp"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:background="@drawable/roundedbutton"
-                android:text="Simpan"/>
         </LinearLayout>
-    </ScrollView>
+<!--    </ScrollView>-->
 </RelativeLayout>
 
 <!--    </android.support.v4.widget.SwipeRefreshLayout>-->

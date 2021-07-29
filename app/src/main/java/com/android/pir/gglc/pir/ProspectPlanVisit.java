@@ -787,13 +787,15 @@ public class ProspectPlanVisit extends ActionBarActivity implements NavigationDr
 							: oResponsealue.getString("nomor_rencana_detail");
 					String indnr = oResponsealue.isNull("indnr") ? null
 							: oResponsealue.getString("indnr");
+					String active = oResponsealue.isNull("active") ? null
+							: oResponsealue.getString("active");
 //					Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
 //					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
 //					Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
 //					Log.d(LOG_TAG, "id_customer:" + id_customer);
 					databaseHandler.addDetailRencana(new DetailRencana(Integer.parseInt(id_rencana_detail),Integer.parseInt(id_rencana_header),
 							Integer.parseInt(id_kegiatan),Integer.parseInt(id_customer),Integer.parseInt(id_karyawan),
-							Integer.parseInt(status_rencana),nomor_rencana_detail,indnr));
+							Integer.parseInt(status_rencana),nomor_rencana_detail,indnr,active));
 				}
 				resetForm();
 			} catch (JSONException e) {

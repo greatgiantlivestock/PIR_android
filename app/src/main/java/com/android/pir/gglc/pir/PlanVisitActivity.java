@@ -99,6 +99,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 	private static final String LOG_TAG = PlanVisitActivity.class.getSimpleName();
 	private int id_rencanaHeader = 0;
 	private MstUser user;
+	private Mst_Customer customer;
 	private DataSapi sapi;
 	private DetailReqLoadNew detailReqLoadNew;
 	private MasterRencana mstRencana;
@@ -266,7 +267,19 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 		} else {
 			listview.setVisibility(View.INVISIBLE);
 		}
-		showCustomDialog("Jangan lupa update data petani setiap hari sebelum membuat rencana kunjungan. Caranya tekan titik tiga di pojok kanan atas dan pilih refresh.");
+
+		String timeNow = new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()).format(new Date());
+		ArrayList<Mst_Customer> staff_list = databaseHandler.getAllCustomerDate();
+		customer = new Mst_Customer();
+
+		for (Mst_Customer tempStaff : staff_list)
+			customer = tempStaff;
+		String date_update=customer.getDate_update();
+		Log.d(LOG_TAG, "date current: "+timeNow);
+		Log.d(LOG_TAG, "date db: "+date_update);
+		if(!String.valueOf(date_update).equals(String.valueOf(timeNow))){
+			showCustomDialog("Jangan lupa update data petani setiap hari sebelum membuat rencana kunjungan. Caranya tekan titik tiga di pojok kanan atas dan pilih refresh.");
+		}
 	}
 	public void updateContentRefreshRencana1() {
 		new DownloadDataCustomer().execute();
@@ -403,7 +416,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 	private void resetForm(){
 		mulai.setText("");
 		keterangan.setText("");
-		detailReqLoadList.clear();
+//		detailReqLoadList.clear();
 		listview.setAdapter(null);
 	}
 
@@ -962,6 +975,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 			try {
 				oResponse = new JSONObject(main_app_table);
 				JSONArray jsonarr = oResponse.getJSONArray("customer");
+				int id_ = 1;
 				for (int i = 0; i < jsonarr.length(); i++) {
 					JSONObject oResponsealue = jsonarr.getJSONObject(i);
 					String id_customer = oResponsealue.isNull("lifnr") ? null
@@ -976,13 +990,17 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 							: oResponsealue.getString("veraa_user");
 					String indnr = oResponsealue.isNull("indnr") ? null
 							: oResponsealue.getString("indnr");
+					String regdate = oResponsealue.isNull("regdate") ? null
+							: oResponsealue.getString("regdate");
 					String lats = "0";
 					String longs = "0";
 					String id_wilayah = "3010";
 					Log.d(LOG_TAG, "id_customer:" + id_customer);
 					Log.d(LOG_TAG, "kode_customer:" + kode_customer);
 					Log.d(LOG_TAG, "nama_customer:" + nama_customer);
-					db.addMst_customer(new Mst_Customer(Integer.parseInt(id_customer),kode_customer,nama_customer,alamat,no_hp,lats,longs,Integer.parseInt(id_wilayah),indnr));
+					String timeNow = new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()).format(new Date());
+					db.addMst_customer(new Mst_Customer(id_,Integer.parseInt(id_customer),kode_customer,nama_customer,alamat,no_hp,lats,regdate,Integer.parseInt(id_wilayah),indnr,timeNow));
+					id_=id+1;
 				}
 
 			} catch (JSONException e) {
@@ -1281,6 +1299,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 			if (response_data != null) {
 				saveAppDataRencanaDetail(response_data);
 				extractDataRencanaDetail();
+				resetForm();
 				spinnerRencana.setVisibility(View.INVISIBLE);
 				new DownloadDataSapi().execute();
 			} else {
@@ -1333,15 +1352,17 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 							: oResponsealue.getString("nomor_rencana_detail");
 					String indnr = oResponsealue.isNull("indnr") ? null
 							: oResponsealue.getString("indnr");
+					String active = oResponsealue.isNull("active") ? null
+							: oResponsealue.getString("active");
 //					Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
 //					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
 //					Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
 //					Log.d(LOG_TAG, "id_customer:" + id_customer);
 					databaseHandler.addDetailRencana(new DetailRencana(Integer.parseInt(id_rencana_detail),Integer.parseInt(id_rencana_header),
 							Integer.parseInt(id_kegiatan),Integer.parseInt(id_customer),Integer.parseInt(id_karyawan),
-							Integer.parseInt(status_rencana),nomor_rencana_detail,indnr));
+							Integer.parseInt(status_rencana),nomor_rencana_detail,indnr,active));
 				}
-				resetForm();
+				detailReqLoadList.clear();
 			} catch (JSONException e) {
 				final String message = e.toString();
 				handler.post(new Runnable() {
@@ -1791,8 +1812,7 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 							: oResponsealue.getString("budget");
 					String terkirim = oResponsealue.isNull("terkirim") ? null
 							: oResponsealue.getString("terkirim");
-					String sisa = oResponsealue.isNull("sisa") ? null
-							: oResponsealue.getString("sisa");
+					String sisa = "0";
 					String nofanim = oResponsealue.isNull("nofanim") ? null
 							: oResponsealue.getString("nofanim");
 					String dof = oResponsealue.isNull("dof") ? null
@@ -1805,8 +1825,8 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 							: oResponsealue.getString("qty_terima");
 					String create_date = oResponsealue.isNull("created_date") ? null
 							: oResponsealue.getString("created_date");
-					String pakan_type = oResponsealue.isNull("pakan_type") ? null
-							: oResponsealue.getString("pakan_type");
+					String pakan_type = oResponsealue.isNull("pakan_type_desc") ? null
+							: oResponsealue.getString("pakan_type_desc");
 
 					db.addPakan(new Pakan(Integer.parseInt(indnr),kode_pakan,desc_pakan,std,Integer.parseInt(budget),Integer.parseInt(terkirim),
 							Integer.parseInt(sisa),Integer.parseInt(nofanim),dof,satuan,tanggal_kirim,Integer.parseInt(qty_terima),create_date,pakan_type));
@@ -1968,7 +1988,6 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 			holder.list_namaProduct.setText(productData.getNama_customer());
 			holder.list_desa.setText(productData.getAlamat());
 			holder.mButtonAddItem.setOnClickListener(new View.OnClickListener() {
-
 				@Override
 				public void onClick(View v) {
 					updateListViewDetailOrder(new DetailReqLoadNew(data.get(position).getNama_customer(), data.get(position).getId_customer(),data.get(position).getAlamat(),"",data.get(position).getIndnr()));
@@ -1981,7 +2000,6 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 		}
 
 		class UserHolder {
-//			ImageView list_img;
 			TextView list_indnr;
 			TextView list_namaProduct;
 			TextView list_desa;
@@ -2043,9 +2061,6 @@ public class PlanVisitActivity extends ActionBarActivity implements NavigationDr
 						.permitAll().build();
 				StrictMode.setThreadPolicy(policy);
 			}
-//			Log.d(LOG_TAG, "id_rencana_header: "+id_rencana_header);
-//			Log.d(LOG_TAG, "id_customer_plan: "+id_customer);
-//			Log.d(LOG_TAG, "id_karyawan: "+id_karyawan);
 			MultipartEntity entity = new MultipartEntity();
 			entity.addPart("id_rencana_header", new StringBody(id_rencana_header));
 			entity.addPart("id_customer", new StringBody(id_customer));

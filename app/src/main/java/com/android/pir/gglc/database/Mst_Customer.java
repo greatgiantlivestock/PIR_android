@@ -3,6 +3,7 @@ package com.android.pir.gglc.database;
 public class Mst_Customer {
 
 	//private variables
+	int id;
 	int id_customer;
 	String kode_customer;
 	String nama_customer;
@@ -12,14 +13,16 @@ public class Mst_Customer {
 	String longs;
 	int id_wilayah;
 	String indnr;
+	String date_update;
 
 	// Empty constructor
 	public Mst_Customer(){
 
 	}
 	// constructor
-	public Mst_Customer(int id_customer, String kode_customer, String nama_customer, String alamat, String no_hp,
-						String lats, String longs, int id_wilayah, String indnr){
+	public Mst_Customer(int id,int id_customer, String kode_customer, String nama_customer, String alamat, String no_hp,
+						String lats, String longs, int id_wilayah, String indnr, String date_update){
+		this.id= id;
 		this.id_customer= id_customer;
 		this.kode_customer= kode_customer;
 		this.nama_customer = nama_customer;
@@ -29,11 +32,13 @@ public class Mst_Customer {
 		this.longs = longs;
 		this.id_wilayah = id_wilayah;
 		this.indnr = indnr;
+		this.date_update = date_update;
 	}
 
 	// constructor
-	public Mst_Customer(String kode_customer, String nama_customer, String alamat, String no_hp,
-						String lats, String longs, int id_wilayah, String indnr){
+	public Mst_Customer(int id_customer,String kode_customer, String nama_customer, String alamat, String no_hp,
+						String lats, String longs, int id_wilayah, String indnr, String date_update){
+		this.id_customer = id_customer;
 		this.kode_customer = kode_customer;
 		this.nama_customer = nama_customer;
 		this.alamat = alamat;
@@ -42,8 +47,15 @@ public class Mst_Customer {
 		this.longs=longs;
 		this.id_wilayah=id_wilayah;
 		this.indnr=indnr;
+		this.date_update=date_update;
 	}
 
+	public int getId(){
+		return this.id;
+	}
+	public void setId(int id){
+		this.id= id;
+	}
 	public int getId_customer(){
 		return this.id_customer;
 	}
@@ -105,5 +117,12 @@ public class Mst_Customer {
 	}
 	public void setIndnr(String indnr){
 		this.indnr=indnr;
+	}
+
+	public String getDate_update(){
+		return this.date_update;
+	}
+	public void setDate_update(String date_update){
+		this.date_update=date_update;
 	}
 }

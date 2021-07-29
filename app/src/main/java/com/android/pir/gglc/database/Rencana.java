@@ -9,26 +9,36 @@ public class Rencana {
 	int status;
 	String tanggal_rencana;
 	String indnr;
+	String approved;
+	String nomor_rencana;
+	String kode_customer;
+
 	public Rencana(){
 
 	}
 	// constructor
-	public Rencana(int id_rencana_detail, String nama_customer, String alamat, int status, String tanggal_rencana,String indnr){
+	public Rencana(int id_rencana_detail, String nama_customer, String alamat, int status, String tanggal_rencana,String indnr, String approved, String nomor_rencana, String kode_customer){
 		this.id_rencana_detail=id_rencana_detail;
 		this.nama_customer=nama_customer;
 		this.alamat=alamat;
 		this.status=status;
 		this.tanggal_rencana=tanggal_rencana;
 		this.indnr=indnr;
+		this.approved=approved;
+		this.nomor_rencana=nomor_rencana;
+		this.kode_customer=kode_customer;
 	}
 
 	// constructor
-	public Rencana(String nama_customer, String alamat, int status, String tanggal_rencana,String indnr){
+	public Rencana(String nama_customer, String alamat, int status, String tanggal_rencana,String indnr, String approved, String nomor_rencana, String kode_customer){
 		this.nama_customer=nama_customer;
 		this.alamat=alamat;
 		this.status=status;
 		this.tanggal_rencana=tanggal_rencana;
 		this.indnr=indnr;
+		this.approved=approved;
+		this.nomor_rencana=nomor_rencana;
+		this.kode_customer=kode_customer;
 	}
 	// getting id_absen
 	public int getId_rencana_detail(){
@@ -88,6 +98,36 @@ public class Rencana {
 	// setting tanggal rencana
 	public void setIndnr(String indnr){
 		this.indnr= indnr;
+	}
+
+// getting tanggal rencana
+	public String getApproved(){
+		return this.approved;
+	}
+
+	// setting tanggal rencana
+	public void setApproved(String approved){
+		this.approved= approved;
+	}
+
+// getting tanggal rencana
+	public String getNomor_rencana(){
+		return this.nomor_rencana;
+	}
+
+	// setting tanggal rencana
+	public void setNomor_rencana(String nomor_rencana){
+		this.nomor_rencana= nomor_rencana;
+	}
+
+// getting tanggal rencana
+	public String getKode_customer(){
+		return this.kode_customer;
+	}
+
+	// setting tanggal rencana
+	public void setKode_customer(String kode_customer){
+		this.kode_customer= kode_customer;
 	}
 
 }

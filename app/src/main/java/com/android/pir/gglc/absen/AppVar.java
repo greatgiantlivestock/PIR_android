@@ -122,15 +122,23 @@ public class AppVar {
     public static String getFolderPath() {
         StringBuilder path_builder = new StringBuilder();
         path_builder.append(File.separatorChar);
-        path_builder.append("Android");
-        path_builder.append(File.separatorChar);
-        path_builder.append("data");
+        path_builder.append("Visit");
         path_builder.append(File.separatorChar);
         path_builder.append(APPLICATION_PACKAGE_NAME);
         String temp_middle_path = path_builder.toString();
 
         return Environment.getExternalStorageDirectory().getAbsolutePath()
                 + temp_middle_path;
+    }
+    public static String getFolderPatha() {
+        StringBuilder path_builder = new StringBuilder();
+        path_builder.append(File.separatorChar);
+        path_builder.append("visit_pir");
+        path_builder.append(File.separatorChar);
+        path_builder.append(APPLICATION_PACKAGE_NAME);
+        String temp_middle_path = path_builder.toString();
 
+        return Environment.getExternalStorageDirectory().getAbsolutePath()
+                + temp_middle_path;
     }
 }

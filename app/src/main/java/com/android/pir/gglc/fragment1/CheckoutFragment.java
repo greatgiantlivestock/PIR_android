@@ -38,6 +38,7 @@ import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
 import com.android.pir.gglc.database.MstUser;
 import com.android.pir.gglc.database.Mst_Customer;
+import com.android.pir.gglc.database.Mst_Customer_Header;
 import com.android.pir.gglc.database.Pakan;
 import com.android.pir.gglc.database.Trx_Checkin;
 import com.android.pir.gglc.database.Trx_Checkout;
@@ -63,6 +64,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -88,7 +90,6 @@ public class CheckoutFragment extends Fragment{
     private int idrencanaDetail = 0;
     private int index = 0;
     private int jmlEkor = 0;
-    private Pakan pakann;
 
     private Button checkin;
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -101,6 +102,7 @@ public class CheckoutFragment extends Fragment{
     private ImageView imgCust;
     private EditText keterangan;
     private Mst_Customer mst_customer;
+    private Mst_Customer_Header mst_customer_header;
     private double latitude, longitude;
     private Location location;
     private Location location1;
@@ -149,7 +151,9 @@ public class CheckoutFragment extends Fragment{
         imgCust = (ImageView) view.findViewById(R.id.ImgCust);
         SharedPreferences spPreferences = getSharedPrefereces();
         idrencanaDetail = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL, null));
-        index = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null));
+        if(!spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null).isEmpty()) {
+            index = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null));
+        }
 //        status_checkin = spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_STATUS, null);
 
         ArrayList<DetailRencana> rencana_list = databaseHandler.getAlldetailRencanaParam(idrencanaDetail);
@@ -167,19 +171,41 @@ public class CheckoutFragment extends Fragment{
             lsstatus.setBackgroundColor(Color.parseColor("#24ed0e"));
         }
 
-        ArrayList<Mst_Customer> customer_list = databaseHandler.getAllCustomerParamRencana(idrencanaDetail);
+        ArrayList<Mst_Customer> customer_list1 = databaseHandler.getAllCustomerParamRencana(idrencanaDetail);
         mst_customer = new Mst_Customer();
-        for (Mst_Customer customer : customer_list)
-            mst_customer = customer;
-        ArrayList<Pakan> pakan_list = databaseHandler.getMaxPakan(String.valueOf(index));
-        pakann = new Pakan();
-        for (Pakan paakan : pakan_list)
-            pakann = paakan;
-        tvindex_petani.setText(String.valueOf(pakann.getIndnr()));
-        tvjmlEkor.setText(String.valueOf(pakann.getNofanim()));
-        tvdof.setText(pakann.getDof()+" Hari");
-        tvnama_petani.setText(mst_customer.getNama_customer());
-        tvalamat_petani.setText(mst_customer.getAlamat());
+        for (Mst_Customer customer1 : customer_list1)
+            mst_customer = customer1;
+
+        ArrayList<Mst_Customer_Header> customer_list = databaseHandler.getAllCustomerParamRencanaHeader(idrencanaDetail);
+        mst_customer_header = new Mst_Customer_Header();
+        for (Mst_Customer_Header customer : customer_list)
+            mst_customer_header = customer;
+
+        if(mst_customer_header.getLongs()!=null) {
+            String timeNow = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            long jmlDof = 0;
+            try {
+                Date dateNow = new SimpleDateFormat("yyy-MM-dd").parse(timeNow);
+                Date dateReg = new SimpleDateFormat("yyy-MM-dd").parse(mst_customer_header.getLongs());
+                jmlDof = (dateNow.getTime() - dateReg.getTime()) / (1000 * 60 * 60 * 24);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            tvindex_petani.setText(String.valueOf(index));
+            tvjmlEkor.setText(String.valueOf(mst_customer_header.getJml()));
+            tvdof.setText(String.valueOf(jmlDof) + " Hari");
+            tvnama_petani.setText(mst_customer_header.getNama_customer());
+            tvalamat_petani.setText(mst_customer_header.getAlamat());
+        }else{
+            long jmlDof = 0;
+
+            tvindex_petani.setText(String.valueOf(index));
+            tvjmlEkor.setText(String.valueOf("0"));
+            tvdof.setText("");
+            tvnama_petani.setText(mst_customer.getNama_customer());
+            tvalamat_petani.setText(mst_customer.getAlamat());
+        }
 
         if(databaseHandler.getCountDetailrencana()!=0){
             ArrayList<MstUser> user_list = databaseHandler.getAllUser();
@@ -198,6 +224,11 @@ public class CheckoutFragment extends Fragment{
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ArrayList<DetailRencana> rencana_list = databaseHandler.getAlldetailRencanaParam(idrencanaDetail);
+                rencanaDetail = new DetailRencana();
+                for (DetailRencana detailRencana : rencana_list)
+                    rencanaDetail = detailRencana;
+                status_checkin = String.valueOf(rencanaDetail.getStatus_rencana());
                 if(status_checkin.equals("0")){
                     showCustomDialog("Anda belum checkin, silahkan checkin terlebih dahulu");
                 }else {

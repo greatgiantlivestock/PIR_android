@@ -34,6 +34,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
 import com.android.pir.gglc.database.MstUser;
 import com.android.pir.gglc.database.Mst_Customer;
+import com.android.pir.gglc.database.Mst_Customer_Header;
 import com.android.pir.gglc.database.Pakan;
 import com.android.pir.gglc.database.Trx_Checkin;
 import com.android.pir.gglc.database.UploadDataSapi;
@@ -69,6 +71,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -95,13 +98,12 @@ public class DataSapiFragment extends Fragment{
     private int nilai_ass= 0;
     private int index = 0;
     private int jmlEkor = 0;
-    private Pakan pakann;
 
     private Button foto,checkin,foto1,foto2,foto3;
     public static final int MEDIA_TYPE_IMAGE = 1;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private Uri fileUri,fileUri1,fileUri2,fileUri3; // file url to store image/video
-    private File mediaFile,mediaFile1,mediaFile2,mediaFile3;
+    private File mediaFile,mediaFile1,mediaFile2,mediaFile3,mediaFile4;
     private String newImageName,newImageName1,newImageName2,newImageName3;
     private String response_data,response_data_download,main_app_id_detail_jadwal;
     private TextView tvFotoCustomer,tvnama_petani,tvalamat_petani,tvstatus_checkin,tvFotoCustomer1,tvFotoCustomer2,tvFotoCustomer3,tvindex_petani,tvdof,tvjmlEkor;
@@ -109,6 +111,7 @@ public class DataSapiFragment extends Fragment{
     private EditText edketerangan,edketerangan1,edketerangan2,edketerangan3;
     private Spinner edeartag,edeartag1,edeartag2,edeartag3;
     private Mst_Customer mst_customer;
+    private Mst_Customer_Header mst_customer_header;
     private double latitude, longitude;
     private CheckBox assesment;
     private String IMAGE_DIRECTORY_NAME = "Data_sapi";
@@ -125,6 +128,9 @@ public class DataSapiFragment extends Fragment{
     private ArrayList<DataSapi> eartagList2;
     private ArrayList<DataSapi> eartagList3;
     private ArrayList<String> eartagStringList;
+    private ListView ListView;
+    private ListViewAdapter cAdapter;
+    private ArrayList<UploadDataSapi> DS_list = new ArrayList<UploadDataSapi>();
     public DataSapiFragment() {
         //no coding in here
     }
@@ -178,9 +184,13 @@ public class DataSapiFragment extends Fragment{
         edketerangan1 = (EditText) view.findViewById(R.id.keterangan1);
         edketerangan2 = (EditText) view.findViewById(R.id.keterangan2);
         edketerangan3 = (EditText) view.findViewById(R.id.keterangan3);
+        ListView = (ListView) view.findViewById(R.id.listDS);
+
         SharedPreferences spPreferences = getSharedPrefereces();
         idrencanaDetail = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL, null));
-        index = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null));
+        if(!spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null).isEmpty()) {
+            index = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, "0"));
+        }
 //        status_checkin = spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_STATUS, null);
 
         ArrayList<DetailRencana> rencana_list = databaseHandler.getAlldetailRencanaParam(idrencanaDetail);
@@ -297,19 +307,41 @@ public class DataSapiFragment extends Fragment{
                 }
             }
         });
-        ArrayList<Mst_Customer> customer_list = databaseHandler.getAllCustomerParamRencana(idrencanaDetail);
+        ArrayList<Mst_Customer> customer_list1 = databaseHandler.getAllCustomerParamRencana(idrencanaDetail);
         mst_customer = new Mst_Customer();
-        for (Mst_Customer customer : customer_list)
-            mst_customer = customer;
-        ArrayList<Pakan> pakan_list = databaseHandler.getMaxPakan(String.valueOf(index));
-        pakann = new Pakan();
-        for (Pakan paakan : pakan_list)
-            pakann = paakan;
-        tvindex_petani.setText(String.valueOf(pakann.getIndnr()));
-        tvjmlEkor.setText(String.valueOf(pakann.getNofanim()));
-        tvdof.setText(pakann.getDof()+" Hari");
-        tvnama_petani.setText(mst_customer.getNama_customer());
-        tvalamat_petani.setText(mst_customer.getAlamat());
+        for (Mst_Customer customer1 : customer_list1)
+            mst_customer = customer1;
+
+        ArrayList<Mst_Customer_Header> customer_list = databaseHandler.getAllCustomerParamRencanaHeader(idrencanaDetail);
+        mst_customer_header = new Mst_Customer_Header();
+        for (Mst_Customer_Header customer : customer_list)
+            mst_customer_header = customer;
+
+        if(mst_customer_header.getLongs()!=null) {
+            String timeNow = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            long jmlDof = 0;
+            try {
+                Date dateNow = new SimpleDateFormat("yyy-MM-dd").parse(timeNow);
+                Date dateReg = new SimpleDateFormat("yyy-MM-dd").parse(mst_customer_header.getLongs());
+                jmlDof = (dateNow.getTime() - dateReg.getTime()) / (1000 * 60 * 60 * 24);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            tvindex_petani.setText(String.valueOf(index));
+            tvjmlEkor.setText(String.valueOf(mst_customer_header.getJml()));
+            tvdof.setText(String.valueOf(jmlDof) + " Hari");
+            tvnama_petani.setText(mst_customer_header.getNama_customer());
+            tvalamat_petani.setText(mst_customer_header.getAlamat());
+        }else{
+            long jmlDof = 0;
+
+            tvindex_petani.setText(String.valueOf(index));
+            tvjmlEkor.setText(String.valueOf("0"));
+            tvdof.setText("");
+            tvnama_petani.setText(mst_customer.getNama_customer());
+            tvalamat_petani.setText(mst_customer.getAlamat());
+        }
 
         if(databaseHandler.getCountDetailrencana()!=0){
             ArrayList<MstUser> user_list = databaseHandler.getAllUser();
@@ -322,7 +354,7 @@ public class DataSapiFragment extends Fragment{
             showCustomDialog("Download dencana detail terlebih dahulu");
         }
 
-        foto.setOnClickListener(new View.OnClickListener() {
+        imgCust.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(edeartag.getSelectedItem().equals("Pilih Eartag")){
@@ -332,7 +364,7 @@ public class DataSapiFragment extends Fragment{
                 }
             }
         });
-        foto1.setOnClickListener(new View.OnClickListener() {
+        imgCust1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(edeartag1.getSelectedItem().equals("Pilih Eartag")){
@@ -346,7 +378,7 @@ public class DataSapiFragment extends Fragment{
                 }
             }
         });
-        foto2.setOnClickListener(new View.OnClickListener() {
+        imgCust2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(edeartag2.getSelectedItem().equals("Pilih Eartag")){
@@ -360,7 +392,7 @@ public class DataSapiFragment extends Fragment{
                 }
             }
         });
-        foto3.setOnClickListener(new View.OnClickListener() {
+        imgCust3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(edeartag3.getSelectedItem().equals("Pilih Eartag")){
@@ -386,13 +418,24 @@ public class DataSapiFragment extends Fragment{
                 saveAppKeterangan2(edketerangan2.getText().toString());
                 saveAppKeterangan3(edketerangan3.getText().toString());
                 saveAppAssessment(String.valueOf(nilai_ass));
+
+                ArrayList<DetailRencana> rencana_list = databaseHandler.getAlldetailRencanaParam(idrencanaDetail);
+                rencanaDetail = new DetailRencana();
+                for (DetailRencana detailRencana : rencana_list)
+                    rencanaDetail = detailRencana;
+                status_checkin = String.valueOf(rencanaDetail.getStatus_rencana());
                 if(status_checkin.equals("0")){
                     showCustomDialog("Anda belum checkin, silahkan checkin terlebih dahulu");
                 }else {
-                    if (tvFotoCustomer.getText().toString() == "") {
-                        showCustomDialog("Belum ada foto sapi yang di ambil");
-                    } else {
-                        new UploadData().execute();
+                    String id_cust = String.valueOf(rencanaDetail.getId_customer()).substring(0,1);
+                    if(id_cust.equals("9")){
+                        showCustomDialog("Tidak diizinkan mengupload data di petani baru, anda hanya bisa checkin, checkout dan keterangan kunjungan saja pada menu checkout.");
+                    }else {
+                        if (tvFotoCustomer.getText().toString() == "") {
+                            showCustomDialog("Belum ada foto sapi yang di ambil");
+                        } else {
+                            new UploadData().execute();
+                        }
                     }
                 }
             }
@@ -406,7 +449,143 @@ public class DataSapiFragment extends Fragment{
 //
 //            }
 //        });
+        updateContentRefreshRencana();
         return  view;
+    }
+
+    public void updateContentRefreshRencana() {
+        DS_list.clear();
+        ArrayList<UploadDataSapi> ds_from_db = databaseHandler.getAllUploadDataSapiParam(String.valueOf(idrencanaDetail));
+
+        if (ds_from_db.size() > 0) {
+            ListView.setVisibility(View.VISIBLE);
+            for (int i = 0; i < ds_from_db.size(); i++) {
+                String id_rencana_detail = ds_from_db.get(i).getId_rencana_detail();
+                String eartag= ds_from_db.get(i).getEartag();
+                String foto= ds_from_db.get(i).getFoto();
+                String keterangan= ds_from_db.get(i).getKeterangan();
+                String assessment= ds_from_db.get(i).getAssessment();
+                String tanggal= ds_from_db.get(i).getTanggal();
+
+                UploadDataSapi uds = new UploadDataSapi();
+                uds.setId_rencana_detail(id_rencana_detail);
+                uds.setEartag(eartag);
+                uds.setFoto(foto);
+                uds.setKeterangan(keterangan);
+                uds.setAssessment(assessment);
+                uds.setTanggal(tanggal);
+
+                DS_list.add(uds);
+            }
+        } else {
+            ListView.setVisibility(View.INVISIBLE);
+        }
+        showListRencana();
+    }
+
+    public void showListRencana() {
+        DS_list.clear();
+        ArrayList<UploadDataSapi> ds_from_db = null;
+        ds_from_db = databaseHandler.getAllUploadDataSapiParam(String.valueOf(idrencanaDetail));
+
+        if (ds_from_db.size() > 0) {
+            ListView.setVisibility(View.VISIBLE);
+            for (int i = 0; i < ds_from_db.size(); i++) {
+                String id_rencana_detail = ds_from_db.get(i).getId_rencana_detail();
+                String eartag= ds_from_db.get(i).getEartag();
+                String foto= ds_from_db.get(i).getFoto();
+                String keterangan= ds_from_db.get(i).getKeterangan();
+                String assessment= ds_from_db.get(i).getAssessment();
+                String tanggal= ds_from_db.get(i).getTanggal();
+
+                UploadDataSapi uds = new UploadDataSapi();
+                uds.setId_rencana_detail(id_rencana_detail);
+                uds.setEartag(eartag);
+                uds.setFoto(foto);
+                uds.setKeterangan(keterangan);
+                uds.setAssessment(assessment);
+                uds.setTanggal(tanggal);
+
+                DS_list.add(uds);
+            }
+
+            cAdapter = new ListViewAdapter(DataSapiFragment.this.getActivity(), R.layout.list_item_ds,
+                    DS_list);
+            ListView.setAdapter(cAdapter);
+            cAdapter.notifyDataSetChanged();
+        } else {
+            ListView.setVisibility(View.INVISIBLE);
+        }
+    }
+    public class ListViewAdapter extends ArrayAdapter<UploadDataSapi> {
+        Activity activity;
+        int layoutResourceId;
+        UploadDataSapi DSData;
+
+        ArrayList<UploadDataSapi> data = new ArrayList<UploadDataSapi>();
+
+        public ListViewAdapter(Activity act, int layoutResourceId,
+                               ArrayList<UploadDataSapi> data) {
+            super(act, layoutResourceId, data);
+            this.layoutResourceId = layoutResourceId;
+            this.activity = act;
+            this.data = data;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public View getView(final int position, View convertView,
+                            ViewGroup parent) {
+            View row = convertView;
+            ListViewAdapter.UserHolder holder = null;
+
+            if (row == null) {
+                LayoutInflater inflater = LayoutInflater.from(activity);
+                row = inflater.inflate(layoutResourceId, parent, false);
+                holder = new ListViewAdapter.UserHolder();
+                holder.list_nama= (TextView) row
+                        .findViewById(R.id.eartag);
+                holder.list_assessment= (TextView) row
+                        .findViewById(R.id.assessment);
+                holder.list_foto= (ImageView) row
+                        .findViewById(R.id.imgDS);
+                holder.keterangan= (TextView) row
+                        .findViewById(R.id.keterangan);
+                row.setTag(holder);
+            } else {
+                holder = (ListViewAdapter.UserHolder) row.getTag();
+            }
+            DSData = data.get(position);
+            String assessment = "";
+            if(DSData.getAssessment().equals("0")){
+                assessment="Non Asessment";
+            }else{
+                assessment="Asessment";
+            }
+            mediaFile4 = new File(AppVar.getFolderPath() + "/" + IMAGE_DIRECTORY_NAME + "/" +DSData.getFoto());
+            Bitmap myBitmap = BitmapFactory.decodeFile(mediaFile4.getAbsolutePath());
+
+            holder.list_foto.setImageBitmap(myBitmap);
+            holder.list_nama.setText(DSData.getEartag().trim());
+            holder.keterangan.setText(DSData.getKeterangan().trim());
+            holder.list_assessment.setText(" ("+assessment+")");
+
+//            row.setOnClickListener(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View v) {
+//                    String pakan_type = String.valueOf(data.get(position).getPakan_type());
+//                    ChooseCustomerDialog(pakan_type);
+//                }
+//            });
+            return row;
+        }
+        class UserHolder {
+            TextView list_nama;
+            TextView list_assessment;
+            ImageView list_foto;
+            TextView keterangan;
+        }
     }
 
     public void showCustomDialog(String msg) {

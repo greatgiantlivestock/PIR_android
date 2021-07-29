@@ -9,7 +9,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,16 +22,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +50,8 @@ import com.android.pir.gglc.absen.NavigationDrawerFragment;
 import com.android.pir.gglc.absen.Orderan;
 import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.History_canvassing;
+import com.android.pir.gglc.database.Pakan;
+import com.android.pir.gglc.fragment1.PakanFragment;
 import com.android.pir.mobile.R;
 
 import org.apache.http.HttpResponse;
@@ -50,10 +64,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 import static com.android.pir.gglc.absen.AppVar.SHARED_PREFERENCES_NAME;
 
@@ -75,12 +93,7 @@ public class History_Canvassing extends ActionBarActivity implements
 	private static final String LOG_TAG = History_Canvassing.class
 			.getSimpleName();
 	private EditText searchCustomer;
-
 	private Typeface typefaceSmall;
-
-	private TextView tvKodeCustomer;
-	private TextView tvNamaCustomer;
-	private TextView tvNamaAlamat;
     private String response;
     private History_canvassing customer;
 	private Button chat,map;
@@ -91,6 +104,8 @@ public class History_Canvassing extends ActionBarActivity implements
 	int cDay,cMonth,cYear;
 	Calendar cDate;
 	int sDay,sMonth,sYear;
+	private ProgressBar progressBar;
+	private WebView webView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +114,6 @@ public class History_Canvassing extends ActionBarActivity implements
 		setContentView(R.layout.activity_main_history_canvassing);
 
 		mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
-
-		tvKodeCustomer = (TextView) findViewById(R.id.activity_customer_title_kode_customer);
-		tvNamaCustomer = (TextView) findViewById(R.id.activity_customer_title_nama_customer);
-		tvNamaAlamat = (TextView) findViewById(R.id.activity_customer_title_alamat_customer);
 		mulai = (EditText)findViewById(R.id.date_from);
 		sampai = (EditText)findViewById(R.id.date_to);
 		history = (Button)findViewById(R.id.search);
@@ -111,9 +122,6 @@ public class History_Canvassing extends ActionBarActivity implements
 		setSupportActionBar(mToolbar);
 		getSupportActionBar().setTitle(R.string.title_activity_all);
 
-		tvKodeCustomer.setTypeface(typefaceSmall);
-		tvNamaCustomer.setTypeface(typefaceSmall);
-		tvNamaAlamat.setTypeface(typefaceSmall);
 		chat = (Button) findViewById(R.id.chat);
 		act = this;
 
@@ -289,13 +297,13 @@ public class History_Canvassing extends ActionBarActivity implements
 			AsyncTask<String, Integer, String> {
 		@Override
 		protected void onPreExecute() {
-			progressDialog.setMessage("download dulu ya");
+			progressDialog.setMessage("Checking history");
 			progressDialog.show();
 			progressDialog
 					.setOnCancelListener(new DialogInterface.OnCancelListener() {
 						@Override
 						public void onCancel(DialogInterface dialog) {
-							String msg = "Cancle ya";
+							String msg = "Cancled";
 							showCustomDialog(msg);
 						}
 					});
@@ -459,7 +467,7 @@ public class History_Canvassing extends ActionBarActivity implements
 			JSONObject oResponse;
 			try {
 				oResponse = new JSONObject(main_app_table);
-				JSONArray jsonarr = oResponse.getJSONArray("canvassing");
+				JSONArray jsonarr = oResponse.getJSONArray("visit");
 				for (int i = 0; i < jsonarr.length(); i++) {
 					JSONObject oResponsealue = jsonarr.getJSONObject(i);
 					String nama_customer = oResponsealue.isNull("name1") ? null
@@ -473,8 +481,18 @@ public class History_Canvassing extends ActionBarActivity implements
 							: oResponsealue.getString("tanggal_checkin");
 					String tanggal_checkout = oResponsealue.isNull("tanggal_checkout") ? null
 							: oResponsealue.getString("tanggal_checkout");
+					String lats = oResponsealue.isNull("lats") ? null
+							: oResponsealue.getString("lats");
+					String longs = oResponsealue.isNull("longs") ? null
+							: oResponsealue.getString("longs");
+					String foto = oResponsealue.isNull("foto") ? null
+							: oResponsealue.getString("foto");
+					String indnr = oResponsealue.isNull("indnr") ? null
+							: oResponsealue.getString("indnr");
+					String id_rencana_detail = oResponsealue.isNull("id_rencana_detail") ? null
+							: oResponsealue.getString("id_rencana_detail");
 
-					databaseHandler.addHistoryCanvassing(new History_canvassing(nama_customer,nomor_rencana,alamat,tanggal_checkin,tanggal_checkout));
+					databaseHandler.addHistoryCanvassing(new History_canvassing(nama_customer,nomor_rencana,alamat,tanggal_checkin,tanggal_checkout,lats,longs,foto,indnr,id_rencana_detail));
 				}
 			} catch (JSONException e) {
 				final String message = e.toString();
@@ -538,6 +556,11 @@ public class History_Canvassing extends ActionBarActivity implements
 				String alamat = customer_from_db.get(i).getAlamat();
 				String waktu_checkin = customer_from_db.get(i).getWaktu_checkin();
 				String waktu_checkout = customer_from_db.get(i).getWaktu_checkout();
+				String lats = customer_from_db.get(i).getLats();
+				String longs = customer_from_db.get(i).getLongs();
+				String foto = customer_from_db.get(i).getFoto();
+				String indnr = customer_from_db.get(i).getIndnr();
+				String id_rencana_detail = customer_from_db.get(i).getId_rencana_detail();
 
 				History_canvassing canvasing = new History_canvassing();
 				canvasing.setId_canvassing(id_canvassing);
@@ -546,6 +569,11 @@ public class History_Canvassing extends ActionBarActivity implements
 				canvasing.setAlamat(alamat);
 				canvasing.setWaktu_checkin(waktu_checkin);
 				canvasing.setWaktu_checkout(waktu_checkout);
+				canvasing.setLats(lats);
+				canvasing.setLongs(longs);
+				canvasing.setFoto(foto);
+				canvasing.setIndnr(indnr);
+				canvasing.setId_rencana_detail(id_rencana_detail);
 
 				canvassing_list.add(canvasing);
 			}
@@ -572,6 +600,11 @@ public class History_Canvassing extends ActionBarActivity implements
 				String alamat = customer_from_db.get(i).getAlamat();
 				String waktu_checkin = customer_from_db.get(i).getWaktu_checkin();
 				String waktu_checkout = customer_from_db.get(i).getWaktu_checkout();
+				String lats = customer_from_db.get(i).getLats();
+				String longs = customer_from_db.get(i).getLongs();
+				String foto = customer_from_db.get(i).getFoto();
+				String indnr = customer_from_db.get(i).getIndnr();
+				String id_rencana_detail = customer_from_db.get(i).getId_rencana_detail();
 
 				History_canvassing canvasing = new History_canvassing();
 				canvasing.setId_canvassing(id_canvassing);
@@ -580,6 +613,11 @@ public class History_Canvassing extends ActionBarActivity implements
 				canvasing.setAlamat(alamat);
 				canvasing.setWaktu_checkin(waktu_checkin);
 				canvasing.setWaktu_checkout(waktu_checkout);
+				canvasing.setLats(lats);
+				canvasing.setLongs(longs);
+				canvasing.setFoto(foto);
+				canvasing.setIndnr(indnr);
+				canvasing.setId_rencana_detail(id_rencana_detail);
 
 				canvassing_list.add(canvasing);
 				/*
@@ -659,49 +697,50 @@ public class History_Canvassing extends ActionBarActivity implements
 
 				row = inflater.inflate(layoutResourceId, parent, false);
 				holder = new UserHolder();
-				holder.list_kodeCustomer = (TextView) row
-						.findViewById(R.id.customer_title_kode_customer);
-				holder.list_namaCustomer = (TextView) row
-						.findViewById(R.id.customer_title_nama_customer);
-				holder.list_alamat = (TextView) row
-						.findViewById(R.id.customer_title_alamat_customer);
+				holder.list_nama = (TextView) row.findViewById(R.id.customer_title_nama_customer);
+				holder.list_index = (TextView) row.findViewById(R.id.index);
+				holder.list_alamat = (TextView) row.findViewById(R.id.customer_title_alamat_customer);
+				holder.list_checkin = (TextView) row.findViewById(R.id.checkin);
 				row.setTag(holder);
 			} else {
 				holder = (UserHolder) row.getTag();
 			}
 			customerData = data.get(position);
-			holder.list_kodeCustomer.setText(customerData.getNama_customer());
-			holder.list_namaCustomer.setText(customerData.getAlamat());
-			holder.list_alamat.setText(customerData.getWaktu_checkout());
-			// Wilayah wilayah = databaseHandler.getWilayah(customerData
-			// .getId_wilayah());
-			holder.list_kodeCustomer.setTypeface(typefaceSmall);
-			holder.list_namaCustomer.setTypeface(typefaceSmall);
-			holder.list_alamat.setTypeface(typefaceSmall);
-			/*
-			row.setOnClickListener(new View.OnClickListener() {
+			Geocoder geocoder;
+			List<Address> addresses = null;
+			geocoder = new Geocoder(History_Canvassing.this, Locale.getDefault());
 
+			try {
+				addresses = geocoder.getFromLocation(Double.parseDouble(customerData.getLats()),Double.parseDouble(customerData.getLongs()), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			String address = addresses.get(0).getAddressLine(0);
+			holder.list_nama.setText(customerData.getNama_customer());
+			holder.list_alamat.setText(customerData.getAlamat());
+			holder.list_index.setText(customerData.getIndnr());
+			holder.list_checkin.setText(address+", "+customerData.getWaktu_checkout());
+			row.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					String id_customer = String.valueOf(data.get(position)
-							.getId_canvassing());
-					saveAppDataCustomerIdCustomer(id_customer);
-					SharedPreferences spPreferences = getSharedPrefereces();
-					String main_app_staff_level = spPreferences.getString(AppVar.SHARED_PREFERENCES_STAFF_LEVEL, null);
-					//int levelStaff = Integer.parseInt(main_app_staff_level);
-
-					//gotoDetailCustomer();
+					String id_customer = String.valueOf(data.get(position).getId_rencana_detail());
+					ChooseCustomerDialog(id_customer);
+//					saveAppDataCustomerIdCustomer(id_customer);
+//					SharedPreferences spPreferences = getSharedPrefereces();
+//					String main_app_staff_level = spPreferences.getString(AppVar.SHARED_PREFERENCES_STAFF_LEVEL, null);
 				}
 			});
-			*/
 			return row;
 
 		}
 
 		class UserHolder {
-			TextView list_kodeCustomer;
-			TextView list_namaCustomer;
+			TextView list_nama;
+			TextView list_index;
 			TextView list_alamat;
+//			WebView list_foto;
+			TextView list_checkin;
 		}
 
 	}
@@ -748,6 +787,121 @@ public class History_Canvassing extends ActionBarActivity implements
 			mNavigationDrawerFragment.closeDrawer();
 		else
 			super.onBackPressed();
+	}
+
+	private void ChooseCustomerDialog(String type) {
+		Log.d(LOG_TAG, "id_rencana_detail history: "+type);
+		final Dialog chooseCustomerDialog = new Dialog(act);
+		chooseCustomerDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		chooseCustomerDialog.setContentView(R.layout.activity_main_detail_history);
+		chooseCustomerDialog.setCanceledOnTouchOutside(true);
+		chooseCustomerDialog.setCancelable(true);
+		Window window = chooseCustomerDialog.getWindow();
+		window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+		Button button = (Button) chooseCustomerDialog.findViewById(R.id.close);
+		webView = (WebView) chooseCustomerDialog.findViewById(R.id.webV);
+//		progressBar = (ProgressBar) findViewById(R.id.progweb);
+//		progressBar.setVisibility(View.INVISIBLE);
+
+		button.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				chooseCustomerDialog.dismiss();
+			}
+		});
+		chooseCustomerDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				chooseCustomerDialog.dismiss();
+			}
+		});
+
+		WebSettings webSettings = webView.getSettings();
+		webSettings.setJavaScriptEnabled(true);
+
+		this.getWindow().setFeatureInt( Window.FEATURE_PROGRESS, Window.PROGRESS_VISIBILITY_ON);
+//		webView.setWebChromeClient(new WebChromeClient() {
+//			public void onProgressChanged(WebView view, int progress) {
+//				progressBar.setProgress(progress);
+//				if (progress == 100) {
+//					progressBar.setVisibility(View.GONE);
+//
+//				} else {
+//					progressBar.setVisibility(View.VISIBLE);
+//				}
+//			}
+//		});
+
+		webView.setWebViewClient(new WebViewClient());
+		webView.loadUrl("https://dev-pir-visit.gg-livestock.com/Rekap_salesman_mobile/ambil_data/"+type);
+
+		webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+		webView.getSettings().setBuiltInZoomControls(false);
+		webView.setOnKeyListener(new View.OnKeyListener(){
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+					webView.goBack();
+					return true;
+				}
+				return false;
+			}
+		});
+
+		webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+
+//		final ArrayList<Pakan> customer_list = new ArrayList<Pakan>();
+//		final ListView listview = (ListView) chooseCustomerDialog.findViewById(R.id.list);
+//
+//		listview.setItemsCanFocus(false);
+//		ArrayList<Pakan> pakan_from_db = databaseHandler.getAllPakan(String.valueOf(indnr),type);
+//		if (pakan_from_db.size() > 0) {
+//			listview.setVisibility(View.VISIBLE);
+//			for (int i = 0; i < pakan_from_db.size(); i++) {
+//				int indnr = pakan_from_db.get(i).getIndnr();
+//				String kode_pakan= pakan_from_db.get(i).getKode_pakan();
+//				String desc_pakan= pakan_from_db.get(i).getDesc_pakan();
+//				String std= pakan_from_db.get(i).getStd();
+//				int budget= pakan_from_db.get(i).getBudget();
+//				int terkirim= pakan_from_db.get(i).getTerkirim();
+//				int sisa= pakan_from_db.get(i).getSisa();
+//				int nofanim= pakan_from_db.get(i).getNofanim();
+//				String dof= pakan_from_db.get(i).getDof();
+//				String satuan= pakan_from_db.get(i).getSatuan();
+//				String tanggal_kirim= pakan_from_db.get(i).getTanggal_kirim();
+//				int qty_terima= pakan_from_db.get(i).getQty_terima();
+//				String create_date= pakan_from_db.get(i).getCreate_date();
+//				String pakan_type= pakan_from_db.get(i).getPakan_type();
+//
+//				Pakan pakan = new Pakan();
+//				pakan.setIndnr(indnr);
+//				pakan.setKode_pakan(kode_pakan);
+//				pakan.setDesc_pakan(desc_pakan);
+//				pakan.setStd(std);
+//				pakan.setBudget(budget);
+//				pakan.setTerkirim(terkirim);
+//				pakan.setSisa(sisa);
+//				pakan.setNofanim(nofanim);
+//				pakan.setDof(dof);
+//				pakan.setSatuan(satuan);
+//				pakan.setTanggal_kirim(tanggal_kirim);
+//				pakan.setQty_terima(qty_terima);
+//				pakan.setCreate_date(create_date);
+//				pakan.setPakan_type(pakan_type);
+//
+//				customer_list.add(pakan);
+//				cAdapterChooseAdapter = new PakanFragment.ListViewChooseAdapter(PakanFragment.this.getActivity(),R.layout.list_item_detail_pakan,customer_list, chooseCustomerDialog);
+//				listview.setAdapter(cAdapterChooseAdapter);
+//				cAdapterChooseAdapter.notifyDataSetChanged();
+//			}
+//		} else {
+//			listview.setVisibility(View.INVISIBLE);
+//		}
+		Handler handler = new Handler();
+		handler.post(new Runnable() {
+			public void run() {
+				chooseCustomerDialog.show();
+			}
+		});
 	}
 
 	public void showCustomDialogExit() {

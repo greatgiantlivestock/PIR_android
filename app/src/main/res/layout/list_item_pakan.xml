@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:orientation="horizontal"
             android:weightSum="3">
@@ -36,14 +35,14 @@
                     android:layout_marginRight="5dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
                 <TextView
                     android:id="@+id/std_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_height="wrap_content"
@@ -60,19 +59,18 @@
                     android:layout_marginRight="5dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/medium_blue"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:orientation="horizontal"
             android:weightSum="8">
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_weight="2.7"
                 android:padding="5dp"
                 android:background="@drawable/roundedactivebudget"
@@ -84,18 +82,18 @@
                     android:text="Budget :"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
                 <TextView
                     android:id="@+id/budget_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_weight="2.7"
                 android:padding="5dp"
                 android:background="@drawable/roundedactiveterkirim"
@@ -107,21 +105,22 @@
                     android:text="Terkirim :"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
                 <TextView
                     android:id="@+id/terkirim_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_weight="2.6"
                 android:padding="5dp"
+                android:layout_marginRight="5dp"
                 android:background="@drawable/roundedactivesisa"
                 android:layout_marginLeft="3dp"
                 android:orientation="vertical">
@@ -131,40 +130,16 @@
                     android:text="Sisa :"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
                 <TextView
                     android:id="@+id/sisa_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
 
             </LinearLayout>
-<!--            <LinearLayout-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="70dp"-->
-<!--                android:layout_weight="2.3"-->
-<!--                android:layout_marginRight="5dp"-->
-<!--                android:padding="5dp"-->
-<!--                android:background="@drawable/roundedactivestd"-->
-<!--                android:layout_marginLeft="3dp"-->
-<!--                android:orientation="vertical">-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Std Pemberian :"-->
-<!--                    android:textAppearance="?android:attr/textAppearanceSmall"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="14sp"/>-->
-<!--                <TextView-->
-<!--                    android:id="@+id/std_value"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:textAppearance="?android:attr/textAppearanceSmall"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="12sp"/>-->
-<!--            </LinearLayout>-->
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -88,8 +88,12 @@
                     <Button
                         android:id="@+id/search"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Lihat Riwayat"/>
+                        android:layout_height="38dp"
+                        android:padding="5dp"
+                        android:background="@drawable/roundedbutton"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="lihat riwayat"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -104,34 +108,11 @@
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.2"
-                        android:text="Petani"
+                        android:text="History Visit Petani"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/black"
                         android:textSize="14sp"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/activity_customer_title_nama_customer"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Alamat"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/activity_customer_title_alamat_customer"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.8"
-                        android:text="@string/app_customer_hint_nama_toko"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
                 </LinearLayout>
 
                 <View
@@ -140,15 +121,25 @@
                     android:layout_height="1dp"
                     android:background="#414141" />
 
-                <ListView
-                    android:id="@+id/list"
-                    android:layout_width="fill_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:divider="@color/listview_divider"
-                    android:dividerHeight="0.8dp"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false" />
+                    android:layout_marginTop="5dp"
+                    android:padding="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/roundedarea">
+                    <ListView
+                        android:id="@+id/list"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/grey"
+                        android:divider="@color/listview_divider"
+                        android:dividerHeight="0.8dp"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
+                </LinearLayout>
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>

@@ -9,28 +9,43 @@ public class History_canvassing {
 	String alamat;
 	String waktu_checkin;
 	String waktu_checkout;
+	String lats;
+	String longs;
+	String foto;
+	String indnr;
+	String id_rencana_detail;
 
 	// Empty constructor
 	public History_canvassing(){
 
 	}
 	// constructor
-	public History_canvassing(int id_canvassing, String nama_customer, String nomor_rencana, String alamat, String waktu_checkin, String waktu_checkout){
+	public History_canvassing(int id_canvassing, String nama_customer, String nomor_rencana, String alamat, String waktu_checkin, String waktu_checkout, String lats, String longs, String foto, String indnr, String id_rencana_detail){
 		this.id_canvassing=id_canvassing;
 		this.nama_customer=nama_customer;
 		this.nomor_rencana=nomor_rencana;
 		this.alamat=alamat;
 		this.waktu_checkin=waktu_checkin;
 		this.waktu_checkout=waktu_checkout;
+		this.lats=lats;
+		this.longs=longs;
+		this.foto=foto;
+		this.indnr=indnr;
+		this.id_rencana_detail=id_rencana_detail;
 	}
 
 	// constructor
-	public History_canvassing(String nama_customer, String nomor_rencana, String alamat, String waktu_checkin, String waktu_checkout){
+	public History_canvassing(String nama_customer, String nomor_rencana, String alamat, String waktu_checkin, String waktu_checkout, String lats, String longs, String foto, String indnr, String id_rencana_detail){
 		this.nama_customer=nama_customer;
 		this.nomor_rencana=nomor_rencana;
 		this.alamat=alamat;
 		this.waktu_checkin=waktu_checkin;
 		this.waktu_checkout=waktu_checkout;
+		this.lats=lats;
+		this.longs=longs;
+		this.foto=foto;
+		this.indnr=indnr;
+		this.id_rencana_detail=id_rencana_detail;
 	}
 	// getting id_absen
 	public int getId_canvassing(){
@@ -91,5 +106,55 @@ public class History_canvassing {
 	// setting lokasi
 	public void setWaktu_checkout(String waktu_checkout){
 		this.waktu_checkout= waktu_checkout;
+	}
+
+	// getting lokasi
+	public String getLats(){
+		return this.lats;
+	}
+
+	// setting lokasi
+	public void setLats(String lats){
+		this.lats= lats;
+	}
+
+	// getting lokasi
+	public String getLongs(){
+		return this.longs;
+	}
+
+	// setting lokasi
+	public void setLongs(String longs){
+		this.longs= longs;
+	}
+
+	// getting lokasi
+	public String getFoto(){
+		return this.foto;
+	}
+
+	// setting lokasi
+	public void setFoto(String foto){
+		this.foto= foto;
+	}
+
+	// getting lokasi
+	public String getIndnr(){
+		return this.indnr;
+	}
+
+	// setting lokasi
+	public void setIndnr(String indnr){
+		this.indnr= indnr;
+	}
+
+	// getting lokasi
+	public String getId_rencana_detail(){
+		return this.id_rencana_detail;
+	}
+
+	// setting lokasi
+	public void setId_rencana_detail(String id_rencana_detail){
+		this.id_rencana_detail= id_rencana_detail;
 	}
 }

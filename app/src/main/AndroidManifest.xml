@@ -104,42 +104,50 @@
 
         <activity
             android:launchMode="singleTop"
-            android:name="com.android.pir.gglc.absen.ChangePassword">
+            android:name="com.android.pir.gglc.absen.ChangePassword"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <activity
             android:launchMode="singleTop"
-            android:name="com.android.pir.gglc.absen.Orderan">
+            android:name="com.android.pir.gglc.absen.Orderan"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <activity
             android:launchMode="singleTop"
-            android:name="com.android.pir.gglc.pir.CheckoutActivity">
+            android:name="com.android.pir.gglc.pir.CheckoutActivity"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <activity
             android:launchMode="singleTop"
-            android:name="com.android.pir.gglc.pir.DashboardTabsActivity">
+            android:name="com.android.pir.gglc.pir.DashboardTabsActivity"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <activity
             android:launchMode="singleTop"
-            android:name="com.android.pir.gglc.pir.DashboardActivity">
+            android:name="com.android.pir.gglc.pir.DashboardActivity"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <activity
             android:launchMode="singleTop"
-            android:name="com.android.pir.gglc.pir.History_Canvassing">
+            android:name="com.android.pir.gglc.pir.History_Canvassing"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <activity
             android:launchMode="singleTop"
-            android:name="com.android.pir.gglc.pir.DetailJadwalActivity">
+            android:name="com.android.pir.gglc.pir.DetailJadwalActivity"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <activity
             android:launchMode="singleTop"
-            android:name="com.android.pir.gglc.pir.CheckinOneFragmentActivity">
+            android:name="com.android.pir.gglc.pir.CheckinOneFragmentActivity"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
 
@@ -147,22 +155,26 @@
 
         <activity
             android:launchMode="singleTop"
-            android:name="com.android.pir.gglc.pir.Chiller">
+            android:name="com.android.pir.gglc.pir.Chiller"
+            android:windowSoftInputMode="adjustPan">
 
         </activity>
 
         <activity
             android:launchMode="singleTop"
-            android:name="com.android.pir.gglc.pir.CheckoutActivityA">
+            android:name="com.android.pir.gglc.pir.CheckoutActivityA"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:launchMode="singleTop"
-            android:name="com.android.pir.gglc.pir.IconTextTabsActivity_lap">
+            android:name="com.android.pir.gglc.pir.IconTextTabsActivity_lap"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <activity
             android:launchMode="singleTop"
-            android:name="com.android.pir.gglc.pir.TestCheckin">
+            android:name="com.android.pir.gglc.pir.TestCheckin"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <meta-data

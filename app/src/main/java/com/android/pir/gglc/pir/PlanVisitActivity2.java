@@ -254,7 +254,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 	private void resetForm(){
 		mulai.setText("");
 		keterangan.setText("");
-		detailReqLoadList.clear();
+//		detailReqLoadList.clear();
 		listview.setAdapter(null);
 	}
 
@@ -427,8 +427,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 					for (MstUser tempStaff : staff_list)
 						user = tempStaff;
 					String nama=user.getNama();
-					ArrayList<Mst_Customer> customer_from_db = databaseHandler
-							.getAllCustomerOnly(nama);
+					ArrayList<Mst_Customer> customer_from_db = databaseHandler.getAllCustomerOnly(nama);
 					if (customer_from_db.size() > 0) {
 						listview.setVisibility(View.VISIBLE);
 						for (int i = 0; i < customer_from_db.size(); i++) {
@@ -874,6 +873,7 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 			if (response_data != null) {
 				saveAppDataRencanaDetail(response_data);
 				extractDataRencanaDetail();
+				resetForm();
 				spinnerRencana.setVisibility(View.INVISIBLE);
 				if (progressDialog != null) {
 					progressDialog.dismiss();
@@ -932,15 +932,17 @@ public class PlanVisitActivity2 extends ActionBarActivity implements NavigationD
 							: oResponsealue.getString("nomor_rencana_detail");
 					String indnr = oResponsealue.isNull("indnr") ? null
 							: oResponsealue.getString("indnr");
+					String active = oResponsealue.isNull("active") ? null
+							: oResponsealue.getString("active");
 //					Log.d(LOG_TAG, "id_rencana_detail:" + id_rencana_detail);
 //					Log.d(LOG_TAG, "id_rencana_header:" + id_rencana_header);
 //					Log.d(LOG_TAG, "id_kegiatan:" + id_kegiatan);
 //					Log.d(LOG_TAG, "id_customer:" + id_customer);
 					databaseHandler.addDetailRencana(new DetailRencana(Integer.parseInt(id_rencana_detail),Integer.parseInt(id_rencana_header),
 							Integer.parseInt(id_kegiatan),Integer.parseInt(id_customer),Integer.parseInt(id_karyawan),
-							Integer.parseInt(status_rencana),nomor_rencana_detail,indnr));
+							Integer.parseInt(status_rencana),nomor_rencana_detail,indnr,active));
 				}
-				resetForm();
+				detailReqLoadList.clear();
 			} catch (JSONException e) {
 				final String message = e.toString();
 				handler.post(new Runnable() {

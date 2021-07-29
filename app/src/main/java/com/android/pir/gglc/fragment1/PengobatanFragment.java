@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
@@ -40,11 +41,14 @@ import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
 import com.android.pir.gglc.database.DetailReqLoadNew;
 import com.android.pir.gglc.database.DetailReqObat;
+import com.android.pir.gglc.database.FeedbackPakan;
 import com.android.pir.gglc.database.MstUser;
 import com.android.pir.gglc.database.Mst_Customer;
+import com.android.pir.gglc.database.Mst_Customer_Header;
 import com.android.pir.gglc.database.Obat;
 import com.android.pir.gglc.database.Pakan;
 import com.android.pir.gglc.database.Pengobatan;
+import com.android.pir.gglc.database.PengobatanJoin;
 import com.android.pir.gglc.pir.PlanVisitActivity;
 import com.android.pir.mobile.R;
 
@@ -57,6 +61,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.CookieHandler;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -69,28 +74,31 @@ public class PengobatanFragment extends Fragment{
     private ProgressDialog progressDialog;
     private TextView nama,desa,descFoto,cSaved,tvindex_petani,tvdof,tvjmlEkor;
     private Mst_Customer mst_customer;
+    private Mst_Customer_Header mst_customer_header;
     private int id_rencana_detail=0;
     private ImageView imgCust;
-    private Button addObat,addFoto,simpanPengobatan;
+    private Button addObat,simpanPengobatan;
     public static final int MEDIA_TYPE_IMAGE = 1;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private String IMAGE_DIRECTORY_NAME = "Pengobatan";
     private Uri fileUri;
     private File mediaFile;
+    private File mediaFile1;
     private String newImageName;
     private Obat obat;
-    private ListView listView;
+    private ListView listView,ListView1;
     private EditText qtyObat;
     private ListViewChooseAdapter cAdapterChooseAdapter;
     private ArrayList<DetailReqObat> detailReqLoadList = new ArrayList<DetailReqObat>();
+    private ArrayList<PengobatanJoin> pengobatan_List = new ArrayList<PengobatanJoin>();
     private ListViewAdapter cAdapter;
+    private ListViewAdapter1 cAdapter1;
     private LinearLayout ln_count;
     int jml = 0;
     private int index = 0;
     private int jmlEkor = 0;
-    private Pakan pakann;
-    private int id_status = 0;
-//    private ListViewAdapter cAdapter;
+    private int status_checkin = 0;
+    private DetailRencana rencanaDetail;
 
     public PengobatanFragment() {
         //no coding in here
@@ -120,36 +128,55 @@ public class PengobatanFragment extends Fragment{
         tvdof = (TextView) view.findViewById(R.id.dof);
         imgCust = (ImageView) view.findViewById(R.id.ImgCust_obat);
         addObat = (Button) view.findViewById(R.id.addObat);
-        addFoto = (Button) view.findViewById(R.id.addFoto);
+//        addFoto = (Button) view.findViewById(R.id.addFoto);
         simpanPengobatan = (Button) view.findViewById(R.id.save_pir_obat);
         descFoto = (TextView) view.findViewById(R.id.desc_foto);
         listView = (ListView) view.findViewById(R.id.list);
+        ListView1 = (ListView) view.findViewById(R.id.list1);
         ln_count = (LinearLayout) view.findViewById(R.id.ln_cout);
 
         SharedPreferences spPreferences = getSharedPrefereces();
         id_rencana_detail = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL, null));
-        index = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null));
-        ArrayList<Mst_Customer> customer_list = databaseHandler.getAllCustomerParamRencana(id_rencana_detail);
+        if(!spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null).isEmpty()) {
+            index = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null));
+        }
+        ArrayList<Mst_Customer> customer_list1 = databaseHandler.getAllCustomerParamRencana(id_rencana_detail);
         mst_customer = new Mst_Customer();
-        for (Mst_Customer customer : customer_list)
-            mst_customer = customer;
-        ArrayList<Pakan> pakan_list = databaseHandler.getMaxPakan(String.valueOf(index));
-        pakann = new Pakan();
-        for (Pakan paakan : pakan_list)
-            pakann = paakan;
-        int idrencanaDetail = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL, null));
-        ArrayList<DetailRencana> rencana_list = databaseHandler.getAlldetailRencanaParam(idrencanaDetail);
-        DetailRencana rencanaDetail = new DetailRencana();
-        for (DetailRencana detailRencana : rencana_list)
-            rencanaDetail = detailRencana;
-        id_status =rencanaDetail.getStatus_rencana();
-        tvindex_petani.setText(String.valueOf(pakann.getIndnr()));
-        tvjmlEkor.setText(String.valueOf(pakann.getNofanim()));
-        tvdof.setText(pakann.getDof()+" Hari");
-        nama.setText(mst_customer.getNama_customer());
-        desa.setText(mst_customer.getAlamat());
+        for (Mst_Customer customer1 : customer_list1)
+            mst_customer = customer1;
 
-        addFoto.setOnClickListener(new View.OnClickListener() {
+        ArrayList<Mst_Customer_Header> customer_list = databaseHandler.getAllCustomerParamRencanaHeader(id_rencana_detail);
+        mst_customer_header = new Mst_Customer_Header();
+        for (Mst_Customer_Header customer : customer_list)
+            mst_customer_header = customer;
+
+        if(mst_customer_header.getLongs()!=null) {
+            String timeNow = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            long jmlDof = 0;
+            try {
+                Date dateNow = new SimpleDateFormat("yyy-MM-dd").parse(timeNow);
+                Date dateReg = new SimpleDateFormat("yyy-MM-dd").parse(mst_customer_header.getLongs());
+                jmlDof = (dateNow.getTime() - dateReg.getTime()) / (1000 * 60 * 60 * 24);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            tvindex_petani.setText(String.valueOf(index));
+            tvjmlEkor.setText(String.valueOf(mst_customer_header.getJml()));
+            tvdof.setText(String.valueOf(jmlDof) + " Hari");
+            nama.setText(mst_customer_header.getNama_customer());
+            desa.setText(mst_customer_header.getAlamat());
+        }else{
+            long jmlDof = 0;
+
+            tvindex_petani.setText(String.valueOf(index));
+            tvjmlEkor.setText(String.valueOf("0"));
+            tvdof.setText("");
+            nama.setText(mst_customer.getNama_customer());
+            desa.setText(mst_customer.getAlamat());
+        }
+
+        imgCust.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 gotoCaptureImage();
@@ -164,8 +191,125 @@ public class PengobatanFragment extends Fragment{
             ln_count.setBackgroundColor(Color.parseColor("#ff0000"));
         }
         cSaved.setText(String.valueOf(jml));
-
+        updateContentRefreshRencana();
         return  view;
+    }
+
+
+    public void updateContentRefreshRencana() {
+        pengobatan_List.clear();
+        ArrayList<PengobatanJoin> pengobatan_saved_from_db = databaseHandler.getAllPengobatansavedParam(String.valueOf(id_rencana_detail));
+        if (pengobatan_saved_from_db.size() > 0) {
+            ListView1.setVisibility(View.VISIBLE);
+            for (int i = 0; i < pengobatan_saved_from_db.size(); i++) {
+                int idrencana_detaildt= pengobatan_saved_from_db.get(i).getId_rencana_detail();
+                String kode= pengobatan_saved_from_db.get(i).getKode_obat();
+                int qty= pengobatan_saved_from_db.get(i).getQty();
+                String tanggal= pengobatan_saved_from_db.get(i).getTanggal();
+                String foto= pengobatan_saved_from_db.get(i).getFoto_pengobatan();
+                String satuan= pengobatan_saved_from_db.get(i).getSatuan();
+
+                PengobatanJoin pengobatandata = new PengobatanJoin();
+                pengobatandata.setId_rencana_detail(idrencana_detaildt);
+                pengobatandata.setKode_obat(kode);
+                pengobatandata.setQty(qty);
+                pengobatandata.setTanggal(tanggal);
+                pengobatandata.setFoto_pengobatan(foto);
+                pengobatandata.setSatuan(satuan);
+
+                pengobatan_List.add(pengobatandata);
+            }
+        } else {
+            ListView1.setVisibility(View.INVISIBLE);
+        }
+        showListRencana();
+    }
+
+    public void showListRencana() {
+        pengobatan_List.clear();
+        ArrayList<PengobatanJoin> pengobatan_saved_from_db = null;
+        pengobatan_saved_from_db = databaseHandler.getAllPengobatansavedParam(String.valueOf(id_rencana_detail));
+
+        if (pengobatan_saved_from_db.size() > 0) {
+            ListView1.setVisibility(View.VISIBLE);
+            for (int i = 0; i < pengobatan_saved_from_db.size(); i++) {
+                int idrencana_detaildt= pengobatan_saved_from_db.get(i).getId_rencana_detail();
+                String kode= pengobatan_saved_from_db.get(i).getKode_obat();
+                int qty= pengobatan_saved_from_db.get(i).getQty();
+                String tanggal= pengobatan_saved_from_db.get(i).getTanggal();
+                String foto= pengobatan_saved_from_db.get(i).getFoto_pengobatan();
+                String satuan= pengobatan_saved_from_db.get(i).getSatuan();
+
+                PengobatanJoin pengobatandata = new PengobatanJoin();
+                pengobatandata.setId_rencana_detail(idrencana_detaildt);
+                pengobatandata.setKode_obat(kode);
+                pengobatandata.setQty(qty);
+                pengobatandata.setTanggal(tanggal);
+                pengobatandata.setFoto_pengobatan(foto);
+                pengobatandata.setSatuan(satuan);
+
+                pengobatan_List.add(pengobatandata);
+            }
+
+            cAdapter1 = new ListViewAdapter1(PengobatanFragment.this.getActivity(), R.layout.list_item_pengobatan,
+                    pengobatan_List);
+            ListView1.setAdapter(cAdapter1);
+            cAdapter1.notifyDataSetChanged();
+        } else {
+            ListView1.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public class ListViewAdapter1 extends ArrayAdapter<PengobatanJoin> {
+        Activity activity;
+        int layoutResourceId;
+        PengobatanJoin pengobatanData;
+
+        ArrayList<PengobatanJoin> data = new ArrayList<PengobatanJoin>();
+
+        public ListViewAdapter1(Activity act, int layoutResourceId,
+                                ArrayList<PengobatanJoin> data) {
+            super(act, layoutResourceId, data);
+            this.layoutResourceId = layoutResourceId;
+            this.activity = act;
+            this.data = data;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public View getView(final int position, View convertView,
+                            ViewGroup parent) {
+            View row = convertView;
+            ListViewAdapter1.UserHolder holder = null;
+
+            if (row == null) {
+                LayoutInflater inflater = LayoutInflater.from(activity);
+                row = inflater.inflate(layoutResourceId, parent, false);
+                holder = new ListViewAdapter1.UserHolder();
+                holder.list_nama= (TextView) row.findViewById(R.id.nama_obat);
+                holder.list_qty= (TextView) row.findViewById(R.id.qty);
+                holder.list_tanggal= (TextView) row.findViewById(R.id.tanggal);
+                holder.list_foto = (ImageView) row.findViewById(R.id.foto);
+                row.setTag(holder);
+            } else {
+                holder = (ListViewAdapter1.UserHolder) row.getTag();
+            }
+            pengobatanData = data.get(position);
+            mediaFile1 = new File(AppVar.getFolderPath() + "/" + IMAGE_DIRECTORY_NAME + "/" +pengobatanData.getFoto_pengobatan());
+            Bitmap myBitmap = BitmapFactory.decodeFile(mediaFile1.getAbsolutePath());
+            holder.list_nama.setText(pengobatanData.getKode_obat());
+            String qty = String.valueOf(pengobatanData.getQty());
+            holder.list_qty.setText(qty+" "+pengobatanData.getSatuan());
+            holder.list_tanggal.setText(pengobatanData.getTanggal());
+            holder.list_foto.setImageBitmap(myBitmap);
+            return row;
+        }
+        class UserHolder {
+            TextView list_nama;
+            TextView list_qty;
+            TextView list_tanggal;
+            ImageView list_foto;
+        }
     }
 
     public void gotoCaptureImage() {
@@ -292,7 +436,12 @@ public class PengobatanFragment extends Fragment{
                     }
                     break;
                 case R.id.save_pir_obat:
-                    if(id_status==0){
+                    ArrayList<DetailRencana> rencana_list = databaseHandler.getAlldetailRencanaParam(id_rencana_detail);
+                    rencanaDetail = new DetailRencana();
+                    for (DetailRencana detailRencana : rencana_list)
+                        rencanaDetail = detailRencana;
+                    status_checkin = rencanaDetail.getStatus_rencana();
+                    if(status_checkin==0){
                         showCustomDialog("Anda belum checkin, silahkan checkin terlebih dahulu");
                     }else {
                         if (detailReqLoadList.isEmpty()) {
@@ -301,12 +450,17 @@ public class PengobatanFragment extends Fragment{
                                     .getString(R.string.app_reqload_pengobatan_empty_box);
                             showCustomDialog(msg);
                         } else {
-                            if (descFoto.getText().toString().equals("")) {
-                                showCustomDialog("Ambil Foto Terlebih Dahulu Sebelum Menyimpan");
-                            } else {
-                                showCustomDialogConfirm("Data yang disimpan akan langsung terinterface ke SAP setelah proses upload dilakukan. Lanjutkan jika data sudah benar");
+                            String id_cust = String.valueOf(rencanaDetail.getId_customer()).substring(0,1);
+                            if(id_cust.equals("9")){
+                                showCustomDialog("Tidak diizinkan mengupload data di petani baru, anda hanya bisa checkin, checkout dan keterangan kunjungan saja pada menu checkout.");
+                            }else {
+                                if (descFoto.getText().toString().equals("")) {
+                                    showCustomDialog("Ambil Foto Terlebih Dahulu Sebelum Menyimpan");
+                                } else {
+                                    showCustomDialogConfirm("Data yang disimpan akan langsung terinterface ke SAP setelah proses upload dilakukan. Lanjutkan jika data sudah benar.");
+                                }
+                                break;
                             }
-                            break;
                         }
                     }
                 default:
@@ -471,6 +625,7 @@ public class PengobatanFragment extends Fragment{
             cSaved.setText(String.valueOf(jml));
             resetForm();
             showCustomDialog("Data Berhasil Disimpan.");
+            updateContentRefreshRencana();
         }else{
             showCustomDialog("Gagal Menyimpan..");
         }
@@ -682,16 +837,21 @@ public class PengobatanFragment extends Fragment{
         alertDialogBuilder
                 .setMessage(msg)
                 .setCancelable(false)
-                .setPositiveButton(
-                        act.getApplicationContext().getResources()
-                                .getString(R.string.MSG_DLG_LABEL_OK),
+                .setPositiveButton("Ya, Lanjutkan",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                AlertDialog alertDialog = alertDialogBuilder
-                                        .create();
+                                AlertDialog alertDialog = alertDialogBuilder.create();
                                 alertDialog.dismiss();
                                 savePengobatan();
+                            }
+                        })
+                .setNegativeButton("Cek Lagi",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                alertDialog.dismiss();
                             }
                         });
         AlertDialog alertDialog = alertDialogBuilder.create();

@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.pir.gglc.pir.DashboardActivity;
 import com.android.pir.gglc.pir.PlanVisitActivity;
 import com.android.pir.mobile.R;
 import com.android.pir.gglc.database.DatabaseHandler;
@@ -255,7 +256,7 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     private void gotoNavigationdrawer(){
-        Intent intent = new Intent(act, PlanVisitActivity.class);
+        Intent intent = new Intent(act, DashboardActivity.class);
         startActivity(intent);
         finish();
     }

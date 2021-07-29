@@ -10,6 +10,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
@@ -23,39 +25,26 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.pir.gglc.absen.AppVar;
-import com.android.pir.gglc.absen.RequestHandler;
 import com.android.pir.gglc.database.DatabaseHandler;
 import com.android.pir.gglc.database.DetailRencana;
-import com.android.pir.gglc.database.MasterRencana;
 import com.android.pir.gglc.database.MstUser;
 import com.android.pir.gglc.database.Mst_Customer;
+import com.android.pir.gglc.database.Mst_Customer_Header;
 import com.android.pir.gglc.database.Pakan;
 import com.android.pir.gglc.database.Trx_Checkin;
-import com.android.pir.gglc.fragment.OneFragment;
-import com.android.pir.gglc.pir.CheckinOneFragmentActivity;
 import com.android.pir.gglc.pir.DashboardActivity;
-import com.android.pir.gglc.pir.DetailJadwalActivity;
-import com.android.pir.gglc.pir.IconTextTabsActivity;
 import com.android.pir.mobile.R;
 
 import org.apache.http.HttpEntity;
@@ -78,11 +67,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -105,18 +94,20 @@ public class OneFragment1 extends Fragment{
     private int index = 0;
     private int jmlEkor = 0;
 
-    private Button foto,checkin;
+    private Button checkin;
     public static final int MEDIA_TYPE_IMAGE = 1;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private Uri fileUri1; // file url to store image/video
     private File mediaFile;
-    private String newImageName1;
+    private File mediaFile2;
+    private String newImageName1,address;
     private String response_data,response_data_download,main_app_id_detail_jadwal;
-    private TextView tvFotoCustomer,tvnama_petani,tvalamat_petani,tvstatus_checkin,tvindex_petani,tvdof,tvjmlEkor;
+    private TextView tvFotoCustomer,tvnama_petani,tvalamat_petani,tvstatus_checkin,tvindex_petani,tvdof,tvjmlEkor,addressText;
     private ImageView imgCust;
 //    private EditText no_checkin1;
     private Mst_Customer mst_customer;
-    private Pakan pakann;
+    private Mst_Customer_Header mst_customer_header;
+//    private Pakan pakann;
     private double latitude, longitude;
     private Location location;
     private Location location1;
@@ -128,8 +119,9 @@ public class OneFragment1 extends Fragment{
     private int id_checkin,id_user,id_customer,rotateV=90;
     private MstUser user;
     private DetailRencana rencanaDetail;
+    private Trx_Checkin tckin;
     private String idrd,idcst,fto,nmr,lts,lng,idus,tgl,kode_customer;
-    private LinearLayout lsstatus;
+    private LinearLayout lsstatus,localad,lnBT;
     public OneFragment1() {
         //no coding in here
     }
@@ -143,7 +135,7 @@ public class OneFragment1 extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.pir_fragment_one, container, false);
-        act=this.getActivity();
+        act = this.getActivity();
 
 
         progressDialog = new ProgressDialog(this.getActivity());
@@ -154,50 +146,79 @@ public class OneFragment1 extends Fragment{
         progressDialog.setCanceledOnTouchOutside(false);
 
         databaseHandler = new DatabaseHandler(this.getActivity());
-        tvFotoCustomer = (TextView) view.findViewById(R.id.title_foto_customer);
+        tvFotoCustomer = (TextView) view.findViewById(R.id.title_foto_customer_checkin);
         tvnama_petani = (TextView) view.findViewById(R.id.nama_petani);
+        addressText = (TextView) view.findViewById(R.id.addressTV);
         tvalamat_petani = (TextView) view.findViewById(R.id.alamat_pertani);
         tvindex_petani = (TextView) view.findViewById(R.id.index);
         tvjmlEkor = (TextView) view.findViewById(R.id.jmlEkor);
         tvdof = (TextView) view.findViewById(R.id.dof);
         tvstatus_checkin = (TextView) view.findViewById(R.id.status_checkin);
         lsstatus = (LinearLayout) view.findViewById(R.id.lstatus_checkin);
-        foto = (Button) view.findViewById(R.id.foto);
         checkin = (Button) view.findViewById(R.id.checkin);
         imgCust = (ImageView) view.findViewById(R.id.ImgCust);
+        localad = (LinearLayout) view.findViewById(R.id.localAd);
+        lnBT = (LinearLayout) view.findViewById(R.id.lnBT);
 //        no_checkin1 = (EditText) view.findViewById(R.id.no_checkin);
 //        no_checkin1.setEnabled(false);
         SharedPreferences spPreferences = getSharedPrefereces();
         idrencanaDetail = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_JADWAL, null));
-        index = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null));
+        if (!spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null).isEmpty()) {
+            index = Integer.parseInt(spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_INDEX_NUMBER, null));
+        }
 //        status_checkin = spPreferences.getString(AppVar.SHARED_PREFERENCES_TABLE_JADWAL_DETAIL_STATUS, null);
         ArrayList<DetailRencana> rencana_list = databaseHandler.getAlldetailRencanaParam(idrencanaDetail);
         rencanaDetail = new DetailRencana();
         for (DetailRencana detailRencana : rencana_list)
             rencanaDetail = detailRencana;
-        int id_status =rencanaDetail.getStatus_rencana();
+        int id_status = rencanaDetail.getStatus_rencana();
 
-        if(id_status==0){
+        if (id_status == 0) {
             tvstatus_checkin.setText("Baru (Belum Checkin)");
             lsstatus.setBackgroundColor(Color.parseColor("#ed190e"));
-        }else if (id_status==1){
+            localad.setVisibility(View.INVISIBLE);
+        } else if (id_status == 1) {
             tvstatus_checkin.setText("Sudah Checkin");
             lsstatus.setBackgroundColor(Color.parseColor("#24ed0e"));
+            checkin.setVisibility(View.INVISIBLE);
+            imgCust.setEnabled(false);
         }
 
-        ArrayList<Mst_Customer> customer_list = databaseHandler.getAllCustomerParamRencana(idrencanaDetail);
+        ArrayList<Mst_Customer> customer_list1 = databaseHandler.getAllCustomerParamRencana(idrencanaDetail);
         mst_customer = new Mst_Customer();
-        for (Mst_Customer customer : customer_list)
-            mst_customer = customer;
-        ArrayList<Pakan> pakan_list = databaseHandler.getMaxPakan(String.valueOf(index));
-        pakann = new Pakan();
-        for (Pakan paakan : pakan_list)
-            pakann = paakan;
-        tvindex_petani.setText(String.valueOf(pakann.getIndnr()));
-        tvjmlEkor.setText(String.valueOf(pakann.getNofanim()));
-        tvdof.setText(pakann.getDof()+" Hari");
-        tvnama_petani.setText(mst_customer.getNama_customer());
-        tvalamat_petani.setText(mst_customer.getAlamat());
+        for (Mst_Customer customer1 : customer_list1)
+            mst_customer = customer1;
+
+        ArrayList<Mst_Customer_Header> customer_list = databaseHandler.getAllCustomerParamRencanaHeader(idrencanaDetail);
+        mst_customer_header = new Mst_Customer_Header();
+        for (Mst_Customer_Header customer : customer_list)
+            mst_customer_header = customer;
+
+        if(mst_customer_header.getLongs()!=null) {
+            String timeNow = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            long jmlDof = 0;
+            try {
+                Date dateNow = new SimpleDateFormat("yyy-MM-dd").parse(timeNow);
+                Date dateReg = new SimpleDateFormat("yyy-MM-dd").parse(mst_customer_header.getLongs());
+                jmlDof = (dateNow.getTime() - dateReg.getTime()) / (1000 * 60 * 60 * 24);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            tvindex_petani.setText(String.valueOf(index));
+            tvjmlEkor.setText(String.valueOf(mst_customer_header.getJml()));
+            tvdof.setText(String.valueOf(jmlDof) + " Hari");
+            tvnama_petani.setText(mst_customer_header.getNama_customer());
+            tvalamat_petani.setText(mst_customer_header.getAlamat());
+        }else{
+            long jmlDof = 0;
+
+            tvindex_petani.setText(String.valueOf(index));
+            tvjmlEkor.setText(String.valueOf("0"));
+            tvdof.setText("");
+            tvnama_petani.setText(mst_customer.getNama_customer());
+            tvalamat_petani.setText(mst_customer.getAlamat());
+        }
 
         if(databaseHandler.getCountDetailrencana()!=0){
             ArrayList<MstUser> user_list = databaseHandler.getAllUser();
@@ -210,7 +231,7 @@ public class OneFragment1 extends Fragment{
             showCustomDialog("Download dencana detail terlebih dahulu");
         }
 
-        foto.setOnClickListener(new View.OnClickListener() {
+        imgCust.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                     gotoCaptureImage1();
@@ -222,6 +243,22 @@ public class OneFragment1 extends Fragment{
                 checkinSave();
             }
         });
+        ArrayList<Trx_Checkin> ckin = databaseHandler.getAllCheckinParamID(String.valueOf(idrencanaDetail));
+        tckin = new Trx_Checkin();
+        for (Trx_Checkin cekinData : ckin)
+            tckin = cekinData;
+        String localLats =tckin.getLats();
+        String localLongs =tckin.getLongs();
+        String waktu =tckin.getTanggal_checkin();
+        String foto =tckin.getFoto();
+        Log.d(LOG_TAG, "latsLocal: "+localLats);
+        Log.d(LOG_TAG, "longsLocal: "+localLongs);
+        if(localLats!=null){
+            mediaFile2 = new File(AppVar.getFolderPath() + "/" + IMAGE_DIRECTORY_NAME + "/" +foto );
+            Bitmap myBitmap = BitmapFactory.decodeFile(mediaFile2.getAbsolutePath());
+            imgCust.setImageBitmap(myBitmap);
+            setAddress(Double.parseDouble(localLats),Double.parseDouble(localLongs), waktu);
+        }
         return  view;
     }
 
@@ -279,9 +316,20 @@ public class OneFragment1 extends Fragment{
                                 AlertDialog alertDialog = alertDialogBuilder
                                         .create();
                                 alertDialog.dismiss();
-                                resetCheckin();
                                 tvstatus_checkin.setText("Sudah Checkin");
                                 lsstatus.setBackgroundColor(Color.parseColor("#24ed0e"));
+                                ArrayList<Trx_Checkin> ckin = databaseHandler.getAllCheckinParamID(String.valueOf(idrencanaDetail));
+                                tckin = new Trx_Checkin();
+                                for (Trx_Checkin cekinData : ckin)
+                                    tckin = cekinData;
+                                String localLats =tckin.getLats();
+                                String localLongs =tckin.getLongs();
+                                String waktu =tckin.getTanggal_checkin();
+                                Log.d(LOG_TAG, "latsLocalC: "+localLats);
+                                Log.d(LOG_TAG, "longsLocalC: "+localLongs);
+                                setAddress(Double.parseDouble(localLats),Double.parseDouble(localLongs), waktu);
+                                localad.setVisibility(View.VISIBLE);
+                                resetCheckin();
                             }
                         });
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -346,100 +394,18 @@ public class OneFragment1 extends Fragment{
                                 editor.putString(AppVar.SHARED_PREFERENCES_LATS,vlats);
                                 editor.putString(AppVar.SHARED_PREFERENCES_LONGS,vlongs);
                                 editor.commit();
-                                new UploadData().execute();
-//                                int countId_checkin = databaseHandler.getCountTrxcheckin();
-//                                final String date = "yyyy-MM-dd";
-//                                Calendar calendar = Calendar.getInstance();
-//                                SimpleDateFormat dateFormat = new SimpleDateFormat(date);
-//                                final String checkDate = dateFormat.format(calendar.getTime());
-//                                String kode_customer=mst_customer.getKode_customer();
-//                                id_checkin=countId_checkin+1;
-//
-//                                int already_checkin = databaseHandler.getCheckinAlready(kode_customer, idrencanaDetail);
-//
-//                                if(already_checkin==1){
-//                                    ArrayList<Mst_Customer> customer_list = databaseHandler.getAllCustomerParam(kode_customer);
-//                                    Mst_Customer customer_param = new Mst_Customer();
-//                                    for (Mst_Customer customer : customer_list)
-//                                        customer_param = customer;
-//
-//                                    String nama = customer_param.getNama_customer();
-//
-//                                    showCustomDialog("Anda sudah checkin pada customer atas nama "+nama+" di hari yang sama");
-//                                }else{
-//                                    Trx_Checkin checkin = new Trx_Checkin();
-//                                    //checkin.setId_checkin(id_checkin);
-//                                    checkin.setTanggal_checkin(checkDate);
-//                                    checkin.setNomor_checkin(no_checkin1.getText().toString());
-//                                    checkin.setId_user(id_user);
-//                                    checkin.setId_rencana_detail(idrencanaDetail);
-////                                    checkin.setId_rencana_header(id_rencanaHeader);
-//                                    checkin.setKode_customer(kode_customer);
-//                                    checkin.setLats(vlats);
-//                                    checkin.setLongs(vlongs);
-//                                    checkin.setFoto(tvFotoCustomer.getText().toString());
-//                                    checkin.setStatus("1");
-//
-//                                    databaseHandler.addCheckin(checkin);
-//
-//                                    final String tanggal_checkin_checkin = checkDate;
-//                                    final String nomor_checkin_checkin = no_checkin1.getText().toString();
-//                                    final String id_user_checkin_checkin = String.valueOf(id_user);
-//                                    final String id_rencana_detail_checkin = String.valueOf(idrencanaDetail);
-////                                    final String id_rencana_master_checkin = String.valueOf(id_rencanaHeader);
-//                                    final String kode_customer_checkin = kode_customer;
-//                                    final String lats_checkin = vlats;
-//                                    final String longs_checkin = vlongs;
-//                                    final String foto_checkin = tvFotoCustomer.getText().toString();
-//
-//                                    class insertToDatabase extends AsyncTask<Void, Void, String> {
-//                                        ProgressDialog loading;
-//
-//                                        @Override
-//                                        protected void onPreExecute() {
-//                                            super.onPreExecute();
-//                                            loading = ProgressDialog.show(OneFragment1.this.getActivity(),"Proses...","Silahkan Tunggu...",false,false);
-//                                        }
-//
-//                                        @Override
-//                                        protected void onPostExecute(String s) {
-//                                            super.onPostExecute(s);
-//                                            loading.dismiss();
-//                                            Toast.makeText(OneFragment1.this.getActivity(),"Checkin Berhasil !",Toast.LENGTH_LONG).show();
-//                                            //resetCheckin();
-//                                            databaseHandler.updateCheckin(id_rencana_detail_checkin);
-//                                            gotoDashboard();
-//                                            Log.d(LOG_TAG, "sampe sini");
-//                                        }
-//
-//                                        @Override
-//                                        protected String doInBackground(Void... params) {
-//                                            HashMap<String,String> hashMap  = new HashMap<>();
-//                                            hashMap.put("tanggal_checkin",tanggal_checkin_checkin);
-//                                            hashMap.put("nomor_checkin",nomor_checkin_checkin);
-//                                            hashMap.put("id_user",id_user_checkin_checkin);
-//                                            hashMap.put("id_rencana_detail",id_rencana_detail_checkin);
-////                                            hashMap.put("id_rencana_header",id_rencana_master_checkin);
-//                                            hashMap.put("kode_customer",kode_customer_checkin);
-//                                            hashMap.put("lats",lats_checkin);
-//                                            hashMap.put("longs",longs_checkin);
-//                                            hashMap.put("foto",foto_checkin);
-//
-//                                            RequestHandler rh = new RequestHandler();
-//                                            String res = rh.sendPostRequest(AppVar.POST_NEW_CHECKIN, hashMap);
-//                                            return res;
-//                                        }
-//                                    }
-//                                    insertToDatabase in = new insertToDatabase();
-//                                    in.execute();
-//                                }
+                                if(tvFotoCustomer.getText().toString().equals("")){
+                                    saveAppSupplierFoto1Null();
+                                    new UploadData().execute();
+                                }else {
+                                    new UploadData().execute();
+                                }
                     } else {
                         String msg = "ID Rencana Kosong, silahkan lakukan refresh pada menu visit";
                         showCustomDialog(msg);
                     }
 
-                }
-                else{
+                }else{
                     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                             1000L, 1.0f, locationListener);
                     location1 = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -457,7 +423,12 @@ public class OneFragment1 extends Fragment{
                             editor.putString(AppVar.SHARED_PREFERENCES_LATS,vlats);
                             editor.putString(AppVar.SHARED_PREFERENCES_LONGS,vlongs);
                             editor.commit();
-                            new UploadData().execute();
+                            if(tvFotoCustomer.getText().toString().equals("")){
+                                saveAppSupplierFoto1Null();
+                                new UploadData().execute();
+                            }else {
+                                new UploadData().execute();
+                            }
 //                            if (vlats.equalsIgnoreCase("0")
 //                                    || vlongs.equalsIgnoreCase("0")) {
 //                                String msg = getActivity().getApplicationContext()
@@ -590,9 +561,6 @@ public class OneFragment1 extends Fragment{
 
         @Override
         protected String doInBackground(String... params) {
-//            String url = AppVar.CONFIG_APP_URL_PUBLIC;
-//            String uploadSupplier = AppVar.CONFIG_APP_URL_UPLOAD_INSERT_CHECKIN_NEW;
-//            String upload_image_supplier_url = url + uploadSupplier;
             SharedPreferences spPreferences = getSharedPrefereces();
             String lats = spPreferences.getString(AppVar.SHARED_PREFERENCES_LATS, null);
             String longs = spPreferences.getString(AppVar.SHARED_PREFERENCES_LONGS, null);
@@ -600,13 +568,16 @@ public class OneFragment1 extends Fragment{
             /***********************
              * Upload Image Supplier
              */
-            if(foto=="") {
+            if(foto==null) {
 //                response_data = uploadImage1(upload_image_supplier_url, String.valueOf(id_user), String.valueOf(idrencanaDetail), lats, longs);
+                Log.d(LOG_TAG, "masuk 11: ");
                 saveCkNI(String.valueOf(id_user), String.valueOf(idrencanaDetail), lats, longs);
             }else{
 //                response_data = uploadImage(upload_image_supplier_url, String.valueOf(id_user), String.valueOf(idrencanaDetail), lats, longs, foto);
+                Log.d(LOG_TAG, "masuk 12: ");
                 saveCkI(String.valueOf(id_user), String.valueOf(idrencanaDetail), lats, longs,foto);
             }
+
             return null;
         }
 
@@ -763,7 +734,7 @@ public class OneFragment1 extends Fragment{
         checkin.setKode_customer(kode_customer);
         checkin.setLats(lats_);
         checkin.setLongs(longs_);
-        checkin.setFoto(tvFotoCustomer.getText().toString());
+        checkin.setFoto(null);
         checkin.setStatus("1");
         checkin.setProspect("0");
         databaseHandler.addCheckin(checkin);
@@ -792,56 +763,62 @@ public class OneFragment1 extends Fragment{
         databaseHandler.updateCheckin(id_rencana_detail_);
     }
 
-    public void extractUpload() {
-        JSONObject oResponse;
-        try {
-            oResponse = new JSONObject(response_data);
-            String status = oResponse.isNull("error") ? "True" : oResponse
-                    .getString("error");
-            if (response_data.isEmpty()) {
-                final String msg = act
-                        .getApplicationContext()
-                        .getResources()
-                        .getString(
-                                R.string.app_supplier_processing_failed);
-                showCustomDialog(msg);
-            } else {
-                Log.d(LOG_TAG, "status=" + status);
-                if (status.equalsIgnoreCase("False")) {
-                    saveAppSupplierFoto1(null);
-                    File dir = new File(AppVar.getFolderPath() + "/"
-                            + IMAGE_DIRECTORY_NAME);
-                    List<File> fileFoto = getListFiles(dir);
-                    for (File tempFile : fileFoto) {
-                        tempFile.delete();
-                    }
-                    final String msg = act
-                            .getApplicationContext()
-                            .getResources()
-                            .getString(
-                                    R.string.app_supplier_processing_sukses);
-                    showCustomDialog(msg);
-                    resetCheckin();
-                } else {
-                    final String msg = act
-                            .getApplicationContext()
-                            .getResources()
-                            .getString(
-                                    R.string.app_supplier_processing_failed);
-                    showCustomDialog(msg);
-                }
-            }
-        } catch (JSONException e) {
-            final String message = e.toString();
-            showCustomDialog(message);
-        }
-    }
+//    public void extractUpload() {
+//        JSONObject oResponse;
+//        try {
+//            oResponse = new JSONObject(response_data);
+//            String status = oResponse.isNull("error") ? "True" : oResponse
+//                    .getString("error");
+//            if (response_data.isEmpty()) {
+//                final String msg = act
+//                        .getApplicationContext()
+//                        .getResources()
+//                        .getString(
+//                                R.string.app_supplier_processing_failed);
+//                showCustomDialog(msg);
+//            } else {
+//                Log.d(LOG_TAG, "status=" + status);
+//                if (status.equalsIgnoreCase("False")) {
+//                    saveAppSupplierFoto1(null);
+//                    File dir = new File(AppVar.getFolderPath() + "/"
+//                            + IMAGE_DIRECTORY_NAME);
+//                    List<File> fileFoto = getListFiles(dir);
+//                    for (File tempFile : fileFoto) {
+//                        tempFile.delete();
+//                    }
+//                    final String msg = act
+//                            .getApplicationContext()
+//                            .getResources()
+//                            .getString(
+//                                    R.string.app_supplier_processing_sukses);
+//                    showCustomDialog(msg);
+//                } else {
+//                    final String msg = act
+//                            .getApplicationContext()
+//                            .getResources()
+//                            .getString(
+//                                    R.string.app_supplier_processing_failed);
+//                    showCustomDialog(msg);
+//                }
+//            }
+//        } catch (JSONException e) {
+//            final String message = e.toString();
+//            showCustomDialog(message);
+//        }
+//    }
 
     public void saveAppSupplierFoto1(String responsedata) {
         SharedPreferences sp = getSharedPrefereces();
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(AppVar.SHARED_PREFERENCES_CHILLER_FOTO_1,
                 responsedata);
+        editor.commit();
+    }
+    public void saveAppSupplierFoto1Null() {
+        SharedPreferences sp = getSharedPrefereces();
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(AppVar.SHARED_PREFERENCES_CHILLER_FOTO_1,
+                null);
         editor.commit();
     }
 
@@ -948,12 +925,23 @@ public class OneFragment1 extends Fragment{
     }
 
     public void resetCheckin() {
-//        spinnerRencanaDetail.setSelection(0);
-//        spinnerCustomer.setSelection(0);
-        tvFotoCustomer.setText("");
-        imgCust.setImageResource(R.drawable.avatar);
-        foto.setClickable(false);
-        checkin.setClickable(false);
+        lnBT.setVisibility(View.INVISIBLE);
+        imgCust.setEnabled(false);
+    }
+    public void setAddress(double lats, double longs, String waktu) {
+        Geocoder geocoder;
+        List<Address> addresses = null;
+        geocoder = new Geocoder(this.getActivity(), Locale.getDefault());
+
+        try {
+            addresses = geocoder.getFromLocation(lats,longs, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+        Log.d(LOG_TAG, "Adress from lats longs: "+address);
+        addressText.setText(address+", "+waktu);
     }
 
     public Uri getOutputMediaFileUri1(int type) {
@@ -974,11 +962,11 @@ public class OneFragment1 extends Fragment{
         // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
                 Locale.getDefault()).format(new Date());
-        ArrayList<Mst_Customer> staff_list = databaseHandler.getAllCustomerParamRencana(idrencanaDetail);
-        mst_customer = new Mst_Customer();
-
-        for (Mst_Customer tempStaff : staff_list)
-            mst_customer = tempStaff;
+//        ArrayList<Mst_Customer> staff_list = databaseHandler.getAllCustomerParamRencana(idrencanaDetail);
+//        mst_customer = new Mst_Customer();
+//
+//        for (Mst_Customer tempStaff : staff_list)
+//            mst_customer = tempStaff;
         //mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
             mediaFile = new File(dir.getPath() + File.separator

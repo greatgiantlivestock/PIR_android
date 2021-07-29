@@ -171,24 +171,59 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:gravity="center"
             android:padding="5dip" >
 
-            <TextView
-                android:id="@+id/title_foto_customer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/black"/>
+            <ImageView
+                android:id="@+id/ImgCust"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/Linear1"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/avatar"/>
 
-            <Button
-                android:id="@+id/foto"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/title_foto_customer_checkin"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"/>
+            <LinearLayout
+                android:id="@+id/localAd"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:background="@drawable/roundedbutton"
-                android:text="Foto"
-                android:layout_centerHorizontal="true"/>
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Detail Checkin : "
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/addressTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lnBT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/checkin"
+                    android:layout_below="@+id/ImgCust"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/roundedbutton"
+                    android:text="@string/checkin"
+                    android:layout_centerHorizontal="true"/>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -218,27 +253,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/ImgCust"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/Linear1"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/avatar"/>
-
-    <Button
-        android:id="@+id/checkin"
-        android:layout_below="@+id/ImgCust"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/white"
-        android:background="@drawable/roundedbutton"
-        android:text="@string/checkin"
-        android:layout_centerHorizontal="true"/>
-
 </RelativeLayout>
 
 <!--    </android.support.v4.widget.SwipeRefreshLayout>-->

@@ -7,6 +7,7 @@
     android:paddingRight="5dp"
     android:paddingTop="5dp" >
     <LinearLayout
+        android:id="@+id/list_item_r"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/roundedactive"
@@ -43,20 +44,35 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:weightSum="3">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Index : "
-                android:layout_marginLeft="5dp"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-            <TextView
-                android:id="@+id/index"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Index : "
+                    android:layout_marginLeft="5dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/index"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="100"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/approved"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:maxLength="100"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/black"
